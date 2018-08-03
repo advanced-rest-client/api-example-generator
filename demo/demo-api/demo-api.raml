@@ -1,0 +1,106 @@
+#%RAML 1.0
+title: API demo
+version: v1
+baseUri: http://api.domain.com/
+
+types:
+  Person:
+    properties:
+      error?:
+        type: boolean
+        xml:
+          attribute: true
+      id:
+        type: string
+      name: string
+      birthday: date-only
+      gender: string
+      url: string
+      tagline: string
+      language: string
+      etag: string
+      image:
+        type: object
+        properties:
+          url: string
+          thumb: string
+  JsonExampleInclude:
+    type: Person
+    example: !include example.json
+  XmlExampleInclude:
+    type: Person
+    example: !include example.xml
+  PropertyExamples:
+    properties:
+      xtra:
+        type: string
+        xml:
+          attribute: true
+      firstName:
+        type: string
+        example: Pawel
+      lastName:
+        type: string
+        example: Psztyc
+      address: Address
+      num: number
+      int: integer
+      bool: boolean
+      defVal:
+        type: integer
+        default: 10
+        example: 1
+  Address:
+    properties:
+      street: string
+      zip:
+        type: string
+        example: "94100"
+        default: "00000"
+      house:
+        type: number
+        example: 1
+  TypeExamples:
+    properties:
+      firstName: string
+      lastName: string
+    example:
+      firstName: Pawel
+      lastName: Psztyc
+/IncludedInType:
+  post:
+    body:
+      application/json:
+        type: Person
+      application/xml:
+        type: Person
+/IncludedInline:
+  post:
+    body:
+      application/json:
+        type: Person
+      application/xml:
+        type: !include example.xsd
+        example: !include example.xml
+/typeExamples:
+  post:
+    body:
+      application/json:
+        type: TypeExamples
+/propertyExamples:
+  post:
+    body:
+      application/json:
+        type: PropertyExamples
+      application/xml:
+        type: PropertyExamples
+/arrayTypeExample:
+  post:
+    body:
+      application/json:
+        type: TypeExamples[]
+/arrayPropertyExamples:
+  post:
+    body:
+      application/json:
+        type: PropertyExamples[]

@@ -1,0 +1,3508 @@
+[
+  {
+    "@id": "file://demo/demo-api/demo-api.raml",
+    "@type": [
+      "http://a.ml/vocabularies/document#Document",
+      "http://a.ml/vocabularies/document#Fragment",
+      "http://a.ml/vocabularies/document#Module",
+      "http://a.ml/vocabularies/document#Unit"
+    ],
+    "http://a.ml/vocabularies/document#encodes": [
+      {
+        "@id": "file://demo/demo-api/demo-api.raml#/web-api",
+        "@type": [
+          "http://schema.org/WebAPI",
+          "http://a.ml/vocabularies/document#RootDomainElement",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://schema.org/name": [
+          {
+            "@value": "API demo"
+          }
+        ],
+        "http://a.ml/vocabularies/http#server": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/web-api/http%3A%2F%2Fapi.domain.com%2F",
+            "@type": [
+              "http://a.ml/vocabularies/http#Server",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#url": [
+              {
+                "@value": "http://api.domain.com/"
+              }
+            ]
+          }
+        ],
+        "http://schema.org/version": [
+          {
+            "@value": "v1"
+          }
+        ],
+        "http://a.ml/vocabularies/http#endpoint": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInType",
+            "@type": [
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#path": [
+              {
+                "@value": "/IncludedInType"
+              }
+            ],
+            "http://www.w3.org/ns/hydra/core#supportedOperation": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInType/post",
+                "@type": [
+                  "http://www.w3.org/ns/hydra/core#Operation",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/hydra/core#method": [
+                  {
+                    "@value": "post"
+                  }
+                ],
+                "http://www.w3.org/ns/hydra/core#expects": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInType/post/request",
+                    "@type": [
+                      "http://a.ml/vocabularies/http#Request",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/http#payload": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInType/post/request/application%2Fjson",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/json"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/linked_6",
+                            "@type": [
+                              "http://www.w3.org/ns/shacl#NodeShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#link-target": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#link-label": [
+                              {
+                                "@value": "Person"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInType/post/request/application%2Fxml",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/xml"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/linked_7",
+                            "@type": [
+                              "http://www.w3.org/ns/shacl#NodeShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#link-target": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#link-label": [
+                              {
+                                "@value": "Person"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInline",
+            "@type": [
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#path": [
+              {
+                "@value": "/IncludedInline"
+              }
+            ],
+            "http://www.w3.org/ns/hydra/core#supportedOperation": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInline/post",
+                "@type": [
+                  "http://www.w3.org/ns/hydra/core#Operation",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/hydra/core#method": [
+                  {
+                    "@value": "post"
+                  }
+                ],
+                "http://www.w3.org/ns/hydra/core#expects": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInline/post/request",
+                    "@type": [
+                      "http://a.ml/vocabularies/http#Request",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/http#payload": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInline/post/request/application%2Fjson",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/json"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/linked_8",
+                            "@type": [
+                              "http://www.w3.org/ns/shacl#NodeShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#link-target": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#link-label": [
+                              {
+                                "@value": "Person"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInline/post/request/application%2Fxml",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/xml"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInline/post/request/application%2Fxml/schema/schema",
+                            "@type": [
+                              "http://www.w3.org/ns/shacl#SchemaShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://www.w3.org/ns/shacl#mediaType": [
+                              {
+                                "@value": "application/xml"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#name": [
+                              {
+                                "@value": "schema"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#reference-id": [
+                              {
+                                "@id": "file://demo/demo-api/example.xsd#/external"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#examples": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FIncludedInline/post/request/application%2Fxml/schema/schema/example/default-example",
+                                "@type": [
+                                  "http://a.ml/vocabularies/document#Example",
+                                  "http://a.ml/vocabularies/document#DomainElement"
+                                ],
+                                "http://a.ml/vocabularies/document#strict": [
+                                  {
+                                    "@value": true
+                                  }
+                                ],
+                                "http://a.ml/vocabularies/document#reference-id": [
+                                  {
+                                    "@id": "file://demo/demo-api/example.xml#/external"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FtypeExamples",
+            "@type": [
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#path": [
+              {
+                "@value": "/typeExamples"
+              }
+            ],
+            "http://www.w3.org/ns/hydra/core#supportedOperation": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FtypeExamples/post",
+                "@type": [
+                  "http://www.w3.org/ns/hydra/core#Operation",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/hydra/core#method": [
+                  {
+                    "@value": "post"
+                  }
+                ],
+                "http://www.w3.org/ns/hydra/core#expects": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FtypeExamples/post/request",
+                    "@type": [
+                      "http://a.ml/vocabularies/http#Request",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/http#payload": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FtypeExamples/post/request/application%2Fjson",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/json"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/linked_5",
+                            "@type": [
+                              "http://www.w3.org/ns/shacl#NodeShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#link-target": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#link-label": [
+                              {
+                                "@value": "TypeExamples"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FpropertyExamples",
+            "@type": [
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#path": [
+              {
+                "@value": "/propertyExamples"
+              }
+            ],
+            "http://www.w3.org/ns/hydra/core#supportedOperation": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FpropertyExamples/post",
+                "@type": [
+                  "http://www.w3.org/ns/hydra/core#Operation",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/hydra/core#method": [
+                  {
+                    "@value": "post"
+                  }
+                ],
+                "http://www.w3.org/ns/hydra/core#expects": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FpropertyExamples/post/request",
+                    "@type": [
+                      "http://a.ml/vocabularies/http#Request",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/http#payload": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FpropertyExamples/post/request/application%2Fjson",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/json"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/linked_6",
+                            "@type": [
+                              "http://www.w3.org/ns/shacl#NodeShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#link-target": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#link-label": [
+                              {
+                                "@value": "PropertyExamples"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FpropertyExamples/post/request/application%2Fxml",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/xml"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/linked_7",
+                            "@type": [
+                              "http://www.w3.org/ns/shacl#NodeShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#link-target": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#link-label": [
+                              {
+                                "@value": "PropertyExamples"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayTypeExample",
+            "@type": [
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#path": [
+              {
+                "@value": "/arrayTypeExample"
+              }
+            ],
+            "http://www.w3.org/ns/hydra/core#supportedOperation": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayTypeExample/post",
+                "@type": [
+                  "http://www.w3.org/ns/hydra/core#Operation",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/hydra/core#method": [
+                  {
+                    "@value": "post"
+                  }
+                ],
+                "http://www.w3.org/ns/hydra/core#expects": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayTypeExample/post/request",
+                    "@type": [
+                      "http://a.ml/vocabularies/http#Request",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/http#payload": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayTypeExample/post/request/application%2Fjson",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/json"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayTypeExample/post/request/application%2Fjson/array/schema/array/default-array/linked_1",
+                            "@type": [
+                              "http://a.ml/vocabularies/shapes#ArrayShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#link-target": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayTypeExample/post/request/application%2Fjson/array/schema/array/default-array"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#link-label": [
+                              {
+                                "@value": "amf_inline_type_1"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayPropertyExamples",
+            "@type": [
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#path": [
+              {
+                "@value": "/arrayPropertyExamples"
+              }
+            ],
+            "http://www.w3.org/ns/hydra/core#supportedOperation": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayPropertyExamples/post",
+                "@type": [
+                  "http://www.w3.org/ns/hydra/core#Operation",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/hydra/core#method": [
+                  {
+                    "@value": "post"
+                  }
+                ],
+                "http://www.w3.org/ns/hydra/core#expects": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayPropertyExamples/post/request",
+                    "@type": [
+                      "http://a.ml/vocabularies/http#Request",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/http#payload": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayPropertyExamples/post/request/application%2Fjson",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/json"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayPropertyExamples/post/request/application%2Fjson/array/schema/array/default-array/linked_1",
+                            "@type": [
+                              "http://a.ml/vocabularies/shapes#ArrayShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#link-target": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayPropertyExamples/post/request/application%2Fjson/array/schema/array/default-array"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#link-label": [
+                              {
+                                "@value": "amf_inline_type_2"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "http://a.ml/vocabularies/document#references": [
+      {
+        "@id": "file://demo/demo-api/example.xsd",
+        "@type": [
+          "http://a.ml/vocabularies/document#ExternalFragment",
+          "http://a.ml/vocabularies/document#Fragment",
+          "http://a.ml/vocabularies/document#Unit"
+        ],
+        "http://a.ml/vocabularies/document#encodes": [
+          {
+            "@id": "file://demo/demo-api/example.xsd#/external",
+            "@type": [
+              "http://a.ml/vocabularies/document#ExternalDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/document#raw": [
+              {
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"Person\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"birthday\" type=\"xs:date\"></xs:element>\n        <xs:element name=\"gender\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"image\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n              <xs:element name=\"thumb\" type=\"xs:string\"></xs:element>\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n        <xs:element name=\"tagline\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"language\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"etag\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"></xs:attribute>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "file://demo/demo-api/example.json",
+        "@type": [
+          "http://a.ml/vocabularies/document#ExternalFragment",
+          "http://a.ml/vocabularies/document#Fragment",
+          "http://a.ml/vocabularies/document#Unit"
+        ],
+        "http://a.ml/vocabularies/document#encodes": [
+          {
+            "@id": "file://demo/demo-api/example.json#/external",
+            "@type": [
+              "http://a.ml/vocabularies/document#ExternalDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/document#raw": [
+              {
+                "@value": "{\n  \"id\": \"R34fg663H9KW9MMSKISI\",\n  \"name\": \"Pawel Psztyc\",\n  \"birthday\": \"1983-10-20\",\n  \"gender\": \"male\",\n  \"url\": \"https://domain.com/profile/pawel.psztyc\",\n  \"image\": {\n    \"url\": \"https://domain.com/profile/pawel.psztyc/image\",\n    \"thumb\": \"https://domain.com/profile/pawel.psztyc/image/thumb\"\n  },\n  \"tagline\": \"Some text about me.\",\n  \"language\": \"en_GB\",\n  \"etag\": \"\\\"W\\\\244m4n5kj3gbn2nj4k4n4\\\"\"\n}\n"
+              }
+            ],
+            "http://a.ml/vocabularies/http#mediaType": [
+              {
+                "@value": "application/json"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "file://demo/demo-api/example.xml",
+        "@type": [
+          "http://a.ml/vocabularies/document#ExternalFragment",
+          "http://a.ml/vocabularies/document#Fragment",
+          "http://a.ml/vocabularies/document#Unit"
+        ],
+        "http://a.ml/vocabularies/document#encodes": [
+          {
+            "@id": "file://demo/demo-api/example.xml#/external",
+            "@type": [
+              "http://a.ml/vocabularies/document#ExternalDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/document#raw": [
+              {
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Person error=\"false\">\n  <id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\n  <name>John Smith</name>\n  <birthday>1990-10-12</birthday>\n  <gender>male</gender>\n  <url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s</url>\n  <image>\n    <url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image</url>\n    <thumb>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb</thumb>\n  </image>\n  <tagline>Hi, I'm John!</tagline>\n  <language>en_US</language>\n  <etag>W\\\\244m4n5kj3gbn2nj4k4n4</etag>\n</Person>\n"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "http://a.ml/vocabularies/document#declares": [
+      {
+        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape",
+          "http://www.w3.org/ns/shacl#Shape",
+          "http://a.ml/vocabularies/shapes#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://www.w3.org/ns/shacl#closed": [
+          {
+            "@value": false
+          }
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/xtra",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#xtra"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/xtra/scalar/xtra",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "xtra"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#xmlSerialization": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/xtra/scalar/xtra/xml",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#XMLSerializer",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/shapes#xmlAttribute": [
+                      {
+                        "@value": true
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#xmlWrapped": [
+                      {
+                        "@value": false
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#xmlName": [
+                      {
+                        "@value": "xtra"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "xtra"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/firstName",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#firstName"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/firstName/scalar/firstName",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "firstName"
+                  }
+                ],
+                "http://a.ml/vocabularies/document#examples": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/firstName/scalar/firstName/example/default-example",
+                    "@type": [
+                      "http://a.ml/vocabularies/document#Example",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/document#strict": [
+                      {
+                        "@value": true
+                      }
+                    ],
+                    "http://a.ml/vocabularies/document#structuredValue": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/firstName/scalar/firstName/example/default-example/scalar_1",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "Pawel",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#raw": [
+                      {
+                        "@value": "Pawel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "firstName"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/lastName",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#lastName"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/lastName/scalar/lastName",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "lastName"
+                  }
+                ],
+                "http://a.ml/vocabularies/document#examples": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/lastName/scalar/lastName/example/default-example",
+                    "@type": [
+                      "http://a.ml/vocabularies/document#Example",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/document#strict": [
+                      {
+                        "@value": true
+                      }
+                    ],
+                    "http://a.ml/vocabularies/document#structuredValue": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/lastName/scalar/lastName/example/default-example/scalar_1",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "Psztyc",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#raw": [
+                      {
+                        "@value": "Psztyc"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "lastName"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/address",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#address"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#NodeShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#closed": [
+                  {
+                    "@value": false
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/street",
+                    "@type": [
+                      "http://www.w3.org/ns/shacl#PropertyShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape"
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://a.ml/vocabularies/data#street"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#range": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/street/scalar/street",
+                        "@type": [
+                          "http://a.ml/vocabularies/shapes#ScalarShape",
+                          "http://www.w3.org/ns/shacl#Shape",
+                          "http://a.ml/vocabularies/shapes#Shape",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://www.w3.org/ns/shacl#datatype": [
+                          {
+                            "@id": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#name": [
+                          {
+                            "@value": "street"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "street"
+                      }
+                    ]
+                  },
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip",
+                    "@type": [
+                      "http://www.w3.org/ns/shacl#PropertyShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape"
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://a.ml/vocabularies/data#zip"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#range": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip",
+                        "@type": [
+                          "http://a.ml/vocabularies/shapes#ScalarShape",
+                          "http://www.w3.org/ns/shacl#Shape",
+                          "http://a.ml/vocabularies/shapes#Shape",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://www.w3.org/ns/shacl#datatype": [
+                          {
+                            "@id": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#name": [
+                          {
+                            "@value": "zip"
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#defaultValue": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip/scalar_1",
+                            "@type": [
+                              "http://a.ml/vocabularies/data#Scalar"
+                            ],
+                            "http://a.ml/vocabularies/data#value": [
+                              {
+                                "@value": "00000",
+                                "@type": "http://www.w3.org/2001/XMLSchema#string"
+                              }
+                            ]
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#defaultValueStr": [
+                          {
+                            "@value": "\"00000\""
+                          }
+                        ],
+                        "http://a.ml/vocabularies/document#examples": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip/example/default-example",
+                            "@type": [
+                              "http://a.ml/vocabularies/document#Example",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#strict": [
+                              {
+                                "@value": true
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#structuredValue": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip/example/default-example/scalar_1",
+                                "@type": [
+                                  "http://a.ml/vocabularies/data#Scalar"
+                                ],
+                                "http://a.ml/vocabularies/data#value": [
+                                  {
+                                    "@value": "94100",
+                                    "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                  }
+                                ]
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#raw": [
+                              {
+                                "@value": "94100"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "zip"
+                      }
+                    ]
+                  },
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house",
+                    "@type": [
+                      "http://www.w3.org/ns/shacl#PropertyShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape"
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://a.ml/vocabularies/data#house"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#range": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house/scalar/house",
+                        "@type": [
+                          "http://a.ml/vocabularies/shapes#ScalarShape",
+                          "http://www.w3.org/ns/shacl#Shape",
+                          "http://a.ml/vocabularies/shapes#Shape",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://www.w3.org/ns/shacl#datatype": [
+                          {
+                            "@id": "http://a.ml/vocabularies/shapes#number"
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#name": [
+                          {
+                            "@value": "house"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/document#examples": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house/scalar/house/example/default-example",
+                            "@type": [
+                              "http://a.ml/vocabularies/document#Example",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://a.ml/vocabularies/document#strict": [
+                              {
+                                "@value": true
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#structuredValue": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house/scalar/house/example/default-example/scalar_1",
+                                "@type": [
+                                  "http://a.ml/vocabularies/data#Scalar"
+                                ],
+                                "http://a.ml/vocabularies/data#value": [
+                                  {
+                                    "@value": "1",
+                                    "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                                  }
+                                ]
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#raw": [
+                              {
+                                "@value": "1"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "house"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "Address"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "address"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/num",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#num"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/num/scalar/num",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://a.ml/vocabularies/shapes#number"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "num"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "num"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/int",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#int"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/int/scalar/int",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#integer"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "int"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "int"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/bool",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#bool"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/bool/scalar/bool",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#boolean"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "bool"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "bool"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#defVal"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal/scalar/defVal",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#integer"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "defVal"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#defaultValue": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal/scalar/defVal/scalar_1",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "10",
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#defaultValueStr": [
+                  {
+                    "@value": "10"
+                  }
+                ],
+                "http://a.ml/vocabularies/document#examples": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal/scalar/defVal/example/default-example",
+                    "@type": [
+                      "http://a.ml/vocabularies/document#Example",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/document#strict": [
+                      {
+                        "@value": true
+                      }
+                    ],
+                    "http://a.ml/vocabularies/document#structuredValue": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal/scalar/defVal/example/default-example/scalar_1",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "1",
+                            "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#raw": [
+                      {
+                        "@value": "1"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "defVal"
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#name": [
+          {
+            "@value": "PropertyExamples"
+          }
+        ]
+      },
+      {
+        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape",
+          "http://www.w3.org/ns/shacl#Shape",
+          "http://a.ml/vocabularies/shapes#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://www.w3.org/ns/shacl#closed": [
+          {
+            "@value": false
+          }
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/street",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#street"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/street/scalar/street",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "street"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "street"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#zip"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "zip"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#defaultValue": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip/scalar_1",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "00000",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#defaultValueStr": [
+                  {
+                    "@value": "\"00000\""
+                  }
+                ],
+                "http://a.ml/vocabularies/document#examples": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip/example/default-example",
+                    "@type": [
+                      "http://a.ml/vocabularies/document#Example",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/document#strict": [
+                      {
+                        "@value": true
+                      }
+                    ],
+                    "http://a.ml/vocabularies/document#structuredValue": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip/example/default-example/scalar_1",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "94100",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#raw": [
+                      {
+                        "@value": "94100"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "zip"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#house"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house/scalar/house",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://a.ml/vocabularies/shapes#number"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "house"
+                  }
+                ],
+                "http://a.ml/vocabularies/document#examples": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house/scalar/house/example/default-example",
+                    "@type": [
+                      "http://a.ml/vocabularies/document#Example",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/document#strict": [
+                      {
+                        "@value": true
+                      }
+                    ],
+                    "http://a.ml/vocabularies/document#structuredValue": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house/scalar/house/example/default-example/scalar_1",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "1",
+                            "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#raw": [
+                      {
+                        "@value": "1"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "house"
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#name": [
+          {
+            "@value": "Address"
+          }
+        ]
+      },
+      {
+        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape",
+          "http://www.w3.org/ns/shacl#Shape",
+          "http://a.ml/vocabularies/shapes#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://www.w3.org/ns/shacl#closed": [
+          {
+            "@value": false
+          }
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/error",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#error"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/error/scalar/error%3F",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#boolean"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "error?"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#xmlSerialization": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/error%3F/scalar/error%3F/xml",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#XMLSerializer",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/shapes#xmlAttribute": [
+                      {
+                        "@value": true
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#xmlWrapped": [
+                      {
+                        "@value": false
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#xmlName": [
+                      {
+                        "@value": "error?"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 0
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "error"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/id",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#id"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/id/scalar/id",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "id"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "id"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/name",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#name"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/name/scalar/name",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "name"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "name"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/birthday",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#birthday"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/birthday/scalar/birthday",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#date"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "birthday"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "birthday"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/gender",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#gender"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/gender/scalar/gender",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "gender"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "gender"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/url",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#url"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/url/scalar/url",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "url"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "url"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/tagline",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#tagline"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/tagline/scalar/tagline",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "tagline"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "tagline"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/language",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#language"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/language/scalar/language",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "language"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "language"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/etag",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#etag"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/etag/scalar/etag",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "etag"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "etag"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/image",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#image"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/image/image",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#NodeShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#closed": [
+                  {
+                    "@value": false
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/image/image/property/url",
+                    "@type": [
+                      "http://www.w3.org/ns/shacl#PropertyShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape"
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://a.ml/vocabularies/data#url"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#range": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/image/image/property/url/scalar/url",
+                        "@type": [
+                          "http://a.ml/vocabularies/shapes#ScalarShape",
+                          "http://www.w3.org/ns/shacl#Shape",
+                          "http://a.ml/vocabularies/shapes#Shape",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://www.w3.org/ns/shacl#datatype": [
+                          {
+                            "@id": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#name": [
+                          {
+                            "@value": "url"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "url"
+                      }
+                    ]
+                  },
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/image/image/property/thumb",
+                    "@type": [
+                      "http://www.w3.org/ns/shacl#PropertyShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape"
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://a.ml/vocabularies/data#thumb"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#range": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Person/property/image/image/property/thumb/scalar/thumb",
+                        "@type": [
+                          "http://a.ml/vocabularies/shapes#ScalarShape",
+                          "http://www.w3.org/ns/shacl#Shape",
+                          "http://a.ml/vocabularies/shapes#Shape",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://www.w3.org/ns/shacl#datatype": [
+                          {
+                            "@id": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#name": [
+                          {
+                            "@value": "thumb"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "thumb"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "image"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "image"
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#name": [
+          {
+            "@value": "Person"
+          }
+        ],
+        "http://a.ml/vocabularies/document#examples": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example",
+            "@type": [
+              "http://a.ml/vocabularies/document#Example",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://schema.org/name": [
+              {
+                "@value": "example_0"
+              }
+            ],
+            "http://a.ml/vocabularies/document#strict": [
+              {
+                "@value": true
+              }
+            ],
+            "http://a.ml/vocabularies/document#structuredValue": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1",
+                "@type": [
+                  "http://a.ml/vocabularies/data#Object"
+                ],
+                "http://a.ml/vocabularies/data#birthday": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/scalar_4",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "1983-10-20",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ],
+                "http://a.ml/vocabularies/data#etag": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/scalar_12",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "\"W\\244m4n5kj3gbn2nj4k4n4\"",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ],
+                "http://a.ml/vocabularies/data#gender": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/scalar_5",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "male",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ],
+                "http://a.ml/vocabularies/data#id": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/scalar_2",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "R34fg663H9KW9MMSKISI",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ],
+                "http://a.ml/vocabularies/data#image": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/object_7",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Object"
+                    ],
+                    "http://a.ml/vocabularies/data#thumb": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/object_7/scalar_9",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "https://domain.com/profile/pawel.psztyc/image/thumb",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://a.ml/vocabularies/data#url": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/object_7/scalar_8",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "https://domain.com/profile/pawel.psztyc/image",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "http://a.ml/vocabularies/data#language": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/scalar_11",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "en_GB",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ],
+                "http://a.ml/vocabularies/data#name": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/scalar_3",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "Pawel Psztyc",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ],
+                "http://a.ml/vocabularies/data#tagline": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/scalar_10",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "Some text about me.",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ],
+                "http://a.ml/vocabularies/data#url": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/JsonExampleInclude/example/default-example/object_1/scalar_6",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "https://domain.com/profile/pawel.psztyc",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://a.ml/vocabularies/document#reference-id": [
+              {
+                "@id": "file://demo/demo-api/example.json#/external"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/XmlExampleInclude/example/default-example",
+            "@type": [
+              "http://a.ml/vocabularies/document#Example",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://schema.org/name": [
+              {
+                "@value": "example_1"
+              }
+            ],
+            "http://a.ml/vocabularies/document#strict": [
+              {
+                "@value": true
+              }
+            ],
+            "http://a.ml/vocabularies/document#reference-id": [
+              {
+                "@id": "file://demo/demo-api/example.xml#/external"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape",
+          "http://www.w3.org/ns/shacl#Shape",
+          "http://a.ml/vocabularies/shapes#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://www.w3.org/ns/shacl#closed": [
+          {
+            "@value": false
+          }
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/property/firstName",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#firstName"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/property/firstName/scalar/firstName",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "firstName"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "firstName"
+              }
+            ]
+          },
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/property/lastName",
+            "@type": [
+              "http://www.w3.org/ns/shacl#PropertyShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://a.ml/vocabularies/data#lastName"
+              }
+            ],
+            "http://a.ml/vocabularies/shapes#range": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/property/lastName/scalar/lastName",
+                "@type": [
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/shacl#datatype": [
+                  {
+                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "lastName"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "lastName"
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#name": [
+          {
+            "@value": "TypeExamples"
+          }
+        ],
+        "http://a.ml/vocabularies/document#examples": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/example/default-example",
+            "@type": [
+              "http://a.ml/vocabularies/document#Example",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/document#strict": [
+              {
+                "@value": true
+              }
+            ],
+            "http://a.ml/vocabularies/document#structuredValue": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/example/default-example/object_1",
+                "@type": [
+                  "http://a.ml/vocabularies/data#Object"
+                ],
+                "http://a.ml/vocabularies/data#firstName": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/example/default-example/object_1/scalar_2",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "Pawel",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ],
+                "http://a.ml/vocabularies/data#lastName": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/example/default-example/object_1/scalar_3",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Scalar"
+                    ],
+                    "http://a.ml/vocabularies/data#value": [
+                      {
+                        "@value": "Psztyc",
+                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#raw": [
+              {
+                "@value": "      firstName: Pawel\n      lastName: Psztyc\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayTypeExample/post/request/application%2Fjson/array/schema/array/default-array",
+        "@type": [
+          "http://a.ml/vocabularies/shapes#ArrayShape",
+          "http://www.w3.org/ns/shacl#Shape",
+          "http://a.ml/vocabularies/shapes#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://a.ml/vocabularies/shapes#items": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples",
+            "@type": [
+              "http://www.w3.org/ns/shacl#NodeShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://www.w3.org/ns/shacl#closed": [
+              {
+                "@value": false
+              }
+            ],
+            "http://www.w3.org/ns/shacl#property": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/property/firstName",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#firstName"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/property/firstName/scalar/firstName",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "firstName"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "firstName"
+                  }
+                ]
+              },
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/property/lastName",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#lastName"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/property/lastName/scalar/lastName",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "lastName"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "lastName"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "TypeExamples"
+              }
+            ],
+            "http://a.ml/vocabularies/document#examples": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/example/default-example",
+                "@type": [
+                  "http://a.ml/vocabularies/document#Example",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://a.ml/vocabularies/document#strict": [
+                  {
+                    "@value": true
+                  }
+                ],
+                "http://a.ml/vocabularies/document#structuredValue": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/example/default-example/object_1",
+                    "@type": [
+                      "http://a.ml/vocabularies/data#Object"
+                    ],
+                    "http://a.ml/vocabularies/data#firstName": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/example/default-example/object_1/scalar_2",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "Pawel",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://a.ml/vocabularies/data#lastName": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/TypeExamples/example/default-example/object_1/scalar_3",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "Psztyc",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#raw": [
+                  {
+                    "@value": "      firstName: Pawel\n      lastName: Psztyc\n"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#name": [
+          {
+            "@value": "amf_inline_type_1"
+          }
+        ]
+      },
+      {
+        "@id": "file://demo/demo-api/demo-api.raml#/web-api/end-points/%2FarrayPropertyExamples/post/request/application%2Fjson/array/schema/array/default-array",
+        "@type": [
+          "http://a.ml/vocabularies/shapes#ArrayShape",
+          "http://www.w3.org/ns/shacl#Shape",
+          "http://a.ml/vocabularies/shapes#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://a.ml/vocabularies/shapes#items": [
+          {
+            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples",
+            "@type": [
+              "http://www.w3.org/ns/shacl#NodeShape",
+              "http://www.w3.org/ns/shacl#Shape",
+              "http://a.ml/vocabularies/shapes#Shape",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://www.w3.org/ns/shacl#closed": [
+              {
+                "@value": false
+              }
+            ],
+            "http://www.w3.org/ns/shacl#property": [
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/xtra",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#xtra"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/xtra/scalar/xtra",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "xtra"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#xmlSerialization": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/xtra/scalar/xtra/xml",
+                        "@type": [
+                          "http://a.ml/vocabularies/shapes#XMLSerializer",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/shapes#xmlAttribute": [
+                          {
+                            "@value": true
+                          }
+                        ],
+                        "http://a.ml/vocabularies/shapes#xmlWrapped": [
+                          {
+                            "@value": false
+                          }
+                        ],
+                        "http://a.ml/vocabularies/shapes#xmlName": [
+                          {
+                            "@value": "xtra"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "xtra"
+                  }
+                ]
+              },
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/firstName",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#firstName"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/firstName/scalar/firstName",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "firstName"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/document#examples": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/firstName/scalar/firstName/example/default-example",
+                        "@type": [
+                          "http://a.ml/vocabularies/document#Example",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/document#strict": [
+                          {
+                            "@value": true
+                          }
+                        ],
+                        "http://a.ml/vocabularies/document#structuredValue": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/firstName/scalar/firstName/example/default-example/scalar_1",
+                            "@type": [
+                              "http://a.ml/vocabularies/data#Scalar"
+                            ],
+                            "http://a.ml/vocabularies/data#value": [
+                              {
+                                "@value": "Pawel",
+                                "@type": "http://www.w3.org/2001/XMLSchema#string"
+                              }
+                            ]
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#raw": [
+                          {
+                            "@value": "Pawel"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "firstName"
+                  }
+                ]
+              },
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/lastName",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#lastName"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/lastName/scalar/lastName",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "lastName"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/document#examples": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/lastName/scalar/lastName/example/default-example",
+                        "@type": [
+                          "http://a.ml/vocabularies/document#Example",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/document#strict": [
+                          {
+                            "@value": true
+                          }
+                        ],
+                        "http://a.ml/vocabularies/document#structuredValue": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/lastName/scalar/lastName/example/default-example/scalar_1",
+                            "@type": [
+                              "http://a.ml/vocabularies/data#Scalar"
+                            ],
+                            "http://a.ml/vocabularies/data#value": [
+                              {
+                                "@value": "Psztyc",
+                                "@type": "http://www.w3.org/2001/XMLSchema#string"
+                              }
+                            ]
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#raw": [
+                          {
+                            "@value": "Psztyc"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "lastName"
+                  }
+                ]
+              },
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/address",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#address"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address",
+                    "@type": [
+                      "http://www.w3.org/ns/shacl#NodeShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#closed": [
+                      {
+                        "@value": false
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#property": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/street",
+                        "@type": [
+                          "http://www.w3.org/ns/shacl#PropertyShape",
+                          "http://www.w3.org/ns/shacl#Shape",
+                          "http://a.ml/vocabularies/shapes#Shape"
+                        ],
+                        "http://www.w3.org/ns/shacl#path": [
+                          {
+                            "@id": "http://a.ml/vocabularies/data#street"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/shapes#range": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/street/scalar/street",
+                            "@type": [
+                              "http://a.ml/vocabularies/shapes#ScalarShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://www.w3.org/ns/shacl#datatype": [
+                              {
+                                "@id": "http://www.w3.org/2001/XMLSchema#string"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#name": [
+                              {
+                                "@value": "street"
+                              }
+                            ]
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#minCount": [
+                          {
+                            "@value": 1
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#name": [
+                          {
+                            "@value": "street"
+                          }
+                        ]
+                      },
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip",
+                        "@type": [
+                          "http://www.w3.org/ns/shacl#PropertyShape",
+                          "http://www.w3.org/ns/shacl#Shape",
+                          "http://a.ml/vocabularies/shapes#Shape"
+                        ],
+                        "http://www.w3.org/ns/shacl#path": [
+                          {
+                            "@id": "http://a.ml/vocabularies/data#zip"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/shapes#range": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip",
+                            "@type": [
+                              "http://a.ml/vocabularies/shapes#ScalarShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://www.w3.org/ns/shacl#datatype": [
+                              {
+                                "@id": "http://www.w3.org/2001/XMLSchema#string"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#name": [
+                              {
+                                "@value": "zip"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#defaultValue": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip/scalar_1",
+                                "@type": [
+                                  "http://a.ml/vocabularies/data#Scalar"
+                                ],
+                                "http://a.ml/vocabularies/data#value": [
+                                  {
+                                    "@value": "00000",
+                                    "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                  }
+                                ]
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#defaultValueStr": [
+                              {
+                                "@value": "\"00000\""
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#examples": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip/example/default-example",
+                                "@type": [
+                                  "http://a.ml/vocabularies/document#Example",
+                                  "http://a.ml/vocabularies/document#DomainElement"
+                                ],
+                                "http://a.ml/vocabularies/document#strict": [
+                                  {
+                                    "@value": true
+                                  }
+                                ],
+                                "http://a.ml/vocabularies/document#structuredValue": [
+                                  {
+                                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/zip/scalar/zip/example/default-example/scalar_1",
+                                    "@type": [
+                                      "http://a.ml/vocabularies/data#Scalar"
+                                    ],
+                                    "http://a.ml/vocabularies/data#value": [
+                                      {
+                                        "@value": "94100",
+                                        "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "http://www.w3.org/ns/shacl#raw": [
+                                  {
+                                    "@value": "94100"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#minCount": [
+                          {
+                            "@value": 1
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#name": [
+                          {
+                            "@value": "zip"
+                          }
+                        ]
+                      },
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house",
+                        "@type": [
+                          "http://www.w3.org/ns/shacl#PropertyShape",
+                          "http://www.w3.org/ns/shacl#Shape",
+                          "http://a.ml/vocabularies/shapes#Shape"
+                        ],
+                        "http://www.w3.org/ns/shacl#path": [
+                          {
+                            "@id": "http://a.ml/vocabularies/data#house"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/shapes#range": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house/scalar/house",
+                            "@type": [
+                              "http://a.ml/vocabularies/shapes#ScalarShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://www.w3.org/ns/shacl#datatype": [
+                              {
+                                "@id": "http://a.ml/vocabularies/shapes#number"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#name": [
+                              {
+                                "@value": "house"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#examples": [
+                              {
+                                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house/scalar/house/example/default-example",
+                                "@type": [
+                                  "http://a.ml/vocabularies/document#Example",
+                                  "http://a.ml/vocabularies/document#DomainElement"
+                                ],
+                                "http://a.ml/vocabularies/document#strict": [
+                                  {
+                                    "@value": true
+                                  }
+                                ],
+                                "http://a.ml/vocabularies/document#structuredValue": [
+                                  {
+                                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/Address/property/house/scalar/house/example/default-example/scalar_1",
+                                    "@type": [
+                                      "http://a.ml/vocabularies/data#Scalar"
+                                    ],
+                                    "http://a.ml/vocabularies/data#value": [
+                                      {
+                                        "@value": "1",
+                                        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "http://www.w3.org/ns/shacl#raw": [
+                                  {
+                                    "@value": "1"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#minCount": [
+                          {
+                            "@value": 1
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#name": [
+                          {
+                            "@value": "house"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Address"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "address"
+                  }
+                ]
+              },
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/num",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#num"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/num/scalar/num",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://a.ml/vocabularies/shapes#number"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "num"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "num"
+                  }
+                ]
+              },
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/int",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#int"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/int/scalar/int",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#integer"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "int"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "int"
+                  }
+                ]
+              },
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/bool",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#bool"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/bool/scalar/bool",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#boolean"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "bool"
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "bool"
+                  }
+                ]
+              },
+              {
+                "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#PropertyShape",
+                  "http://www.w3.org/ns/shacl#Shape",
+                  "http://a.ml/vocabularies/shapes#Shape"
+                ],
+                "http://www.w3.org/ns/shacl#path": [
+                  {
+                    "@id": "http://a.ml/vocabularies/data#defVal"
+                  }
+                ],
+                "http://a.ml/vocabularies/shapes#range": [
+                  {
+                    "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal/scalar/defVal",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#integer"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "defVal"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#defaultValue": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal/scalar/defVal/scalar_1",
+                        "@type": [
+                          "http://a.ml/vocabularies/data#Scalar"
+                        ],
+                        "http://a.ml/vocabularies/data#value": [
+                          {
+                            "@value": "10",
+                            "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#defaultValueStr": [
+                      {
+                        "@value": "10"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/document#examples": [
+                      {
+                        "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal/scalar/defVal/example/default-example",
+                        "@type": [
+                          "http://a.ml/vocabularies/document#Example",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/document#strict": [
+                          {
+                            "@value": true
+                          }
+                        ],
+                        "http://a.ml/vocabularies/document#structuredValue": [
+                          {
+                            "@id": "file://demo/demo-api/demo-api.raml#/declarations/types/PropertyExamples/property/defVal/scalar/defVal/example/default-example/scalar_1",
+                            "@type": [
+                              "http://a.ml/vocabularies/data#Scalar"
+                            ],
+                            "http://a.ml/vocabularies/data#value": [
+                              {
+                                "@value": "1",
+                                "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                              }
+                            ]
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#raw": [
+                          {
+                            "@value": "1"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#minCount": [
+                  {
+                    "@value": 1
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#name": [
+                  {
+                    "@value": "defVal"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "PropertyExamples"
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#name": [
+          {
+            "@value": "amf_inline_type_2"
+          }
+        ]
+      }
+    ]
+  }
+]

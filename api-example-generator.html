@@ -1,0 +1,334 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../amf-helper-mixin/amf-helper-mixin.html">
+<script>
+/**
+ * `api-example-generator`
+ *
+ * Examples generator from AMF model
+ *
+ *
+ * @customElement
+ * @polymer
+ * @demo demo/index.html
+ * @memberof ApiElements
+ * @appliesMixin ApiElements.AmfHelperMixin
+ */
+class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
+  /**
+   * @type {String}
+   */
+  static get is() {
+    return 'api-example-generator';
+  }
+  /**
+   * @type {Object}
+   */
+  static get properties() {
+    return {
+      /**
+       * AMF `http://a.ml/vocabularies/http#Payload` shape type.
+       * Note, you must set `amfModel` property to resolve references in
+       * the model.
+       * @type {Object}
+       */
+      shape: Object,
+      example: {
+        type: String,
+        readOnly: true,
+        notify: true
+      },
+      auto: Boolean
+    };
+  }
+  /**
+   * @type {Array}
+   */
+  static get observers() {
+    return [
+      '_shapeAutoChanged(shape, auto)'
+    ];
+  }
+  /**
+   * Generates example when shape changes when `auto` is set to true.
+   *
+   * @param {Array|Object} shape
+   * @param {?Boolean} auto
+   */
+  _shapeAutoChanged(shape, auto) {
+    if (!auto) {
+      return;
+    }
+    if (!shape) {
+      this._setExample(undefined);
+      return;
+    }
+    const example = this.generate(shape);
+    this._setExample(example);
+  }
+
+  /**
+   * Generates the example from a shape.
+   * @param {?Array|Object} shape AMF shape definition
+   * @return {String|undefined} Example value.
+   */
+  generate(shape) {
+    if (!shape) {
+      shape = this.shape;
+    }
+    if (!shape) {
+      return;
+    }
+    if (shape instanceof Array) {
+      shape = shape[0];
+    }
+    shape = this._resolve(shape);
+    const mediaType = this._getValue(shape,
+      this.ns.raml.vocabularies.http + 'mediaType');
+    if (!mediaType) {
+      return;
+    }
+    const schema = shape[this.ns.raml.vocabularies.http + 'schema'];
+    if (!schema || !schema.length) {
+      return;
+    }
+    return this._computeExample(mediaType, schema[0]);
+  }
+  /**
+   * Computes an example for given media type.
+   * @param {String} type Media type
+   * @param {Object} schema Payload's schema
+   * @return {String|undefined}
+   */
+  _computeExample(type, schema) {
+    if (this._hasType(schema,
+      this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
+      const items = schema[this.ns.raml.vocabularies.shapes + 'items'];
+      // We need only first type here as arras can have different types
+      for (let i = 0, len = items.length; i < len; i++) {
+        const _example = this._computeExample(type, items[i]);
+        if (_example) {
+          return '[' + _example + ']';
+        }
+      }
+      return;
+    }
+    const examples = schema[this.ns.raml.vocabularies.document + 'examples'];
+    if (!examples || !examples.length) {
+      const properties = schema[this.ns.w3.shacl.name + 'property'];
+      if (properties && properties.length) {
+        const typeName = this._getValue(schema, this.ns.w3.shacl.name + 'name');
+        return this._exampleFromProperties(type, properties, typeName);
+      }
+      return;
+    }
+    return this._exampleFromExamples(type, examples);
+  }
+  /**
+   * Searches for an example in examples array by it's media type.
+   * @param {String} type Payload's media type
+   * @param {Array<Object>} examples List of examples
+   * @return {Object|undefined} Example's model or undefined if not found.
+   */
+  _exampleFromMediaType(type, examples) {
+    let example;
+    for (let i = 0; i < examples.length; i++) {
+      const _tmp = examples[i];
+      const _type = this._getValue(_tmp,
+        this.ns.raml.vocabularies.http + 'mediaType');
+      if (type !== _type) {
+        continue;
+      }
+      example = _tmp;
+      break;
+    }
+    return example;
+  }
+  /**
+   * Generate an example from the examples array.
+   *
+   * @param {String} type Bosy content type.
+   * @param {Array<Object>} examples Resolved examples.
+   * @return {String|undefined}
+   */
+  _exampleFromExamples(type, examples) {
+    const example = examples.length === 1 ? examples[0] :
+      this._exampleFromMediaType(type, examples);
+    if (!example) {
+      return;
+    }
+    const raw = this._getValue(example,
+      this.ns.raml.vocabularies.document + 'raw');
+    if (raw) {
+      if (type.indexOf('json') === -1) {
+        return raw;
+      }
+      try {
+        JSON.parse(raw);
+        return raw;
+      } catch (_) {}
+    }
+    const structured = example[
+      this.ns.raml.vocabularies.document + 'structuredValue'];
+    if (!structured || !structured[0]) {
+      return;
+    }
+    const structure = structured[0];
+    const result = this._jsonFromStructure(structure);
+    if (result) {
+      if (typeof result === 'object') {
+        return JSON.stringify(result, null, 2);
+      }
+    }
+  }
+  /**
+   * Creates a JSON example representation from AMF example's structure
+   * definition.
+   * @param {Object} structure
+   * @return {any}
+   */
+  _jsonFromStructure(structure) {
+    if (!structure) {
+      return;
+    }
+    const prefix = this.ns.raml.vocabularies.data;
+    let obj;
+    switch (structure['@type'][0]) {
+      case prefix + 'Object': obj = {}; break;
+      case prefix + 'Array': obj = []; break;
+      case prefix + 'Scalar':
+        return this._getValue(structure, prefix + 'value');
+      default: return;
+    }
+    const isArray = obj instanceof Array;
+    Object.keys(structure).forEach((key) => {
+      if (key.indexOf(prefix) !== 0) {
+        return;
+      }
+      const value = this._jsonFromStructure(structure[key][0]);
+      if (!value) {
+        return;
+      }
+      if (isArray) {
+        obj[obj.length] = value;
+      } else {
+        obj[key.replace(prefix, '')] = value;
+      }
+    });
+    return obj;
+  }
+  /**
+   * Creates an example from RAML type properties.
+   * @param {String} type Media type
+   * @param {Array} properties
+   * @param {?String} typeName Name of the RAML type.
+   * @return {any}
+   */
+  _exampleFromProperties(type, properties, typeName) {
+    if (type.indexOf('json') !== -1) {
+      const value = this._jsonExampleFromProperties(properties);
+      if (value) {
+        return JSON.stringify(value, null, 2);
+      }
+      return;
+    }
+    if (type.indexOf('xml') !== -1) {
+      return this._xmlExampleFromProperties(properties, typeName);
+    }
+  }
+  /**
+   * Generates a JSON example from RAML's type properties.
+   * @param {Array} properties List of type properties
+   * @return {String|undefined}
+   */
+  _jsonExampleFromProperties(properties) {
+    const result = {};
+    for (let i = 0, len = properties.length; i < len; i++) {
+      const property = properties[i];
+      const name = this._getValue(property, this.ns.w3.shacl.name + 'name');
+      if (!name) {
+        continue;
+      }
+      const range = property[this.ns.raml.vocabularies.shapes + 'range'];
+      if (!range) {
+        continue;
+      }
+      const value = this._computeJsonProperyValue(range[0]);
+      result[name] = value || '';
+    }
+    return result;
+  }
+  /**
+   * Computes JSON value from a range shape.
+   * @param {Object} range AMF's range model.
+   * @return {any}
+   */
+  _computeJsonProperyValue(range) {
+    if (this._hasType(range,
+      this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
+      let value = this._getTypeScalarValue(range);
+      const prefix = this.ns.w3.xmlSchema;
+      const dt = range[this.ns.w3.shacl.name + 'datatype'];
+      if (!dt || !dt.length) {
+        return value || '';
+      }
+      switch (dt[0]['@id']) {
+        case prefix + 'boolean':
+          if (value !== undefined) {
+            return value === 'true' ? true : false;
+          }
+          return value;
+        case prefix + 'integer':
+        case prefix + 'number':
+          if (value) {
+            if (isNaN(value)) {
+              return 0;
+            }
+            return Number(value);
+          }
+          return 0;
+        default: return value || '';
+      }
+    }
+    if (this._hasType(range, this.ns.w3.shacl.name + 'NodeShape')) {
+      const properties = range[this.ns.w3.shacl.name + 'property'];
+      if (properties && properties.length) {
+        return this._jsonExampleFromProperties(properties);
+      }
+      return;
+    }
+  }
+  /**
+   * Gets a value from a Range shape for a scalar value.
+   * @param {Object} range AMF's range model.
+   * @return {any}
+   */
+  _getTypeScalarValue(range) {
+    const dv = range[this.ns.w3.shacl.name + 'defaultValue'];
+    if (dv && dv[0]) {
+      return this._getValue(dv[0], this.ns.raml.vocabularies.data + 'value');
+    }
+    const ex = range[this.ns.raml.vocabularies.document + 'examples'];
+    if (ex && ex[0]) {
+      return this._getValue(ex[0], this.ns.w3.shacl.name + 'raw');
+    }
+    const type = range[this.ns.w3.shacl.name + 'datatype'];
+    if (!type) {
+      return;
+    }
+    const typeDef = type[0]['@id'];
+    return typeDef
+    .replace(this.ns.w3.xmlSchema, '')
+    .replace(this.ns.raml.vocabularies.shapes, '');
+  }
+  /**
+   * Computes example from RAML type for XML media type.
+   * @param {Array<Object>} properties
+   * @param {?String} typeName RAML type name
+   * @return {String}
+   */
+  _xmlExampleFromProperties(properties, typeName) {
+    debugger;
+  }
+}
+window.customElements.define(ApiExampleGenerator.is, ApiExampleGenerator);
+</script>

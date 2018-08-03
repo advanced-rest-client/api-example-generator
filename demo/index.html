@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>api-request-editor demo</title>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="../../shadycss/apply-shim.html">
+    <link rel="import" href="../../polymer/lib/elements/custom-style.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-repeat.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../api-navigation/api-navigation.html">
+    <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="../../paper-item/paper-item.html">
+    <link rel="import" href="../../paper-listbox/paper-listbox.html">
+    <link rel="import" href="../../neon-animation/web-animations.html">
+    <link rel="import" href="../api-example-generator.html">
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      api-navigation {
+        width: 320px;
+        min-width: 320px;
+        overflow: auto;
+      }
+
+      header {
+        padding: 12px 24px;
+        background-color: #C5E1A5;
+        --iron-icon-fill-color: #3E2723;
+        --paper-input-container-focus-color: #33691E;
+        --paper-input-container-label: {
+          color: #3E2723;
+        };
+      }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <dom-bind id="demo">
+      <template is="dom-bind">
+        <header>
+          <paper-dropdown-menu label="Select media type" disabled id="mediaDropdown">
+            <paper-listbox slot="dropdown-content" id="mediaList" on-selected-changed="_mediaTypeChanged">
+              <template is="dom-repeat" items="[[mediaTypes]]">
+                <paper-item data-type$="[[item]]">[[item]]</paper-item>
+              </template>
+            </paper-listbox>
+          </paper-dropdown-menu>
+        </header>
+        <div class="vertical-section-container centered" role="main">
+          <api-navigation amf-model="[[amfModel]]" endpoints-opened></api-navigation>
+          <template is="dom-if" if="[[hasData]]">
+            <api-example-generator amf-model="[[amfModel]]" shape="[[shape]]" example="{{example}}" auto></api-example-generator>
+            <pre>[[example]]</pre>
+          </template>
+          <template is="dom-if" if="[[!hasData]]">
+            <p>Select a HTTP method in the navigation to see the demo.</p>
+          </template>
+        </div>
+      </template>
+    </dom-bind>
+    <script>
+    (function(app) {
+      app._load = function() {
+        fetch('./demo-api.json')
+        .then((response) => response.json())
+        .then((data) => {
+          app.amfModel = data;
+        });
+      };
+
+      app._navChanged = function(e) {
+        if (e.detail.passive) {
+          return;
+        }
+        const type = e.detail.type;
+        if (type === 'method') {
+          app.setData(e.detail.selected);
+          app.hasData = true;
+        } else {
+          app.hasData = false;
+        }
+      };
+      app.setData = function(id) {
+        document.getElementById('mediaList').selected = undefined;
+        app.payloads = undefined;
+        const ns = ApiElements.Amf.ns;
+        const enc = app.amfModel[0][ns.raml.vocabularies.document + 'encodes'][0];
+        const endpoints = enc[ns.raml.vocabularies.http + 'endpoint'];
+        const endpointId = id.substr(0, id.lastIndexOf('/'));
+        for (let i = 0, len = endpoints.length; i < len; i++) {
+          let item = endpoints[i];
+          if (item['@id'] !== endpointId) {
+            continue;
+          }
+          const op = item[ns.w3.hydra.supportedOperation][0];
+          const expect = op[ns.w3.hydra.core + 'expects'][0];
+          const payloads = expect[ns.raml.vocabularies.http + 'payload'];
+          app.payloads = payloads;
+          app.setupMediaTypes(payloads);
+          return;
+        }
+      };
+
+      app.setupMediaTypes = function(payloads) {
+        const ns = ApiElements.Amf.ns;
+        const types = payloads.map((item) => {
+          return item[ns.raml.vocabularies.http + 'mediaType'][0]['@value'];
+        });
+        app.mediaTypes = types;
+        const dropdown = document.getElementById('mediaDropdown');
+        if (dropdown.hasAttribute('disabled')) {
+          dropdown.removeAttribute('disabled');
+        }
+      };
+
+      app._mediaTypeChanged = function(e) {
+        const payload = app.payloads[e.detail.value];
+        app.shape = payload;
+      };
+      window.addEventListener('WebComponentsReady', () => app._load());
+      window.addEventListener('api-navigation-selection-changed', app._navChanged);
+    })(document.getElementById('demo'));
+  </script>
+  </body>
+</html>
