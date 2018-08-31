@@ -6,17 +6,6 @@
 
 Examples generator from AMF model
 
-<!---
-```
-<custom-element-demo>
-  <template>
-    <link rel="import" href="api-example-generator.html">
-    <next-code-block></next-code-block>
-  </template>
-</custom-element-demo>
-```
--->
-
 ```html
 <api-example-generator></api-example-generator>
 ```
