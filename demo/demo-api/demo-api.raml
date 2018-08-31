@@ -4,6 +4,18 @@ version: v1
 baseUri: http://api.domain.com/
 
 types:
+  Image:
+    type: object
+    properties:
+      url: string
+      thumb: string
+  Imgs:
+    properties:
+      something: string
+      images:
+        type: Image[]
+        xml:
+          wrapped: true
   Person:
     properties:
       error?:
@@ -14,11 +26,19 @@ types:
         type: string
       name: string
       birthday: date-only
-      gender: string
+      gender:
+        type: string
+        examples:
+          Male: male
+          Female: female
       url: string
       tagline: string
-      language: string
-      etag: string
+      language:
+        type: string
+        default: PL
+      etag:
+        type: string
+        example: etag example
       image:
         type: object
         properties:
@@ -104,3 +124,8 @@ types:
     body:
       application/json:
         type: PropertyExamples[]
+/wrappedXml:
+  post:
+    body:
+      application/xml:
+        type: Imgs

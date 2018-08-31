@@ -122,16 +122,18 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     }
     const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
     const examples = this._ensureArray(schema[eKey]);
-    if (!examples || !examples.length) {
-      const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
-      const properties = this._ensureArray(schema[pKey]);
-      if (properties && properties.length) {
-        const typeName = this._getValue(schema, this.ns.w3.shacl.name + 'name');
-        return this._exampleFromProperties(type, properties, typeName);
+    if (examples && examples.length) {
+      const result = this._exampleFromExamples(type, examples);
+      if (result) {
+        return result;
       }
-      return;
     }
-    return this._exampleFromExamples(type, examples);
+    const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
+    const properties = this._ensureArray(schema[pKey]);
+    if (properties && properties.length) {
+      const typeName = this._getValue(schema, this.ns.w3.shacl.name + 'name');
+      return this._exampleFromProperties(type, properties, typeName);
+    }
   }
   /**
    * Searches for an example in examples array by it's media type.
@@ -403,8 +405,186 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @return {String}
    */
   _xmlExampleFromProperties(properties, typeName) {
-    console.warn('Implement me.');
-    return;
+    const doc = document.implementation.createDocument('', '', null);
+    const main = doc.createElement(typeName);
+    doc.appendChild(main);
+    const nl = doc.createTextNode('\n');
+    main.appendChild(nl);
+    for (let i = 0, len = properties.length; i < len; i++) {
+      this._xmlProcessProperty(doc, main, properties[i]);
+    }
+    const s = new XMLSerializer();
+    return s.serializeToString(doc);
+  }
+  /**
+   * Processes an XML property
+   * @param {Document} doc Main document
+   * @param {Element} node Current node
+   * @param {Object} property AMF property
+   */
+  _xmlProcessProperty(doc, node, property) {
+    if (!property) {
+      return;
+    }
+    if (this._hasType(property, this.ns.w3.shacl.name + 'NodeShape')) {
+      const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
+      const properties = this._ensureArray(property[pKey]);
+      if (!properties) {
+        return;
+      }
+      for (let i = 0, len = properties.length; i < len; i++) {
+        this._xmlProcessProperty(doc, node, properties[i]);
+      }
+      return;
+    }
+    const rKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'range');
+    let range = property[rKey];
+    if (!range) {
+      return;
+    }
+    if (range instanceof Array) {
+      range = range[0];
+    }
+    const sKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'xmlSerialization');
+    let serialization = range[sKey];
+    let isWrapped = false;
+    if (serialization) {
+      if (serialization instanceof Array) {
+        serialization = serialization[0];
+      }
+      const isAtribute = this._getValue(serialization, this.ns.raml.vocabularies.shapes + 'xmlAttribute');
+      if (isAtribute) {
+        this._appendXmlAttribute(node, property, range, serialization);
+        return;
+      }
+      isWrapped = this._getValue(serialization, this.ns.raml.vocabularies.shapes + 'xmlWrapped');
+    }
+    if (this._hasType(range, this.ns.w3.shacl.name + 'NodeShape')) {
+      this._appendXmlElements(doc, node, property, range);
+      return;
+    }
+    if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
+      this._appendXmlArray(doc, node, property, range, isWrapped);
+      return;
+    }
+    this._appendXmlElement(doc, node, property, range);
+  }
+  /**
+   * Reads property data type.
+   * @param {Object} shape
+   * @return {String} Data type
+   */
+  _readDataType(shape) {
+    const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
+    let dataType = shape[dtKey];
+    if (!dataType) {
+      return;
+    }
+    if (dataType instanceof Array) {
+      dataType = dataType[0];
+    }
+    dataType = dataType['@id'];
+    const vKey = this._getAmfKey(this.ns.w3.xmlSchema);
+    let result = dataType.replace(vKey, '');
+    if (result[0] === ':') {
+      result = result.substr(1);
+    }
+    return result;
+  }
+  /**
+   * Appends an attribute to the node from AMF property
+   * @param {Element} node Current node
+   * @param {Object} property AMF property
+   * @param {Object} range AMF range
+   * @param {Object} serialization Serialization info
+   */
+  _appendXmlAttribute(node, property, range, serialization) {
+    let name = this._getValue(serialization, this.ns.raml.vocabularies.shapes + 'xmlName');
+    if (!name) {
+      name = this._getValue(range, this.ns.w3.shacl.name + 'name');
+    }
+    if (!name) {
+      return;
+    }
+    if (name.indexOf('?') !== -1) {
+      name = name.replace('?', '');
+    }
+    let value = this._readDataType(range);
+    if (!value) {
+      value = '';
+    }
+    node.setAttribute(name, value);
+  }
+  /**
+   * Appends an element to the node tree from a type
+   * @param {Document} doc Main document
+   * @param {Element} node Current node
+   * @param {Object} property AMF property
+   * @param {Object} range AMF range
+   * @return {Element} Newly created element
+   */
+  _appendXmlElement(doc, node, property, range) {
+    const name = this._getValue(range, this.ns.w3.shacl.name + 'name');
+    if (!name) {
+      return;
+    }
+    let nodeValue = this._getValue(range, this.ns.w3.shacl.name + 'defaultValueStr');
+    if (!nodeValue) {
+      const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+      let example = range[eKey];
+      if (example) {
+        if (example instanceof Array) {
+          example = example[0];
+        }
+        nodeValue = this._getValue(example, this.ns.w3.shacl.name + 'raw');
+      }
+    }
+    if (!nodeValue) {
+      nodeValue = this._readDataType(range);
+    }
+    const element = doc.createElement(name);
+    if (nodeValue) {
+      const vn = doc.createTextNode(nodeValue);
+      element.appendChild(vn);
+    }
+    node.appendChild(element);
+    const nl = doc.createTextNode('\n');
+    node.appendChild(nl);
+    return element;
+  }
+
+  _appendXmlElements(doc, node, property, range) {
+    const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
+    const properties = this._ensureArray(range[pKey]);
+    const element = this._appendXmlElement(doc, node, property, range);
+    if (!properties) {
+      return;
+    }
+    const nl = doc.createTextNode('\n');
+    element.appendChild(nl);
+    for (let i = 0, len = properties.length; i < len; i++) {
+      this._xmlProcessProperty(doc, element, properties[i]);
+    }
+  }
+
+  _appendXmlArray(doc, node, property, range, isWrapped) {
+    if (isWrapped) {
+      const element = this._appendXmlElement(doc, node, property, range);
+      node.appendChild(element);
+      const nl = doc.createTextNode('\n');
+      node.appendChild(nl);
+      node = element;
+    }
+    const pKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
+    const properties = this._ensureArray(range[pKey]);
+    if (!properties) {
+      return;
+    }
+    const nl = doc.createTextNode('\n');
+    node.appendChild(nl);
+    for (let i = 0, len = properties.length; i < len; i++) {
+      this._xmlProcessProperty(doc, node, properties[i]);
+    }
   }
 }
 window.customElements.define(ApiExampleGenerator.is, ApiExampleGenerator);

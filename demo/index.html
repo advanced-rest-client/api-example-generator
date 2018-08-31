@@ -34,6 +34,8 @@
       header {
         padding: 12px 24px;
         background-color: #C5E1A5;
+        @apply --layout-horizontal;
+        @apply --layout-center;
         --iron-icon-fill-color: #3E2723;
         --paper-input-container-focus-color: #33691E;
         --paper-input-container-label: {
@@ -47,6 +49,12 @@
     <dom-bind id="demo">
       <template is="dom-bind">
         <header>
+          <paper-dropdown-menu label="Select API">
+          <paper-listbox slot="dropdown-content" id="apisList" on-selected-changed="_apiChanged">
+            <paper-item data-src="demo-api.json">Demo api</paper-item>
+            <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
           <paper-dropdown-menu label="Select media type" disabled id="mediaDropdown">
             <paper-listbox slot="dropdown-content" id="mediaList" on-selected-changed="_mediaTypeChanged">
               <template is="dom-repeat" items="[[mediaTypes]]">
@@ -65,16 +73,29 @@
             <p>Select a HTTP method in the navigation to see the demo.</p>
           </template>
         </div>
+
+        <demo-element id="helper" amf-model="{{amfModel}}"></demo-element>
       </template>
     </dom-bind>
     <script>
     (function(app) {
+      class DemoElement extends ApiElements.AmfHelperMixin(Polymer.Element) {}
+      window.customElements.define('demo-element', DemoElement);
       app._load = function() {
-        fetch('./demo-api.json')
+        document.getElementById('apisList').selected = 0;
+      };
+
+      app._loadFile = function(file) {
+        fetch('./' + file)
         .then((response) => response.json())
         .then((data) => {
           app.amfModel = data;
         });
+      };
+
+      app._apiChanged = function(e) {
+        const file = e.target.selectedItem.dataset.src;
+        app._loadFile(file);
       };
 
       app._navChanged = function(e) {
@@ -89,31 +110,22 @@
           app.hasData = false;
         }
       };
+
       app.setData = function(id) {
         document.getElementById('mediaList').selected = undefined;
         app.payloads = undefined;
-        const ns = ApiElements.Amf.ns;
-        const enc = app.amfModel[0][ns.raml.vocabularies.document + 'encodes'][0];
-        const endpoints = enc[ns.raml.vocabularies.http + 'endpoint'];
-        const endpointId = id.substr(0, id.lastIndexOf('/'));
-        for (let i = 0, len = endpoints.length; i < len; i++) {
-          let item = endpoints[i];
-          if (item['@id'] !== endpointId) {
-            continue;
-          }
-          const op = item[ns.w3.hydra.supportedOperation][0];
-          const expect = op[ns.w3.hydra.core + 'expects'][0];
-          const payloads = expect[ns.raml.vocabularies.http + 'payload'];
-          app.payloads = payloads;
-          app.setupMediaTypes(payloads);
-          return;
-        }
+        const webApi = app.$.helper._computeWebApi(app.amfModel);
+        const method = app.$.helper._computeMethodModel(webApi, id);
+        const expect = app.$.helper._computeExpects(method);
+        const payloads = app.$.helper._computePayload(expect);
+        app.payloads = payloads;
+        app.setupMediaTypes(payloads);
       };
 
       app.setupMediaTypes = function(payloads) {
         const ns = ApiElements.Amf.ns;
         const types = payloads.map((item) => {
-          return item[ns.raml.vocabularies.http + 'mediaType'][0]['@value'];
+          return app.$.helper._getValue(item, ns.raml.vocabularies.http + 'mediaType');
         });
         app.mediaTypes = types;
         const dropdown = document.getElementById('mediaDropdown');
