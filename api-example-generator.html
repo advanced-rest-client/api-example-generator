@@ -87,11 +87,15 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (!mediaType) {
       return;
     }
-    const schema = shape[this.ns.raml.vocabularies.http + 'schema'];
-    if (!schema || !schema.length) {
+    const sKey = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
+    let schema = shape[sKey];
+    if (!schema) {
       return;
     }
-    return this._computeExample(mediaType, schema[0]);
+    if (schema instanceof Array) {
+      schema = schema[0];
+    }
+    return this.computeExample(mediaType, schema);
   }
   /**
    * Computes an example for given media type.
@@ -99,22 +103,28 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @param {Object} schema Payload's schema
    * @return {String|undefined}
    */
-  _computeExample(type, schema) {
+  computeExample(type, schema) {
     if (this._hasType(schema,
       this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
-      const items = schema[this.ns.raml.vocabularies.shapes + 'items'];
+      const iKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
+      const items = this._ensureArray(schema[iKey]);
       // We need only first type here as arras can have different types
       for (let i = 0, len = items.length; i < len; i++) {
-        const _example = this._computeExample(type, items[i]);
+        const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
+        const properties = this._ensureArray(items[i][pKey]);
+        const typeName = this._getValue(items[i], this.ns.w3.shacl.name + 'name');
+        const _example = this._exampleFromProperties(type, properties, typeName);
         if (_example) {
           return '[' + _example + ']';
         }
       }
       return;
     }
-    const examples = schema[this.ns.raml.vocabularies.document + 'examples'];
+    const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+    const examples = this._ensureArray(schema[eKey]);
     if (!examples || !examples.length) {
-      const properties = schema[this.ns.w3.shacl.name + 'property'];
+      const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
+      const properties = this._ensureArray(schema[pKey]);
       if (properties && properties.length) {
         const typeName = this._getValue(schema, this.ns.w3.shacl.name + 'name');
         return this._exampleFromProperties(type, properties, typeName);
@@ -167,12 +177,14 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
         return raw;
       } catch (_) {}
     }
-    const structured = example[
-      this.ns.raml.vocabularies.document + 'structuredValue'];
-    if (!structured || !structured[0]) {
+    const sKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'structuredValue');
+    let structure = example[sKey];
+    if (!structure) {
       return;
     }
-    const structure = structured[0];
+    if (structure instanceof Array) {
+      structure = structure[0];
+    }
     const result = this._jsonFromStructure(structure);
     if (result) {
       if (typeof result === 'object') {
@@ -191,27 +203,40 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       return;
     }
     const prefix = this.ns.raml.vocabularies.data;
-    let obj;
-    switch (structure['@type'][0]) {
-      case prefix + 'Object': obj = {}; break;
-      case prefix + 'Array': obj = []; break;
-      case prefix + 'Scalar':
-        return this._getValue(structure, prefix + 'value');
-      default: return;
+    if (this._hasType(structure, prefix + 'Scalar')) {
+      return this._getValue(structure, prefix + 'value');
     }
+    let obj;
+    if (this._hasType(structure, prefix + 'Object')) {
+      obj = {};
+    } else if (this._hasType(structure, prefix + 'Array')) {
+      obj = [];
+    } else {
+      return;
+    }
+
     const isArray = obj instanceof Array;
+    const resolvedPrefix = this._getAmfKey(prefix);
     Object.keys(structure).forEach((key) => {
-      if (key.indexOf(prefix) !== 0) {
+      if (key.indexOf(resolvedPrefix) !== 0) {
         return;
       }
-      const value = this._jsonFromStructure(structure[key][0]);
+      let v = structure[key];
+      if (v instanceof Array) {
+        v = v[0];
+      }
+      const value = this._jsonFromStructure(v);
       if (!value) {
         return;
       }
       if (isArray) {
         obj[obj.length] = value;
       } else {
-        obj[key.replace(prefix, '')] = value;
+        key = key.replace(resolvedPrefix, '');
+        if (key[0] === ':') {
+          key = key.substr(1);
+        }
+        obj[key] = value;
       }
     });
     return obj;
@@ -248,11 +273,15 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       if (!name) {
         continue;
       }
-      const range = property[this.ns.raml.vocabularies.shapes + 'range'];
+      const rKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'range');
+      let range = property[rKey];
       if (!range) {
         continue;
       }
-      const value = this._computeJsonProperyValue(range[0]);
+      if (range instanceof Array) {
+        range = range[0];
+      }
+      const value = this._computeJsonProperyValue(range);
       result[name] = value || '';
     }
     return result;
@@ -263,15 +292,24 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @return {any}
    */
   _computeJsonProperyValue(range) {
+
     if (this._hasType(range,
       this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
       let value = this._getTypeScalarValue(range);
-      const prefix = this.ns.w3.xmlSchema;
-      const dt = range[this.ns.w3.shacl.name + 'datatype'];
-      if (!dt || !dt.length) {
+      let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
+      if (prefix !== this.ns.w3.xmlSchema) {
+        prefix += ':';
+      }
+      const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
+      let dt = range[dtKey];
+      if (!dt) {
         return value || '';
       }
-      switch (dt[0]['@id']) {
+      if (dt instanceof Array) {
+        dt = dt[0];
+      }
+
+      switch (dt['@id']) {
         case prefix + 'boolean':
           if (value !== undefined) {
             return value === 'true' ? true : false;
@@ -289,8 +327,26 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
         default: return value || '';
       }
     }
+    const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
+    if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
+      const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
+      const list = this._ensureArray(range[key]);
+      if (!list) {
+        return;
+      }
+      for (let i = 0, len = list.length; i < len; i++) {
+        const item = list[i];
+        if (this._hasType(item, this.ns.w3.shacl.name + 'NodeShape')) {
+          const data = this._ensureArray(item[pKey]);
+          if (data) {
+            return this._jsonExampleFromProperties(data);
+          }
+        }
+      }
+      return;
+    }
     if (this._hasType(range, this.ns.w3.shacl.name + 'NodeShape')) {
-      const properties = range[this.ns.w3.shacl.name + 'property'];
+      const properties = this._ensureArray(range[pKey]);
       if (properties && properties.length) {
         return this._jsonExampleFromProperties(properties);
       }
@@ -303,22 +359,42 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @return {any}
    */
   _getTypeScalarValue(range) {
-    const dv = range[this.ns.w3.shacl.name + 'defaultValue'];
-    if (dv && dv[0]) {
-      return this._getValue(dv[0], this.ns.raml.vocabularies.data + 'value');
+    const dvKey = this._getAmfKey(this.ns.w3.shacl.name + 'defaultValue');
+    let dv = range[dvKey];
+    if (dv) {
+      if (dv instanceof Array) {
+        dv = dv[0];
+      }
+      return this._getValue(dv, this.ns.raml.vocabularies.data + 'value');
     }
-    const ex = range[this.ns.raml.vocabularies.document + 'examples'];
-    if (ex && ex[0]) {
-      return this._getValue(ex[0], this.ns.w3.shacl.name + 'raw');
+    const rKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+    let ex = range[rKey];
+    if (ex) {
+      if (ex instanceof Array) {
+        ex = ex[0];
+      }
+      return this._getValue(ex, this.ns.w3.shacl.name + 'raw');
     }
-    const type = range[this.ns.w3.shacl.name + 'datatype'];
+    const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
+    let type = range[dtKey];
     if (!type) {
       return;
     }
-    const typeDef = type[0]['@id'];
+    if (type instanceof Array) {
+      type = type[0];
+    }
+    const typeDef = type['@id'];
+    let scKey = this._getAmfKey(this.ns.w3.xmlSchema);
+    let shKey = this._getAmfKey(this.ns.raml.vocabularies.shapes);
+    if (scKey !== this.ns.w3.xmlSchema) {
+      scKey += ':';
+    }
+    if (shKey !== this.ns.raml.vocabularies.shapes) {
+      shKey += ':';
+    }
     return typeDef
-    .replace(this.ns.w3.xmlSchema, '')
-    .replace(this.ns.raml.vocabularies.shapes, '');
+    .replace(scKey, '')
+    .replace(shKey, '');
   }
   /**
    * Computes example from RAML type for XML media type.
@@ -327,7 +403,8 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @return {String}
    */
   _xmlExampleFromProperties(properties, typeName) {
-    debugger;
+    console.warn('Implement me.');
+    return;
   }
 }
 window.customElements.define(ApiExampleGenerator.is, ApiExampleGenerator);
