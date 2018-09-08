@@ -120,6 +120,9 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       }
       return;
     }
+    if (this._hasType(schema, this.ns.raml.vocabularies.document + 'Example')) {
+      return this._exampleFromExamples(type, [schema]);
+    }
     const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
     const examples = this._ensureArray(schema[eKey]);
     if (examples && examples.length) {
@@ -168,8 +171,11 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (!example) {
       return;
     }
-    const raw = this._getValue(example,
+    let raw = this._getValue(example,
       this.ns.raml.vocabularies.document + 'raw');
+    if (!raw) {
+      raw = this._getValue(example, this.ns.w3.shacl.name + 'raw');
+    }
     if (raw) {
       if (type.indexOf('json') === -1) {
         return raw;
