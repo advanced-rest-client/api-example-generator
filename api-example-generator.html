@@ -32,11 +32,17 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
        * @type {Object}
        */
       shape: Object,
+      /**
+       * Auto generated example.
+       */
       example: {
         type: String,
         readOnly: true,
         notify: true
       },
+      /**
+       * When set it automatically generates the example when shape value change
+       */
       auto: Boolean
     };
   }
@@ -69,9 +75,12 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   /**
    * Generates the example from a shape.
    * @param {?Array|Object} shape AMF shape definition
+   * @param {?Object} opts Generation options:
+   * - type `String` - Type name of an union type. If not set it uses first type
+   * in the union.
    * @return {String|undefined} Example value.
    */
-  generate(shape) {
+  generate(shape, opts) {
     if (!shape) {
       shape = this.shape;
     }
@@ -95,15 +104,18 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (schema instanceof Array) {
       schema = schema[0];
     }
-    return this.computeExample(mediaType, schema);
+    return this.computeExample(mediaType, schema, opts);
   }
   /**
    * Computes an example for given media type.
    * @param {String} type Media type
    * @param {Object} schema Payload's schema
+   * @param {?Object} opts Generation options:
+   * - type `String` - Type name of an union type. If not set it uses first type
+   * in the union.
    * @return {String|undefined}
    */
-  computeExample(type, schema) {
+  computeExample(type, schema, opts) {
     if (this._hasType(schema,
       this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
       const iKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
@@ -123,6 +135,17 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (this._hasType(schema, this.ns.raml.vocabularies.document + 'Example')) {
       return this._exampleFromExamples(type, [schema]);
     }
+    if (this._hasType(schema, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
+      if (!opts) {
+        opts = {};
+      }
+      const unionShape = this._getUnionShape(schema, opts);
+      if (!unionShape) {
+        return;
+      }
+      return this.computeExample(type, unionShape, opts);
+    }
+
     const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
     const examples = this._ensureArray(schema[eKey]);
     if (examples && examples.length) {
@@ -136,6 +159,35 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (properties && properties.length) {
       const typeName = this._getValue(schema, this.ns.w3.shacl.name + 'name');
       return this._exampleFromProperties(type, properties, typeName);
+    }
+  }
+  /**
+   * Gets a shape for union type
+   * @param {Object} schema Union's model
+   * @param {?Object} opts See `computeExample()` for description
+   * @return {Object|undefined} Model for shape or un defined if not found
+   */
+  _getUnionShape(schema, opts) {
+    if (!schema) {
+      return;
+    }
+    const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
+    let anyOf = schema[key];
+    if (!anyOf) {
+      return;
+    }
+    if (!(anyOf instanceof Array)) {
+      anyOf = [anyOf];
+    }
+    if (!opts.type) {
+      return anyOf[0];
+    }
+    for (let i = 0, len = anyOf.length; i < len; i++) {
+      const type = anyOf[i];
+      const name = this._getValue(type, this.ns.w3.shacl.name + 'name');
+      if (name === opts.type) {
+        return type;
+      }
     }
   }
   /**

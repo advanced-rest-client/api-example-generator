@@ -28,7 +28,15 @@ declare namespace ApiElements {
      * the model.
      */
     shape: object|null;
+
+    /**
+     * Auto generated example.
+     */
     readonly example: string|null|undefined;
+
+    /**
+     * When set it automatically generates the example when shape value change
+     */
     auto: boolean|null|undefined;
 
     /**
@@ -40,17 +48,32 @@ declare namespace ApiElements {
      * Generates the example from a shape.
      *
      * @param shape AMF shape definition
+     * @param opts Generation options:
+     * - type `String` - Type name of an union type. If not set it uses first type
+     * in the union.
      * @returns Example value.
      */
-    generate(shape: any[]|object|null): String|null|undefined;
+    generate(shape: any[]|object|null, opts: object|null): String|null|undefined;
 
     /**
      * Computes an example for given media type.
      *
      * @param type Media type
      * @param schema Payload's schema
+     * @param opts Generation options:
+     * - type `String` - Type name of an union type. If not set it uses first type
+     * in the union.
      */
-    computeExample(type: String|null, schema: object|null): String|null|undefined;
+    computeExample(type: String|null, schema: object|null, opts: object|null): String|null|undefined;
+
+    /**
+     * Gets a shape for union type
+     *
+     * @param schema Union's model
+     * @param opts See `computeExample()` for description
+     * @returns Model for shape or un defined if not found
+     */
+    _getUnionShape(schema: object|null, opts: object|null): object|null|undefined;
 
     /**
      * Searches for an example in examples array by it's media type.
