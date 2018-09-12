@@ -51,6 +51,7 @@
         <header>
           <paper-dropdown-menu label="Select API">
           <paper-listbox slot="dropdown-content" id="apisList" on-selected-changed="_apiChanged">
+            <paper-item data-src="se-8987.json">SE-8987</paper-item>
             <paper-item data-src="demo-api.json">Demo api</paper-item>
             <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
           </paper-listbox>
@@ -63,15 +64,29 @@
             </paper-listbox>
           </paper-dropdown-menu>
         </header>
-        <div class="vertical-section-container centered" role="main">
+
+        <div class="horizontal-section-container centered" role="main">
           <api-navigation amf-model="[[amfModel]]" endpoints-opened></api-navigation>
-          <template is="dom-if" if="[[hasData]]">
-            <api-example-generator amf-model="[[amfModel]]" shape="[[shape]]" example="{{example}}" auto></api-example-generator>
-            <pre>[[example]]</pre>
-          </template>
-          <template is="dom-if" if="[[!hasData]]">
-            <p>Select a HTTP method in the navigation to see the demo.</p>
-          </template>
+          <section class="vertical-section-container">
+            <template is="dom-if" if="[[hasData]]">
+              <api-example-generator amf-model="[[amfModel]]" shape="[[shape]]" example="{{example}}" auto></api-example-generator>
+
+              <template is="dom-if" if="[[unionTypes]]">
+                <paper-dropdown-menu label="Select union type">
+                  <paper-listbox slot="dropdown-content" on-selected-changed="_unionTypeChanged">
+                    <template is="dom-repeat" items="[[unionTypes]]">
+                      <paper-item data-type$="[[item]]">[[item]]</paper-item>
+                    </template>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+              </template>
+
+              <pre>[[example]]</pre>
+            </template>
+            <template is="dom-if" if="[[!hasData]]">
+              <p>Select a HTTP method in the navigation to see the demo.</p>
+            </template>
+          </section>
         </div>
 
         <demo-element id="helper" amf-model="{{amfModel}}"></demo-element>
@@ -94,6 +109,7 @@
       };
 
       app._apiChanged = function(e) {
+        app.unionTypes = undefined;
         const file = e.target.selectedItem.dataset.src;
         app._loadFile(file);
       };
@@ -102,6 +118,7 @@
         if (e.detail.passive) {
           return;
         }
+        app.unionTypes = undefined;
         const type = e.detail.type;
         if (type === 'method') {
           app.setData(e.detail.selected);
@@ -114,6 +131,7 @@
       app.setData = function(id) {
         document.getElementById('mediaList').selected = undefined;
         app.payloads = undefined;
+        app.unionTypes = undefined;
         const webApi = app.$.helper._computeWebApi(app.amfModel);
         const method = app.$.helper._computeMethodModel(webApi, id);
         const expect = app.$.helper._computeExpects(method);
@@ -135,10 +153,55 @@
       };
 
       app._mediaTypeChanged = function(e) {
+        app.unionTypes = undefined;
         const payload = app.payloads[e.detail.value];
         app.shape = payload;
+        app._discoverUnion(payload);
       };
-      window.addEventListener('WebComponentsReady', () => app._load());
+
+      app._discoverUnion = function (shape) {
+        setTimeout(() => {
+          const ns = ApiElements.Amf.ns;
+          const sKey = app.$.helper._getAmfKey(ns.raml.vocabularies.http + 'schema');
+          let schema = shape[sKey];
+          if (!schema) {
+            app.unionTypes = undefined;
+            return;
+          }
+          if (schema instanceof Array) {
+            schema = schema[0];
+          }
+          if (app.$.helper._hasType(schema, ns.raml.vocabularies.shapes + 'UnionShape')) {
+            const key = app.$.helper._getAmfKey(ns.raml.vocabularies.shapes + 'anyOf');
+            let anyOf = schema[key];
+            if (!anyOf) {
+              app.unionTypes = undefined;
+              return;
+            }
+            if (!(anyOf instanceof Array)) {
+              anyOf = [anyOf];
+            }
+            const result = [];
+            for (let i = 0, len = anyOf.length; i < len; i++) {
+              const name = app.$.helper._getValue(anyOf[i], ns.w3.shacl.name + 'name');
+              result[result.length] = name;
+            }
+            app.unionTypes = result;
+          } else {
+            app.unionTypes = undefined;
+          }
+        });
+      };
+
+      app._unionTypeChanged = function(e) {
+        const type = app.unionTypes[e.detail.value];
+        const element = document.querySelector('api-example-generator');
+        const example = element.generate(app.shape, {
+          type
+        });
+        element._setExample(example);
+      };
+      window.addEventListener('WebComponentsReady',  app._load);
       window.addEventListener('api-navigation-selection-changed', app._navChanged);
     })(document.getElementById('demo'));
   </script>

@@ -1,0 +1,454 @@
+{
+  "@context": {
+    "raml-http": "http://a.ml/vocabularies/http#",
+    "shacl": "http://www.w3.org/ns/shacl#",
+    "raml-shapes": "http://a.ml/vocabularies/shapes#",
+    "security": "http://a.ml/vocabularies/security#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "data": "http://a.ml/vocabularies/data#",
+    "doc": "http://a.ml/vocabularies/document#",
+    "schema-org": "http://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#"
+  },
+  "@id": "amf://id",
+  "@type": [
+    "doc:Document",
+    "doc:Fragment",
+    "doc:Module",
+    "doc:Unit"
+  ],
+  "doc:declares": [
+    {
+      "@id": "amf://id#1",
+      "@type": [
+        "raml-shapes:UnionShape",
+        "shacl:Shape",
+        "raml-shapes:Shape"
+      ],
+      "raml-shapes:anyOf": [
+        {
+          "@id": "amf://id#2",
+          "@type": [
+            "shacl:NodeShape",
+            "shacl:Shape",
+            "raml-shapes:Shape",
+            "doc:DomainElement"
+          ],
+          "doc:examples": {
+            "@id": "amf://id#3",
+            "@type": [
+              "doc:Example",
+              "doc:DomainElement"
+            ],
+            "doc:strict": true,
+            "doc:structuredValue": {
+              "@id": "amf://id#4",
+              "@type": "data:Object",
+              "data:name": {
+                "@id": "file://demo/se-8987/se-8987.raml#/declarations/types/Dog/example/default-example/object_1/scalar_2",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "Pepe"
+                }
+              }
+            },
+            "shacl:raw": "      name: Pepe\n"
+          },
+          "shacl:closed": false,
+          "shacl:name": "Dog",
+          "shacl:property": {
+            "@id": "amf://id#5",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#6",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "name"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "name",
+            "shacl:path": {
+              "@id": "data:name"
+            }
+          }
+        },
+        {
+          "@id": "amf://id#9",
+          "@type": [
+            "shacl:NodeShape",
+            "shacl:Shape",
+            "raml-shapes:Shape",
+            "doc:DomainElement"
+          ],
+          "doc:examples": {
+            "@id": "amf://id#10",
+            "@type": [
+              "doc:Example",
+              "doc:DomainElement"
+            ],
+            "doc:strict": true,
+            "doc:structuredValue": {
+              "@id": "amf://id#11",
+              "@type": "data:Object",
+              "data:age": {
+                "@id": "file://demo/se-8987/se-8987.raml#/declarations/types/Cat/example/default-example/object_1/scalar_2",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "45"
+                }
+              }
+            },
+            "shacl:raw": "      age: 45\n\n"
+          },
+          "shacl:closed": false,
+          "shacl:name": "Cat",
+          "shacl:property": {
+            "@id": "amf://id#12",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#13",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "shacl:datatype": {
+                "@id": "xsd:integer"
+              },
+              "shacl:name": "age"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "age",
+            "shacl:path": {
+              "@id": "data:age"
+            }
+          }
+        }
+      ],
+      "shacl:name": "amf_inline_type_1"
+    },
+    {
+      "@id": "amf://id#2",
+      "@type": [
+        "shacl:NodeShape",
+        "shacl:Shape",
+        "raml-shapes:Shape",
+        "doc:DomainElement"
+      ],
+      "doc:examples": {
+        "@id": "amf://id#3",
+        "@type": [
+          "doc:Example",
+          "doc:DomainElement"
+        ],
+        "doc:strict": true,
+        "doc:structuredValue": {
+          "@id": "amf://id#4",
+          "@type": "data:Object",
+          "data:name": {
+            "@id": "file://demo/se-8987/se-8987.raml#/declarations/types/Dog/example/default-example/object_1/scalar_2",
+            "@type": "data:Scalar",
+            "data:value": {
+              "@type": "xsd:string",
+              "@value": "Pepe"
+            }
+          }
+        },
+        "shacl:raw": "      name: Pepe\n"
+      },
+      "shacl:closed": false,
+      "shacl:name": "Dog",
+      "shacl:property": {
+        "@id": "amf://id#5",
+        "@type": [
+          "shacl:PropertyShape",
+          "shacl:Shape",
+          "raml-shapes:Shape"
+        ],
+        "raml-shapes:range": {
+          "@id": "amf://id#6",
+          "@type": [
+            "raml-shapes:ScalarShape",
+            "shacl:Shape",
+            "raml-shapes:Shape",
+            "doc:DomainElement"
+          ],
+          "shacl:datatype": {
+            "@id": "xsd:string"
+          },
+          "shacl:name": "name"
+        },
+        "shacl:minCount": 1,
+        "shacl:name": "name",
+        "shacl:path": {
+          "@id": "data:name"
+        }
+      }
+    },
+    {
+      "@id": "amf://id#9",
+      "@type": [
+        "shacl:NodeShape",
+        "shacl:Shape",
+        "raml-shapes:Shape",
+        "doc:DomainElement"
+      ],
+      "doc:examples": {
+        "@id": "amf://id#10",
+        "@type": [
+          "doc:Example",
+          "doc:DomainElement"
+        ],
+        "doc:strict": true,
+        "doc:structuredValue": {
+          "@id": "amf://id#11",
+          "@type": "data:Object",
+          "data:age": {
+            "@id": "file://demo/se-8987/se-8987.raml#/declarations/types/Cat/example/default-example/object_1/scalar_2",
+            "@type": "data:Scalar",
+            "data:value": {
+              "@type": "xsd:integer",
+              "@value": "45"
+            }
+          }
+        },
+        "shacl:raw": "      age: 45\n\n"
+      },
+      "shacl:closed": false,
+      "shacl:name": "Cat",
+      "shacl:property": {
+        "@id": "amf://id#12",
+        "@type": [
+          "shacl:PropertyShape",
+          "shacl:Shape",
+          "raml-shapes:Shape"
+        ],
+        "raml-shapes:range": {
+          "@id": "amf://id#13",
+          "@type": [
+            "raml-shapes:ScalarShape",
+            "shacl:Shape",
+            "raml-shapes:Shape",
+            "doc:DomainElement"
+          ],
+          "shacl:datatype": {
+            "@id": "xsd:integer"
+          },
+          "shacl:name": "age"
+        },
+        "shacl:minCount": 1,
+        "shacl:name": "age",
+        "shacl:path": {
+          "@id": "data:age"
+        }
+      }
+    }
+  ],
+  "doc:encodes": {
+    "@id": "amf://id#16",
+    "@type": [
+      "schema-org:WebAPI",
+      "doc:RootDomainElement",
+      "doc:DomainElement"
+    ],
+    "raml-http:endpoint": [
+      {
+        "@id": "amf://id#17",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:path": "/example1",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#18",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "hydra:expects": {
+            "@id": "amf://id#19",
+            "@type": [
+              "raml-http:Request",
+              "doc:DomainElement"
+            ],
+            "raml-http:payload": {
+              "@id": "amf://id#20",
+              "@type": [
+                "raml-http:Payload",
+                "doc:DomainElement"
+              ],
+              "raml-http:mediaType": "application/json",
+              "raml-http:schema": {
+                "@id": "amf://id#21",
+                "@type": [
+                  "raml-shapes:UnionShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape"
+                ],
+                "raml-shapes:anyOf": [
+                  {
+                    "@id": "amf://id#22",
+                    "@type": [
+                      "shacl:NodeShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "shacl:closed": false,
+                    "shacl:name": "Dog",
+                    "shacl:property": {
+                      "@id": "amf://id#5",
+                      "@type": [
+                        "shacl:PropertyShape",
+                        "shacl:Shape",
+                        "raml-shapes:Shape"
+                      ],
+                      "raml-shapes:range": {
+                        "@id": "amf://id#6",
+                        "@type": [
+                          "raml-shapes:ScalarShape",
+                          "shacl:Shape",
+                          "raml-shapes:Shape",
+                          "doc:DomainElement"
+                        ],
+                        "shacl:datatype": {
+                          "@id": "xsd:string"
+                        },
+                        "shacl:name": "name"
+                      },
+                      "shacl:minCount": 1,
+                      "shacl:name": "name",
+                      "shacl:path": {
+                        "@id": "data:name"
+                      }
+                    }
+                  },
+                  {
+                    "@id": "amf://id#23",
+                    "@type": [
+                      "shacl:NodeShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "shacl:closed": false,
+                    "shacl:name": "Cat",
+                    "shacl:property": {
+                      "@id": "amf://id#12",
+                      "@type": [
+                        "shacl:PropertyShape",
+                        "shacl:Shape",
+                        "raml-shapes:Shape"
+                      ],
+                      "raml-shapes:range": {
+                        "@id": "amf://id#13",
+                        "@type": [
+                          "raml-shapes:ScalarShape",
+                          "shacl:Shape",
+                          "raml-shapes:Shape",
+                          "doc:DomainElement"
+                        ],
+                        "shacl:datatype": {
+                          "@id": "xsd:integer"
+                        },
+                        "shacl:name": "age"
+                      },
+                      "shacl:minCount": 1,
+                      "shacl:name": "age",
+                      "shacl:path": {
+                        "@id": "data:age"
+                      }
+                    }
+                  }
+                ],
+                "shacl:name": "schema"
+              }
+            }
+          },
+          "hydra:method": "post",
+          "hydra:returns": {
+            "@id": "amf://id#25",
+            "@type": [
+              "raml-http:Response",
+              "doc:DomainElement"
+            ],
+            "schema-org:name": "200",
+            "hydra:statusCode": "200"
+          }
+        }
+      },
+      {
+        "@id": "amf://id#26",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:path": "/example2",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#27",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "hydra:expects": {
+            "@id": "amf://id#28",
+            "@type": [
+              "raml-http:Request",
+              "doc:DomainElement"
+            ],
+            "raml-http:payload": {
+              "@id": "amf://id#29",
+              "@type": [
+                "raml-http:Payload",
+                "doc:DomainElement"
+              ],
+              "raml-http:mediaType": "application/json",
+              "raml-http:schema": {
+                "@id": "amf://id#1/linked_1",
+                "@type": [
+                  "raml-shapes:UnionShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape"
+                ],
+                "doc:link-label": "amf_inline_type_1",
+                "doc:link-target": {
+                  "@id": "amf://id#1"
+                }
+              }
+            }
+          },
+          "hydra:method": "post",
+          "hydra:returns": {
+            "@id": "amf://id#30",
+            "@type": [
+              "raml-http:Response",
+              "doc:DomainElement"
+            ],
+            "schema-org:name": "200",
+            "hydra:statusCode": "200"
+          }
+        }
+      }
+    ],
+    "schema-org:name": "se-8987-reopen2"
+  }
+}
