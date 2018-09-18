@@ -264,7 +264,8 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     }
     const prefix = this.ns.raml.vocabularies.data;
     if (this._hasType(structure, prefix + 'Scalar')) {
-      return this._getValue(structure, prefix + 'value');
+      const key = this._getAmfKey(prefix + 'value');
+      return this._getTypedValue(structure[key]);
     }
     let obj;
     if (this._hasType(structure, prefix + 'Object')) {
@@ -300,6 +301,51 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       }
     });
     return obj;
+  }
+
+  _getTypedValue(shape) {
+    if (!shape) {
+      return;
+    }
+    if (shape instanceof Array) {
+      shape = shape[0];
+    }
+    let value = shape['@value'];
+    if (!value) {
+      return value;
+    }
+
+    let dt = shape['@type'];
+    if (!dt) {
+      return value || '';
+    }
+    if (dt instanceof Array) {
+      dt = dt[0];
+    }
+    let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
+    if (prefix !== this.ns.w3.xmlSchema) {
+      prefix += ':';
+    }
+    switch (dt) {
+      case prefix + 'boolean':
+      case this.ns.w3.xmlSchema + 'boolean':
+        if (value !== undefined) {
+          return value === 'true' ? true : false;
+        }
+        return value;
+      case prefix + 'integer':
+      case this.ns.w3.xmlSchema + 'integer':
+      case prefix + 'number':
+      case this.ns.w3.xmlSchema + 'number':
+        if (value) {
+          if (isNaN(value)) {
+            return 0;
+          }
+          return Number(value);
+        }
+        return 0;
+      default: return value || '';
+    }
   }
   /**
    * Creates an example from RAML type properties.
@@ -352,9 +398,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @return {any}
    */
   _computeJsonProperyValue(range) {
-
-    if (this._hasType(range,
-      this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
+    if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
       let value = this._getTypeScalarValue(range);
       let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
       if (prefix !== this.ns.w3.xmlSchema) {
@@ -368,15 +412,17 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       if (dt instanceof Array) {
         dt = dt[0];
       }
-
       switch (dt['@id']) {
         case prefix + 'boolean':
+        case this.ns.w3.xmlSchema + 'boolean':
           if (value !== undefined) {
             return value === 'true' ? true : false;
           }
           return value;
         case prefix + 'integer':
+        case this.ns.w3.xmlSchema + 'integer':
         case prefix + 'number':
+        case this.ns.w3.xmlSchema + 'number':
           if (value) {
             if (isNaN(value)) {
               return 0;
