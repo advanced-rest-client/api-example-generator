@@ -129,3 +129,13 @@ types:
     body:
       application/xml:
         type: Imgs
+/inline-property-example:
+  post:
+    body:
+      application/json:
+        type: object
+        properties:
+          limit: number
+          items:
+            type: string[]
+            example: [test, other]

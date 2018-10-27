@@ -268,39 +268,52 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       return this._getTypedValue(structure[key]);
     }
     let obj;
+    let isArray = false;
     if (this._hasType(structure, prefix + 'Object')) {
       obj = {};
     } else if (this._hasType(structure, prefix + 'Array')) {
       obj = [];
+      isArray = true;
     } else {
       return;
     }
-
-    const isArray = obj instanceof Array;
-    const resolvedPrefix = this._getAmfKey(prefix);
-    Object.keys(structure).forEach((key) => {
-      if (key.indexOf(resolvedPrefix) !== 0) {
-        return;
+    if (isArray && this._hasProperty(structure, this.ns.w3.name + '1999/02/22-rdf-syntax-ns#member')) {
+      const key = this._getAmfKey(this.ns.w3.name + '1999/02/22-rdf-syntax-ns#member');
+      const items = structure[key];
+      for (let i = 0, len = items.length; i < len; i++) {
+        const item = items[i];
+        this._jsonFromStructureValue(item, obj, isArray);
       }
-      let v = structure[key];
-      if (v instanceof Array) {
-        v = v[0];
-      }
-      const value = this._jsonFromStructure(v);
-      if (!value) {
-        return;
-      }
-      if (isArray) {
-        obj[obj.length] = value;
-      } else {
-        key = key.replace(resolvedPrefix, '');
-        if (key[0] === ':') {
-          key = key.substr(1);
+    } else {
+      const resolvedPrefix = this._getAmfKey(prefix);
+      Object.keys(structure).forEach((key) => {
+        if (key.indexOf(resolvedPrefix) !== 0) {
+          return;
         }
-        obj[key] = value;
-      }
-    });
+        let v = structure[key];
+        this._jsonFromStructureValue(v, obj, isArray, key, resolvedPrefix);
+      });
+    }
     return obj;
+  }
+
+  _jsonFromStructureValue(value, obj, isArray, key, resolvedPrefix) {
+    if (value instanceof Array) {
+      value = value[0];
+    }
+    const tmp = this._jsonFromStructure(value);
+    if (!tmp) {
+      return;
+    }
+    if (isArray) {
+      obj[obj.length] = tmp;
+    } else {
+      key = key.replace(resolvedPrefix, '');
+      if (key[0] === ':') {
+        key = key.substr(1);
+      }
+      obj[key] = tmp;
+    }
   }
 
   _getTypedValue(shape) {
@@ -399,65 +412,98 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    */
   _computeJsonProperyValue(range) {
     if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
-      let value = this._getTypeScalarValue(range);
-      let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
-      if (prefix !== this.ns.w3.xmlSchema) {
-        prefix += ':';
-      }
-      const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
-      let dt = range[dtKey];
-      if (!dt) {
-        return value || '';
-      }
-      if (dt instanceof Array) {
-        dt = dt[0];
-      }
-      switch (dt['@id']) {
-        case prefix + 'boolean':
-        case this.ns.w3.xmlSchema + 'boolean':
-          if (value !== undefined) {
-            return value === 'true' ? true : false;
-          }
-          return value;
-        case prefix + 'integer':
-        case this.ns.w3.xmlSchema + 'integer':
-        case prefix + 'number':
-        case this.ns.w3.xmlSchema + 'number':
-          if (value) {
-            if (isNaN(value)) {
-              return 0;
-            }
-            return Number(value);
-          }
-          return 0;
-        default: return value || '';
-      }
+      return this._computeJsonScalarValue(range);
     }
-    const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
     if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
-      const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
-      const list = this._ensureArray(range[key]);
-      if (!list) {
-        return;
-      }
-      for (let i = 0, len = list.length; i < len; i++) {
-        const item = list[i];
-        if (this._hasType(item, this.ns.w3.shacl.name + 'NodeShape')) {
-          const data = this._ensureArray(item[pKey]);
-          if (data) {
-            return this._jsonExampleFromProperties(data);
-          }
-        }
-      }
-      return;
+      return this._computeJsonUnionValue(range);
     }
     if (this._hasType(range, this.ns.w3.shacl.name + 'NodeShape')) {
-      const properties = this._ensureArray(range[pKey]);
-      if (properties && properties.length) {
-        return this._jsonExampleFromProperties(properties);
-      }
+      return this._computeJsonObjectValue(range);
+    }
+    if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
+      return this._computeJsonArrayValue(range);
+    }
+  }
+  _computeJsonScalarValue(range) {
+    let value = this._getTypeScalarValue(range);
+    let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
+    if (prefix !== this.ns.w3.xmlSchema) {
+      prefix += ':';
+    }
+    const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
+    let dt = range[dtKey];
+    if (!dt) {
+      return value || '';
+    }
+    if (dt instanceof Array) {
+      dt = dt[0];
+    }
+    switch (dt['@id']) {
+      case prefix + 'boolean':
+      case this.ns.w3.xmlSchema + 'boolean':
+        if (value !== undefined) {
+          return value === 'true' ? true : false;
+        }
+        return value;
+      case prefix + 'integer':
+      case this.ns.w3.xmlSchema + 'integer':
+      case prefix + 'number':
+      case this.ns.w3.xmlSchema + 'number':
+        if (value) {
+          if (isNaN(value)) {
+            return 0;
+          }
+          return Number(value);
+        }
+        return 0;
+      default: return value || '';
+    }
+  }
+
+  _computeJsonUnionValue(range) {
+    const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
+    const list = this._ensureArray(range[key]);
+    if (!list) {
       return;
     }
+    const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
+    for (let i = 0, len = list.length; i < len; i++) {
+      const item = list[i];
+      if (this._hasType(item, this.ns.w3.shacl.name + 'NodeShape')) {
+        const data = this._ensureArray(item[pKey]);
+        if (data) {
+          return this._jsonExampleFromProperties(data);
+        }
+      }
+    }
+  }
+
+  _computeJsonObjectValue(range) {
+    const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
+    const properties = this._ensureArray(range[pKey]);
+    if (properties && properties.length) {
+      return this._jsonExampleFromProperties(properties);
+    }
+  }
+
+  _computeJsonArrayValue(range) {
+    const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
+    const items = this._ensureArray(range[key]);
+    if (!items) {
+      return;
+    }
+    const result = [];
+    for (let i = 0, len = items.length; i < len; i++) {
+      let item = items[i];
+      if (item instanceof Array) {
+        item = item[0];
+      }
+      const value = this._computeJsonProperyValue(item);
+      if (value !== undefined) {
+        result[result.length] = value;
+      }
+    }
+    return result;
   }
   /**
    * Gets a value from a Range shape for a scalar value.
