@@ -97,6 +97,8 @@ declare namespace ApiElements {
      * definition.
      */
     _jsonFromStructure(structure: object|null): any|null;
+    _jsonFromStructureValue(value: any, obj: any, isArray: any, key: any, resolvedPrefix: any): void;
+    _getTypedValue(shape: any): any;
 
     /**
      * Creates an example from RAML type properties.
@@ -119,6 +121,10 @@ declare namespace ApiElements {
      * @param range AMF's range model.
      */
     _computeJsonProperyValue(range: object|null): any|null;
+    _computeJsonScalarValue(range: any): any;
+    _computeJsonUnionValue(range: any): any;
+    _computeJsonObjectValue(range: any): any;
+    _computeJsonArrayValue(range: any): any;
 
     /**
      * Gets a value from a Range shape for a scalar value.

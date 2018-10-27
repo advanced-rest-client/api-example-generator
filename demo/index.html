@@ -51,9 +51,9 @@
         <header>
           <paper-dropdown-menu label="Select API">
           <paper-listbox slot="dropdown-content" id="apisList" on-selected-changed="_apiChanged">
-            <paper-item data-src="se-8987.json">SE-8987</paper-item>
             <paper-item data-src="demo-api.json">Demo api</paper-item>
             <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
+            <paper-item data-src="se-8987.json">SE-8987</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
           <paper-dropdown-menu label="Select media type" disabled id="mediaDropdown">
@@ -159,7 +159,10 @@
         app._discoverUnion(payload);
       };
 
-      app._discoverUnion = function (shape) {
+      app._discoverUnion = function(shape) {
+        if (!shape) {
+          return;
+        }
         setTimeout(() => {
           const ns = ApiElements.Amf.ns;
           const sKey = app.$.helper._getAmfKey(ns.raml.vocabularies.http + 'schema');
