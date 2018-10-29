@@ -22,7 +22,7 @@
         ],
         "http://a.ml/vocabularies/http#server": [
           {
-            "@id": "amf://id#151",
+            "@id": "amf://id#156",
             "@type": [
               "http://a.ml/vocabularies/http#Server",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -84,7 +84,7 @@
                         ],
                         "http://a.ml/vocabularies/http#schema": [
                           {
-                            "@id": "amf://id#76/linked_6",
+                            "@id": "amf://id#76/linked_9",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -117,7 +117,7 @@
                         ],
                         "http://a.ml/vocabularies/http#schema": [
                           {
-                            "@id": "amf://id#76/linked_7",
+                            "@id": "amf://id#76/linked_10",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -187,7 +187,7 @@
                         ],
                         "http://a.ml/vocabularies/http#schema": [
                           {
-                            "@id": "amf://id#76/linked_8",
+                            "@id": "amf://id#76/linked_11",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -406,7 +406,7 @@
                         ],
                         "http://a.ml/vocabularies/http#schema": [
                           {
-                            "@id": "amf://id#1/linked_6",
+                            "@id": "amf://id#1/linked_9",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -439,7 +439,7 @@
                         ],
                         "http://a.ml/vocabularies/http#schema": [
                           {
-                            "@id": "amf://id#1/linked_7",
+                            "@id": "amf://id#1/linked_10",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -824,6 +824,75 @@
                             "http://www.w3.org/ns/shacl#name": [
                               {
                                 "@value": "schema"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "@id": "amf://id#151",
+            "@type": [
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/http#path": [
+              {
+                "@value": "/union"
+              }
+            ],
+            "http://www.w3.org/ns/hydra/core#supportedOperation": [
+              {
+                "@id": "amf://id#152",
+                "@type": [
+                  "http://www.w3.org/ns/hydra/core#Operation",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://www.w3.org/ns/hydra/core#method": [
+                  {
+                    "@value": "post"
+                  }
+                ],
+                "http://www.w3.org/ns/hydra/core#expects": [
+                  {
+                    "@id": "amf://id#153",
+                    "@type": [
+                      "http://a.ml/vocabularies/http#Request",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://a.ml/vocabularies/http#payload": [
+                      {
+                        "@id": "amf://id#154",
+                        "@type": [
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://a.ml/vocabularies/http#mediaType": [
+                          {
+                            "@value": "application/json"
+                          }
+                        ],
+                        "http://a.ml/vocabularies/http#schema": [
+                          {
+                            "@id": "amf://id#155/linked_1",
+                            "@type": [
+                              "http://a.ml/vocabularies/shapes#UnionShape",
+                              "http://www.w3.org/ns/shacl#Shape",
+                              "http://a.ml/vocabularies/shapes#Shape"
+                            ],
+                            "http://a.ml/vocabularies/document#link-target": [
+                              {
+                                "@id": "amf://id#155"
+                              }
+                            ],
+                            "http://a.ml/vocabularies/document#link-label": [
+                              {
+                                "@value": "amf_inline_type_4"
                               }
                             ]
                           }
@@ -4738,7 +4807,7 @@
         ],
         "http://a.ml/vocabularies/shapes#items": [
           {
-            "@id": "amf://id#1/linked_8",
+            "@id": "amf://id#1/linked_11",
             "@type": [
               "http://www.w3.org/ns/shacl#NodeShape",
               "http://www.w3.org/ns/shacl#Shape",
@@ -4854,6 +4923,63 @@
                 "@value": "[test, other]"
               }
             ]
+          }
+        ]
+      },
+      {
+        "@id": "amf://id#155",
+        "@type": [
+          "http://a.ml/vocabularies/shapes#UnionShape",
+          "http://www.w3.org/ns/shacl#Shape",
+          "http://a.ml/vocabularies/shapes#Shape"
+        ],
+        "http://a.ml/vocabularies/shapes#anyOf": [
+          [
+            {
+              "@id": "amf://id#76/linked_12",
+              "@type": [
+                "http://www.w3.org/ns/shacl#NodeShape",
+                "http://www.w3.org/ns/shacl#Shape",
+                "http://a.ml/vocabularies/shapes#Shape",
+                "http://a.ml/vocabularies/document#DomainElement"
+              ],
+              "http://a.ml/vocabularies/document#link-target": [
+                {
+                  "@id": "amf://id#76"
+                }
+              ],
+              "http://a.ml/vocabularies/document#link-label": [
+                {
+                  "@value": "Person"
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "@id": "amf://id#1/linked_12",
+              "@type": [
+                "http://www.w3.org/ns/shacl#NodeShape",
+                "http://www.w3.org/ns/shacl#Shape",
+                "http://a.ml/vocabularies/shapes#Shape",
+                "http://a.ml/vocabularies/document#DomainElement"
+              ],
+              "http://a.ml/vocabularies/document#link-target": [
+                {
+                  "@id": "amf://id#1"
+                }
+              ],
+              "http://a.ml/vocabularies/document#link-label": [
+                {
+                  "@value": "PropertyExamples"
+                }
+              ]
+            }
+          ]
+        ],
+        "http://www.w3.org/ns/shacl#name": [
+          {
+            "@value": "amf_inline_type_4"
           }
         ]
       }

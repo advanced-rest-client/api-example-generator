@@ -7,6 +7,7 @@
   <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
   <link rel="import" href="../api-example-generator.html">
+  <script src="amf-loader.js"></script>
 </head>
 <body>
   <test-fixture id="Basic">
@@ -16,14 +17,86 @@
   </test-fixture>
 
   <script>
+  /* global AmfLoader */
   suite('api-example-generator', () => {
-    let element;
-    setup(() => {
-      element = fixture('Basic');
-    });
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true]
+    ].forEach((setupItem) => {
+      suite(setupItem[0], () => {
+        let amf;
+        suiteSetup(() => {
+          return AmfLoader.load(setupItem[1])
+          .then((model) => {
+            amf = model;
+          });
+        });
 
-    test('Initializes the element', () => {
-      assert.ok(element);
+        suite('_computeScalarType()', () => {
+          let element;
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+          [
+            ['String', 'http://www.w3.org/2001/XMLSchema#string'],
+            ['Number', 'http://a.ml/vocabularies/shapes#number'],
+            ['Integer', 'http://www.w3.org/2001/XMLSchema#integer'],
+            ['Boolean', 'http://www.w3.org/2001/XMLSchema#boolean'],
+            ['Date', 'http://www.w3.org/2001/XMLSchema#date']
+          ]
+          .forEach((item) => {
+            test(`Returns ${item[0]} type`, () => {
+              const shape = {};
+              if (setupItem[1]) {
+                shape['shacl:datatype'] = item[1];
+              } else {
+                shape['http://www.w3.org/ns/shacl#datatype'] = item[1];
+              }
+              const result = element._computeScalarType(shape);
+              assert.equal(result, item[0]);
+            });
+          });
+        });
+
+        suite('_getUnionShape()', () => {
+          let element;
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+
+          test('Returns first object from the union', () => {
+            const decl = element._computeDeclares(amf);
+            const shape = decl[11];
+            const result = element._getUnionShape(shape, {});
+            assert.ok(result);
+            const name = element._getValue(result, element.ns.w3.shacl.name + 'name');
+            assert.equal(name, 'Person');
+          });
+
+          test('Returns type defined in options', () => {
+            const decl = element._computeDeclares(amf);
+            const shape = decl[11];
+            const result = element._getUnionShape(shape, {
+              type: 'PropertyExamples'
+            });
+            assert.ok(result);
+            const name = element._getValue(result, element.ns.w3.shacl.name + 'name');
+            assert.equal(name, 'PropertyExamples');
+          });
+
+          test('Returns undefined when no shape', () => {
+            const result = element._getUnionShape();
+            assert.isUndefined(result);
+          });
+
+          test('Returns undefined when no anyOf key', () => {
+            const result = element._getUnionShape({});
+            assert.isUndefined(result);
+          });
+        });
+      });
     });
   });
   </script>

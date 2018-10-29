@@ -139,3 +139,8 @@ types:
           items:
             type: string[]
             example: [test, other]
+/union:
+  post:
+    body:
+      application/json:
+        type: Person | PropertyExamples

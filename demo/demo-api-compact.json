@@ -22,7 +22,7 @@
         ],
         "raml-http:server": [
           {
-            "@id": "#151",
+            "@id": "#156",
             "@type": [
               "raml-http:Server",
               "doc:DomainElement"
@@ -34,7 +34,7 @@
             ],
             "sourcemaps:sources": [
               {
-                "@id": "#151/source-map",
+                "@id": "#156/source-map",
                 "@type": [
                   "sourcemaps:SourceMap"
                 ],
@@ -56,7 +56,7 @@
                   {
                     "sourcemaps:element": [
                       {
-                        "@value": "amf://id#151"
+                        "@value": "amf://id#156"
                       }
                     ],
                     "sourcemaps:value": [
@@ -120,7 +120,7 @@
                         ],
                         "raml-http:schema": [
                           {
-                            "@id": "#76/linked_9",
+                            "@id": "#76/linked_13",
                             "@type": [
                               "shacl:NodeShape",
                               "shacl:Shape",
@@ -175,7 +175,7 @@
                         ],
                         "raml-http:schema": [
                           {
-                            "@id": "#76/linked_10",
+                            "@id": "#76/linked_14",
                             "@type": [
                               "shacl:NodeShape",
                               "shacl:Shape",
@@ -333,7 +333,7 @@
                         ],
                         "raml-http:schema": [
                           {
-                            "@id": "#76/linked_11",
+                            "@id": "#76/linked_15",
                             "@type": [
                               "shacl:NodeShape",
                               "shacl:Shape",
@@ -790,7 +790,7 @@
                         ],
                         "raml-http:schema": [
                           {
-                            "@id": "#1/linked_9",
+                            "@id": "#1/linked_13",
                             "@type": [
                               "shacl:NodeShape",
                               "shacl:Shape",
@@ -845,7 +845,7 @@
                         ],
                         "raml-http:schema": [
                           {
-                            "@id": "#1/linked_10",
+                            "@id": "#1/linked_14",
                             "@type": [
                               "shacl:NodeShape",
                               "shacl:Shape",
@@ -1782,6 +1782,163 @@
                 ]
               }
             ]
+          },
+          {
+            "@id": "#151",
+            "@type": [
+              "raml-http:EndPoint",
+              "doc:DomainElement"
+            ],
+            "raml-http:path": [
+              {
+                "@value": "/union"
+              }
+            ],
+            "hydra:supportedOperation": [
+              {
+                "@id": "#152",
+                "@type": [
+                  "hydra:Operation",
+                  "doc:DomainElement"
+                ],
+                "hydra:method": [
+                  {
+                    "@value": "post"
+                  }
+                ],
+                "hydra:expects": [
+                  {
+                    "@id": "#153",
+                    "@type": [
+                      "raml-http:Request",
+                      "doc:DomainElement"
+                    ],
+                    "raml-http:payload": [
+                      {
+                        "@id": "#154",
+                        "@type": [
+                          "raml-http:Payload",
+                          "doc:DomainElement"
+                        ],
+                        "raml-http:mediaType": [
+                          {
+                            "@value": "application/json"
+                          }
+                        ],
+                        "raml-http:schema": [
+                          {
+                            "@id": "#155/linked_2",
+                            "@type": [
+                              "raml-shapes:UnionShape",
+                              "shacl:Shape",
+                              "raml-shapes:Shape"
+                            ],
+                            "doc:link-target": [
+                              {
+                                "@id": "#155"
+                              }
+                            ],
+                            "doc:link-label": [
+                              {
+                                "@value": "amf_inline_type_4"
+                              }
+                            ]
+                          }
+                        ],
+                        "sourcemaps:sources": [
+                          {
+                            "@id": "#154/source-map",
+                            "@type": [
+                              "sourcemaps:SourceMap"
+                            ],
+                            "sourcemaps:lexical": [
+                              {
+                                "sourcemaps:element": [
+                                  {
+                                    "@value": "amf://id#154"
+                                  }
+                                ],
+                                "sourcemaps:value": [
+                                  {
+                                    "@value": "[(145,6)-(147,0)]"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "sourcemaps:sources": [
+                      {
+                        "@id": "#153/source-map",
+                        "@type": [
+                          "sourcemaps:SourceMap"
+                        ],
+                        "sourcemaps:lexical": [
+                          {
+                            "sourcemaps:element": [
+                              {
+                                "@value": "raml-http:payload"
+                              }
+                            ],
+                            "sourcemaps:value": [
+                              {
+                                "@value": "[(144,4)-(147,0)]"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "sourcemaps:sources": [
+                  {
+                    "@id": "#152/source-map",
+                    "@type": [
+                      "sourcemaps:SourceMap"
+                    ],
+                    "sourcemaps:lexical": [
+                      {
+                        "sourcemaps:element": [
+                          {
+                            "@value": "amf://id#152"
+                          }
+                        ],
+                        "sourcemaps:value": [
+                          {
+                            "@value": "[(143,2)-(147,0)]"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "sourcemaps:sources": [
+              {
+                "@id": "#151/source-map",
+                "@type": [
+                  "sourcemaps:SourceMap"
+                ],
+                "sourcemaps:lexical": [
+                  {
+                    "sourcemaps:element": [
+                      {
+                        "@value": "amf://id#151"
+                      }
+                    ],
+                    "sourcemaps:value": [
+                      {
+                        "@value": "[(142,0)-(147,0)]"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         ],
         "sourcemaps:sources": [
@@ -1837,7 +1994,7 @@
                 ],
                 "sourcemaps:value": [
                   {
-                    "@value": "[(2,0)-(142,0)]"
+                    "@value": "[(2,0)-(147,0)]"
                   }
                 ]
               },
@@ -11596,7 +11753,7 @@
         ],
         "raml-shapes:items": [
           {
-            "@id": "#1/linked_11",
+            "@id": "#1/linked_15",
             "@type": [
               "shacl:NodeShape",
               "shacl:Shape",
@@ -11908,6 +12065,99 @@
                 "sourcemaps:value": [
                   {
                     "@value": "[(140,12)-(141,0)]"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "#155",
+        "@type": [
+          "raml-shapes:UnionShape",
+          "shacl:Shape",
+          "raml-shapes:Shape"
+        ],
+        "raml-shapes:anyOf": [
+          [
+            {
+              "@id": "#76/linked_16",
+              "@type": [
+                "shacl:NodeShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "doc:link-target": [
+                {
+                  "@id": "#76"
+                }
+              ],
+              "doc:link-label": [
+                {
+                  "@value": "Person"
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "@id": "#1/linked_16",
+              "@type": [
+                "shacl:NodeShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "doc:link-target": [
+                {
+                  "@id": "#1"
+                }
+              ],
+              "doc:link-label": [
+                {
+                  "@value": "PropertyExamples"
+                }
+              ]
+            }
+          ]
+        ],
+        "shacl:name": [
+          {
+            "@value": "amf_inline_type_4"
+          }
+        ],
+        "sourcemaps:sources": [
+          {
+            "@id": "#155/source-map",
+            "@type": [
+              "sourcemaps:SourceMap"
+            ],
+            "sourcemaps:inline-element": [
+              {
+                "sourcemaps:element": [
+                  {
+                    "@value": "amf://id#155"
+                  }
+                ],
+                "sourcemaps:value": [
+                  {
+                    "@value": ""
+                  }
+                ]
+              }
+            ],
+            "sourcemaps:lexical": [
+              {
+                "sourcemaps:element": [
+                  {
+                    "@value": "amf://id#155"
+                  }
+                ],
+                "sourcemaps:value": [
+                  {
+                    "@value": "[(146,8)-(147,0)]"
                   }
                 ]
               }
