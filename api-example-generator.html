@@ -124,6 +124,15 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       for (let i = 0, len = items.length; i < len; i++) {
         const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
         const properties = this._ensureArray(items[i][pKey]);
+        if (!properties) {
+          if (this._hasType(items[i], this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
+            const example = this._computeScalarType(items[i]);
+            if (example) {
+              return '["' + example + '"]';
+            }
+          }
+          continue;
+        }
         const typeName = this._getValue(items[i], this.ns.w3.shacl.name + 'name');
         const _example = this._exampleFromProperties(type, properties, typeName);
         if (_example) {
@@ -162,6 +171,35 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     }
   }
   /**
+   * Computes value from defined `datatype` property.
+   * @param {Object} shape A shape with `datatype` property.
+   * @return {String|undefined} Value of the data type.
+   */
+  _computeScalarType(shape) {
+    const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
+    let dt = shape[dtKey];
+    if (!dt) {
+      return;
+    }
+    if (dt instanceof Array) {
+      dt = dt[0];
+    }
+    let id = dt['@id'] ? dt['@id'] : dt;
+    const w3index = id.indexOf(this.ns.w3.xmlSchema);
+    if (w3index !== -1) {
+      id = id.substr(this.ns.w3.xmlSchema.length);
+    }
+    const shapeindex = id.indexOf(this.ns.raml.vocabularies.shapes);
+    if (shapeindex !== -1) {
+      id = id.substr(this.ns.raml.vocabularies.shapes.length);
+    }
+    const index = id.indexOf(':');
+    if (index !== -1) {
+      id = id.substr(index);
+    }
+    return id[0].toUpperCase() + id.substr(1);
+  }
+  /**
    * Gets a shape for union type
    * @param {Object} schema Union's model
    * @param {?Object} opts See `computeExample()` for description
@@ -180,13 +218,21 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       anyOf = [anyOf];
     }
     if (!opts.type) {
-      return anyOf[0];
+      let item = anyOf[0];
+      if (item instanceof Array) {
+        item = item[0];
+      }
+      return this._resolve(item);
     }
     for (let i = 0, len = anyOf.length; i < len; i++) {
-      const type = anyOf[i];
-      const name = this._getValue(type, this.ns.w3.shacl.name + 'name');
+      let item = anyOf[i];
+      if (item instanceof Array) {
+        item = item[0];
+      }
+      item = this._resolve(item);
+      const name = this._getValue(item, this.ns.w3.shacl.name + 'name');
       if (name === opts.type) {
-        return type;
+        return item;
       }
     }
   }

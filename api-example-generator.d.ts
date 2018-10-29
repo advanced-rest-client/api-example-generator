@@ -67,6 +67,14 @@ declare namespace ApiElements {
     computeExample(type: String|null, schema: object|null, opts: object|null): String|null|undefined;
 
     /**
+     * Computes value from defined `datatype` property.
+     *
+     * @param shape A shape with `datatype` property.
+     * @returns Value of the data type.
+     */
+    _computeScalarType(shape: object|null): String|null|undefined;
+
+    /**
      * Gets a shape for union type
      *
      * @param schema Union's model
