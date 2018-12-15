@@ -514,8 +514,12 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     }
     const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
     for (let i = 0, len = list.length; i < len; i++) {
-      const item = list[i];
+      let item = list[i];
+      if (item instanceof Array) {
+        item = item[0];
+      }
       if (this._hasType(item, this.ns.w3.shacl.name + 'NodeShape')) {
+        item = this._resolve(item);
         const data = this._ensureArray(item[pKey]);
         if (data) {
           return this._jsonExampleFromProperties(data);
