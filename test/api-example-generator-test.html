@@ -18,26 +18,67 @@
 
   <script>
   /* global AmfLoader */
-  suite('api-example-generator', () => {
-    [
-      ['json+ld data model', false],
-      ['Compact data model', true]
-    ].forEach((setupItem) => {
-      suite(setupItem[0], () => {
-        let amf;
-        suiteSetup(() => {
-          return AmfLoader.load(setupItem[1])
-          .then((model) => {
-            amf = model;
-          });
-        });
 
-        suite('_computeScalarType()', () => {
+  function getType(element, amf, name) {
+    if (amf instanceof Array) {
+      amf = amf[0];
+    }
+    const dKey = element._getAmfKey(element.ns.raml.vocabularies.document + 'declares');
+    const declares = element._ensureArray(amf[dKey]);
+    const type = declares.find((item) => {
+      if (!element._hasType(item, element.ns.w3.shacl.name + 'NodeShape')) {
+        return false;
+      }
+      const iName = element._getValue(item, element.ns.w3.shacl.name + 'name');
+      return name === iName;
+    });
+    return type;
+  }
+
+  function getProperty(element, type, index) {
+    const pKey = element._getAmfKey(element.ns.w3.shacl.name + 'property');
+    const props = element._ensureArray(type[pKey]);
+    return props[index];
+  }
+
+  function getTypeProperty(element, amf, typeName, propertyIndex) {
+    const type = getType(element, amf, typeName);
+    const prop = getProperty(element, type, propertyIndex);
+    return prop;
+  }
+
+  function getTypePropertyRange(element, amf, typeName, propertyIndex) {
+    const prop = getTypeProperty(element, amf, typeName, propertyIndex);
+    const rKey = element._getAmfKey(element.ns.raml.vocabularies.shapes + 'range');
+    let range = prop[rKey];
+    if (range instanceof Array) {
+      range = range[0];
+    }
+    return range;
+  }
+
+  suite('api-example-generator', () => {
+    suite('_computeScalarType()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
           let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
           setup(() => {
             element = fixture('Basic');
             element.amfModel = amf;
           });
+
           [
             ['String', 'http://www.w3.org/2001/XMLSchema#string'],
             ['Number', 'http://a.ml/vocabularies/shapes#number'],
@@ -58,9 +99,25 @@
             });
           });
         });
+      });
+    });
 
-        suite('_getUnionShape()', () => {
+    suite('_getUnionShape()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
           let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
           setup(() => {
             element = fixture('Basic');
             element.amfModel = amf;
@@ -94,6 +151,86 @@
           test('Returns undefined when no anyOf key', () => {
             const result = element._getUnionShape({});
             assert.isUndefined(result);
+          });
+        });
+      });
+    });
+
+    suite('_getTypeScalarValue()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+
+          test('Returns default value of range', () => {
+            const range = getTypePropertyRange(element, amf, 'Address', 1);
+            const result = element._getTypeScalarValue(range);
+            assert.equal(result, '00000');
+          });
+
+          test('Returns example value when no default value', () => {
+            const range = getTypePropertyRange(element, amf, 'Address', 2);
+            const result = element._getTypeScalarValue(range);
+            assert.equal(result, 1);
+          });
+
+          test('Returns undefined otherwise', () => {
+            const range = getTypePropertyRange(element, amf, 'Address', 0);
+            const result = element._getTypeScalarValue(range);
+            assert.isUndefined(result);
+          });
+        });
+      });
+    });
+
+    suite('_computeJsonObjectValue()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+
+          test('Returns object', () => {
+            const type = getType(element, amf, 'Address');
+            const result = element._computeJsonObjectValue(type);
+            assert.typeOf(result, 'object');
+          });
+
+          test('Computes JSON properties', () => {
+            const type = getType(element, amf, 'Address');
+            const result = element._computeJsonObjectValue(type);
+            assert.equal(result.house, '1');
+            assert.equal(result.street, '');
+            assert.equal(result.zip, '00000');
           });
         });
       });
