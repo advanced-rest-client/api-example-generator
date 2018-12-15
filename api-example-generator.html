@@ -472,6 +472,9 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   }
   _computeJsonScalarValue(range) {
     let value = this._getTypeScalarValue(range);
+    if (!value) {
+      return '';
+    }
     let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
     if (prefix !== this.ns.w3.xmlSchema) {
       prefix += ':';
@@ -514,8 +517,12 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     }
     const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
     for (let i = 0, len = list.length; i < len; i++) {
-      const item = list[i];
+      let item = list[i];
+      if (item instanceof Array) {
+        item = item[0];
+      }
       if (this._hasType(item, this.ns.w3.shacl.name + 'NodeShape')) {
+        item = this._resolve(item);
         const data = this._ensureArray(item[pKey]);
         if (data) {
           return this._jsonExampleFromProperties(data);
@@ -573,26 +580,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       }
       return this._getValue(ex, this.ns.w3.shacl.name + 'raw');
     }
-    const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
-    let type = range[dtKey];
-    if (!type) {
-      return;
-    }
-    if (type instanceof Array) {
-      type = type[0];
-    }
-    const typeDef = type['@id'];
-    let scKey = this._getAmfKey(this.ns.w3.xmlSchema);
-    let shKey = this._getAmfKey(this.ns.raml.vocabularies.shapes);
-    if (scKey !== this.ns.w3.xmlSchema) {
-      scKey += ':';
-    }
-    if (shKey !== this.ns.raml.vocabularies.shapes) {
-      shKey += ':';
-    }
-    return typeDef
-    .replace(scKey, '')
-    .replace(shKey, '');
   }
   /**
    * Computes example from RAML type for XML media type.
