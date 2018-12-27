@@ -23,7 +23,7 @@ types:
         xml:
           attribute: true
       id:
-        type: string
+        type: string | number
       name: string
       birthday: date-only
       gender:
@@ -44,6 +44,7 @@ types:
         properties:
           url: string
           thumb: string
+      opt?: Image | string
   JsonExampleInclude:
     type: Person
     example: !include example.json
@@ -107,6 +108,8 @@ types:
     body:
       application/json:
         type: TypeExamples
+      application/xml:
+        type: TypeExamples
 /propertyExamples:
   post:
     body:
@@ -124,6 +127,8 @@ types:
     body:
       application/json:
         type: PropertyExamples[]
+      application/xml:
+        type: PropertyExamples[]
 /wrappedXml:
   post:
     body:
@@ -139,8 +144,17 @@ types:
           items:
             type: string[]
             example: [test, other]
+      application/xml:
+        type: object
+        properties:
+          limit: number
+          items:
+            type: string[]
+            example: [test, other]
 /union:
   post:
     body:
       application/json:
+        type: Person | PropertyExamples
+      application/xml:
         type: Person | PropertyExamples

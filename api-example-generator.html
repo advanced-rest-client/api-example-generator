@@ -51,7 +51,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    */
   static get observers() {
     return [
-      '_shapeAutoChanged(shape, auto)'
+      '_shapeAutoChanged(shape, auto, amfModel)'
     ];
   }
   /**
@@ -112,10 +112,14 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @param {Object} schema Payload's schema
    * @param {?Object} opts Generation options:
    * - type `String` - Type name of an union type. If not set it uses first type
+   * - typeName `String` - When generating XML example name of the type to use as
+   * main node.
    * in the union.
    * @return {String|undefined}
    */
   computeExample(type, schema, opts) {
+    schema = this._resolve(schema);
+    const isXml = type.indexOf('xml') !== -1;
     if (this._hasType(schema,
       this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
       const iKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
@@ -128,6 +132,9 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
           if (this._hasType(items[i], this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
             const example = this._computeScalarType(items[i]);
             if (example) {
+              if (isXml) {
+                return example;
+              }
               return '["' + example + '"]';
             }
           }
@@ -136,13 +143,16 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
         const typeName = this._getValue(items[i], this.ns.w3.shacl.name + 'name');
         const _example = this._exampleFromProperties(type, properties, typeName);
         if (_example) {
+          if (isXml) {
+            return _example;
+          }
           return '[' + _example + ']';
         }
       }
       return;
     }
     if (this._hasType(schema, this.ns.raml.vocabularies.document + 'Example')) {
-      return this._exampleFromExamples(type, [schema]);
+      return this._exampleFromExamples(type, [schema], opts);
     }
     if (this._hasType(schema, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
       if (!opts) {
@@ -158,7 +168,13 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
     const examples = this._ensureArray(schema[eKey]);
     if (examples && examples.length) {
-      const result = this._exampleFromExamples(type, examples);
+      if (!opts) {
+        opts = {};
+      }
+      if (!opts.typeName) {
+        opts.typeName = this._getValue(schema, this.ns.w3.shacl.name + 'name');
+      }
+      const result = this._exampleFromExamples(type, examples, opts);
       if (result) {
         return result;
       }
@@ -261,9 +277,10 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    *
    * @param {String} type Bosy content type.
    * @param {Array<Object>} examples Resolved examples.
+   * @param {?Object} opts Processing options. See `computeExample()`
    * @return {String|undefined}
    */
-  _exampleFromExamples(type, examples) {
+  _exampleFromExamples(type, examples, opts) {
     const example = examples.length === 1 ? examples[0] :
       this._exampleFromMediaType(type, examples);
     if (!example) {
@@ -274,14 +291,24 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (!raw) {
       raw = this._getValue(example, this.ns.w3.shacl.name + 'raw');
     }
+    const isJson = type.indexOf('json') !== -1;
+    const isXml = !isJson && type.indexOf('xml') !== -1;
     if (raw) {
-      if (type.indexOf('json') === -1) {
+      if (isJson) {
+        try {
+          JSON.parse(raw);
+          return raw;
+        } catch (_) {}
+      }
+      if (isXml) {
+        if (raw.trim()[0] === '<') {
+          return raw;
+        }
+      }
+      if (!isJson && !isXml) {
+        // no appropiate parser for now.
         return raw;
       }
-      try {
-        JSON.parse(raw);
-        return raw;
-      } catch (_) {}
     }
     const sKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'structuredValue');
     let structure = example[sKey];
@@ -291,11 +318,16 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (structure instanceof Array) {
       structure = structure[0];
     }
-    const result = this._jsonFromStructure(structure);
-    if (result) {
-      if (typeof result === 'object') {
-        return JSON.stringify(result, null, 2);
+    if (isJson) {
+      const result = this._jsonFromStructure(structure);
+      if (result) {
+        if (typeof result === 'object') {
+          return JSON.stringify(result, null, 2);
+        }
+        return result;
       }
+    } else {
+      return this._xmlFromStructure(structure, opts);
     }
   }
   /**
@@ -362,6 +394,35 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     }
   }
 
+  _xmlFromStructure(structure, opts) {
+    const doc = document.implementation.createDocument('', '', null);
+    const typeName = opts && opts.typeName || 'model';
+    const main = doc.createElement(typeName);
+    doc.appendChild(main);
+    const nl = doc.createTextNode('\n');
+    main.appendChild(nl);
+    const keys = Object.keys(structure);
+    const exclude = ['@id', '@type', '__apicResolved',
+      this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources')
+    ];
+    for (let i = 0, len = keys.length; i < len; i++) {
+      let key = keys[i];
+      if (exclude.indexOf(key) !== -1) {
+        continue;
+      }
+      let item = structure[key];
+      if (item instanceof Array) {
+        item = item[0];
+      }
+      const name = this._dataNameFromKey(key);
+      this._xmlProcessDataProperty(doc, main, item, name);
+    }
+    const s = new XMLSerializer();
+    let value = s.serializeToString(doc);
+    value = '<?xml version="1.0" encoding="UTF-8"?>\n' + value;
+    return value;
+  }
+
   _getTypedValue(shape) {
     if (!shape) {
       return;
@@ -388,22 +449,16 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     switch (dt) {
       case prefix + 'boolean':
       case this.ns.w3.xmlSchema + 'boolean':
-        if (value !== undefined) {
-          return value === 'true' ? true : false;
-        }
-        return value;
+        return value === 'true' ? true : false;
       case prefix + 'integer':
       case this.ns.w3.xmlSchema + 'integer':
       case prefix + 'number':
       case this.ns.w3.xmlSchema + 'number':
-        if (value) {
-          if (isNaN(value)) {
-            return 0;
-          }
-          return Number(value);
+        if (isNaN(value)) {
+          return 0;
         }
-        return 0;
-      default: return value || '';
+        return Number(value);
+      default: return value;
     }
   }
   /**
@@ -551,6 +606,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       if (item instanceof Array) {
         item = item[0];
       }
+      this._resolve(item);
       const value = this._computeJsonProperyValue(item);
       if (value !== undefined) {
         result[result.length] = value;
@@ -609,6 +665,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (!property) {
       return;
     }
+
     if (this._hasType(property, this.ns.w3.shacl.name + 'NodeShape')) {
       const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
       const properties = this._ensureArray(property[pKey]);
@@ -628,6 +685,21 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (range instanceof Array) {
       range = range[0];
     }
+    if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
+      const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
+      const list = this._ensureArray(range[key]);
+      if (!list) {
+        return;
+      }
+      const shape = list[0];
+      if (this._hasType(shape, this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
+        this._xmlProcessUnionScalarProperty(doc, node, property, shape);
+      } else {
+        this._xmlProcessProperty(doc, node, shape);
+      }
+      return;
+    }
+
     const sKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'xmlSerialization');
     let serialization = range[sKey];
     let isWrapped = false;
@@ -667,12 +739,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       dataType = dataType[0];
     }
     dataType = dataType['@id'];
-    const vKey = this._getAmfKey(this.ns.w3.xmlSchema);
-    let result = dataType.replace(vKey, '');
-    if (result[0] === ':') {
-      result = result.substr(1);
-    }
-    return result;
+    return this._dataNameFromKey(dataType);
   }
   /**
    * Appends an attribute to the node from AMF property
@@ -768,6 +835,99 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     for (let i = 0, len = properties.length; i < len; i++) {
       this._xmlProcessProperty(doc, node, properties[i]);
     }
+  }
+
+  _xmlProcessUnionScalarProperty(doc, node, property, shape) {
+    const name = this._getValue(property, this.ns.w3.shacl.name + 'name') || 'unknown';
+    const type = this._readDataType(shape);
+    const element = doc.createElement(name);
+    element.appendChild(doc.createTextNode(type));
+    node.appendChild(element);
+    node.appendChild(doc.createTextNode('\n'));
+  }
+
+  /**
+   * Processes XML property from a data shape.
+   * @param {Document} doc Main document
+   * @param {Element} node Current node
+   * @param {Object} property AMF property
+   * @param {String} name Current property name
+   */
+  _xmlProcessDataProperty(doc, node, property, name) {
+    if (!property || !name) {
+      return;
+    }
+    const element = doc.createElement(name);
+    if (this._hasType(property, this.ns.raml.vocabularies.data + 'Scalar')) {
+      let value = this._computeStructuredExampleValue(property);
+      if (value) {
+        const vn = doc.createTextNode(value);
+        element.appendChild(vn);
+      }
+    } else if (this._hasType(property, this.ns.raml.vocabularies.data + 'Array')) {
+      element.appendChild(doc.createTextNode('\n'));
+      this._processDataArrayProperties(doc, element, property, name);
+    } else if (this._hasType(property, this.ns.raml.vocabularies.data + 'Object')) {
+      element.appendChild(doc.createTextNode('\n'));
+      this._processDataObjectProperties(doc, element, property, name);
+    } else if (property['@value']) {
+      const vn = doc.createTextNode(property['@value']);
+      node.appendChild(vn);
+      node.appendChild(doc.createTextNode('\n'));
+      // Skips adding new element
+      return;
+    }
+    node.appendChild(element);
+    node.appendChild(doc.createTextNode('\n'));
+  }
+
+  _processDataArrayProperties(doc, node, property, name) {
+    let childName;
+    if (name.substr(-2) === 'es') {
+      childName = name.substr(0, name.length - 2);
+    } else if (name.substr(-1) === 's') {
+      childName = name.substr(0, name.length - 1);
+    } else {
+      childName = name;
+    }
+    const key = this._getAmfKey(this.ns.w3.name + '1999/02/22-rdf-syntax-ns#member');
+    const items = this._ensureArray(property[key]);
+    for (let i = 0, len = items.length; i < len; i++) {
+      let item = items[i];
+      if (item instanceof Array) {
+        item = item[0];
+      }
+      this._xmlProcessDataProperty(doc, node, item, childName);
+    }
+  }
+
+  _processDataObjectProperties(doc, node, property) {
+    const prefix = this.ns.raml.vocabularies.data;
+    const resolvedPrefix = this._getAmfKey(prefix);
+    Object.keys(property).forEach((key) => {
+      if (key.indexOf(resolvedPrefix) !== 0) {
+        return;
+      }
+      let item = property[key];
+      if (item instanceof Array) {
+        item = item[0];
+      }
+      const name = this._dataNameFromKey(key);
+      this._xmlProcessDataProperty(doc, node, item, name);
+    });
+  }
+
+  _dataNameFromKey(key) {
+    let index = key.indexOf('#');
+    if (index !== -1) {
+      key = key.substr(index + 1);
+    } else {
+      index = key.indexOf(':');
+      if (index !== -1) {
+        key = key.substr(index + 1);
+      }
+    }
+    return key;
   }
 }
 window.customElements.define(ApiExampleGenerator.is, ApiExampleGenerator);
