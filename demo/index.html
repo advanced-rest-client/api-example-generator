@@ -94,9 +94,9 @@
     </dom-bind>
     <script>
     (function(app) {
-      class DemoElement extends ApiElements.AmfHelperMixin(Polymer.Element) {}
-      window.customElements.define('demo-element', DemoElement);
       app._load = function() {
+        class DemoElement extends ApiElements.AmfHelperMixin(Polymer.Element) {}
+        window.customElements.define('demo-element', DemoElement);
         document.getElementById('apisList').selected = 0;
       };
 
