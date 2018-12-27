@@ -27,9 +27,9 @@
     const dKey = element._getAmfKey(element.ns.raml.vocabularies.document + 'declares');
     const declares = element._ensureArray(amf[dKey]);
     const type = declares.find((item) => {
-      if (!element._hasType(item, element.ns.w3.shacl.name + 'NodeShape')) {
-        return false;
-      }
+      // if (!element._hasType(item, element.ns.w3.shacl.name + 'NodeShape')) {
+      //   return false;
+      // }
       const iName = element._getValue(item, element.ns.w3.shacl.name + 'name');
       return name === iName;
     });
@@ -56,6 +56,25 @@
       range = range[0];
     }
     return range;
+  }
+
+  function getPayload(element, amf, endpoint, method) {
+    const webApi = element._computeWebApi(amf);
+    const endPoint = element._computeEndpointByPath(webApi, endpoint);
+    const opKey = element._getAmfKey(element.ns.w3.hydra.supportedOperation);
+    const ops = element._ensureArray(endPoint[opKey]);
+    const op = ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
+    const expects = element._computeExpects(op);
+    return element._ensureArray(element._computePayload(expects));
+  }
+
+  function getPayloadSchema(element, amf, endpoint, method, payloadIndex) {
+    if (!payloadIndex) {
+      payloadIndex = 0;
+    }
+    const payload = getPayload(element, amf, endpoint, method)[payloadIndex];
+    const sKey = element._getAmfKey(element.ns.raml.vocabularies.http + 'schema');
+    return element._ensureArray(payload[sKey]);
   }
 
   suite('api-example-generator', () => {
@@ -125,8 +144,7 @@
           });
 
           test('Returns first object from the union', () => {
-            const decl = element._computeDeclares(amf);
-            const shape = decl[11];
+            const shape = getType(element, amf, 'amf_inline_type_6');
             const result = element._getUnionShape(shape, {});
             assert.ok(result);
             const name = element._getValue(result, element.ns.w3.shacl.name + 'name');
@@ -134,8 +152,7 @@
           });
 
           test('Returns type defined in options', () => {
-            const decl = element._computeDeclares(amf);
-            const shape = decl[11];
+            const shape = getType(element, amf, 'amf_inline_type_6');
             const result = element._getUnionShape(shape, {
               type: 'PropertyExamples'
             });
@@ -232,6 +249,559 @@
             assert.equal(result.house, '1');
             assert.equal(result.street, '');
             assert.equal(result.zip, '00000');
+          });
+        });
+      });
+    });
+
+    suite('_shapeAutoChanged()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+
+          test('Does nothing when no auto', () => {
+            const spy = sinon.spy(element, '_setExample');
+            element._shapeAutoChanged({}, false);
+            assert.isFalse(spy.called);
+          });
+
+          test('Sets example undefined when no shape', () => {
+            element._setExample('test');
+            element._shapeAutoChanged(undefined, true);
+            assert.isUndefined(element.example);
+          });
+
+          test('Sets example value', () => {
+            const type = getPayload(element, amf, '/IncludedInType', 'post')[0];
+            element._shapeAutoChanged(type, true);
+            assert.typeOf(element.example, 'string');
+          });
+        });
+      });
+    });
+
+    suite('generate()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+
+          test('Uses type from argument', () => {
+            const type = getPayload(element, amf, '/IncludedInType', 'post')[0];
+            const result = element.generate(type);
+            assert.typeOf(result, 'string');
+          });
+
+          test('Uses type from properties', () => {
+            const type = getPayload(element, amf, '/IncludedInType', 'post')[0];
+            element.shape = type;
+            const result = element.generate();
+            assert.typeOf(result, 'string');
+          });
+
+          test('Takes first type from the array', () => {
+            const type = getPayload(element, amf, '/IncludedInType', 'post');
+            const result = element.generate(type);
+            assert.typeOf(result, 'string');
+          });
+
+          test('Returns undefined when no media type', () => {
+            const result = element.generate({});
+            assert.isUndefined(result);
+          });
+
+          test('Returns undefined when shape', () => {
+            const result = element.generate();
+            assert.isUndefined(result);
+          });
+
+          test('Returns undefined when no schema', () => {
+            const type = getPayload(element, amf, '/IncludedInType', 'post')[0];
+            const key = element._getAmfKey(element.ns.raml.vocabularies.http + 'schema');
+            delete type[key];
+            const result = element.generate(type);
+            assert.isUndefined(result);
+          });
+        });
+      });
+    });
+
+    suite('computeExample()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+
+          test('Computes example for array type (JSON)', () => {
+            const type = getPayloadSchema(element, amf, '/arrayTypeExample', 'post')[0];
+            const result = element.computeExample('application/json', type);
+            const cmp = '[{\n  "firstName": "",\n  "lastName": ""\n}]';
+            assert.equal(result, cmp);
+          });
+
+          test('Computes example for array type (XML)', () => {
+            const type = getPayloadSchema(element, amf, '/arrayTypeExample', 'post')[0];
+            const result = element.computeExample('application/xml', type);
+            let cmp = '<TypeExamples>\n<firstName>string</firstName>\n';
+            cmp += '<lastName>string</lastName>\n</TypeExamples>';
+            assert.equal(result, cmp);
+          });
+
+          test('Computes example for Example shape (JSON)', () => {
+            const range = getTypePropertyRange(element, amf, 'Address', 1);
+            const key = element._getAmfKey(element.ns.raml.vocabularies.document + 'examples');
+            const example = element._ensureArray(range[key])[0];
+            const result = element.computeExample('application/json', example);
+            assert.equal(result, '94100');
+          });
+
+          test('Computes example for Example shape (XML)', () => {
+            const range = getTypePropertyRange(element, amf, 'Address', 1);
+            const key = element._getAmfKey(element.ns.raml.vocabularies.document + 'examples');
+            const example = element._ensureArray(range[key])[0];
+            const result = element.computeExample('application/xml', example);
+            assert.equal(result, '<?xml version="1.0" encoding="UTF-8"?>\n<model>\n94100\n</model>');
+          });
+
+          test('Computes example from examples array in a range (JSON)', () => {
+            const range = getTypePropertyRange(element, amf, 'Address', 1);
+            const result = element.computeExample('application/json', range);
+            assert.equal(result, '94100');
+          });
+
+          test('Computes example from examples array in a range (XML)', () => {
+            const range = getTypePropertyRange(element, amf, 'Address', 1);
+            const result = element.computeExample('application/xml', range);
+            assert.equal(result, '<?xml version="1.0" encoding="UTF-8"?>\n<zip>\n94100\n</zip>');
+          });
+
+          test('Computes example from properties in a type (JSON)', () => {
+            const type = getType(element, amf, 'Address');
+            const result = element.computeExample('application/json', type);
+            assert.equal(result, '{\n  "street": "",\n  "zip": "00000",\n  "house": "1"\n}');
+          });
+
+          test('Computes example from properties in a type (XML)', () => {
+            const type = getType(element, amf, 'Address');
+            const result = element.computeExample('application/xml', type);
+            assert.equal(result, '<Address>\n<street>string</street>\n<zip>"00000"</zip>\n<house>1</house>\n</Address>');
+          });
+
+          test('Example from properties in a type contains default value instead of example value', () => {
+            const type = getType(element, amf, 'Address');
+            const result = element.computeExample('application/json', type);
+            assert.isAbove(result.indexOf('"zip": "00000"'), 0);
+          });
+
+          test('Compute example for a union type with detault type (JSON)', () => {
+            const type = getType(element, amf, 'amf_inline_type_6');
+            const result = element.computeExample('application/json', type);
+            let cmp = '{\n  "error": "",\n  "id": "",\n  "name": "",\n  "birthday": "",\n  ';
+            cmp += '"gender": "male",\n  "url": "",\n  "tagline": "",\n  "language": "PL",\n  ';
+            cmp += '"etag": "etag example",\n  "image": {\n    "url": "",\n    "thumb": ""\n  },\n  ';
+            cmp += '"opt": {\n    "url": "",\n    "thumb": ""\n  }\n}';
+            assert.equal(result, cmp);
+          });
+
+          test('Compute example for a union type with detault type (XML)', () => {
+            const type = getType(element, amf, 'amf_inline_type_6');
+            const result = element.computeExample('application/xml', type);
+            let cmp = '<Person error="boolean">\n<id>string</id>\n<name>string</name>\n<birthday>date</birthday>\n';
+            cmp += '<gender>male</gender>\n<url>string</url>\n<tagline>string</tagline>\n<language>PL</language>\n';
+            cmp += '<etag>etag example</etag>\n<image>\n<url>string</url>\n<thumb>string</thumb>\n</image>\n';
+            cmp += '<url>string</url>\n<thumb>string</thumb>\n</Person>';
+            assert.equal(result, cmp);
+          });
+
+          test('Compute example for a union type with specified type (JSON)', () => {
+            const type = getType(element, amf, 'amf_inline_type_6');
+            const result = element.computeExample('application/json', type, {
+              type: 'PropertyExamples'
+            });
+            let cmp = '{\n  "xtra": "",\n  "firstName": "Pawel",\n  "lastName": "Psztyc",\n  ';
+            cmp += '"address": {\n    "street": "",\n    "zip": "00000",\n    "house": "1"\n  }';
+            cmp += ',\n  "num": "",\n  "int": "",\n  "bool": "",\n  "defVal": 10\n}';
+            assert.equal(result, cmp);
+          });
+
+          test('Returns undefined if specified union type does not exist', () => {
+            const type = getType(element, amf, 'amf_inline_type_6');
+            const result = element.computeExample('application/json', type, {
+              type: 'NonExisting'
+            });
+            assert.isUndefined(result);
+          });
+        });
+      });
+    });
+
+    suite('_exampleFromMediaType()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+
+          test('Returns undefined when empty examples', () => {
+            const result = element._exampleFromMediaType('application/json', []);
+            assert.isUndefined(result);
+          });
+
+          test('Returns selected media type', () => {
+            const payloads = getPayload(element, amf, '/IncludedInType', 'post');
+            const result = element._exampleFromMediaType('application/json', payloads);
+            assert.typeOf(result, 'object');
+          });
+
+          test('Returns undefined when payload not found', () => {
+            const payloads = getPayload(element, amf, '/IncludedInType', 'post');
+            const result = element._exampleFromMediaType('application/xxx', payloads);
+            assert.isUndefined(result);
+          });
+        });
+      });
+    });
+
+    suite('_exampleFromExamples()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+
+          test('Finds an example from media type', () => {
+            const payloads = getPayload(element, amf, '/IncludedInType', 'post');
+            element._resolve(payloads[0]);
+            element._resolve(payloads[1]);
+            element._exampleFromExamples('application/json', payloads);
+          });
+        });
+      });
+    });
+
+    suite('_jsonFromStructure()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
+
+          test('Returns undefined whjen no structure', () => {
+            const result = element._jsonFromStructure();
+            assert.isUndefined(result);
+          });
+
+          function getStructuredValue(element, type) {
+            const key = element._getAmfKey(element.ns.raml.vocabularies.document + 'examples');
+            const example = element._ensureArray(type[key])[0];
+            const svKey = element._getAmfKey(element.ns.raml.vocabularies.document + 'structuredValue');
+            return element._ensureArray(example[svKey])[0];
+          }
+
+          test('Creates example from structure', () => {
+            const type = getType(element, amf, 'JsonExampleInclude');
+            const value = getStructuredValue(element, type);
+            const result = element._jsonFromStructure(value);
+            assert.typeOf(result, 'object');
+          });
+
+          test('Creates complext structures', () => {
+            const type = getType(element, amf, 'JsonExampleInclude');
+            const value = getStructuredValue(element, type);
+            const result = element._jsonFromStructure(value);
+            assert.typeOf(result.image, 'object');
+          });
+
+          test('Creates example for array structure', () => {
+            const type = getType(element, amf, 'amf_inline_type_4');
+            const value = getStructuredValue(element, type);
+            const result = element._jsonFromStructure(value);
+            assert.typeOf(result, 'array');
+            assert.deepEqual(result, ['test', 'other']);
+          });
+        });
+      });
+    });
+
+    suite('_getTypedValue()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          let prefix;
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+            prefix = element._getAmfKey(element.ns.w3.xmlSchema);
+            if (prefix !== element.ns.w3.xmlSchema) {
+              prefix += ':';
+            }
+          });
+
+          test('Returns undefined when no argument', () => {
+            const result = element._getTypedValue();
+            assert.isUndefined(result);
+          });
+
+          test('Returns undefined when no @value', () => {
+            const result = element._getTypedValue({});
+            assert.isUndefined(result);
+          });
+
+          test('Returns type for "boolean" (true) - compact', () => {
+            const result = element._getTypedValue({
+              '@type': prefix + 'boolean',
+              '@value': 'true'
+            });
+            assert.typeOf(result, 'boolean');
+            assert.isTrue(result);
+          });
+
+          test('Returns type for "boolean" (true) - full', () => {
+            const result = element._getTypedValue({
+              '@type': element.ns.w3.xmlSchema + 'boolean',
+              '@value': 'true'
+            });
+            assert.typeOf(result, 'boolean');
+            assert.isTrue(result);
+          });
+
+          test('Returns type for "boolean" (false) - compact', () => {
+            const result = element._getTypedValue({
+              '@type': prefix + 'boolean',
+              '@value': 'false'
+            });
+            assert.typeOf(result, 'boolean');
+            assert.isFalse(result);
+          });
+
+          test('Returns type for "boolean" (false) - full', () => {
+            const result = element._getTypedValue({
+              '@type': element.ns.w3.xmlSchema + 'boolean',
+              '@value': 'false'
+            });
+            assert.typeOf(result, 'boolean');
+            assert.isFalse(result);
+          });
+
+          test('Returns type for "integer" - compact', () => {
+            const result = element._getTypedValue({
+              '@type': prefix + 'integer',
+              '@value': '10'
+            });
+            assert.typeOf(result, 'number');
+            assert.equal(result, 10);
+          });
+
+          test('Returns type for "integer" (false) - full', () => {
+            const result = element._getTypedValue({
+              '@type': element.ns.w3.xmlSchema + 'integer',
+              '@value': '10'
+            });
+            assert.typeOf(result, 'number');
+            assert.equal(result, 10);
+          });
+
+          test('Returns type for "number" - compact', () => {
+            const result = element._getTypedValue({
+              '@type': prefix + 'number',
+              '@value': '10'
+            });
+            assert.typeOf(result, 'number');
+            assert.equal(result, 10);
+          });
+
+          test('Returns type for "number" (false) - full', () => {
+            const result = element._getTypedValue({
+              '@type': element.ns.w3.xmlSchema + 'number',
+              '@value': '10'
+            });
+            assert.typeOf(result, 'number');
+            assert.equal(result, 10);
+          });
+
+          test('Returns 0 when expected number is NaN', () => {
+            const result = element._getTypedValue({
+              '@type': prefix + 'number',
+              '@value': 'test'
+            });
+            assert.typeOf(result, 'number');
+            assert.equal(result, 0);
+          });
+
+          test('Returns passed value for anything else', () => {
+            const result = element._getTypedValue({
+              '@type': prefix + 'string',
+              '@value': 'test'
+            });
+            assert.typeOf(result, 'string');
+            assert.equal(result, 'test');
+          });
+
+          test('Handles argument to be an array', () => {
+            const result = element._getTypedValue([{
+              '@type': prefix + 'string',
+              '@value': 'test'
+            }]);
+            assert.typeOf(result, 'string');
+            assert.equal(result, 'test');
+          });
+
+          test('Handles @type to be an array', () => {
+            const result = element._getTypedValue([{
+              '@type': [prefix + 'number'],
+              '@value': '10'
+            }]);
+            assert.typeOf(result, 'number');
+            assert.equal(result, 10);
+          });
+
+          test('Returns value when type is missing', () => {
+            const result = element._getTypedValue([{
+              '@value': '10'
+            }]);
+            assert.typeOf(result, 'string');
+            assert.equal(result, '10');
+          });
+        });
+      });
+    });
+
+    suite('_computeJsonArrayValue()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          let prefix;
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+            prefix = element._getAmfKey(element.ns.w3.xmlSchema);
+            if (prefix !== element.ns.w3.xmlSchema) {
+              prefix += ':';
+            }
+          });
+
+          test('Returns undefined when no items', () => {
+            const result = element._computeJsonArrayValue({});
+            assert.isUndefined(result);
+          });
+
+          test('Computes value for array range', () => {
+            const type = getType(element, amf, 'amf_inline_type_2');
+            const result = element._computeJsonArrayValue(type);
+            assert.typeOf(result, 'array');
+            assert.lengthOf(result, 1);
           });
         });
       });
