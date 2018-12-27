@@ -395,10 +395,9 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   }
 
   _xmlFromStructure(structure, opts) {
-    const doc = document.implementation.createDocument('', '', null);
     const typeName = opts && opts.typeName || 'model';
-    const main = doc.createElement(typeName);
-    doc.appendChild(main);
+    const doc = document.implementation.createDocument('', typeName, null);
+    const main = doc.documentElement;
     const nl = doc.createTextNode('\n');
     main.appendChild(nl);
     const keys = Object.keys(structure);
@@ -644,9 +643,8 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @return {String}
    */
   _xmlExampleFromProperties(properties, typeName) {
-    const doc = document.implementation.createDocument('', '', null);
-    const main = doc.createElement(typeName);
-    doc.appendChild(main);
+    const doc = document.implementation.createDocument('', typeName, null);
+    const main = doc.documentElement;
     const nl = doc.createTextNode('\n');
     main.appendChild(nl);
     for (let i = 0, len = properties.length; i < len; i++) {
