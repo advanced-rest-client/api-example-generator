@@ -8,6 +8,10 @@
  *   api-example-generator.html
  */
 
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
 /// <reference path="../polymer/types/polymer-element.d.ts" />
 /// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
 
@@ -62,6 +66,8 @@ declare namespace ApiElements {
      * @param schema Payload's schema
      * @param opts Generation options:
      * - type `String` - Type name of an union type. If not set it uses first type
+     * - typeName `String` - When generating XML example name of the type to use as
+     * main node.
      * in the union.
      */
     computeExample(type: String|null, schema: object|null, opts: object|null): String|null|undefined;
@@ -97,8 +103,9 @@ declare namespace ApiElements {
      *
      * @param type Bosy content type.
      * @param examples Resolved examples.
+     * @param opts Processing options. See `computeExample()`
      */
-    _exampleFromExamples(type: String|null, examples: Array<object|null>|null): String|null|undefined;
+    _exampleFromExamples(type: String|null, examples: Array<object|null>|null, opts: object|null): String|null|undefined;
 
     /**
      * Creates a JSON example representation from AMF example's structure
@@ -106,6 +113,7 @@ declare namespace ApiElements {
      */
     _jsonFromStructure(structure: object|null): any|null;
     _jsonFromStructureValue(value: any, obj: any, isArray: any, key: any, resolvedPrefix: any): void;
+    _xmlFromStructure(structure: any, opts: any): any;
     _getTypedValue(shape: any): any;
 
     /**
@@ -186,6 +194,20 @@ declare namespace ApiElements {
     _appendXmlElement(doc: Document|null, node: Element|null, property: object|null, range: object|null): Element|null;
     _appendXmlElements(doc: any, node: any, property: any, range: any): void;
     _appendXmlArray(doc: any, node: any, property: any, range: any, isWrapped: any): void;
+    _xmlProcessUnionScalarProperty(doc: any, node: any, property: any, shape: any): void;
+
+    /**
+     * Processes XML property from a data shape.
+     *
+     * @param doc Main document
+     * @param node Current node
+     * @param property AMF property
+     * @param name Current property name
+     */
+    _xmlProcessDataProperty(doc: Document|null, node: Element|null, property: object|null, name: String|null): void;
+    _processDataArrayProperties(doc: any, node: any, property: any, name: any): void;
+    _processDataObjectProperties(doc: any, node: any, property: any): void;
+    _dataNameFromKey(key: any): any;
   }
 }
 
