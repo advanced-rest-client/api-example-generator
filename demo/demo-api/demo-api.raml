@@ -158,3 +158,16 @@ types:
         type: Person | PropertyExamples
       application/xml:
         type: Person | PropertyExamples
+/arrayScalar:
+  post:
+    body:
+      application/json:
+        type: array
+        items: [number]
+/arrayScalarWithExample:
+  post:
+    body:
+      application/json:
+        type: array
+        items: [number]
+        example: [1, 2, 3]

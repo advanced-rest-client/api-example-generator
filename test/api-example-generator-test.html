@@ -381,15 +381,15 @@
           test('Computes example for array type (JSON)', () => {
             const type = getPayloadSchema(element, amf, '/arrayTypeExample', 'post')[0];
             const result = element.computeExample('application/json', type);
-            const cmp = '[{\n  "firstName": "",\n  "lastName": ""\n}]';
+            const cmp = '[{\n  "firstName": "Pawel",\n  "lastName": "Psztyc"\n}]';
             assert.equal(result, cmp);
           });
 
           test('Computes example for array type (XML)', () => {
             const type = getPayloadSchema(element, amf, '/arrayTypeExample', 'post')[0];
             const result = element.computeExample('application/xml', type);
-            let cmp = '<TypeExamples>\n<firstName>string</firstName>\n';
-            cmp += '<lastName>string</lastName>\n</TypeExamples>';
+            let cmp = '<?xml version="1.0" encoding="UTF-8"?>\n<TypeExamples>\n<firstName>Pawel</firstName>\n';
+            cmp += '<lastName>Psztyc</lastName>\n</TypeExamples>';
             assert.equal(result, cmp);
           });
 
@@ -476,6 +476,21 @@
               type: 'NonExisting'
             });
             assert.isUndefined(result);
+          });
+
+          test('Produces example for scalar value with example', () => {
+            let schema = getPayloadSchema(element, amf, '/arrayScalarWithExample', 'post')[0];
+            schema = element._resolve(schema);
+            const result = element.computeExample('application/json', schema);
+            assert.equal(result, '[1, 2, 3]');
+          });
+
+          test('Produces example for wrapped XML', () => {
+            let schema = getPayloadSchema(element, amf, '/wrappedXml', 'post')[0];
+            schema = element._resolve(schema);
+            const result = element.computeExample('application/xml', schema);
+            assert.isAbove(result.indexOf('<images>'), 0, 'Has XML wrapper');
+            assert.isAbove(result.indexOf('<Image>'), 0, 'Has XML wrapee');
           });
         });
       });
@@ -802,6 +817,83 @@
             const result = element._computeJsonArrayValue(type);
             assert.typeOf(result, 'array');
             assert.lengthOf(result, 1);
+          });
+        });
+      });
+    });
+
+    suite('_computeExampleArraySchape()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true]
+      ].forEach((setupItem) => {
+        suite(setupItem[0], () => {
+          let element;
+          let amf;
+
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1])
+            .then((model) => {
+              amf = model;
+            });
+          });
+
+          let prefix;
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+            prefix = element._getAmfKey(element.ns.w3.xmlSchema);
+            if (prefix !== element.ns.w3.xmlSchema) {
+              prefix += ':';
+            }
+          });
+
+          test('Returns items example as array (JSON)', () => {
+            let schema = getPayloadSchema(element, amf, '/arrayTypeExample', 'post')[0];
+            schema = element._resolve(schema);
+            const result = element._computeExampleArraySchape('application/json', schema);
+            assert.typeOf(result, 'string');
+            const decoded = JSON.parse(result);
+            assert.typeOf(decoded, 'array');
+            const item = decoded[0];
+            assert.equal(item.firstName, 'Pawel');
+          });
+
+          test('Returns items example (XML)', () => {
+            let schema = getPayloadSchema(element, amf, '/arrayTypeExample', 'post')[0];
+            schema = element._resolve(schema);
+            const result = element._computeExampleArraySchape('application/xml', schema);
+            assert.typeOf(result, 'string');
+            assert.equal(result[0], '<');
+          });
+
+          test('Returns example from properties (JSON)', () => {
+            let schema = getPayloadSchema(element, amf, '/arrayPropertyExamples', 'post')[0];
+            schema = element._resolve(schema);
+            const result = element._computeExampleArraySchape('application/json', schema);
+            assert.typeOf(result, 'string');
+            const decoded = JSON.parse(result);
+            assert.typeOf(decoded, 'array');
+            const item = decoded[0];
+            assert.equal(item.firstName, 'Pawel');
+          });
+
+          test('Produces examples for complex objects (JSON)', () => {
+            let schema = getPayloadSchema(element, amf, '/arrayPropertyExamples', 'post')[0];
+            schema = element._resolve(schema);
+            const result = element._computeExampleArraySchape('application/json', schema);
+            assert.typeOf(result, 'string');
+            const decoded = JSON.parse(result);
+            assert.typeOf(decoded, 'array');
+            const item = decoded[0];
+            assert.equal(item.address.zip, '00000');
+          });
+
+          test('Produces example for scalar value', () => {
+            let schema = getPayloadSchema(element, amf, '/arrayScalar', 'post')[0];
+            schema = element._resolve(schema);
+            const result = element._computeExampleArraySchape('application/json', schema);
+            assert.equal(result, '[Number]');
           });
         });
       });
