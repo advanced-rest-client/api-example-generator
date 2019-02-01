@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "elements": [
     {
-      "description": "`api-example-generator`\n\nExamples generator from AMF model",
+      "description": "`api-example-generator`\n\nExamples generator from AMF model.\n\n## Data model\n\nThe result of calling `generatePayloadsExamples()`, `generatePayloadExamples()`,\nor `computeExamples()` is an array of view models.\n\n### ExampleModel\n\n- **hasRaw** `Boolean` - if true then `raw` property has a value\n- **hasTitle** `Boolean` - if true then `title` property has a value\n- **hasUnion** `Boolean` - if true then `values` property has a value\n- **value** `String`, Optional - Example to render\n- **title** - `String`, Optional - Example name, only when `hasTitle` is set\n- **raw** `String`, Optional - Raw value of RAML example. This value is a\nYAML or JSON schema value. This is only set when raw value is available in\nthe model and it is not JSON/XML.\n- **values** `Array<ExampleModel>`, Optional - Only when `hasUnion` is set.\n\n## Usage\n\nTo generate examples for a list payloads\n\n```javascript\nconst supportedOperation = {...}; // definition of AMF supported operation\nconst payloads = getPayloads(supportedOperation); // Extract array of payloads from e.g. Expects\nconst mediaTypes = generator.listMedia(payloads);\nconst examples = generator.generatePayloadsExamples(payloads, mediaTypes[0]);\nconsole.log(examples);\n```\n\nTo generate examples from a payload\n\n```javascript\nconst examples = generator.generatePayloadExamples(payloads[0], 'application/json');\nconsole.log(examples);\n```\n\nTo generate examples from any object to any mime\n\n```javascript\nconst shape = getTypeDeclaration(); // gets type definition\nconst examples = generator.computeExamples(shape, 'application/json');\nconsole.log(examples);\n```",
       "summary": "",
       "path": "api-example-generator.html",
       "properties": [
@@ -52,71 +52,6 @@
             }
           },
           "inheritedFrom": "ApiElements.AmfHelperMixin"
-        },
-        {
-          "name": "shape",
-          "type": "Object",
-          "description": "AMF `http://a.ml/vocabularies/http#Payload` shape type.\nNote, you must set `amfModel` property to resolve references in\nthe model.",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 33,
-              "column": 6
-            },
-            "end": {
-              "line": 33,
-              "column": 19
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "attributeType": "Object"
-            }
-          }
-        },
-        {
-          "name": "example",
-          "type": "string | null | undefined",
-          "description": "Auto generated example.",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 37,
-              "column": 6
-            },
-            "end": {
-              "line": 41,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "notify": true,
-              "readOnly": true,
-              "attributeType": "String"
-            }
-          }
-        },
-        {
-          "name": "auto",
-          "type": "boolean | null | undefined",
-          "description": "When set it automatically generates the example when shape value change",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 45,
-              "column": 6
-            },
-            "end": {
-              "line": 45,
-              "column": 19
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "attributeType": "Boolean"
-            }
-          }
         }
       ],
       "methods": [
@@ -1711,59 +1646,62 @@
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
-          "name": "_shapeAutoChanged",
-          "description": "Generates example when shape changes when `auto` is set to true.",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 62,
-              "column": 2
-            },
-            "end": {
-              "line": 72,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "shape",
-              "type": "(Array | Object)"
-            },
-            {
-              "name": "auto",
-              "type": "?Boolean"
-            }
-          ],
-          "return": {
-            "type": "void"
-          }
-        },
-        {
-          "name": "generate",
-          "description": "Generates the example from a shape.",
+          "name": "listMedia",
+          "description": "Lists media types names for payloads.\nThe `payloads` is an array of AMF Payload shape. It can be single Payload\nshape as a convenient method for compact model.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 82,
+              "line": 74,
               "column": 2
             },
             "end": {
-              "line": 107,
+              "line": 91,
               "column": 3
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "shape",
-              "type": "(?Array | Object)",
-              "description": "AMF shape definition"
+              "name": "payloads",
+              "type": "(Array.<Object> | Object)",
+              "description": "List of payloads AMF's Request shape."
+            }
+          ],
+          "return": {
+            "type": "(Array.<String> | undefined)",
+            "desc": "Returns a list of mime types or undefined\nif not found."
+          }
+        },
+        {
+          "name": "generatePayloadsExamples",
+          "description": "Generates a list of examples from an AMF Payloads array for a given media type.\nThe shape can be an Example in which case it will return the example value.\nIf the shape is other shape than Example shape then it looks for examples array and\nuse it to generate values. Otherwise it tries to generate an example from\nobject properties (if object).",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 109,
+              "column": 2
+            },
+            "end": {
+              "line": 130,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "payloads",
+              "type": "(Array.<Object> | Object)",
+              "description": "List of payloads to process."
+            },
+            {
+              "name": "media",
+              "type": "String",
+              "description": "A media to for which to generate the examles."
             },
             {
               "name": "opts",
-              "type": "?Object",
-              "description": "Generation options:\n- type `String` - Type name of an union type. If not set it uses first type\nin the union."
+              "type": "Object",
+              "description": "Generation options:\n- noAuto `Boolean` - When set it only returns examples defined in API spec file.\nWhen not set it generates examples from properties when the example is not\ndefined.\n- type `String` - Type name of an union type. If not set it uses first type\n- typeName `String` - When generating XML example name of the type to use as main node."
             }
           ],
           "return": {
@@ -1772,35 +1710,175 @@
           }
         },
         {
-          "name": "computeExample",
-          "description": "Computes an example for given media type.",
+          "name": "generatePayloadExamples",
+          "description": "Generates a list of examples for a single AMF Payload shape.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 119,
+              "line": 138,
               "column": 2
             },
             "end": {
-              "line": 187,
+              "line": 153,
               "column": 3
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "type",
-              "type": "String",
-              "description": "Media type"
+              "name": "payload",
+              "type": "Object",
+              "description": "AMF Payload shape."
             },
+            {
+              "name": "mime",
+              "type": "String",
+              "description": "A mime type to use."
+            },
+            {
+              "name": "opts",
+              "type": "Object",
+              "description": "Generation options. See `generatePayloadsExamples()`."
+            }
+          ],
+          "return": {
+            "type": "(Array.<Object> | undefined)",
+            "desc": "List of examples."
+          }
+        },
+        {
+          "name": "computeExamples",
+          "description": "Computes examples from an AMF shape.\nIt returns examples defined in API spec file. If examples are not defined\nand `opts.noAuto` flag is not set then it generates an example value from\nobject properties (if an object represents scalar, object, union, or an array).",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 168,
+              "column": 2
+            },
+            "end": {
+              "line": 221,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
             {
               "name": "schema",
               "type": "Object",
-              "description": "Payload's schema"
+              "description": "Any AMF schema."
+            },
+            {
+              "name": "mime",
+              "type": "String",
+              "description": "Examples media type. Currently `application/json` and\n`application/xml` are supported."
+            },
+            {
+              "name": "opts",
+              "type": "Object",
+              "description": "Generation options. See `generatePayloadsExamples()`.\nBesides that, `opts.typeId` is required to compute examples for a payload.\nThe `typeId` is a value of `@id` of the Payload shape."
+            }
+          ],
+          "return": {
+            "type": "(Array.<Object> | undefined)"
+          }
+        },
+        {
+          "name": "_computeFromExamples",
+          "description": "Computes examples value from a list of examples.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 232,
+              "column": 2
+            },
+            "end": {
+              "line": 246,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "examples",
+              "type": "Array.<Object>",
+              "description": "List of AMF Example schapes."
+            },
+            {
+              "name": "mime",
+              "type": "String",
+              "description": "Examples media type. Currently `application/json` and\n`application/xml` are supported."
+            },
+            {
+              "name": "opts",
+              "type": "Object",
+              "description": "Generation options. See `generatePayloadsExamples()`.\nBesides that, `opts.typeId` is required to compute examples for a payload.\nThe `typeId` is a value of `@id` of the Payload shape."
+            }
+          ],
+          "return": {
+            "type": "(Array.<Object> | undefined)"
+          }
+        },
+        {
+          "name": "_listTypeExamples",
+          "description": "Uses Example shape's source maps to determine which examples should be rendered.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 253,
+              "column": 2
+            },
+            "end": {
+              "line": 289,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "examples",
+              "type": "Array.<Object>",
+              "description": "List of AMF Example schapes."
+            },
+            {
+              "name": "typeId",
+              "type": "String",
+              "description": "Payload ID"
+            }
+          ],
+          "return": {
+            "type": "(Array.<Object> | undefined)"
+          }
+        },
+        {
+          "name": "_generateFromExample",
+          "description": "Generate an example from an example shape.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 298,
+              "column": 2
+            },
+            "end": {
+              "line": 373,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "example",
+              "type": "Object",
+              "description": "Resolved example."
+            },
+            {
+              "name": "mime",
+              "type": "String",
+              "description": "Example content type."
             },
             {
               "name": "opts",
               "type": "?Object",
-              "description": "Generation options:\n- type `String` - Type name of an union type. If not set it uses first type\n- typeName `String` - When generating XML example name of the type to use as\nmain node.\nin the union."
+              "description": "Processing options."
             }
           ],
           "return": {
@@ -1808,16 +1886,70 @@
           }
         },
         {
+          "name": "_computeExampleArraySchape",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 375,
+              "column": 2
+            },
+            "end": {
+              "line": 394,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "schema"
+            },
+            {
+              "name": "mime"
+            },
+            {
+              "name": "opts"
+            }
+          ]
+        },
+        {
+          "name": "_computeUnionExamples",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 396,
+              "column": 2
+            },
+            "end": {
+              "line": 428,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "schema"
+            },
+            {
+              "name": "mime"
+            },
+            {
+              "name": "opts"
+            }
+          ]
+        },
+        {
           "name": "_computeScalarType",
           "description": "Computes value from defined `datatype` property.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 193,
+              "line": 434,
               "column": 2
             },
             "end": {
-              "line": 216,
+              "line": 457,
               "column": 3
             }
           },
@@ -1835,116 +1967,16 @@
           }
         },
         {
-          "name": "_getUnionShape",
-          "description": "Gets a shape for union type",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 223,
-              "column": 2
-            },
-            "end": {
-              "line": 253,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "schema",
-              "type": "Object",
-              "description": "Union's model"
-            },
-            {
-              "name": "opts",
-              "type": "?Object",
-              "description": "See `computeExample()` for description"
-            }
-          ],
-          "return": {
-            "type": "(Object | undefined)",
-            "desc": "Model for shape or un defined if not found"
-          }
-        },
-        {
-          "name": "_exampleFromMediaType",
-          "description": "Searches for an example in examples array by it's media type.",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 260,
-              "column": 2
-            },
-            "end": {
-              "line": 273,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "type",
-              "type": "String",
-              "description": "Payload's media type"
-            },
-            {
-              "name": "examples",
-              "type": "Array.<Object>",
-              "description": "List of examples"
-            }
-          ],
-          "return": {
-            "type": "(Object | undefined)",
-            "desc": "Example's model or undefined if not found."
-          }
-        },
-        {
-          "name": "_exampleFromExamples",
-          "description": "Generate an example from the examples array.",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 282,
-              "column": 2
-            },
-            "end": {
-              "line": 331,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "type",
-              "type": "String",
-              "description": "Bosy content type."
-            },
-            {
-              "name": "examples",
-              "type": "Array.<Object>",
-              "description": "Resolved examples."
-            },
-            {
-              "name": "opts",
-              "type": "?Object",
-              "description": "Processing options. See `computeExample()`"
-            }
-          ],
-          "return": {
-            "type": "(String | undefined)"
-          }
-        },
-        {
           "name": "_jsonFromStructure",
           "description": "Creates a JSON example representation from AMF example's structure\ndefinition.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 338,
+              "line": 464,
               "column": 2
             },
             "end": {
-              "line": 375,
+              "line": 501,
               "column": 3
             }
           },
@@ -1965,11 +1997,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 377,
+              "line": 503,
               "column": 2
             },
             "end": {
-              "line": 394,
+              "line": 520,
               "column": 3
             }
           },
@@ -2001,11 +2033,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 396,
+              "line": 522,
               "column": 2
             },
             "end": {
-              "line": 422,
+              "line": 546,
               "column": 3
             }
           },
@@ -2020,16 +2052,37 @@
           ]
         },
         {
+          "name": "formatXml",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 548,
+              "column": 2
+            },
+            "end": {
+              "line": 567,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "xml"
+            }
+          ]
+        },
+        {
           "name": "_getTypedValue",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 424,
+              "line": 569,
               "column": 2
             },
             "end": {
-              "line": 461,
+              "line": 606,
               "column": 3
             }
           },
@@ -2046,33 +2099,38 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 469,
+              "line": 615,
               "column": 2
             },
             "end": {
-              "line": 480,
+              "line": 640,
               "column": 3
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "type",
-              "type": "String",
-              "description": "Media type"
-            },
-            {
               "name": "properties",
               "type": "Array"
+            },
+            {
+              "name": "mime",
+              "type": "String",
+              "description": "Media type"
             },
             {
               "name": "typeName",
               "type": "?String",
               "description": "Name of the RAML type."
+            },
+            {
+              "name": "isArray",
+              "type": "?Boolean",
+              "description": "if true the result should be an array"
             }
           ],
           "return": {
-            "type": "any"
+            "type": "(String | undefined)"
           }
         },
         {
@@ -2081,11 +2139,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 486,
+              "line": 646,
               "column": 2
             },
             "end": {
-              "line": 506,
+              "line": 666,
               "column": 3
             }
           },
@@ -2107,11 +2165,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 512,
+              "line": 673,
               "column": 2
             },
             "end": {
-              "line": 525,
+              "line": 686,
               "column": 3
             }
           },
@@ -2121,6 +2179,11 @@
               "name": "range",
               "type": "Object",
               "description": "AMF's range model."
+            },
+            {
+              "name": "typeName",
+              "type": "?String",
+              "description": "Optional, type name to use in Union type. By default first NodeShape."
             }
           ],
           "return": {
@@ -2133,11 +2196,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 526,
+              "line": 687,
               "column": 2
             },
             "end": {
-              "line": 563,
+              "line": 727,
               "column": 3
             }
           },
@@ -2150,24 +2213,34 @@
         },
         {
           "name": "_computeJsonUnionValue",
-          "description": "",
+          "description": "Computes JSON example from UnionShape",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 565,
+              "line": 734,
               "column": 2
             },
             "end": {
-              "line": 585,
+              "line": 761,
               "column": 3
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "range"
+              "name": "range",
+              "type": "Object",
+              "description": "Type definition"
+            },
+            {
+              "name": "typeName",
+              "type": "?String",
+              "description": "Optional, type name to use. By default first NodeShape."
             }
-          ]
+          ],
+          "return": {
+            "type": "(Object | undefined)"
+          }
         },
         {
           "name": "_computeJsonObjectValue",
@@ -2175,11 +2248,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 587,
+              "line": 763,
               "column": 2
             },
             "end": {
-              "line": 593,
+              "line": 769,
               "column": 3
             }
           },
@@ -2196,11 +2269,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 595,
+              "line": 771,
               "column": 2
             },
             "end": {
-              "line": 614,
+              "line": 790,
               "column": 3
             }
           },
@@ -2217,11 +2290,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 620,
+              "line": 796,
               "column": 2
             },
             "end": {
-              "line": 637,
+              "line": 813,
               "column": 3
             }
           },
@@ -2243,11 +2316,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 644,
+              "line": 820,
               "column": 2
             },
             "end": {
-              "line": 654,
+              "line": 828,
               "column": 3
             }
           },
@@ -2273,11 +2346,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 661,
+              "line": 835,
               "column": 2
             },
             "end": {
-              "line": 723,
+              "line": 896,
               "column": 3
             }
           },
@@ -2309,11 +2382,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 729,
+              "line": 902,
               "column": 2
             },
             "end": {
-              "line": 740,
+              "line": 913,
               "column": 3
             }
           },
@@ -2335,11 +2408,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 748,
+              "line": 921,
               "column": 2
             },
             "end": {
-              "line": 764,
+              "line": 937,
               "column": 3
             }
           },
@@ -2376,11 +2449,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 773,
+              "line": 946,
               "column": 2
             },
             "end": {
-              "line": 801,
+              "line": 975,
               "column": 3
             }
           },
@@ -2418,11 +2491,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 803,
+              "line": 977,
               "column": 2
             },
             "end": {
-              "line": 815,
+              "line": 987,
               "column": 3
             }
           },
@@ -2451,11 +2524,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 817,
+              "line": 989,
               "column": 2
             },
             "end": {
-              "line": 835,
+              "line": 1013,
               "column": 3
             }
           },
@@ -2487,11 +2560,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 837,
+              "line": 1015,
               "column": 2
             },
             "end": {
-              "line": 844,
+              "line": 1020,
               "column": 3
             }
           },
@@ -2520,11 +2593,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 853,
+              "line": 1029,
               "column": 2
             },
             "end": {
-              "line": 879,
+              "line": 1051,
               "column": 3
             }
           },
@@ -2561,11 +2634,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 881,
+              "line": 1053,
               "column": 2
             },
             "end": {
-              "line": 899,
+              "line": 1071,
               "column": 3
             }
           },
@@ -2594,11 +2667,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 901,
+              "line": 1073,
               "column": 2
             },
             "end": {
-              "line": 915,
+              "line": 1087,
               "column": 3
             }
           },
@@ -2624,11 +2697,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 917,
+              "line": 1089,
               "column": 2
             },
             "end": {
-              "line": 928,
+              "line": 1100,
               "column": 3
             }
           },
@@ -2650,11 +2723,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 15,
+          "line": 58,
           "column": 0
         },
         "end": {
-          "line": 929,
+          "line": 1101,
           "column": 1
         }
       },
@@ -2697,64 +2770,9 @@
           "metadata": {},
           "type": "Object | null | undefined",
           "inheritedFrom": "ApiElements.AmfHelperMixin"
-        },
-        {
-          "name": "shape",
-          "description": "AMF `http://a.ml/vocabularies/http#Payload` shape type.\nNote, you must set `amfModel` property to resolve references in\nthe model.",
-          "sourceRange": {
-            "start": {
-              "line": 33,
-              "column": 6
-            },
-            "end": {
-              "line": 33,
-              "column": 19
-            }
-          },
-          "metadata": {},
-          "type": "Object"
-        },
-        {
-          "name": "example",
-          "description": "Auto generated example.",
-          "sourceRange": {
-            "start": {
-              "line": 37,
-              "column": 6
-            },
-            "end": {
-              "line": 41,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "type": "string | null | undefined"
-        },
-        {
-          "name": "auto",
-          "description": "When set it automatically generates the example when shape value change",
-          "sourceRange": {
-            "start": {
-              "line": 45,
-              "column": 6
-            },
-            "end": {
-              "line": 45,
-              "column": 19
-            }
-          },
-          "metadata": {},
-          "type": "boolean | null | undefined"
         }
       ],
-      "events": [
-        {
-          "type": "CustomEvent",
-          "name": "example-changed",
-          "description": "Fired when the `example` property changes.",
-          "metadata": {}
-        }
-      ],
+      "events": [],
       "styling": {
         "cssVariables": [],
         "selectors": []

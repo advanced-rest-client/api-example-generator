@@ -4,8 +4,51 @@
 /**
  * `api-example-generator`
  *
- * Examples generator from AMF model
+ * Examples generator from AMF model.
  *
+ * ## Data model
+ *
+ * The result of calling `generatePayloadsExamples()`, `generatePayloadExamples()`,
+ * or `computeExamples()` is an array of view models.
+ *
+ * ### ExampleModel
+ *
+ * - **hasRaw** `Boolean` - if true then `raw` property has a value
+ * - **hasTitle** `Boolean` - if true then `title` property has a value
+ * - **hasUnion** `Boolean` - if true then `values` property has a value
+ * - **value** `String`, Optional - Example to render
+ * - **title** - `String`, Optional - Example name, only when `hasTitle` is set
+ * - **raw** `String`, Optional - Raw value of RAML example. This value is a
+ * YAML or JSON schema value. This is only set when raw value is available in
+ * the model and it is not JSON/XML.
+ * - **values** `Array<ExampleModel>`, Optional - Only when `hasUnion` is set.
+ *
+ * ## Usage
+ *
+ * To generate examples for a list payloads
+ *
+ * ```javascript
+ * const supportedOperation = {...}; // definition of AMF supported operation
+ * const payloads = getPayloads(supportedOperation); // Extract array of payloads from e.g. Expects
+ * const mediaTypes = generator.listMedia(payloads);
+ * const examples = generator.generatePayloadsExamples(payloads, mediaTypes[0]);
+ * console.log(examples);
+ * ```
+ *
+ * To generate examples from a payload
+ *
+ * ```javascript
+ * const examples = generator.generatePayloadExamples(payloads[0], 'application/json');
+ * console.log(examples);
+ * ```
+ *
+ * To generate examples from any object to any mime
+ *
+ * ```javascript
+ * const shape = getTypeDeclaration(); // gets type definition
+ * const examples = generator.computeExamples(shape, 'application/json');
+ * console.log(examples);
+ * ```
  *
  * @customElement
  * @polymer
@@ -21,182 +64,368 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     return 'api-example-generator';
   }
   /**
-   * @type {Object}
-   */
-  static get properties() {
-    return {
-      /**
-       * AMF `http://a.ml/vocabularies/http#Payload` shape type.
-       * Note, you must set `amfModel` property to resolve references in
-       * the model.
-       * @type {Object}
-       */
-      shape: Object,
-      /**
-       * Auto generated example.
-       */
-      example: {
-        type: String,
-        readOnly: true,
-        notify: true
-      },
-      /**
-       * When set it automatically generates the example when shape value change
-       */
-      auto: Boolean
-    };
-  }
-  /**
-   * @type {Array}
-   */
-  static get observers() {
-    return [
-      '_shapeAutoChanged(shape, auto, amfModel)'
-    ];
-  }
-  /**
-   * Generates example when shape changes when `auto` is set to true.
+   * Lists media types names for payloads.
+   * The `payloads` is an array of AMF Payload shape. It can be single Payload
+   * shape as a convenient method for compact model.
    *
-   * @param {Array|Object} shape
-   * @param {?Boolean} auto
+   * @param {Array<Object>|Object} payloads List of payloads AMF's Request shape.
+   * @return {Array<String>|undefined} Returns a list of mime types or undefined
+   * if not found.
    */
-  _shapeAutoChanged(shape, auto) {
-    if (!auto) {
+  listMedia(payloads) {
+    if (!payloads) {
       return;
     }
-    if (!shape) {
-      this._setExample(undefined);
-      return;
+    if (!(payloads instanceof Array)) {
+      if (!this._hasType(payloads, this.ns.raml.vocabularies.http + 'Payload')) {
+        return;
+      }
+      return [this._getValue(payloads, this.ns.raml.vocabularies.http + 'mediaType')];
     }
-    const example = this.generate(shape);
-    this._setExample(example);
+    const result = [];
+    for (let i = 0; i < payloads.length; i++) {
+      const payload = payloads[i];
+      const mime = this._getValue(payload, this.ns.raml.vocabularies.http + 'mediaType');
+      result[result.length] = mime;
+    }
+    return result;
   }
-
   /**
-   * Generates the example from a shape.
-   * @param {?Array|Object} shape AMF shape definition
-   * @param {?Object} opts Generation options:
+   * Generates a list of examples from an AMF Payloads array for a given media type.
+   * The shape can be an Example in which case it will return the example value.
+   * If the shape is other shape than Example shape then it looks for examples array and
+   * use it to generate values. Otherwise it tries to generate an example from
+   * object properties (if object).
+   *
+   * @param {Array<Object>|Object} payloads List of payloads to process.
+   * @param {String} media A media to for which to generate the examles.
+   * @param {Object} opts Generation options:
+   * - noAuto `Boolean` - When set it only returns examples defined in API spec file.
+   * When not set it generates examples from properties when the example is not
+   * defined.
    * - type `String` - Type name of an union type. If not set it uses first type
-   * in the union.
+   * - typeName `String` - When generating XML example name of the type to use as main node.
    * @return {String|undefined} Example value.
    */
-  generate(shape, opts) {
-    if (!shape) {
-      shape = this.shape;
-    }
-    if (!shape) {
+  generatePayloadsExamples(payloads, media, opts) {
+    if (!payloads || !media) {
       return;
     }
-    if (shape instanceof Array) {
-      shape = shape[0];
+    if (!opts) {
+      opts = {};
     }
-    shape = this._resolve(shape);
-    const mediaType = this._getValue(shape,
-      this.ns.raml.vocabularies.http + 'mediaType');
-    if (!mediaType) {
+    if (!(payloads instanceof Array)) {
+      payloads = [payloads];
+    }
+    let result;
+    for (let i = 0, len = payloads.length; i < len; i++) {
+      const payload = payloads[i];
+      const payloadMedia = this._getValue(payload, this.ns.raml.vocabularies.http + 'mediaType');
+      if (payloadMedia !== media) {
+        continue;
+      }
+      result = this.generatePayloadExamples(payload, media, opts);
+      break;
+    }
+    return result;
+  }
+  /**
+   * Generates a list of examples for a single AMF Payload shape.
+   * @param {Object} payload AMF Payload shape.
+   * @param {String} mime A mime type to use.
+   * @param {Object} opts Generation options. See `generatePayloadsExamples()`.
+   * @return {Array<Object>|undefined} List of examples.
+   */
+  generatePayloadExamples(payload, mime, opts) {
+    if (!this._hasType(payload, this.ns.raml.vocabularies.http + 'Payload')) {
       return;
     }
+    this._resolve(payload);
     const sKey = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
-    let schema = shape[sKey];
+    let schema = payload[sKey];
     if (!schema) {
       return;
     }
     if (schema instanceof Array) {
       schema = schema[0];
     }
-    return this.computeExample(mediaType, schema, opts);
+    opts.typeId = payload['@id'];
+    return this.computeExamples(schema, mime, opts);
   }
   /**
-   * Computes an example for given media type.
-   * @param {String} type Media type
-   * @param {Object} schema Payload's schema
-   * @param {?Object} opts Generation options:
-   * - type `String` - Type name of an union type. If not set it uses first type
-   * - typeName `String` - When generating XML example name of the type to use as
-   * main node.
-   * in the union.
-   * @return {String|undefined}
+   * Computes examples from an AMF shape.
+   * It returns examples defined in API spec file. If examples are not defined
+   * and `opts.noAuto` flag is not set then it generates an example value from
+   * object properties (if an object represents scalar, object, union, or an array).
+   *
+   * @param {Object} schema Any AMF schema.
+   * @param {String} mime Examples media type. Currently `application/json` and
+   * `application/xml` are supported.
+   * @param {Object} opts Generation options. See `generatePayloadsExamples()`.
+   * Besides that, `opts.typeId` is required to compute examples for a payload.
+   * The `typeId` is a value of `@id` of the Payload shape.
+   * @return {Array<Object>|undefined}
    */
-  computeExample(type, schema, opts) {
-    schema = this._resolve(schema);
+  computeExamples(schema, mime, opts) {
+    if (!schema || !mime) {
+      return;
+    }
+    if (!opts) {
+      opts = {};
+    }
+    this._resolve(schema);
     const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
     const examples = this._ensureArray(schema[eKey]);
-    if (examples && examples.length) {
-      if (!opts) {
-        opts = {};
-      }
-      if (!opts.typeName) {
-        opts.typeName = this._getValue(schema, this.ns.w3.shacl.name + 'name');
-      }
-      const result = this._exampleFromExamples(type, examples, opts);
-      if (result) {
-        return result;
-      }
+    if (examples) {
+      return this._computeFromExamples(examples, mime, opts);
     }
     if (this._hasType(schema, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
-      return this._computeExampleArraySchape(type, schema, opts);
+      const value = this._computeExampleArraySchape(schema, mime, opts);
+      if (value) {
+        return value;
+      }
     }
     if (this._hasType(schema, this.ns.raml.vocabularies.document + 'Example')) {
-      return this._exampleFromExamples(type, [schema], opts);
+      const value = this._generateFromExample(schema, mime, opts);
+      if (value) {
+        return [value];
+      }
     }
+
     if (this._hasType(schema, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
-      if (!opts) {
-        opts = {};
-      }
-      const unionShape = this._getUnionShape(schema, opts);
-      if (!unionShape) {
-        return;
-      }
-      return this.computeExample(type, unionShape, opts);
+      return this._computeUnionExamples(schema, mime, opts);
     }
+
+    if (opts.noAuto) {
+      return;
+    }
+
+    if (this._hasType(schema, this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
+      const result = this._computeJsonScalarValue(schema);
+      return [{
+        hasRaw: false,
+        hasTitle: false,
+        hasUnion: false,
+        value: result
+      }];
+    }
+
     const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
     const properties = this._ensureArray(schema[pKey]);
     if (properties && properties.length) {
       const typeName = this._getValue(schema, this.ns.w3.shacl.name + 'name');
-      return this._exampleFromProperties(type, properties, typeName);
+      const value = this._exampleFromProperties(properties, mime, typeName);
+      if (value) {
+        return [value];
+      }
+    }
+  }
+  /**
+  * Computes examples value from a list of examples.
+   * @param {Array<Object>} examples List of AMF Example schapes.
+   * @param {String} mime Examples media type. Currently `application/json` and
+   * `application/xml` are supported.
+   * @param {Object} opts Generation options. See `generatePayloadsExamples()`.
+   * Besides that, `opts.typeId` is required to compute examples for a payload.
+   * The `typeId` is a value of `@id` of the Payload shape.
+   * @return {Array<Object>|undefined}
+   */
+  _computeFromExamples(examples, mime, opts) {
+    examples = this._listTypeExamples(examples, opts.typeId);
+    if (!examples) {
+      return;
+    }
+    const result = [];
+    for (let i = 0; i < examples.length; i++) {
+      const shape = examples[i];
+      const value = this._generateFromExample(shape, mime, opts);
+      if (value) {
+        result[result.length] = value;
+      }
+    }
+    return result;
+  }
+  /**
+   * Uses Example shape's source maps to determine which examples should be rendered.
+   * @param {Array<Object>} examples List of AMF Example schapes.
+   * @param {String} typeId Payload ID
+   * @return {Array<Object>|undefined}
+   */
+  _listTypeExamples(examples, typeId) {
+    if (!typeId) {
+      return examples;
+    }
+    const result = [];
+    const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources');
+    const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'tracked-element');
+    const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'value');
+    const longId = typeId.indexOf('amf') === -1 ? ('amf://id' + typeId) : typeId;
+    for (let i = 0, len = examples.length; i < len; i++) {
+      let example = examples[i];
+      if (example instanceof Array) {
+        example = example[0];
+      }
+      let sm = example[sourceKey];
+      if (!sm) {
+        result[result.length] = example;
+        continue;
+      }
+      if (sm instanceof Array) {
+        sm = sm[0];
+      }
+      let tracked = sm[trackedKey];
+      if (!tracked) {
+        result[result.length] = example;
+        continue;
+      }
+      if (tracked instanceof Array) {
+        tracked = tracked[0];
+      }
+      const value = this._getValue(tracked, valueKey);
+      if (value && (value === typeId || value === longId)) {
+        result[result.length] = example;
+      }
+    }
+    return result.length ? result : undefined;
+  }
+  /**
+   * Generate an example from an example shape.
+   *
+   * @param {Object} example Resolved example.
+   * @param {String} mime Example content type.
+   * @param {?Object} opts Processing options.
+   * @return {String|undefined}
+   */
+  _generateFromExample(example, mime, opts) {
+    let raw = this._getValue(example, this.ns.raml.vocabularies.document + 'raw');
+    if (!raw) {
+      raw = this._getValue(example, this.ns.w3.shacl.name + 'raw');
+    }
+    let title = this._getValue(example, this.ns.schema.schemaName);
+    if (title && title.indexOf('example_') === 0) {
+      title = undefined;
+    }
+    const isJson = mime.indexOf('json') !== -1;
+    const isXml = !isJson && mime.indexOf('xml') !== -1;
+    const hasRaw = !!raw;
+    const result = {};
+    result.hasTitle = !!title;
+    result.hasUnion = false;
+    if (result.hasTitle) {
+      result.title = title;
+    }
+    if (hasRaw) {
+      if (isJson) {
+        try {
+          const res = JSON.parse(raw);
+          const type = typeof res;
+          if (type === 'string' || type === 'number' || type === 'boolean') {
+            throw new Error('');
+          }
+          result.hasRaw = false;
+          result.value = raw;
+          return result;
+        } catch (_) {}
+      }
+      if (isXml) {
+        if (raw.trim()[0] === '<') {
+          result.hasRaw = false;
+          result.value = raw;
+          return result;
+        }
+      }
+      result.hasRaw = true;
+      result.raw = raw;
+    }
+    const sKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'structuredValue');
+    let structure = example[sKey];
+    if (!structure) {
+      if (result.raw) {
+        result.value = result.raw;
+      } else {
+        result.value = '';
+      }
+      return result;
+    }
+    if (structure instanceof Array) {
+      structure = structure[0];
+    }
+    if (isJson) {
+      let data = this._jsonFromStructure(structure);
+      if (data) {
+        if (typeof data === 'object') {
+          data = JSON.stringify(data, null, 2);
+        }
+        result.value = data;
+        return result;
+      }
+    } else if (isXml) {
+      const data = this._xmlFromStructure(structure, opts);
+      result.value = data;
+      return result;
+    } else {
+      if (result.raw) {
+        result.value = result.raw;
+      } else {
+        result.value = '';
+      }
+      return result;
     }
   }
 
-  _computeExampleArraySchape(type, schema, opts) {
-    const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
-    const isJson = type.indexOf('json') !== -1;
+  _computeExampleArraySchape(schema, mime, opts) {
+    const isJson = mime.indexOf('json') !== -1;
     const iKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
     const items = this._ensureArray(schema[iKey]);
     // We need only first type here as arras can have different types
     for (let i = 0, len = items.length; i < len; i++) {
       const item = items[i];
-      if (item[eKey]) {
-        const result = this.computeExample(type, items[0], opts);
-        if (result) {
-          if (isJson && result[0] !== '[') {
-            return '[' + result + ']';
-          }
-          return result;
-        }
-      }
-      const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
-      const properties = this._ensureArray(items[i][pKey]);
-      if (!properties) {
-        if (this._hasType(items[i], this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
-          const result = this._computeScalarType(items[i]);
-          if (result) {
-            if (isJson && result[0] !== '[') {
-              return '[' + result + ']';
+      const result = this.computeExamples(item, mime, opts);
+      if (result) {
+        if (isJson) {
+          result.forEach((item) => {
+            if (item.value[0] !== '[') {
+              item.value = '[' + item.value + ']';
             }
-            return result;
-          }
+          });
         }
-        continue;
-      }
-      const typeName = this._getValue(items[i], this.ns.w3.shacl.name + 'name');
-      const _example = this._exampleFromProperties(type, properties, typeName);
-      if (_example) {
-        if (isJson && _example[0] !== '[') {
-          return '[' + _example + ']';
-        }
-        return _example;
+        return result;
       }
     }
+  }
+
+  _computeUnionExamples(schema, mime, opts) {
+    const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
+    let anyOf = this._ensureArray(schema[key]);
+    if (!anyOf) {
+      return;
+    }
+    const result = {
+      hasTitle: false,
+      hasRaw: false,
+      hasUnion: true,
+      values: []
+    };
+    for (let i = 0, len = anyOf.length; i < len; i++) {
+      let unionSchape = anyOf[i];
+      if (unionSchape instanceof Array) {
+        unionSchape = unionSchape[0];
+      }
+      this._resolve(unionSchape);
+      let data = this.computeExamples(unionSchape, mime, opts);
+      if (!data) {
+        continue;
+      }
+      data = data[0];
+      let name = this._getValue(unionSchape, this.ns.w3.shacl.name + 'name');
+      if (!name) {
+        name = 'Union #' + (i + 1);
+      }
+      data.hasTitle = true;
+      data.title = name;
+      result.values[result.values.length] = data;
+    }
+    return result.values.length ? [result] : undefined;
   }
   /**
    * Computes value from defined `datatype` property.
@@ -226,121 +455,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       id = id.substr(index);
     }
     return id[0].toUpperCase() + id.substr(1);
-  }
-  /**
-   * Gets a shape for union type
-   * @param {Object} schema Union's model
-   * @param {?Object} opts See `computeExample()` for description
-   * @return {Object|undefined} Model for shape or un defined if not found
-   */
-  _getUnionShape(schema, opts) {
-    if (!schema) {
-      return;
-    }
-    const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
-    let anyOf = schema[key];
-    if (!anyOf) {
-      return;
-    }
-    if (!(anyOf instanceof Array)) {
-      anyOf = [anyOf];
-    }
-    if (!opts.type) {
-      let item = anyOf[0];
-      if (item instanceof Array) {
-        item = item[0];
-      }
-      return this._resolve(item);
-    }
-    for (let i = 0, len = anyOf.length; i < len; i++) {
-      let item = anyOf[i];
-      if (item instanceof Array) {
-        item = item[0];
-      }
-      item = this._resolve(item);
-      const name = this._getValue(item, this.ns.w3.shacl.name + 'name');
-      if (name === opts.type) {
-        return item;
-      }
-    }
-  }
-  /**
-   * Searches for an example in examples array by it's media type.
-   * @param {String} type Payload's media type
-   * @param {Array<Object>} examples List of examples
-   * @return {Object|undefined} Example's model or undefined if not found.
-   */
-  _exampleFromMediaType(type, examples) {
-    let example;
-    for (let i = 0; i < examples.length; i++) {
-      const _tmp = examples[i];
-      const _type = this._getValue(_tmp,
-        this.ns.raml.vocabularies.http + 'mediaType');
-      if (type !== _type) {
-        continue;
-      }
-      example = _tmp;
-      break;
-    }
-    return example;
-  }
-  /**
-   * Generate an example from the examples array.
-   *
-   * @param {String} type Bosy content type.
-   * @param {Array<Object>} examples Resolved examples.
-   * @param {?Object} opts Processing options. See `computeExample()`
-   * @return {String|undefined}
-   */
-  _exampleFromExamples(type, examples, opts) {
-    const example = examples.length === 1 ? examples[0] :
-      this._exampleFromMediaType(type, examples);
-    if (!example) {
-      return;
-    }
-    let raw = this._getValue(example,
-      this.ns.raml.vocabularies.document + 'raw');
-    if (!raw) {
-      raw = this._getValue(example, this.ns.w3.shacl.name + 'raw');
-    }
-    const isJson = type.indexOf('json') !== -1;
-    const isXml = !isJson && type.indexOf('xml') !== -1;
-    if (raw) {
-      if (isJson) {
-        try {
-          JSON.parse(raw);
-          return raw;
-        } catch (_) {}
-      }
-      if (isXml) {
-        if (raw.trim()[0] === '<') {
-          return raw;
-        }
-      }
-      if (!isJson && !isXml) {
-        // no appropiate parser for now.
-        return raw;
-      }
-    }
-    const sKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'structuredValue');
-    let structure = example[sKey];
-    if (!structure) {
-      return;
-    }
-    if (structure instanceof Array) {
-      structure = structure[0];
-    }
-    if (isJson) {
-      const result = this._jsonFromStructure(structure);
-      if (result) {
-        if (typeof result === 'object') {
-          return JSON.stringify(result, null, 2);
-        }
-        return result;
-      }
-    } else {
-      return this._xmlFromStructure(structure, opts);
-    }
   }
   /**
    * Creates a JSON example representation from AMF example's structure
@@ -410,8 +524,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     const typeName = opts && opts.typeName || 'model';
     const doc = document.implementation.createDocument('', typeName, null);
     const main = doc.documentElement;
-    const nl = doc.createTextNode('\n');
-    main.appendChild(nl);
     const keys = Object.keys(structure);
     const exclude = ['@id', '@type', '__apicResolved',
       this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources')
@@ -430,8 +542,29 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     }
     const s = new XMLSerializer();
     let value = s.serializeToString(doc);
-    value = '<?xml version="1.0" encoding="UTF-8"?>\n' + value;
-    return value;
+    value = '<?xml version="1.0" encoding="UTF-8"?>' + value;
+    return this.formatXml(value);
+  }
+
+  formatXml(xml) {
+    const PADDING = ' '.repeat(2);
+    const reg = /(>)(<)(\/*)/g;
+    let pad = 0;
+    xml = xml.replace(reg, '$1\r\n$2$3');
+    return xml.split('\r\n').map((node) => {
+      let indent = 0;
+      if (node.match(/.+<\/\w[^>]*>$/)) {
+        indent = 0;
+      } else if (node.match(/^<\/\w/) && pad > 0) {
+        pad -= 1;
+      } else if (node.match(/^<\w[^>]*[^\/]>.*$/)) {
+        indent = 1;
+      } else {
+        indent = 0;
+      }
+      pad += indent;
+      return PADDING.repeat(pad - indent) + node;
+    }).join('\r\n');
   }
 
   _getTypedValue(shape) {
@@ -474,21 +607,36 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   }
   /**
    * Creates an example from RAML type properties.
-   * @param {String} type Media type
    * @param {Array} properties
+   * @param {String} mime Media type
    * @param {?String} typeName Name of the RAML type.
-   * @return {any}
+   * @param {?Boolean} isArray if true the result should be an array
+   * @return {String|undefined}
    */
-  _exampleFromProperties(type, properties, typeName) {
-    if (type.indexOf('json') !== -1) {
+  _exampleFromProperties(properties, mime, typeName, isArray) {
+    let result;
+    if (mime.indexOf('json') !== -1) {
       const value = this._jsonExampleFromProperties(properties);
       if (value) {
-        return JSON.stringify(value, null, 2);
+        result = JSON.stringify(value, null, 2);
+        if (isArray && result[0] !== '[') {
+          result = '[' + result + ']';
+        }
       }
-      return;
+    } else if (mime.indexOf('xml') !== -1) {
+      result = this._xmlExampleFromProperties(properties, typeName);
+      if (result) {
+        result = '<?xml version="1.0" encoding="UTF-8"?>' + result;
+        result = this.formatXml(result);
+      }
     }
-    if (type.indexOf('xml') !== -1) {
-      return this._xmlExampleFromProperties(properties, typeName);
+    if (result) {
+      return {
+        hasRaw: false,
+        hasTitle: false,
+        hasUnion: false,
+        value: result
+      };
     }
   }
   /**
@@ -520,14 +668,15 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   /**
    * Computes JSON value from a range shape.
    * @param {Object} range AMF's range model.
+   * @param {?String} typeName Optional, type name to use in Union type. By default first NodeShape.
    * @return {any}
    */
-  _computeJsonProperyValue(range) {
+  _computeJsonProperyValue(range, typeName) {
     if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
       return this._computeJsonScalarValue(range);
     }
     if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
-      return this._computeJsonUnionValue(range);
+      return this._computeJsonUnionValue(range, typeName);
     }
     if (this._hasType(range, this.ns.w3.shacl.name + 'NodeShape')) {
       return this._computeJsonObjectValue(range);
@@ -540,6 +689,9 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     let value = this._getTypeScalarValue(range);
     if (!value) {
       return '';
+      // Don't change this. User's don't like data types included into the body
+      // editor.
+      // this._computeScalarType(range);
     }
     let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
     if (prefix !== this.ns.w3.xmlSchema) {
@@ -574,8 +726,13 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       default: return value || '';
     }
   }
-
-  _computeJsonUnionValue(range) {
+  /**
+   * Computes JSON example from UnionShape
+   * @param {Object} range Type definition
+   * @param {?String} typeName Optional, type name to use. By default first NodeShape.
+   * @return {Object|undefined}
+   */
+  _computeJsonUnionValue(range, typeName) {
     const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
     const list = this._ensureArray(range[key]);
     if (!list) {
@@ -586,6 +743,13 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       let item = list[i];
       if (item instanceof Array) {
         item = item[0];
+      }
+      this._resolve(item);
+      if (typeName) {
+        const name = this._getValue(item, this.ns.w3.shacl.name + 'name');
+        if (typeName !== name) {
+          continue;
+        }
       }
       if (this._hasType(item, this.ns.w3.shacl.name + 'NodeShape')) {
         item = this._resolve(item);
@@ -657,8 +821,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   _xmlExampleFromProperties(properties, typeName) {
     const doc = document.implementation.createDocument('', typeName, null);
     const main = doc.documentElement;
-    const nl = doc.createTextNode('\n');
-    main.appendChild(nl);
     for (let i = 0, len = properties.length; i < len; i++) {
       this._xmlProcessProperty(doc, main, properties[i]);
     }
@@ -675,7 +837,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (!property) {
       return;
     }
-
     if (this._hasType(property, this.ns.w3.shacl.name + 'NodeShape')) {
       const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
       const properties = this._ensureArray(property[pKey]);
@@ -800,7 +961,10 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       }
     }
     if (!nodeValue) {
-      nodeValue = this._readDataType(range);
+      nodeValue = ' ';
+      // Do not add default type name as users do not like this.
+      // Mocking service would mark is as an error.
+      // this._readDataType(range);
     }
     const element = doc.createElement(name);
     if (nodeValue) {
@@ -808,8 +972,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       element.appendChild(vn);
     }
     node.appendChild(element);
-    const nl = doc.createTextNode('\n');
-    node.appendChild(nl);
     return element;
   }
 
@@ -820,8 +982,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (!properties) {
       return;
     }
-    const nl = doc.createTextNode('\n');
-    element.appendChild(nl);
     for (let i = 0, len = properties.length; i < len; i++) {
       this._xmlProcessProperty(doc, element, properties[i]);
     }
@@ -831,8 +991,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (isWrapped) {
       const element = this._appendXmlElement(doc, node, property, range);
       node.appendChild(element);
-      const nl = doc.createTextNode('\n');
-      node.appendChild(nl);
       node = element;
     }
     const pKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
@@ -840,8 +998,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (!properties) {
       return;
     }
-    const nl = doc.createTextNode('\n');
-    node.appendChild(nl);
     for (let i = 0, len = properties.length; i < len; i++) {
       const prop = properties[i];
       if (isWrapped) {
@@ -850,18 +1006,10 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
           continue;
         }
         const element = doc.createElement(name);
-        const nl = doc.createTextNode('\n');
-        element.appendChild(nl);
         node.appendChild(element);
         node = element;
       }
       this._xmlProcessProperty(doc, node, properties[i]);
-      if (isWrapped) {
-        try {
-          const nl = doc.createTextNode('\n');
-          node.parentNode.appendChild(nl);
-        } catch (_) {}
-      }
     }
   }
 
@@ -870,8 +1018,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     const type = this._readDataType(shape);
     const element = doc.createElement(name);
     element.appendChild(doc.createTextNode(type));
-    node.appendChild(element);
-    node.appendChild(doc.createTextNode('\n'));
   }
 
   /**
@@ -893,20 +1039,16 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
         element.appendChild(vn);
       }
     } else if (this._hasType(property, this.ns.raml.vocabularies.data + 'Array')) {
-      element.appendChild(doc.createTextNode('\n'));
       this._processDataArrayProperties(doc, element, property, name);
     } else if (this._hasType(property, this.ns.raml.vocabularies.data + 'Object')) {
-      element.appendChild(doc.createTextNode('\n'));
       this._processDataObjectProperties(doc, element, property, name);
     } else if (property['@value']) {
       const vn = doc.createTextNode(property['@value']);
       node.appendChild(vn);
-      node.appendChild(doc.createTextNode('\n'));
       // Skips adding new element
       return;
     }
     node.appendChild(element);
-    node.appendChild(doc.createTextNode('\n'));
   }
 
   _processDataArrayProperties(doc, node, property, name) {
