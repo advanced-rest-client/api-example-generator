@@ -4,6 +4,24 @@ version: v1
 baseUri: http://api.domain.com/
 
 types:
+  ScalarType: string
+  ScalarArray: string[]
+  ArrayType:
+    type: array
+    items: Image
+  UnionType: Image | Imgs
+  ScalarWithExample:
+    type: number
+    example: 5
+  ScalarArrayWithExample:
+    type: number[]
+    example: [1, 5]
+  SimpleInlineExample:
+    type: object
+    properties:
+      testProperty: boolean
+    example:
+      testProperty: true
   Image:
     type: object
     properties:
@@ -45,6 +63,18 @@ types:
           url: string
           thumb: string
       opt?: Image | string
+    example:
+      error: false
+      id: 1234
+      name: Pawel Psztyc
+      birthday: 20-10-1983
+      tagline: Test example
+      url: https://domain.com
+      language: PL
+      etag: test
+      image:
+        url: https://image.com
+        thumb: https://image.com/thumb
   JsonExampleInclude:
     type: Person
     example: !include example.json
@@ -88,6 +118,11 @@ types:
     example:
       firstName: Pawel
       lastName: Psztyc
+  ArrayTypeWithExample:
+    type: array
+    items: Image
+    example: [{"url": "url 1", "thumb": "thumb 1"}]
+
 /IncludedInType:
   post:
     body:
@@ -100,9 +135,27 @@ types:
     body:
       application/json:
         type: Person
+        example:
+          error: false
+          id: 1234
+          name: Inline person
+          birthday: 01-01-1990
+          tagline: Test example
+          url: https://domain.com
+          language: PL
+          etag: test
+          image:
+            url: https://image.com
+            thumb: https://image.com/thumb
       application/xml:
         type: !include example.xsd
         example: !include example.xml
+/IncludedInlineJson:
+  post:
+    body:
+      application/json:
+        type: !include user.raml
+        example: !include user.json
 /typeExamples:
   post:
     body:
@@ -129,6 +182,21 @@ types:
         type: PropertyExamples[]
       application/xml:
         type: PropertyExamples[]
+/arrayPropertyGeneratedExamples:
+  post:
+    body:
+      application/json:
+        type: array
+        items:
+          properties:
+            test: boolean
+            other: string
+      application/xml:
+        type: array
+        items:
+          properties:
+            test: boolean
+            other: string
 /wrappedXml:
   post:
     body:
@@ -158,6 +226,17 @@ types:
         type: Person | PropertyExamples
       application/xml:
         type: Person | PropertyExamples
+/scalar:
+  post:
+    body:
+      application/json:
+        type: integer
+/scalarWithExample:
+  post:
+    body:
+      application/json:
+        type: integer
+        example: 1
 /arrayScalar:
   post:
     body:
@@ -171,3 +250,56 @@ types:
         type: array
         items: [number]
         example: [1, 2, 3]
+/user-raml-example:
+  post:
+    body:
+      application/json:
+        type: !include user-raml-example.raml
+        examples:
+          User 3:
+            id: uid3
+            username: ppsztyc
+            firstName: Pawel
+            lastName: Psztyc
+            profilePhoto: https://img/domain.com/ppsztyc
+            email: ppsztyc@domain.com
+          User 4:
+            id: uid4
+            username: jdoe
+            firstName: John
+            lastName: Does
+            profilePhoto: https://img/domain.com/jdoe
+            email: jdoe@domain.com
+      application/xml:
+        type: !include user-raml-example.raml
+/user-json-example:
+  post:
+    body:
+      application/json:
+        type: !include user-json-example.raml
+/users-raml-example:
+  post:
+    body:
+      application/json:
+        type: !include users-raml-example.raml
+      application/xml:
+        type: !include users-raml-example.raml
+/users-json-example:
+  post:
+    body:
+      application/json:
+        type: !include users-json-example.raml
+/named-example:
+  post:
+    body:
+      application/json:
+        example: !include named-example.raml
+      application/xml:
+        example: !include named-example.raml
+/named-linked-example:
+  post:
+    body:
+      application/json:
+        example: !include named-example-with-link.raml
+      application/xml:
+        example: !include named-example-with-link.raml

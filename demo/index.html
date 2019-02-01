@@ -15,20 +15,25 @@
     <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="../../paper-item/paper-item.html">
     <link rel="import" href="../../paper-listbox/paper-listbox.html">
+    <link rel="import" href="../../paper-checkbox/paper-checkbox.html">
     <link rel="import" href="../../neon-animation/web-animations.html">
     <link rel="import" href="../api-example-generator.html">
+    <link rel="import" href="examples-render.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
       html,
       body {
         margin: 0;
         padding: 0;
+        height: 100%;
       }
 
       api-navigation {
         width: 320px;
         min-width: 320px;
         overflow: auto;
+        height: 100%;
+        background-color: #fff;
       }
 
       header {
@@ -42,6 +47,18 @@
           color: #3E2723;
         };
       }
+
+      .container {
+        @apply --layout-horizontal;
+        height: calc(100% - 86px);
+      }
+
+      .demo {
+        @apply --layout-flex;
+        margin-left: 12px;
+        margin-right: 12px;
+        padding-left: 12px;
+      }
       </style>
     </custom-style>
   </head>
@@ -50,38 +67,38 @@
       <template is="dom-bind">
         <header>
           <paper-dropdown-menu label="Select API">
-          <paper-listbox slot="dropdown-content" id="apisList" on-selected-changed="_apiChanged">
-            <paper-item data-src="demo-api.json">Demo api</paper-item>
-            <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
-            <paper-item data-src="se-8987.json">SE-8987</paper-item>
-          </paper-listbox>
-        </paper-dropdown-menu>
-          <paper-dropdown-menu label="Select media type" disabled id="mediaDropdown">
-            <paper-listbox slot="dropdown-content" id="mediaList" on-selected-changed="_mediaTypeChanged">
-              <template is="dom-repeat" items="[[mediaTypes]]">
-                <paper-item data-type$="[[item]]">[[item]]</paper-item>
-              </template>
+            <paper-listbox slot="dropdown-content" id="apisList" on-selected-changed="_apiChanged">
+              <paper-item data-src="demo-api.json">Demo api</paper-item>
+              <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
+              <paper-item data-src="se-8987.json">SE-8987</paper-item>
+              <paper-item data-src="SE-10469.json">SE-10469</paper-item>
+              <paper-item data-src="SE-10469-compact.json">SE-10469 - compact model</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
+          <paper-checkbox checked="{{noAuto}}">Render only defined examples (no auto generation)</paper-checkbox>
         </header>
 
-        <div class="horizontal-section-container centered" role="main">
+        <div class="container" role="main">
           <api-navigation amf-model="[[amfModel]]" endpoints-opened></api-navigation>
-          <section class="vertical-section-container">
-            <template is="dom-if" if="[[hasData]]">
-              <api-example-generator amf-model="[[amfModel]]" shape="[[shape]]" example="{{example}}" auto></api-example-generator>
 
-              <template is="dom-if" if="[[unionTypes]]">
-                <paper-dropdown-menu label="Select union type">
-                  <paper-listbox slot="dropdown-content" on-selected-changed="_unionTypeChanged">
-                    <template is="dom-repeat" items="[[unionTypes]]">
-                      <paper-item data-type$="[[item]]">[[item]]</paper-item>
-                    </template>
-                  </paper-listbox>
-                </paper-dropdown-menu>
+          <section class="demo">
+            <paper-dropdown-menu label="Select media type" disabled id="mediaDropdown">
+              <paper-listbox slot="dropdown-content" id="mediaList" on-selected-changed="_mediaTypeChanged">
+                <template is="dom-repeat" items="[[mediaTypes]]">
+                  <paper-item data-type$="[[item]]">[[item]]</paper-item>
+                </template>
+              </paper-listbox>
+            </paper-dropdown-menu>
+
+            <api-example-generator amf-model="[[amfModel]]" id="generator"></api-example-generator>
+            <template is="dom-if" if="[[hasData]]">
+
+              <template is="dom-if" if="[[examples]]">
+                <template is="dom-repeat" items="[[examples]]">
+                  <examples-render example="[[item]]"></examples-render>
+                </template>
               </template>
 
-              <pre>[[example]]</pre>
             </template>
             <template is="dom-if" if="[[!hasData]]">
               <p>Select a HTTP method in the navigation to see the demo.</p>
@@ -135,76 +152,48 @@
         const webApi = app.$.helper._computeWebApi(app.amfModel);
         const method = app.$.helper._computeMethodModel(webApi, id);
         const expect = app.$.helper._computeExpects(method);
-        const payloads = app.$.helper._computePayload(expect);
+        let payloads;
+        if (expect) {
+          payloads = app.$.helper._computePayload(expect);
+        }
+        if (!payloads) {
+          const returns = app.$.helper._computeReturns(method);
+          payloads = [];
+          returns.forEach((item) => {
+            const data = app.$.helper._computePayload(item);
+            if (data) {
+              payloads = payloads.concat(data);
+            }
+          });
+        }
         app.payloads = payloads;
         app.setupMediaTypes(payloads);
       };
 
       app.setupMediaTypes = function(payloads) {
-        const ns = ApiElements.Amf.ns;
-        const types = payloads.map((item) => {
-          return app.$.helper._getValue(item, ns.raml.vocabularies.http + 'mediaType');
-        });
-        app.mediaTypes = types;
+        const mimes = app.$.generator.listMedia(payloads);
+        app.mediaTypes = mimes;
         const dropdown = document.getElementById('mediaDropdown');
         if (dropdown.hasAttribute('disabled')) {
           dropdown.removeAttribute('disabled');
         }
+        document.getElementById('mediaList').selected = 0;
       };
 
       app._mediaTypeChanged = function(e) {
         app.unionTypes = undefined;
-        const payload = app.payloads[e.detail.value];
-        app.shape = payload;
-        app._discoverUnion(payload);
-      };
-
-      app._discoverUnion = function(shape) {
-        if (!shape) {
+        app.examples = false;
+        const media = app.mediaTypes && app.mediaTypes[e.detail.value];
+        if (!media) {
           return;
         }
-        setTimeout(() => {
-          const ns = ApiElements.Amf.ns;
-          const sKey = app.$.helper._getAmfKey(ns.raml.vocabularies.http + 'schema');
-          let schema = shape[sKey];
-          if (!schema) {
-            app.unionTypes = undefined;
-            return;
-          }
-          if (schema instanceof Array) {
-            schema = schema[0];
-          }
-          if (app.$.helper._hasType(schema, ns.raml.vocabularies.shapes + 'UnionShape')) {
-            const key = app.$.helper._getAmfKey(ns.raml.vocabularies.shapes + 'anyOf');
-            let anyOf = schema[key];
-            if (!anyOf) {
-              app.unionTypes = undefined;
-              return;
-            }
-            if (!(anyOf instanceof Array)) {
-              anyOf = [anyOf];
-            }
-            const result = [];
-            for (let i = 0, len = anyOf.length; i < len; i++) {
-              const name = app.$.helper._getValue(anyOf[i], ns.w3.shacl.name + 'name');
-              result[result.length] = name;
-            }
-            app.unionTypes = result;
-          } else {
-            app.unionTypes = undefined;
-          }
-        });
+        const opts = {};
+        if (app.noAuto) {
+          opts.noAuto = app.noAuto;
+        }
+        app.examples = app.$.generator.generatePayloadsExamples(app.payloads, media, opts);
       };
-
-      app._unionTypeChanged = function(e) {
-        const type = app.unionTypes[e.detail.value];
-        const element = document.querySelector('api-example-generator');
-        const example = element.generate(app.shape, {
-          type
-        });
-        element._setExample(example);
-      };
-      window.addEventListener('WebComponentsReady',  app._load);
+      window.addEventListener('WebComponentsReady', app._load);
       window.addEventListener('api-navigation-selection-changed', app._navChanged);
     })(document.getElementById('demo'));
   </script>

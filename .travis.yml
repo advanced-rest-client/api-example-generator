@@ -21,8 +21,6 @@ script:
 cache:
   directories:
   - node_modules
-after_success:
-- node tasks/ci.js
 env:
   global:
   - secure: HNK5C6vKqJ8RvJTFRFq3rfpi3odQUqs3wURaBU7wTnvPne9+5g0u6Kakv/jHEmEEcEd7RTQ845eUhk4Kaxg8xPFCKbxIJ/AUl3t5QduMtOS0vrQFdgiFMdc1svdwY7UPouW8Ka/OJegcE8B4Az57Xo0cmgnYq9GnNvcUTGCAYZm+fmGMuXhLA0lZ7QTNNqVl/t9FIf+L8Fzk80p/iZdivcmyXUw0B2bSpFwGduPCNz7ZvGCiuoQhjyP4QbqC1j+z5/DkQX2A4zSdYE277+x8qubsf6/rb1nmUm2iuLg0K/axwDZBJzsJq/Q/kqYIYF40u1trhpaej2ftz+Z/vTdP6CpO098jYmaaVRpx4k/ZKIZcBzMUQLw1UDL4gcZbOOoejue2a68F1ewwmjWDiPnLEN2RlsfOTUsF3dcK+mV1Ja+F5o6zQsn/GGvjoGWqYFIOzUeYJH/utYvZftyHdwyNRI+cG10wXMWETFThKfxqRWg5lXaimJLEDxssPBOYSY0Sc1r7qvMzufuJ9uzuatNQNNXwLKQIjTP22Y9pYpxI//dKDeOWb2CwnBPp5LOkNVFEOH89cjJXNq4KfDo6kewm5NhtEu/5A3+v0CO/8de2HF8Rg+DIUGmLIsCT/pG12cWMLtoxp8vn6mEMeLkMwIyfsZJ5NWPrinxERiqJo3S+bgA=

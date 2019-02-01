@@ -1,6 +1,7 @@
 const AmfLoader = {};
-AmfLoader.load = function(compact) {
-  const file = '/demo-api' + (compact ? '-compact' : '') + '.json';
+AmfLoader.load = function(compact, apiFile) {
+  apiFile = apiFile || 'demo-api';
+  const file = '/' + apiFile + (compact ? '-compact' : '') + '.json';
   const url = location.protocol + '//' + location.host +
     location.pathname.substr(0, location.pathname.lastIndexOf('/'))
     .replace('/test', '/demo') + file;
