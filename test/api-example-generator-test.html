@@ -281,6 +281,24 @@
           const result = element.generatePayloadsExamples(shape, 'application/json');
           assert.isUndefined(result);
         });
+
+        test('Generates a value when "rawOnly"', () => {
+          const payloads = getPayload(element, amf, '/IncludedInType', 'post');
+          const result = element.generatePayloadsExamples(payloads[0], null, {
+            rawOnly: true
+          });
+          assert.typeOf(result, 'array', 'Returns an array');
+          assert.lengthOf(result, 1, 'Array is size of 1');
+          assert.equal(result[0].value.indexOf('      error: false'), 0);
+        });
+
+        test('Returns undefined when "rawOnly" and no raw values', () => {
+          const payloads = getPayload(element, amf, '/arrayTypeExample', 'post');
+          const result = element.generatePayloadsExamples(payloads[0], null, {
+            rawOnly: true
+          });
+          assert.isUndefined(result);
+        });
       });
     });
   });
@@ -482,6 +500,24 @@
           assert.isFalse(result[0].hasUnion);
           assert.equal(result[0].raw, '      testProperty: true\n');
           assert.equal(result[0].value, '{\n  "testProperty": true\n}');
+        });
+
+        test('Generates a value when "rawOnly"', () => {
+          const payloads = getPayloadSchema(element, amf, '/IncludedInType', 'post', 0);
+          const result = element.computeExamples(payloads[0], null, {
+            rawOnly: true
+          });
+          assert.typeOf(result, 'array', 'Returns an array');
+          assert.lengthOf(result, 2, 'Array is size of 2');
+          assert.equal(result[0].value.indexOf('      error: false'), 0);
+        });
+
+        test('Returns undefined when "rawOnly" and no raw values', () => {
+          const payloads = getPayloadSchema(element, amf, '/propertyExamples', 'post', 0);
+          const result = element.computeExamples(payloads[0], null, {
+            rawOnly: true
+          });
+          assert.isUndefined(result);
         });
       });
     });

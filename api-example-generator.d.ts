@@ -65,6 +65,13 @@ declare namespace ApiElements {
    * const examples = generator.computeExamples(shape, 'application/json');
    * console.log(examples);
    * ```
+   *
+   * ## Processing options
+   *
+   * - `rawOnly` - list "raw" examples only.
+   * - `noAuto` - Don't generate an example from object properties if the example is
+   * not defined in API file.
+   * - `typeName` - Processed type name, used for XML types to use right XML element wrapper name.
    */
   class ApiExampleGenerator extends
     ApiElements.AmfHelperMixin(

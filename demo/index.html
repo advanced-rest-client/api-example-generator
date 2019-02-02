@@ -48,6 +48,10 @@
         };
       }
 
+      header paper-checkbox:not(:last-of-type) {
+        margin-right: 8px;
+      }
+
       .container {
         @apply --layout-horizontal;
         height: calc(100% - 86px);
@@ -75,7 +79,8 @@
               <paper-item data-src="SE-10469-compact.json">SE-10469 - compact model</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
-          <paper-checkbox checked="{{noAuto}}">Render only defined examples (no auto generation)</paper-checkbox>
+          <paper-checkbox checked="{{noAuto}}" title="Don't generate examples if missing in API definition">No auth</paper-checkbox>
+          <paper-checkbox checked="{{rawOnly}}" title="Return examples as they were defined in API spec file without translating them to selected mime type.">Raw only</paper-checkbox>
         </header>
 
         <div class="container" role="main">
@@ -190,6 +195,9 @@
         const opts = {};
         if (app.noAuto) {
           opts.noAuto = app.noAuto;
+        }
+        if (app.rawOnly) {
+          opts.rawOnly = app.rawOnly;
         }
         app.examples = app.$.generator.generatePayloadsExamples(app.payloads, media, opts);
       };

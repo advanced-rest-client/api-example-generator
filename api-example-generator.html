@@ -50,6 +50,13 @@
  * console.log(examples);
  * ```
  *
+ * ## Processing options
+ *
+ * - `rawOnly` - list "raw" examples only.
+ * - `noAuto` - Don't generate an example from object properties if the example is
+ * not defined in API file.
+ * - `typeName` - Processed type name, used for XML types to use right XML element wrapper name.
+ *
  * @customElement
  * @polymer
  * @demo demo/index.html
@@ -108,11 +115,11 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @return {String|undefined} Example value.
    */
   generatePayloadsExamples(payloads, media, opts) {
-    if (!payloads || !media) {
-      return;
-    }
     if (!opts) {
       opts = {};
+    }
+    if (!payloads || !media && !opts.rawOnly) {
+      return;
     }
     if (!(payloads instanceof Array)) {
       payloads = [payloads];
@@ -121,7 +128,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     for (let i = 0, len = payloads.length; i < len; i++) {
       const payload = payloads[i];
       const payloadMedia = this._getValue(payload, this.ns.raml.vocabularies.http + 'mediaType');
-      if (payloadMedia !== media) {
+      if (media && payloadMedia !== media) {
         continue;
       }
       result = this.generatePayloadExamples(payload, media, opts);
@@ -167,17 +174,20 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @return {Array<Object>|undefined}
    */
   computeExamples(schema, mime, opts) {
-    if (!schema || !mime) {
-      return;
-    }
     if (!opts) {
       opts = {};
+    }
+    if (!schema || !mime && !opts.rawOnly) {
+      return;
     }
     this._resolve(schema);
     const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
     const examples = this._ensureArray(schema[eKey]);
     if (examples) {
       return this._computeFromExamples(examples, mime, opts);
+    }
+    if (opts.rawOnly) {
+      return;
     }
     if (this._hasType(schema, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
       const value = this._computeExampleArraySchape(schema, mime, opts);
@@ -305,8 +315,6 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (title && title.indexOf('example_') === 0) {
       title = undefined;
     }
-    const isJson = mime.indexOf('json') !== -1;
-    const isXml = !isJson && mime.indexOf('xml') !== -1;
     const hasRaw = !!raw;
     const result = {};
     result.hasTitle = !!title;
@@ -314,6 +322,13 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (result.hasTitle) {
       result.title = title;
     }
+    if (opts.rawOnly) {
+      result.hasRaw = false;
+      result.value = raw;
+      return result;
+    }
+    const isJson = mime.indexOf('json') !== -1;
+    const isXml = !isJson && mime.indexOf('xml') !== -1;
     if (hasRaw) {
       if (isJson) {
         try {
