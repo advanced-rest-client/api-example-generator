@@ -1,7 +1,7 @@
 {
   "name": "api-example-generator",
   "description": "Examples generator from AMF model",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "license": "Apache-2.0",
   "main": "api-example-generator.html",
   "keywords": [
