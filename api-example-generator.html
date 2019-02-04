@@ -419,9 +419,12 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   }
 
   _computeExampleArraySchape(schema, mime, opts) {
-    const isJson = mime.indexOf('json') !== -1;
     const iKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
     const items = this._ensureArray(schema[iKey]);
+    if (!items) {
+      return;
+    }
+    const isJson = mime.indexOf('json') !== -1;
     // We need only first type here as arras can have different types
     for (let i = 0, len = items.length; i < len; i++) {
       const item = items[i];

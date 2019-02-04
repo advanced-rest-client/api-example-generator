@@ -1534,6 +1534,13 @@
           const result = element._computeExampleArraySchape(schema, 'application/json', {noAuto: true});
           assert.isUndefined(result, 'array');
         });
+
+        test('Returns undefined when array does not have items', () => {
+          let shape = getType(element, amf, 'ArrayWithoutItems');
+          shape = element._resolve(shape);
+          const result = element._computeExampleArraySchape(shape, 'application/json');
+          assert.isUndefined(result);
+        });
       });
     });
   });
