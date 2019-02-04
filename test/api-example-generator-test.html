@@ -289,7 +289,7 @@
           });
           assert.typeOf(result, 'array', 'Returns an array');
           assert.lengthOf(result, 1, 'Array is size of 1');
-          assert.equal(result[0].value.indexOf('      error: false'), 0);
+          assert.equal(result[0].value.indexOf('\n      error: false'), 0, 'Value is set');
         });
 
         test('Returns undefined when "rawOnly" and no raw values', () => {
@@ -455,28 +455,46 @@
 
         test('Computes example from type example', () => {
           const shape = getType(element, amf, 'JsonExampleInclude');
-          const result = element.computeExamples(shape, 'application/json');
+          const result = element.computeExamples(shape, 'application/json', {
+            typeId: shape['@id']
+          });
           assert.typeOf(result, 'array');
-          assert.lengthOf(result, 1);
-          assert.isFalse(result[0].hasRaw);
-          assert.isFalse(result[0].hasTitle);
-          assert.isFalse(result[0].hasUnion);
+          assert.lengthOf(result, 2);
+          const ex1 = result[0];
+          assert.isFalse(ex1.hasRaw);
+          assert.isFalse(ex1.hasTitle);
+          assert.isFalse(ex1.hasUnion);
           const str = '{\n  "id": "R34fg663H9KW9MMSKISI",\n  "name": "Pawel Psztyc",\n  ' +
           '"birthday": "1983-10-20",\n  "gender": "male",\n  "url": "https://domain.com/profile/pawel.psztyc",\n' +
           '  "image": {\n    "url": "https://domain.com/profile/pawel.psztyc/image",\n    ' +
           '"thumb": "https://domain.com/profile/pawel.psztyc/image/thumb"\n  },\n  ' +
           '"tagline": "Some text about me.",\n  "language": "en_GB",\n  "etag": "\\"W\\\\244m4n5kj3gbn2nj4k4n4\\""\n}\n';
-          assert.equal(result[0].value, str);
+          assert.equal(ex1.value, str);
+          const ex2 = result[1];
+          assert.isTrue(ex2.hasRaw);
+          assert.isFalse(ex2.hasTitle);
+          assert.isFalse(ex2.hasUnion);
+          const raw = '\n      error: false\n      id: 1234\n      name: Pawel Psztyc\n      ' +
+            'birthday: 20-10-1983\n      tagline: Test example\n      url: https://domain.com\n      ' +
+            'language: PL\n      etag: test\n      image:\n        url: https://image.com\n        ' +
+            'thumb: https://image.com/thumb\n';
+          assert.equal(ex2.raw, raw);
+          const str2 = '{\n  \"birthday\": \"20-10-1983\",\n  \"etag\": \"test\",' +
+            '\n  \"id\": 1234,\n  \"image\": {\n    \"thumb\": \"https://image.com/thumb\",\n    ' +
+            '\"url\": \"https://image.com\"\n  },\n  \"language\": \"PL\",\n  \"name\": \"Pawel Psztyc\",\n  ' +
+            '\"tagline\": \"Test example\",\n  \"url\": \"https://domain.com\"\n}';
+          assert.equal(ex2.value, str2);
         });
 
         test('Computes example from XML type example', () => {
           const shape = getType(element, amf, 'XmlExampleInclude');
           const result = element.computeExamples(shape, 'application/xml');
           assert.typeOf(result, 'array');
-          assert.lengthOf(result, 1);
-          assert.isFalse(result[0].hasRaw);
-          assert.isFalse(result[0].hasTitle);
-          assert.isFalse(result[0].hasUnion);
+          assert.lengthOf(result, 2);
+          const ex1 = result[0];
+          assert.isFalse(ex1.hasRaw);
+          assert.isFalse(ex1.hasTitle);
+          assert.isFalse(ex1.hasUnion);
           const str = xmlPrefix + '\n<Person error="false">\n  ' +
           '<id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\n' +
           '  <name>John Smith</name>\n  <birthday>1990-10-12</birthday>\n  <gender>male</gender>\n  ' +
@@ -485,7 +503,20 @@
           '<thumb>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb</thumb>\n  ' +
           '</image>\n  <tagline>Hi, I\'m John!</tagline>\n  <language>en_US</language>\n  '+
           '<etag>W\\\\244m4n5kj3gbn2nj4k4n4</etag>\n</Person>\n';
-          assert.equal(result[0].value, str);
+          assert.equal(ex1.value, str);
+          const ex2 = result[0];
+          assert.isFalse(ex2.hasRaw);
+          assert.isFalse(ex2.hasTitle);
+          assert.isFalse(ex2.hasUnion);
+          const str2 = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Person error=\"false\">\n  ' +
+          '<id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\n  <name>John Smith</name>\n  ' +
+          '<birthday>1990-10-12</birthday>\n  <gender>male</gender>\n  ' +
+          '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s</url>\n  <image>\n    ' +
+          '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image</url>\n    ' +
+          '<thumb>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb</thumb>\n  ' +
+          '</image>\n  <tagline>Hi, I\'m John!</tagline>\n  <language>en_US</language>\n  ' +
+          '<etag>W\\\\244m4n5kj3gbn2nj4k4n4</etag>\n</Person>\n';
+          assert.equal(ex2.value, str2);
         });
 
         test('Computes example for an Example shape', () => {
@@ -498,7 +529,7 @@
           assert.isTrue(result[0].hasRaw);
           assert.isFalse(result[0].hasTitle);
           assert.isFalse(result[0].hasUnion);
-          assert.equal(result[0].raw, '      testProperty: true\n');
+          assert.equal(result[0].raw, '\n      testProperty: true\n');
           assert.equal(result[0].value, '{\n  "testProperty": true\n}');
         });
 
@@ -509,7 +540,7 @@
           });
           assert.typeOf(result, 'array', 'Returns an array');
           assert.lengthOf(result, 2, 'Array is size of 2');
-          assert.equal(result[0].value.indexOf('      error: false'), 0);
+          assert.equal(result[0].value.indexOf('\n      error: false'), 0, 'Value is set');
         });
 
         test('Returns undefined when "rawOnly" and no raw values', () => {
@@ -703,7 +734,7 @@
           assert.equal(ex1.title, 'Person', 'Example 1 has title');
           assert.equal(ex1.value.indexOf('{\n  "birthday": "20-10-1983",\n  "etag": "test"'), 0,
             'Example 1 value is set');
-          assert.equal(ex1.raw.indexOf('      error: false'), 0, 'Example 1 raw is set');
+          assert.equal(ex1.raw.indexOf('\n      error: false'), 0, 'Example 1 raw is set');
           const ex2 = result[0].values[1];
           assert.isFalse(ex2.hasRaw, 'Example 2 hasRaw is false');
           assert.isTrue(ex2.hasTitle, 'Example 2 hasTitle is true');
@@ -728,7 +759,7 @@
           assert.equal(ex1.title, 'Person', 'Example 1 has title');
           const value1 = xmlPrefix + '\r\n<model>\r\n  <birthday>20-10-1983</birthday>';
           assert.equal(ex1.value.indexOf(value1), 0, 'Example 1 value is set');
-          assert.equal(ex1.raw.indexOf('      error: false'), 0, 'Example 1 raw is set');
+          assert.equal(ex1.raw.indexOf('\n      error: false'), 0, 'Example 1 raw is set');
           const ex2 = result[0].values[1];
           assert.isFalse(ex2.hasRaw, 'Example 2 hasRaw is false');
           assert.isTrue(ex2.hasTitle, 'Example 2 hasTitle is true');
@@ -1567,6 +1598,51 @@
           const result = element._computeJsonProperyValue(schema);
           assert.typeOf(result, 'array');
           assert.deepEqual(result[0], {firstName: '', lastName: ''});
+        });
+      });
+    });
+  });
+
+  suite('JSON schema processing', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true]
+    ].forEach((setupItem) => {
+      suite(setupItem[0], () => {
+        let element;
+        let amf;
+
+        suiteSetup(() => {
+          return AmfLoader.load(setupItem[1], 'SE-10469')
+          .then((model) => {
+            amf = model;
+          });
+        });
+
+        setup(() => {
+          element = fixture('Basic');
+          element.amfModel = amf;
+        });
+
+        test('Generates example from JSON schema', () => {
+          const payloads = getPayload(element, amf, '/purina/b2b/supplier/purchaseOrder', 'post');
+          const result = element.generatePayloadsExamples(payloads[0], null, {rawOnly: true});
+          assert.typeOf(result, 'array');
+        });
+
+        test('Example has "raw" property', () => {
+          const payloads = getPayload(element, amf, '/purina/b2b/supplier/purchaseOrder', 'post');
+          const result = element.generatePayloadsExamples(payloads[0], null, {rawOnly: true});
+          const example = result[0];
+          assert.typeOf(example.raw, 'string');
+          assert.isTrue(example.hasRaw);
+        });
+
+        test('Example has "value" property', () => {
+          const payloads = getPayload(element, amf, '/purina/b2b/supplier/purchaseOrder', 'post');
+          const result = element.generatePayloadsExamples(payloads[0], null, {rawOnly: true});
+          const example = result[0];
+          assert.typeOf(example.value, 'string');
         });
       });
     });

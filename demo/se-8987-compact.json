@@ -632,7 +632,7 @@
 ],
 "shacl:name": [
 {
-"@value": "UnionType"
+"@value": "Dog"
 }
 ],
 "sourcemaps:sources": [
@@ -817,7 +817,7 @@
 ],
 "shacl:name": [
 {
-"@value": "UnionType"
+"@value": "Cat"
 }
 ],
 "sourcemaps:sources": [
@@ -976,7 +976,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "      name: Pepe\n"
+"@value": "\n      name: Pepe\n"
 }
 ],
 "sourcemaps:sources": [
@@ -1020,7 +1020,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(13,0)-(14,0)]"
+"@value": "[(12,4)-(14,0)]"
 }
 ]
 }
@@ -1126,7 +1126,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "      age: 45\n\n"
+"@value": "\n      age: 45\n\n"
 }
 ],
 "sourcemaps:sources": [
@@ -1170,7 +1170,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(20,0)-(22,0)]"
+"@value": "[(19,4)-(22,0)]"
 }
 ]
 }
@@ -1447,7 +1447,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "      name: Pepe\n"
+"@value": "\n      name: Pepe\n"
 }
 ],
 "sourcemaps:sources": [
@@ -1491,7 +1491,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(13,0)-(14,0)]"
+"@value": "[(12,4)-(14,0)]"
 }
 ]
 }
@@ -1796,7 +1796,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "      age: 45\n\n"
+"@value": "\n      age: 45\n\n"
 }
 ],
 "sourcemaps:sources": [
@@ -1840,7 +1840,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(20,0)-(22,0)]"
+"@value": "[(19,4)-(22,0)]"
 }
 ]
 }
