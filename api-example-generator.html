@@ -186,6 +186,11 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (examples) {
       return this._computeFromExamples(examples, mime, opts);
     }
+    const jsonSchema = this._readJsonSchema(schema);
+    if (jsonSchema) {
+      return this._exampleFromJsonSchema(schema, jsonSchema);
+    }
+
     if (opts.rawOnly) {
       return;
     }
@@ -229,6 +234,31 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
         return [value];
       }
     }
+  }
+  /**
+   * Reads a raw value of JSON schema if available.
+   * @param {Object} schema Schema shape of a type.
+   * @return {String|undefined} JSON schema if exists.
+   */
+  _readJsonSchema(schema) {
+    const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources');
+    const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'parsed-json-schema');
+    const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'value');
+    let sm = schema[sourceKey];
+    if (!sm) {
+      return;
+    }
+    if (sm instanceof Array) {
+      sm = sm[0];
+    }
+    let tracked = sm[trackedKey];
+    if (!tracked) {
+      return;
+    }
+    if (tracked instanceof Array) {
+      tracked = tracked[0];
+    }
+    return this._getValue(tracked, valueKey);
   }
   /**
   * Computes examples value from a list of examples.
@@ -619,6 +649,34 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
         return Number(value);
       default: return value;
     }
+  }
+  /**
+   * Creates a example structure for the JSON schema.
+   * Old but still in use.
+   * @param {Object} schema AMF schema schape
+   * @param {String} jsonSchema Raw JSON schema value
+   * @return {Array<Object>} Generated example model.
+   */
+  _exampleFromJsonSchema(schema, jsonSchema) {
+    const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
+    const properties = this._ensureArray(schema[pKey]);
+    let example;
+    if (properties && properties.length) {
+      const typeName = this._getValue(schema, this.ns.w3.shacl.name + 'name');
+      example = this._exampleFromProperties(properties, 'application/json', typeName);
+    }
+    if (example) {
+      example.hasRaw = true;
+      example.raw = jsonSchema;
+    } else {
+      example = {
+        hasRaw: false,
+        hasTitle: false,
+        hasUnion: false,
+        value: jsonSchema
+      };
+    }
+    return [example];
   }
   /**
    * Creates an example from RAML type properties.
