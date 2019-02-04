@@ -133,6 +133,14 @@ declare namespace ApiElements {
     computeExamples(schema: object|null, mime: String|null, opts: object|null): Array<object|null>|null|undefined;
 
     /**
+     * Reads a raw value of JSON schema if available.
+     *
+     * @param schema Schema shape of a type.
+     * @returns JSON schema if exists.
+     */
+    _readJsonSchema(schema: object|null): String|null|undefined;
+
+    /**
      * Computes examples value from a list of examples.
      *
      * @param examples List of AMF Example schapes.
@@ -180,6 +188,16 @@ declare namespace ApiElements {
     _xmlFromStructure(structure: any, opts: any): any;
     formatXml(xml: any): any;
     _getTypedValue(shape: any): any;
+
+    /**
+     * Creates a example structure for the JSON schema.
+     * Old but still in use.
+     *
+     * @param schema AMF schema schape
+     * @param jsonSchema Raw JSON schema value
+     * @returns Generated example model.
+     */
+    _exampleFromJsonSchema(schema: object|null, jsonSchema: String|null): Array<object|null>|null;
 
     /**
      * Creates an example from RAML type properties.
