@@ -1654,6 +1654,98 @@
       });
     });
   });
+
+  suite('Tracked elements', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true]
+    ].forEach((setupItem) => {
+      suite(setupItem[0], () => {
+        let element;
+        let amf;
+
+        suiteSetup(() => {
+          return AmfLoader.load(setupItem[1], 'tracked-to-linked')
+          .then((model) => {
+            amf = model;
+          });
+        });
+
+        setup(() => {
+          element = fixture('Basic');
+          element.amfModel = amf;
+        });
+
+        test('Generates example for GET', () => {
+          const payloads = getPayload(element, amf, '/employees', 'get');
+          const result = element.generatePayloadsExamples(payloads[0], 'application/json');
+          assert.typeOf(result, 'array');
+          const example = result[0];
+          assert.isTrue(example.hasTitle, 'Example\'s hasTitle is set');
+          assert.isTrue(example.hasRaw, 'Example\'s hasRaw is set');
+          assert.isFalse(example.hasUnion, 'Example\'s hasUnion is set');
+          assert.equal(example.title, 'employees', 'Example\'s title is set');
+          assert.equal(example.raw,
+            '\n  -\n    id: 1\n    name: Jhon\n  -\n    id: 2\n    name: Sam',
+            'Example\'s raw is set');
+          assert.equal(example.value,
+            '[\n  {\n    "id": 1,\n    "name": "Jhon"\n  },\n  {\n    "id": 2,\n    "name": "Sam"\n  }\n]',
+            'Example\'s value is set');
+        });
+
+        test('Generates example for POST', () => {
+          const payloads = getPayload(element, amf, '/employees', 'post');
+          const result = element.generatePayloadsExamples(payloads[0], 'application/json');
+          assert.typeOf(result, 'array');
+          const example = result[0];
+          assert.isTrue(example.hasTitle, 'Example\'s hasTitle is set');
+          assert.isTrue(example.hasRaw, 'Example\'s hasRaw is set');
+          assert.isFalse(example.hasUnion, 'Example\'s hasUnion is set');
+          assert.equal(example.title, 'employee', 'Example\'s title is set');
+          assert.equal(example.raw,
+            '\n  id: 1\n  name: "Jhon"',
+            'Example\'s raw is set');
+          assert.equal(example.value,
+            '{\n  "id": 1,\n  "name": "Jhon"\n}',
+            'Example\'s value is set');
+        });
+
+        test('Generates example for DELETE', () => {
+          const payloads = getPayload(element, amf, '/employees', 'delete');
+          const result = element.generatePayloadsExamples(payloads[0], 'application/json');
+          assert.typeOf(result, 'array');
+          const example = result[0];
+          assert.isTrue(example.hasTitle, 'Example\'s hasTitle is set');
+          assert.isTrue(example.hasRaw, 'Example\'s hasRaw is set');
+          assert.isFalse(example.hasUnion, 'Example\'s hasUnion is set');
+          assert.equal(example.title, 'employee', 'Example\'s title is set');
+          assert.equal(example.raw,
+            '\n  id: 1\n  name: "Jhon"',
+            'Example\'s raw is set');
+          assert.equal(example.value,
+            '{\n  "id": 1,\n  "name": "Jhon"\n}',
+            'Example\'s value is set');
+        });
+
+        test('Generates example for HEAD', () => {
+          const payloads = getPayload(element, amf, '/employees', 'head');
+          const result = element.generatePayloadsExamples(payloads[0], 'application/xml');
+          assert.typeOf(result, 'array');
+          const example = result[0];
+          assert.isTrue(example.hasTitle, 'Example\'s hasTitle is set');
+          assert.isTrue(example.hasRaw, 'Example\'s hasRaw is set');
+          assert.isFalse(example.hasUnion, 'Example\'s hasUnion is set');
+          assert.equal(example.title, 'employee', 'Example\'s title is set');
+          assert.equal(example.raw,
+            '\n  id: 1\n  name: "Jhon"',
+            'Example\'s raw is set');
+          assert.equal(example.value,
+            '<?xml version="1.0" encoding="UTF-8"?>\r\n<model>\r\n  <id>1</id>\r\n  <name>Jhon</name>\r\n</model>',
+            'Example\'s value is set');
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

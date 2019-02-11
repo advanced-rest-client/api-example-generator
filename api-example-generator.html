@@ -322,7 +322,11 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
         tracked = tracked[0];
       }
       const value = this._getValue(tracked, valueKey);
-      if (value && (value === typeId || value === longId)) {
+      if (!value) {
+        continue;
+      }
+      const ids = value.split(',');
+      if (ids.indexOf(longId) !== -1 || ids.indexOf(typeId) !== -1) {
         result[result.length] = example;
       }
     }
