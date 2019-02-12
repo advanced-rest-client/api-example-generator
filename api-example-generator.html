@@ -558,7 +558,8 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       value = value[0];
     }
     const tmp = this._jsonFromStructure(value);
-    if (!tmp) {
+    if (tmp === undefined) {
+      // it can be false or null
       return;
     }
     if (isArray) {

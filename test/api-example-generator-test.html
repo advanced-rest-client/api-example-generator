@@ -464,12 +464,22 @@
           assert.isFalse(ex1.hasRaw);
           assert.isFalse(ex1.hasTitle);
           assert.isFalse(ex1.hasUnion);
-          const str = '{\n  "id": "R34fg663H9KW9MMSKISI",\n  "name": "Pawel Psztyc",\n  ' +
-          '"birthday": "1983-10-20",\n  "gender": "male",\n  "url": "https://domain.com/profile/pawel.psztyc",\n' +
-          '  "image": {\n    "url": "https://domain.com/profile/pawel.psztyc/image",\n    ' +
-          '"thumb": "https://domain.com/profile/pawel.psztyc/image/thumb"\n  },\n  ' +
-          '"tagline": "Some text about me.",\n  "language": "en_GB",\n  "etag": "\\"W\\\\244m4n5kj3gbn2nj4k4n4\\""\n}\n';
-          assert.equal(ex1.value, str);
+          const parsed1 = JSON.parse(ex1.value);
+          const cmp1 = {
+            id: 'R34fg663H9KW9MMSKISI',
+            name: 'Pawel Psztyc',
+            birthday: '1983-10-20',
+            gender: 'male',
+            url: 'https://domain.com/profile/pawel.psztyc',
+            image: {
+              thumb: 'https://domain.com/profile/pawel.psztyc/image/thumb',
+              url: 'https://domain.com/profile/pawel.psztyc/image'
+            },
+            tagline: 'Some text about me.',
+            language: 'en_GB',
+            etag: '"W\\244m4n5kj3gbn2nj4k4n4"',
+          };
+          assert.deepEqual(parsed1, cmp1);
           const ex2 = result[1];
           assert.isTrue(ex2.hasRaw);
           assert.isFalse(ex2.hasTitle);
@@ -479,11 +489,23 @@
             'language: PL\n      etag: test\n      image:\n        url: https://image.com\n        ' +
             'thumb: https://image.com/thumb\n';
           assert.equal(ex2.raw, raw);
-          const str2 = '{\n  \"birthday\": \"20-10-1983\",\n  \"etag\": \"test\",' +
-            '\n  \"id\": 1234,\n  \"image\": {\n    \"thumb\": \"https://image.com/thumb\",\n    ' +
-            '\"url\": \"https://image.com\"\n  },\n  \"language\": \"PL\",\n  \"name\": \"Pawel Psztyc\",\n  ' +
-            '\"tagline\": \"Test example\",\n  \"url\": \"https://domain.com\"\n}';
-          assert.equal(ex2.value, str2);
+
+          const parsedExample2 = JSON.parse(ex2.value);
+          const cmp2 = {
+            birthday: '20-10-1983',
+            error: false,
+            etag: 'test',
+            id: 1234,
+            image: {
+              thumb: 'https://image.com/thumb',
+              url: 'https://image.com'
+            },
+            language: 'PL',
+            name: 'Pawel Psztyc',
+            tagline: 'Test example',
+            url: 'https://domain.com'
+          };
+          assert.deepEqual(parsedExample2, cmp2);
         });
 
         test('Computes example from XML type example', () => {
@@ -677,10 +699,21 @@
           const result = element.generatePayloadsExamples(payloads, 'application/json');
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
-          assert.equal(result[0].value, '[{\n  "xtra": "",\n  "firstName": "Pawel",\n  ' +
-          '"lastName": "Psztyc",\n  "address": {\n    "street": "",\n    "zip": "00000",\n    ' +
-          '"house": "1"\n  },\n  "num": "",\n  "int": "",\n  "bool": "",\n  ' +
-          '"defVal": 10\n}]');
+          const parsed = JSON.parse(result[0].value);
+          assert.deepEqual(parsed, [{
+            xtra: '',
+            firstName: 'Pawel',
+            lastName: 'Psztyc',
+            address: {
+              street: '',
+              zip: '00000',
+              house: 1
+            },
+            num: '',
+            int: '',
+            bool: '',
+            defVal: 10
+          }]);
         });
 
         test('XML array property defined inline', () => {
@@ -732,8 +765,22 @@
           assert.isTrue(ex1.hasTitle, 'Example 1 hasTitle is true');
           assert.isFalse(ex1.hasUnion, 'Example 1 hasUnion is false');
           assert.equal(ex1.title, 'Person', 'Example 1 has title');
-          assert.equal(ex1.value.indexOf('{\n  "birthday": "20-10-1983",\n  "etag": "test"'), 0,
-            'Example 1 value is set');
+          const parsedExample1 = JSON.parse(ex1.value);
+          const cmp1 = {
+            birthday: '20-10-1983',
+            error: false,
+            etag: 'test',
+            id: 1234,
+            image: {
+              thumb: 'https://image.com/thumb',
+              url: 'https://image.com'
+            },
+            language: 'PL',
+            name: 'Pawel Psztyc',
+            tagline: 'Test example',
+            url: 'https://domain.com'
+          };
+          assert.deepEqual(parsedExample1, cmp1, 'Example 1 value is set');
           assert.equal(ex1.raw.indexOf('\n      error: false'), 0, 'Example 1 raw is set');
           const ex2 = result[0].values[1];
           assert.isFalse(ex2.hasRaw, 'Example 2 hasRaw is false');
@@ -1793,6 +1840,38 @@
             assert.typeOf(data[item[0]], item[1], 'Data type matches');
             assert.equal(data[item[0]], item[2], 'Value matches');
           });
+        });
+      });
+    });
+  });
+
+  suite('Falsy data types', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true]
+    ].forEach((setupItem) => {
+      suite(setupItem[0], () => {
+        let element;
+        let amf;
+
+        suiteSetup(() => {
+          return AmfLoader.load(setupItem[1], 'APIC-188')
+          .then((model) => {
+            amf = model;
+          });
+        });
+
+        setup(() => {
+          element = fixture('Basic');
+          element.amfModel = amf;
+        });
+
+        test('False example is computed', () => {
+          const payloads = getPayload(element, amf, '/record', 'post');
+          const result = element.generatePayloadsExamples(payloads, 'application/json');
+          const data = JSON.parse(result[0].value);
+          assert.isFalse(data.allOrNone);
+          assert.typeOf(data.records, 'array');
         });
       });
     });
