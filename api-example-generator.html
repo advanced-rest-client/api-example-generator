@@ -740,8 +740,11 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       if (range instanceof Array) {
         range = range[0];
       }
-      const value = this._computeJsonProperyValue(range);
-      result[name] = value || '';
+      let value = this._computeJsonProperyValue(range);
+      if (value === undefined) {
+        value = '';
+      }
+      result[name] = value;
     }
     return result;
   }
@@ -764,6 +767,9 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
       return this._computeJsonArrayValue(range);
     }
+    if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'NilShape')) {
+      return null;
+    }
   }
   _computeJsonScalarValue(range) {
     let value = this._getTypeScalarValue(range);
@@ -777,6 +783,10 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     if (prefix !== this.ns.w3.xmlSchema) {
       prefix += ':';
     }
+    let ramlPrefix = this._getAmfKey(this.ns.raml.vocabularies.shapes);
+    if (ramlPrefix !== this.ns.raml.vocabularies.shapes) {
+      ramlPrefix += ':';
+    }
     const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
     let dt = range[dtKey];
     if (!dt) {
@@ -787,15 +797,37 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     }
     switch (dt['@id']) {
       case prefix + 'boolean':
+      case ramlPrefix + 'boolean':
       case this.ns.w3.xmlSchema + 'boolean':
+      case this.ns.raml.vocabularies.shapes + 'boolean':
         if (value !== undefined) {
           return value === 'true' ? true : false;
         }
         return value;
       case prefix + 'integer':
+      case ramlPrefix + 'integer':
       case this.ns.w3.xmlSchema + 'integer':
+      case this.ns.raml.vocabularies.shapes + 'integer':
+
       case prefix + 'number':
       case this.ns.w3.xmlSchema + 'number':
+      case ramlPrefix + 'number':
+      case this.ns.raml.vocabularies.shapes + 'number':
+
+      case prefix + 'long':
+      case this.ns.w3.xmlSchema + 'long':
+      case ramlPrefix + 'long':
+      case this.ns.raml.vocabularies.shapes + 'long':
+
+      case prefix + 'double':
+      case this.ns.w3.xmlSchema + 'double':
+      case ramlPrefix + 'double':
+      case this.ns.raml.vocabularies.shapes + 'double':
+
+      case prefix + 'float':
+      case this.ns.w3.xmlSchema + 'float':
+      case ramlPrefix + 'float':
+      case this.ns.raml.vocabularies.shapes + 'float':
         if (value) {
           if (isNaN(value)) {
             return 0;

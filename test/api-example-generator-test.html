@@ -1746,6 +1746,57 @@
       });
     });
   });
+
+  suite('Data types examples', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true]
+    ].forEach((setupItem) => {
+      suite(setupItem[0], () => {
+        let element;
+        let amf;
+
+        suiteSetup(() => {
+          return AmfLoader.load(setupItem[1])
+          .then((model) => {
+            amf = model;
+          });
+        });
+
+        setup(() => {
+          element = fixture('Basic');
+          element.amfModel = amf;
+        });
+
+        [
+          ['typeString', 'string', 'String example'],
+          ['typeNumber', 'number', 123456],
+          ['typeInt', 'number', 1234546],
+          ['typeDecimal', 'number', 10.67],
+          ['typeBool', 'boolean', true],
+          ['typeNull', 'null', null],
+          ['typeNegativeInt', 'number', -12],
+          ['typeNumberFormatInt64', 'number', 8],
+          ['typeIntFormatInt8', 'number', 12],
+          ['typeNumFormatInt32', 'number', 109298],
+          ['typeNumFormatInt', 'number', 11],
+          ['typeNumFormatLong', 'number', 123456789],
+          ['typeNumFormatFloat', 'number', 1234567.89],
+          ['typeNumFormatDouble', 'number', 1234.56789],
+          ['typeNumFormatInt8', 'number', 1],
+          ['typeNumFormatInt16', 'number', 2]
+        ].forEach((item) => {
+          test(`Returns ${item[1]} type (${item[0]})`, () => {
+            const shape = getType(element, amf, 'DataTypesExample');
+            const result = element.computeExamples(shape, 'application/json');
+            const data = JSON.parse(result[0].value);
+            assert.typeOf(data[item[0]], item[1], 'Data type matches');
+            assert.equal(data[item[0]], item[2], 'Value matches');
+          });
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

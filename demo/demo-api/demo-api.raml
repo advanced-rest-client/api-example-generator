@@ -132,6 +132,74 @@ types:
       lastName: string
       position: string
       deskNumber: string
+  DataTypesExample:
+    type: object
+    properties:
+      typeString:
+        type: string
+        example: String example
+      typeNumber:
+        type: number
+        example: 123456
+      typeInt:
+        type: integer
+        example: 1234546
+      typeDecimal:
+        type: number
+        multipleOf: 0.01
+        example: 10.67
+      typeBool:
+        type: boolean
+        example: true
+      typeNull:
+        type: nil
+        example: null
+      typeNegativeInt:
+        type: integer
+        example: -12
+      typeNumberFormatInt64:
+        type: number
+        minimum: 3
+        maximum: 5
+        format: int64
+        multipleOf: 4
+        example: 8
+      typeNumFormatInt32:
+        type: number
+        format: int32
+        example: 109298
+      typeNumFormatInt:
+        type: number
+        format: int
+        example: 11
+      typeNumFormatLong:
+        type: number
+        format: long
+        example: 123456789
+      typeNumFormatFloat:
+        type: number
+        format: float
+        example: 1234567.89
+      typeNumFormatDouble:
+        type: number
+        format: double
+        example: 1234.56789
+      typeNumFormatInt8:
+        type: number
+        format: int8
+        example: 1
+      typeNumFormatInt16:
+        type: number
+        format: int16
+        example: 2
+      typeIntFormatInt8:
+        type: integer
+        minimum: 3
+        maximum: 5
+        format: int8
+        multipleOf: 1
+        example: 12
+
 /IncludedInType:
   post:
     body:
@@ -333,3 +401,8 @@ types:
       application/json:
         type: Employee
         example: !include examples/employee.raml
+/data-types:
+  post:
+    body:
+      application/json:
+        type: DataTypesExample
