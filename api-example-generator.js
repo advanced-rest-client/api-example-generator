@@ -1,6 +1,5 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../amf-helper-mixin/amf-helper-mixin.html">
-<script>
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 /**
  * `api-example-generator`
  *
@@ -61,9 +60,9 @@
  * @polymer
  * @demo demo/index.html
  * @memberof ApiElements
- * @appliesMixin ApiElements.AmfHelperMixin
+ * @appliesMixin AmfHelperMixin
  */
-class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
+export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
   /**
    * @type {String}
    */
@@ -1214,4 +1213,3 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   }
 }
 window.customElements.define(ApiExampleGenerator.is, ApiExampleGenerator);
-</script>

@@ -1,30 +1,54 @@
 {
-  "name": "@api-components/api-example-generator",
   "description": "Examples generator from AMF model",
-  "version": "2.1.5",
+  "keywords": [
+    "api-components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/advanced-rest-client/api-example-generator.git"
+  },
+  "name": "@api-components/api-example-generator",
+  "version": "3.0.0-preview.1",
   "license": "Apache-2.0",
-  "main": "api-example-generator.html",
+  "main": "api-example-generator.js",
   "authors": [
     "Pawel Psztyc",
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "devDependencies": {
     "@api-components/api-model-generator": "^0.1.10",
-    "@polymer/gen-typescript-declarations": "^1.6.1"
+    "@api-components/api-navigation": "^3.0.0-preview.1",
+    "@polymer/gen-typescript-declarations": "^1.6.1",
+    "@polymer/iron-demo-helpers": "^3.0.0",
+    "@polymer/iron-component-page": "^4.0.0",
+    "@polymer/iron-test-helpers": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@polymer/paper-dropdown-menu": "^3.0.0",
+    "@polymer/paper-listbox": "^3.0.0",
+    "@polymer/paper-item": "^3.0.0",
+    "@polymer/paper-checkbox": "^3.0.0",
+    "web-animations-js": "^2.3.1",
+    "@polymer/test-fixture": "^4.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.3",
+    "wct-mocha": "^1.0.0"
   },
-  "private": false,
   "scripts": {
     "lint": "polymer lint api-example-generator.html",
     "test-sauce": "polymer test --plugin sauce --job-name \"api-example-generator:local-test\"",
     "test": "polymer test --plugin local",
     "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/advanced-rest-client/api-example-generator.git"
-  },
   "bugs": {
     "url": "https://github.com/advanced-rest-client/api-example-generator/issues",
     "email": "arc@mulesoft.com"
+  },
+  "contributors": [
+    "Pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0"
   }
 }
