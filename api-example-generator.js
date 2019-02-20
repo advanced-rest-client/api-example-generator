@@ -638,24 +638,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
     if (dt instanceof Array) {
       dt = dt[0];
     }
-    let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
-    if (prefix !== this.ns.w3.xmlSchema) {
-      prefix += ':';
-    }
-    switch (dt) {
-      case prefix + 'boolean':
-      case this.ns.w3.xmlSchema + 'boolean':
-        return value === 'true' ? true : false;
-      case prefix + 'integer':
-      case this.ns.w3.xmlSchema + 'integer':
-      case prefix + 'number':
-      case this.ns.w3.xmlSchema + 'number':
-        if (isNaN(value)) {
-          return 0;
-        }
-        return Number(value);
-      default: return value;
-    }
+    return this._typeToValue(value, dt);
   }
   /**
    * Creates a example structure for the JSON schema.
@@ -779,14 +762,6 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
       // editor.
       // this._computeScalarType(range);
     }
-    let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
-    if (prefix !== this.ns.w3.xmlSchema) {
-      prefix += ':';
-    }
-    let ramlPrefix = this._getAmfKey(this.ns.raml.vocabularies.shapes);
-    if (ramlPrefix !== this.ns.raml.vocabularies.shapes) {
-      ramlPrefix += ':';
-    }
     const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
     let dt = range[dtKey];
     if (!dt) {
@@ -795,7 +770,24 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
     if (dt instanceof Array) {
       dt = dt[0];
     }
-    switch (dt['@id']) {
+    return this._typeToValue(value, dt['@id']);
+  }
+  /**
+   * Casts the value to given data type represented in AMF notation.
+   * @param {String} value Value encoded in AMF
+   * @param {String} type AMF data type
+   * @return {String|Number|Boolean} Casted value.
+   */
+  _typeToValue(value, type) {
+    let prefix = this._getAmfKey(this.ns.w3.xmlSchema);
+    if (prefix !== this.ns.w3.xmlSchema) {
+      prefix += ':';
+    }
+    let ramlPrefix = this._getAmfKey(this.ns.raml.vocabularies.shapes);
+    if (ramlPrefix !== this.ns.raml.vocabularies.shapes) {
+      ramlPrefix += ':';
+    }
+    switch (type) {
       case prefix + 'boolean':
       case ramlPrefix + 'boolean':
       case this.ns.w3.xmlSchema + 'boolean':

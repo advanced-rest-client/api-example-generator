@@ -1850,6 +1850,50 @@ suite('Data types examples', () => {
   });
 });
 
+suite('Data types - APIC-187', () => {
+  [
+    ['json+ld data model', false],
+    ['Compact data model', true]
+  ].forEach((setupItem) => {
+    suite(setupItem[0], () => {
+      let element;
+      let amf;
+
+      suiteSetup(() => {
+        return AmfLoader.load(setupItem[1], 'APIC-187')
+        .then((model) => {
+          amf = model;
+        });
+      });
+
+      setup(() => {
+        element = fixture('Basic');
+        element.amfModel = amf;
+      });
+
+      [
+        ['AS400CityName', 'string', 'Omaha, DG'],
+        ['AS400ECM', 'number', 401571.6],
+        ['AcquiredDate', 'string', '2019-01-16'],
+        ['Age', 'number', 1],
+        ['TransmissionRearRearSN', 'string', '1'],
+        ['TransmissionRearRatio', 'number', 1],
+        ['Weight', 'number', 9300],
+        ['Year', 'string', '2016']
+
+      ].forEach((item) => {
+        test(`Returns ${item[1]} type (${item[0]})`, () => {
+          const shape = getType(element, amf, 'recordCreateRequest');
+          const result = element.computeExamples(shape, 'application/json');
+          const data = JSON.parse(result[0].value);
+          assert.typeOf(data.records[0][item[0]], item[1], 'Data type matches');
+          assert.equal(data.records[0][item[0]], item[2], 'Value matches');
+        });
+      });
+    });
+  });
+});
+
 suite('Falsy data types', () => {
   [
     ['json+ld data model', false],
