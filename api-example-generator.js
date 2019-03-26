@@ -1,5 +1,5 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {AmfHelperMixin} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
 /**
  * `api-example-generator`
  *
