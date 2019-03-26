@@ -48,7 +48,7 @@
         }
       ]
     },
-    "istanbul": {
+    "@advanced-rest-client/wct-istanbub": {
       "dir": "./coverage",
       "reporters": [
         "text-summary",
