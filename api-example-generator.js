@@ -270,6 +270,16 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
    * @return {Array<Object>|undefined}
    */
   _computeFromExamples(examples, mime, opts) {
+    if (examples.length === 1 && this._hasType(examples[0], this.ns.raml.vocabularies.document + 'NamedExamples')) {
+      // In AMF 4 the examples model changes from being an array of examples
+      // to an object that contains an array of examples.
+      // This extracts the array of examples back to the `examples` variable.
+      const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+      examples = this._ensureArray(examples[0][key]);
+      if (!examples) {
+        return;
+      }
+    }
     examples = this._listTypeExamples(examples, opts.typeId);
     if (!examples) {
       return;
