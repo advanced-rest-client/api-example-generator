@@ -26401,6 +26401,18 @@
 "@value": "[(9,4)-(12,0)]"
 }
 ]
+},
+{
+"http://a.ml/vocabularies/document-source-maps#element": [
+{
+"@value": "amf://id#439"
+}
+],
+"http://a.ml/vocabularies/document-source-maps#value": [
+{
+"@value": "[(9,0)-(12,0)]"
+}
+]
 }
 ]
 }
