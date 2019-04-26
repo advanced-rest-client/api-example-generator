@@ -1253,14 +1253,21 @@
           element.amfModel = amf;
         });
 
-        test('Returns undefined whjen no structure', () => {
+        test('Returns undefined when no structure', () => {
           const result = element._jsonFromStructure();
           assert.isUndefined(result);
         });
 
         function getStructuredValue(element, type) {
           const key = element._getAmfKey(element.ns.raml.vocabularies.document + 'examples');
-          const example = element._ensureArray(type[key])[0];
+          let example = element._ensureArray(type[key])[0];
+          if (element._hasType(example, element.ns.raml.vocabularies.document + 'NamedExamples')) {
+            const key = element._getAmfKey(element.ns.raml.vocabularies.document + 'examples');
+            example = example[key];
+            if (example instanceof Array) {
+              example = example[0];
+            }
+          }
           const svKey = element._getAmfKey(element.ns.raml.vocabularies.document + 'structuredValue');
           return element._ensureArray(example[svKey])[0];
         }

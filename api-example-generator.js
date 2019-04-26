@@ -917,6 +917,20 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
     }
     return result;
   }
+
+  _extractExampleRawValue(example) {
+    if (example instanceof Array) {
+      example = example[0];
+    }
+    if (this._hasType(example, this.ns.raml.vocabularies.document + 'NamedExamples')) {
+      const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+      example = example[key];
+      if (example instanceof Array) {
+        example = example[0];
+      }
+    }
+    return this._getValue(example, this.ns.w3.shacl.name + 'raw');
+  }
   /**
    * Gets a value from a Range shape for a scalar value.
    * @param {Object} range AMF's range model.
@@ -934,10 +948,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
     const rKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
     let ex = range[rKey];
     if (ex) {
-      if (ex instanceof Array) {
-        ex = ex[0];
-      }
-      return this._getValue(ex, this.ns.w3.shacl.name + 'raw');
+      return this._extractExampleRawValue(ex);
     }
   }
   /**
@@ -1082,10 +1093,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
       const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
       let example = range[eKey];
       if (example) {
-        if (example instanceof Array) {
-          example = example[0];
-        }
-        nodeValue = this._getValue(example, this.ns.w3.shacl.name + 'raw');
+        nodeValue = this._extractExampleRawValue(example);
       }
     }
     if (!nodeValue) {
