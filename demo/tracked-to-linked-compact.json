@@ -9,7 +9,7 @@
 ],
 "doc:encodes": [
 {
-"@id": "#21",
+"@id": "#27",
 "@type": [
 "schema-org:WebAPI",
 "doc:RootDomainElement",
@@ -22,7 +22,7 @@
 ],
 "raml-http:endpoint": [
 {
-"@id": "#22",
+"@id": "#28",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -34,7 +34,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#23",
+"@id": "#29",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -46,14 +46,14 @@
 ],
 "hydra:expects": [
 {
-"@id": "#24",
+"@id": "#30",
 "@type": [
 "raml-http:Request",
 "doc:DomainElement"
 ],
 "raml-http:payload": [
 {
-"@id": "#25",
+"@id": "#18",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -65,7 +65,7 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#26/linked_2",
+"@id": "#31/linked_2",
 "@type": [
 "raml-shapes:ArrayShape",
 "shacl:Shape",
@@ -74,7 +74,7 @@
 ],
 "doc:link-target": [
 {
-"@id": "#26"
+"@id": "#31"
 }
 ],
 "doc:link-label": [
@@ -86,7 +86,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#25/source-map",
+"@id": "#18/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -94,214 +94,12 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#25"
+"@value": "amf://id#18"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(12,6)-(15,0)]"
-}
-]
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#23/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#23"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(10,2)-(15,0)]"
-}
-]
-}
-]
-}
-]
-},
-{
-"@id": "#27",
-"@type": [
-"hydra:Operation",
-"doc:DomainElement"
-],
-"hydra:method": [
-{
-"@value": "post"
-}
-],
-"hydra:expects": [
-{
-"@id": "#28",
-"@type": [
-"raml-http:Request",
-"doc:DomainElement"
-],
-"raml-http:payload": [
-{
-"@id": "#29",
-"@type": [
-"raml-http:Payload",
-"doc:DomainElement"
-],
-"raml-http:mediaType": [
-{
-"@value": "application/json"
-}
-],
-"raml-http:schema": [
-{
-"@id": "#20/linked_5",
-"@type": [
-"shacl:NodeShape",
-"shacl:Shape",
-"raml-shapes:Shape",
-"doc:DomainElement"
-],
-"doc:link-target": [
-{
-"@id": "#20"
-}
-],
-"doc:link-label": [
-{
-"@value": "Employee"
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#29/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#29"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(17,6)-(20,0)]"
-}
-]
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#27/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#27"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(15,2)-(20,0)]"
-}
-]
-}
-]
-}
-]
-},
-{
-"@id": "#30",
-"@type": [
-"hydra:Operation",
-"doc:DomainElement"
-],
-"hydra:method": [
-{
-"@value": "delete"
-}
-],
-"hydra:expects": [
-{
-"@id": "#31",
-"@type": [
-"raml-http:Request",
-"doc:DomainElement"
-],
-"raml-http:payload": [
-{
-"@id": "#32",
-"@type": [
-"raml-http:Payload",
-"doc:DomainElement"
-],
-"raml-http:mediaType": [
-{
-"@value": "application/json"
-}
-],
-"raml-http:schema": [
-{
-"@id": "#20/linked_6",
-"@type": [
-"shacl:NodeShape",
-"shacl:Shape",
-"raml-shapes:Shape",
-"doc:DomainElement"
-],
-"doc:link-target": [
-{
-"@id": "#20"
-}
-],
-"doc:link-label": [
-{
-"@value": "Employee"
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#32/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#32"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,6)-(25,0)]"
-}
-]
 }
 ]
 }
@@ -325,7 +123,31 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(20,2)-(25,0)]"
+"@value": "[(11,0)-(15,0)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#29/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#29"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(10,2)-(15,0)]"
 }
 ]
 }
@@ -341,7 +163,7 @@
 ],
 "hydra:method": [
 {
-"@value": "head"
+"@value": "post"
 }
 ],
 "hydra:expects": [
@@ -353,19 +175,19 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#5",
+"@id": "#7",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
 ],
 "raml-http:mediaType": [
 {
-"@value": "application/xml"
+"@value": "application/json"
 }
 ],
 "raml-http:schema": [
 {
-"@id": "#20/linked_7",
+"@id": "#25/linked_5",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -374,7 +196,7 @@
 ],
 "doc:link-target": [
 {
-"@id": "#20"
+"@id": "#25"
 }
 ],
 "doc:link-label": [
@@ -386,7 +208,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#5/source-map",
+"@id": "#7/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -394,14 +216,36 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#5"
+"@value": "amf://id#7"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "[(26,4)-(28,47)]"
+"@value": "[(17,6)-(20,0)]"
 }
 ]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#34/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#34"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(16,0)-(20,0)]"
 }
 ]
 }
@@ -425,6 +269,250 @@
 ],
 "sourcemaps:value": [
 {
+"@value": "[(15,2)-(20,0)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#35",
+"@type": [
+"hydra:Operation",
+"doc:DomainElement"
+],
+"hydra:method": [
+{
+"@value": "delete"
+}
+],
+"hydra:expects": [
+{
+"@id": "#36",
+"@type": [
+"raml-http:Request",
+"doc:DomainElement"
+],
+"raml-http:payload": [
+{
+"@id": "#6",
+"@type": [
+"raml-http:Payload",
+"doc:DomainElement"
+],
+"raml-http:mediaType": [
+{
+"@value": "application/json"
+}
+],
+"raml-http:schema": [
+{
+"@id": "#25/linked_6",
+"@type": [
+"shacl:NodeShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"doc:link-target": [
+{
+"@id": "#25"
+}
+],
+"doc:link-label": [
+{
+"@value": "Employee"
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#6/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#6"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,6)-(25,0)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#36/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#36"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(21,0)-(25,0)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#35/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#35"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(20,2)-(25,0)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#37",
+"@type": [
+"hydra:Operation",
+"doc:DomainElement"
+],
+"hydra:method": [
+{
+"@value": "head"
+}
+],
+"hydra:expects": [
+{
+"@id": "#38",
+"@type": [
+"raml-http:Request",
+"doc:DomainElement"
+],
+"raml-http:payload": [
+{
+"@id": "#8",
+"@type": [
+"raml-http:Payload",
+"doc:DomainElement"
+],
+"raml-http:mediaType": [
+{
+"@value": "application/xml"
+}
+],
+"raml-http:schema": [
+{
+"@id": "#25/linked_7",
+"@type": [
+"shacl:NodeShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"doc:link-target": [
+{
+"@id": "#25"
+}
+],
+"doc:link-label": [
+{
+"@value": "Employee"
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#8/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#8"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(26,4)-(28,47)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#38/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#38"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(26,0)-(28,47)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#37/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#37"
+}
+],
+"sourcemaps:value": [
+{
 "@value": "[(25,2)-(28,47)]"
 }
 ]
@@ -436,7 +524,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#22/source-map",
+"@id": "#28/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -444,7 +532,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#22"
+"@value": "amf://id#28"
 }
 ],
 "sourcemaps:value": [
@@ -460,7 +548,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#21/source-map",
+"@id": "#27/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -468,7 +556,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#21"
+"@value": "amf://id#27"
 }
 ],
 "sourcemaps:value": [
@@ -494,7 +582,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#21"
+"@value": "amf://id#27"
 }
 ],
 "sourcemaps:value": [
@@ -520,6 +608,13 @@
 {
 "@id": "#2",
 "@type": [
+"doc:NamedExamples",
+"doc:DomainElement"
+],
+"doc:examples": [
+{
+"@id": "#3",
+"@type": [
 "doc:Example",
 "doc:DomainElement"
 ],
@@ -535,56 +630,24 @@
 ],
 "doc:structuredValue": [
 {
-"@id": "#2",
+"@id": "#3",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:id": [
 {
-"@id": "#3",
+"@id": "#4",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
 "@value": "1",
 "@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#3/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#3"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(3,6)-(3,7)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:name": [
-{
-"@id": "#4",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Jhon",
-"@type": "xsd:string"
 }
 ],
 "sourcemaps:sources": [
@@ -602,6 +665,44 @@
 ],
 "sourcemaps:value": [
 {
+"@value": "[(3,6)-(3,7)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"data:name": [
+{
+"@id": "#5",
+"@type": [
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
+],
+"data:value": [
+{
+"@value": "Jhon",
+"@type": "xsd:string"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#5/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#5"
+}
+],
+"sourcemaps:value": [
+{
 "@value": "[(4,8)-(4,14)]"
 }
 ]
@@ -613,7 +714,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#2/source-map",
+"@id": "#3/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -621,12 +722,36 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "data:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(4,8)-(4,14)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(3,0)-(4,14)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:id"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(3,6)-(3,7)]"
 }
 ]
 }
@@ -635,7 +760,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
@@ -656,7 +781,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#2/source-map",
+"@id": "#3/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -670,20 +795,6 @@
 "sourcemaps:value": [
 {
 "@value": "true"
-}
-]
-}
-],
-"sourcemaps:source-vendor": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#2"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "RAML 1.0"
 }
 ]
 }
@@ -704,7 +815,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
@@ -730,7 +841,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
@@ -744,12 +855,50 @@
 {
 "sourcemaps:element": [
 {
+"@value": "amf://id#3"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "amf://id#6,amf://id#7,amf://id#8"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#2/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:source-vendor": [
+{
+"sourcemaps:element": [
+{
 "@value": "amf://id#2"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "amf://id#5"
+"@value": "RAML 1.0"
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#2"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(2,0)-(4,14)]"
 }
 ]
 }
@@ -782,7 +931,7 @@
 ]
 },
 {
-"@id": "#6",
+"@id": "#9",
 "@type": [
 "doc:NamedExample",
 "doc:Fragment",
@@ -790,7 +939,14 @@
 ],
 "doc:encodes": [
 {
-"@id": "#7",
+"@id": "#10",
+"@type": [
+"doc:NamedExamples",
+"doc:DomainElement"
+],
+"doc:examples": [
+{
+"@id": "#11",
 "@type": [
 "doc:Example",
 "doc:DomainElement"
@@ -807,177 +963,33 @@
 ],
 "doc:structuredValue": [
 {
-"@id": "#7",
+"@id": "#11",
 "@type": [
 "data:Array",
-"rdf:Seq"
+"rdf:Seq",
+"data:Node",
+"doc:DomainElement"
 ],
 "rdf:member": [
 {
-"@id": "#8",
+"@id": "#12",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:id": [
 {
-"@id": "#9",
+"@id": "#13",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
 "@value": "1",
 "@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#9/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#9"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(4,8)-(4,9)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:name": [
-{
-"@id": "#10",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Jhon",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#10/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#10"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(5,10)-(5,14)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#8/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#8"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "name->[(5,4)-(6,0)]#id->[(4,4)-(5,0)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#8"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(4,0)-(6,0)]"
-}
-]
-}
-]
-}
-]
-},
-{
-"@id": "#11",
-"@type": [
-"data:Object"
-],
-"data:id": [
-{
-"@id": "#12",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#12/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#12"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(7,8)-(7,9)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:name": [
-{
-"@id": "#13",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Sam",
-"@type": "xsd:string"
 }
 ],
 "sourcemaps:sources": [
@@ -995,6 +1007,188 @@
 ],
 "sourcemaps:value": [
 {
+"@value": "[(4,8)-(4,9)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"data:name": [
+{
+"@id": "#14",
+"@type": [
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
+],
+"data:value": [
+{
+"@value": "Jhon",
+"@type": "xsd:string"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#14/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#14"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(5,10)-(5,14)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#12/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:data-node-properties": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#12"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "name->[(5,4)-(6,0)]#id->[(4,4)-(5,0)]"
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "data:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(5,10)-(5,14)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#12"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(4,0)-(6,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:id"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(4,8)-(4,9)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#15",
+"@type": [
+"data:Object",
+"data:Node",
+"doc:DomainElement"
+],
+"data:id": [
+{
+"@id": "#16",
+"@type": [
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
+],
+"data:value": [
+{
+"@value": "2",
+"@type": "xsd:integer"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#16/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#16"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(7,8)-(7,9)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"data:name": [
+{
+"@id": "#17",
+"@type": [
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
+],
+"data:value": [
+{
+"@value": "Sam",
+"@type": "xsd:string"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#17/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#17"
+}
+],
+"sourcemaps:value": [
+{
 "@value": "[(8,10)-(8,13)]"
 }
 ]
@@ -1006,7 +1200,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#11/source-map",
+"@id": "#15/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1014,7 +1208,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#11"
+"@value": "amf://id#15"
 }
 ],
 "sourcemaps:value": [
@@ -1028,12 +1222,36 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#11"
+"@value": "data:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(8,10)-(8,13)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#15"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(7,0)-(8,13)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:id"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(7,8)-(7,9)]"
 }
 ]
 }
@@ -1044,17 +1262,17 @@
 ],
 "data:pos0": [
 {
-"@id": "#8"
+"@id": "#12"
 }
 ],
 "data:pos1": [
 {
-"@id": "#11"
+"@id": "#15"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#7/source-map",
+"@id": "#11/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1062,7 +1280,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#7"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
@@ -1083,7 +1301,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#7/source-map",
+"@id": "#11/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1097,20 +1315,6 @@
 "sourcemaps:value": [
 {
 "@value": "true"
-}
-]
-}
-],
-"sourcemaps:source-vendor": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#7"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "RAML 1.0"
 }
 ]
 }
@@ -1131,7 +1335,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#7"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
@@ -1157,12 +1361,26 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#7"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": ""
+}
+]
+}
+],
+"sourcemaps:tracked-element": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#11"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "amf://id#18"
 }
 ]
 }
@@ -1173,7 +1391,45 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#6/source-map",
+"@id": "#10/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:source-vendor": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#10"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "RAML 1.0"
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#10"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(2,0)-(8,13)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#9/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1181,7 +1437,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#6"
+"@value": "amf://id#9"
 }
 ],
 "sourcemaps:value": [
@@ -1195,7 +1451,7 @@
 ]
 },
 {
-"@id": "#14",
+"@id": "#19",
 "@type": [
 "doc:DataType",
 "doc:Fragment",
@@ -1203,7 +1459,7 @@
 ],
 "doc:encodes": [
 {
-"@id": "#15",
+"@id": "#20",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -1217,7 +1473,7 @@
 ],
 "shacl:property": [
 {
-"@id": "#16",
+"@id": "#21",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -1230,7 +1486,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#17",
+"@id": "#22",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -1249,7 +1505,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#17/source-map",
+"@id": "#22/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1257,7 +1513,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#17"
+"@value": "amf://id#22"
 }
 ],
 "sourcemaps:value": [
@@ -1283,7 +1539,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#16/source-map",
+"@id": "#21/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1291,7 +1547,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#16"
+"@value": "amf://id#21"
 }
 ],
 "sourcemaps:value": [
@@ -1305,7 +1561,7 @@
 ]
 },
 {
-"@id": "#18",
+"@id": "#23",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -1318,7 +1574,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#19",
+"@id": "#24",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -1337,7 +1593,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#19/source-map",
+"@id": "#24/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1345,7 +1601,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#19"
+"@value": "amf://id#24"
 }
 ],
 "sourcemaps:value": [
@@ -1371,7 +1627,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#18/source-map",
+"@id": "#23/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1379,7 +1635,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#18"
+"@value": "amf://id#23"
 }
 ],
 "sourcemaps:value": [
@@ -1400,7 +1656,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#15/source-map",
+"@id": "#20/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1408,7 +1664,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#15"
+"@value": "amf://id#20"
 }
 ],
 "sourcemaps:value": [
@@ -1422,7 +1678,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#15"
+"@value": "amf://id#20"
 }
 ],
 "sourcemaps:value": [
@@ -1436,7 +1692,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#15"
+"@value": "amf://id#20"
 }
 ],
 "sourcemaps:value": [
@@ -1452,7 +1708,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#14/source-map",
+"@id": "#19/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1460,7 +1716,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#14"
+"@value": "amf://id#19"
 }
 ],
 "sourcemaps:value": [
@@ -1476,7 +1732,7 @@
 ],
 "doc:declares": [
 {
-"@id": "#20",
+"@id": "#25",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -1490,7 +1746,7 @@
 ],
 "shacl:property": [
 {
-"@id": "#16",
+"@id": "#21",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -1503,7 +1759,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#17",
+"@id": "#22",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -1522,7 +1778,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#17/source-map",
+"@id": "#22/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1530,7 +1786,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#17"
+"@value": "amf://id#22"
 }
 ],
 "sourcemaps:value": [
@@ -1556,7 +1812,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#16/source-map",
+"@id": "#21/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1564,7 +1820,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#16"
+"@value": "amf://id#21"
 }
 ],
 "sourcemaps:value": [
@@ -1578,7 +1834,7 @@
 ]
 },
 {
-"@id": "#18",
+"@id": "#23",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -1591,7 +1847,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#19",
+"@id": "#24",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -1610,7 +1866,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#19/source-map",
+"@id": "#24/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1618,7 +1874,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#19"
+"@value": "amf://id#24"
 }
 ],
 "sourcemaps:value": [
@@ -1644,7 +1900,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#18/source-map",
+"@id": "#23/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1652,7 +1908,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#18"
+"@value": "amf://id#23"
 }
 ],
 "sourcemaps:value": [
@@ -1673,7 +1929,14 @@
 ],
 "doc:examples": [
 {
-"@id": "#2",
+"@id": "#26",
+"@type": [
+"doc:NamedExamples",
+"doc:DomainElement"
+],
+"doc:examples": [
+{
+"@id": "#3",
 "@type": [
 "doc:Example",
 "doc:DomainElement"
@@ -1690,56 +1953,24 @@
 ],
 "doc:structuredValue": [
 {
-"@id": "#2",
+"@id": "#3",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:id": [
 {
-"@id": "#3",
+"@id": "#4",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
 "@value": "1",
 "@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#3/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#3"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(3,6)-(3,7)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:name": [
-{
-"@id": "#4",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Jhon",
-"@type": "xsd:string"
 }
 ],
 "sourcemaps:sources": [
@@ -1757,6 +1988,44 @@
 ],
 "sourcemaps:value": [
 {
+"@value": "[(3,6)-(3,7)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"data:name": [
+{
+"@id": "#5",
+"@type": [
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
+],
+"data:value": [
+{
+"@value": "Jhon",
+"@type": "xsd:string"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#5/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#5"
+}
+],
+"sourcemaps:value": [
+{
 "@value": "[(4,8)-(4,14)]"
 }
 ]
@@ -1768,7 +2037,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#2/source-map",
+"@id": "#3/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1776,12 +2045,36 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "data:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(4,8)-(4,14)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(3,0)-(4,14)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:id"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(3,6)-(3,7)]"
 }
 ]
 }
@@ -1790,7 +2083,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
@@ -1811,7 +2104,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#2/source-map",
+"@id": "#3/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1825,20 +2118,6 @@
 "sourcemaps:value": [
 {
 "@value": "true"
-}
-]
-}
-],
-"sourcemaps:source-vendor": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#2"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "RAML 1.0"
 }
 ]
 }
@@ -1859,7 +2138,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
@@ -1885,7 +2164,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
@@ -1899,12 +2178,14 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "amf://id#5"
+"@value": "amf://id#6,amf://id#7,amf://id#8"
+}
+]
 }
 ]
 }
@@ -1915,7 +2196,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#20/source-map",
+"@id": "#25/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1923,7 +2204,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#20"
+"@value": "amf://id#25"
 }
 ],
 "sourcemaps:value": [
@@ -1937,7 +2218,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#20"
+"@value": "amf://id#25"
 }
 ],
 "sourcemaps:value": [
@@ -1951,7 +2232,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#20"
+"@value": "amf://id#25"
 }
 ],
 "sourcemaps:value": [
@@ -1965,7 +2246,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#20"
+"@value": "amf://id#25"
 }
 ],
 "sourcemaps:value": [
@@ -1979,7 +2260,7 @@
 ]
 },
 {
-"@id": "#26",
+"@id": "#31",
 "@type": [
 "raml-shapes:ArrayShape",
 "shacl:Shape",
@@ -1988,7 +2269,7 @@
 ],
 "raml-shapes:items": [
 {
-"@id": "#20/linked_8",
+"@id": "#25/linked_8",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -1997,7 +2278,7 @@
 ],
 "doc:link-target": [
 {
-"@id": "#20"
+"@id": "#25"
 }
 ],
 "doc:link-label": [
@@ -2014,7 +2295,14 @@
 ],
 "doc:examples": [
 {
-"@id": "#7",
+"@id": "#32",
+"@type": [
+"doc:NamedExamples",
+"doc:DomainElement"
+],
+"doc:examples": [
+{
+"@id": "#11",
 "@type": [
 "doc:Example",
 "doc:DomainElement"
@@ -2031,177 +2319,33 @@
 ],
 "doc:structuredValue": [
 {
-"@id": "#7",
+"@id": "#11",
 "@type": [
 "data:Array",
-"rdf:Seq"
+"rdf:Seq",
+"data:Node",
+"doc:DomainElement"
 ],
 "rdf:member": [
 {
-"@id": "#8",
+"@id": "#12",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:id": [
 {
-"@id": "#9",
+"@id": "#13",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
 "@value": "1",
 "@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#9/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#9"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(4,8)-(4,9)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:name": [
-{
-"@id": "#10",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Jhon",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#10/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#10"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(5,10)-(5,14)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#8/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#8"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "name->[(5,4)-(6,0)]#id->[(4,4)-(5,0)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#8"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(4,0)-(6,0)]"
-}
-]
-}
-]
-}
-]
-},
-{
-"@id": "#11",
-"@type": [
-"data:Object"
-],
-"data:id": [
-{
-"@id": "#12",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#12/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#12"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(7,8)-(7,9)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:name": [
-{
-"@id": "#13",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Sam",
-"@type": "xsd:string"
 }
 ],
 "sourcemaps:sources": [
@@ -2219,6 +2363,188 @@
 ],
 "sourcemaps:value": [
 {
+"@value": "[(4,8)-(4,9)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"data:name": [
+{
+"@id": "#14",
+"@type": [
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
+],
+"data:value": [
+{
+"@value": "Jhon",
+"@type": "xsd:string"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#14/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#14"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(5,10)-(5,14)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#12/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:data-node-properties": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#12"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "name->[(5,4)-(6,0)]#id->[(4,4)-(5,0)]"
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "data:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(5,10)-(5,14)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#12"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(4,0)-(6,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:id"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(4,8)-(4,9)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#15",
+"@type": [
+"data:Object",
+"data:Node",
+"doc:DomainElement"
+],
+"data:id": [
+{
+"@id": "#16",
+"@type": [
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
+],
+"data:value": [
+{
+"@value": "2",
+"@type": "xsd:integer"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#16/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#16"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(7,8)-(7,9)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"data:name": [
+{
+"@id": "#17",
+"@type": [
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
+],
+"data:value": [
+{
+"@value": "Sam",
+"@type": "xsd:string"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#17/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#17"
+}
+],
+"sourcemaps:value": [
+{
 "@value": "[(8,10)-(8,13)]"
 }
 ]
@@ -2230,7 +2556,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#11/source-map",
+"@id": "#15/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2238,7 +2564,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#11"
+"@value": "amf://id#15"
 }
 ],
 "sourcemaps:value": [
@@ -2252,12 +2578,36 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#11"
+"@value": "data:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(8,10)-(8,13)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#15"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(7,0)-(8,13)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:id"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(7,8)-(7,9)]"
 }
 ]
 }
@@ -2268,17 +2618,17 @@
 ],
 "data:pos0": [
 {
-"@id": "#8"
+"@id": "#12"
 }
 ],
 "data:pos1": [
 {
-"@id": "#11"
+"@id": "#15"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#7/source-map",
+"@id": "#11/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2286,7 +2636,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#7"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
@@ -2307,7 +2657,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#7/source-map",
+"@id": "#11/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2321,20 +2671,6 @@
 "sourcemaps:value": [
 {
 "@value": "true"
-}
-]
-}
-],
-"sourcemaps:source-vendor": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#7"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "RAML 1.0"
 }
 ]
 }
@@ -2355,7 +2691,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#7"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
@@ -2381,12 +2717,28 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#7"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": ""
+}
+]
+}
+],
+"sourcemaps:tracked-element": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#11"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "amf://id#18"
+}
+]
 }
 ]
 }
@@ -2397,7 +2749,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#26/source-map",
+"@id": "#31/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2405,7 +2757,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#26"
+"@value": "amf://id#31"
 }
 ],
 "sourcemaps:value": [
@@ -2419,7 +2771,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#26"
+"@value": "amf://id#31"
 }
 ],
 "sourcemaps:value": [
