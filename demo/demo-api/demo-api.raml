@@ -370,37 +370,45 @@ types:
   post:
     body:
       application/json:
-        example: !include named-example.raml
+        example:
+          Named example JSON: !include named-example.raml
       application/xml:
-        example: !include named-example.raml
+        example:
+          Named example XML: !include named-example.raml
 /named-linked-example:
   post:
     body:
       application/json:
-        example: !include named-example-with-link.raml
+        example:
+          Named example JSON: !include named-example-with-link.raml
       application/xml:
-        example: !include named-example-with-link.raml
+        example:
+          Named example XML: !include named-example-with-link.raml
 /employees:
   get:
     body:
       application/json:
         type: Employee[]
-        examples: !include examples/employees.raml
+        examples:
+          Named example: !include examples/employees.raml
   post:
     body:
       application/json:
         type: Employee
-        example: !include examples/employee.raml
+        example:
+          Named example: !include examples/employee.raml
   delete:
     body:
       application/json:
         type: Employee
-        example: !include examples/employee.raml
+        example:
+          Named example: !include examples/employee.raml
   head:
     body:
       application/json:
         type: Employee
-        example: !include examples/employee.raml
+        example:
+          Named example: !include examples/employee.raml
 /data-types:
   post:
     body:
