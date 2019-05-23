@@ -820,6 +820,13 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
           return value === 'true' ? true : false;
         }
         return value;
+
+      case prefix + 'nil':
+      case ramlPrefix + 'nil':
+      case this.ns.w3.xmlSchema + 'nil':
+      case this.ns.raml.vocabularies.shapes + 'nil':
+        return null;
+
       case prefix + 'integer':
       case ramlPrefix + 'integer':
       case this.ns.w3.xmlSchema + 'integer':
