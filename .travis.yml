@@ -15,9 +15,9 @@ addons:
 script:
 - npm run lint
 - xvfb-run polymer test --plugin local
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test --plugin sauce --job-name
-  "api-example-generator:${TRAVIS_BRANCH}" --build-number=${TRAVIS_BUILD_NUMBER};
-  fi
+# - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test --plugin sauce --job-name
+#   "api-example-generator:${TRAVIS_BRANCH}" --build-number=${TRAVIS_BUILD_NUMBER};
+#   fi
 cache:
   directories:
   - node_modules
