@@ -1973,7 +1973,7 @@
         });
 
         test('Does nothing when no name', () => {
-          element._appendXmlElement(doc, main, undefined, {});
+          element._appendXmlElement(doc, main, {});
           const s = new XMLSerializer();
           const result = s.serializeToString(doc);
           assert.equal(result, '<test/>');
@@ -1985,7 +1985,7 @@
           range[key] = [{
             '@value': 'gender?'
           }];
-          element._appendXmlElement(doc, main, undefined, range);
+          element._appendXmlElement(doc, main, range);
           const node = doc.querySelector('gender');
           assert.ok(node);
         });
