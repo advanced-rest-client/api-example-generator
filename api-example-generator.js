@@ -1091,7 +1091,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
    * @return {Element} Newly created element
    */
   _appendXmlElement(doc, node, property, range) {
-    const name = this._getValue(range, this.ns.w3.shacl.name + 'name');
+    let name = this._getValue(range, this.ns.w3.shacl.name + 'name');
     if (!name) {
       return;
     }
@@ -1109,6 +1109,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
       // Mocking service would mark is as an error.
       // this._readDataType(range);
     }
+    name = name.replace(/[^a-zA-Z0-9\-]*/g, '');
     const element = doc.createElement(name);
     if (nodeValue) {
       const vn = doc.createTextNode(nodeValue);

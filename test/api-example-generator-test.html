@@ -1949,6 +1949,53 @@
       });
     });
   });
+
+  suite('_appendXmlElement()', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true]
+    ].forEach((setupItem) => {
+      suite(setupItem[0], () => {
+        let element;
+        let amf;
+        let doc;
+        let main;
+
+        suiteSetup(() => {
+          return AmfLoader.load(setupItem[1])
+          .then((model) => {
+            amf = model;
+          });
+        });
+
+        setup(() => {
+          element = fixture('Basic');
+          element.amfModel = amf;
+
+          doc = document.implementation.createDocument('', 'test', null);
+          main = doc.documentElement;
+        });
+
+        test('Does nothing when no name', () => {
+          element._appendXmlElement(doc, main, undefined, {});
+          const s = new XMLSerializer();
+          const result = s.serializeToString(doc);
+          assert.equal(result, '<test/>');
+        });
+
+        test('Normalizes name', () => {
+          const key = element._getAmfKey(element.ns.w3.shacl.name + 'name');
+          const range = {};
+          range[key] = [{
+            '@value': 'gender?'
+          }];
+          element._appendXmlElement(doc, main, undefined, range);
+          const node = doc.querySelector('gender');
+          assert.ok(node);
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>
