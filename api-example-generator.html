@@ -782,10 +782,22 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   _computeJsonScalarValue(range) {
     let value = this._getTypeScalarValue(range);
     if (!value) {
-      return '';
-      // Don't change this. User's don't like data types included into the body
-      // editor.
-      // this._computeScalarType(range);
+      // This is to work with mocking services when the user just want to send an
+      // example value to the server. This ensures valid input from the client
+      // even of this alters the `default` value for the API (when one does not
+      // exist)
+      const type = this._computeScalarType(range);
+      switch (type) {
+        case 'Number':
+        case 'Integer':
+        case 'Long':
+        case 'Float':
+        case 'Double': return 0;
+        case 'Boolean': return false;
+        case 'Nil':
+        case 'Null': return null;
+        default: return '';
+      }
     }
     const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
     let dt = range[dtKey];
