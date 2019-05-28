@@ -1039,7 +1039,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
       this._appendXmlArray(doc, node, property, range, isWrapped);
       return;
     }
-    this._appendXmlElement(doc, node, property, range);
+    this._appendXmlElement(doc, node, range);
   }
   /**
    * Reads property data type.
@@ -1086,11 +1086,10 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
    * Appends an element to the node tree from a type
    * @param {Document} doc Main document
    * @param {Element} node Current node
-   * @param {Object} property AMF property
    * @param {Object} range AMF range
    * @return {Element} Newly created element
    */
-  _appendXmlElement(doc, node, property, range) {
+  _appendXmlElement(doc, node, range) {
     let name = this._getValue(range, this.ns.w3.shacl.name + 'name');
     if (!name) {
       return;
@@ -1122,7 +1121,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
   _appendXmlElements(doc, node, property, range) {
     const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
     const properties = this._ensureArray(range[pKey]);
-    const element = this._appendXmlElement(doc, node, property, range);
+    const element = this._appendXmlElement(doc, node, range);
     if (!properties) {
       return;
     }
@@ -1133,7 +1132,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
 
   _appendXmlArray(doc, node, property, range, isWrapped) {
     if (isWrapped) {
-      const element = this._appendXmlElement(doc, node, property, range);
+      const element = this._appendXmlElement(doc, node, range);
       node.appendChild(element);
       node = element;
     }
