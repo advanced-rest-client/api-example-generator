@@ -1980,7 +1980,7 @@
           element._appendXmlElement(doc, main, {});
           const s = new XMLSerializer();
           const result = s.serializeToString(doc);
-          assert.equal(result, '<test/>');
+          assert.match(result, /<test\s?\/>/);
         });
 
         test('Normalizes name', () => {
