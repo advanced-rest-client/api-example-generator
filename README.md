@@ -1,8 +1,8 @@
 [![Published on NPM](https://img.shields.io/npm/v/@api-components/api-example-generator.svg)](https://www.npmjs.com/package/@api-components/api-example-generator)
 
-[![Build Status](https://travis-ci.org/api-components/api-example-generator.svg?branch=stage)](https://travis-ci.org/api-components/api-example-generator)
+[![Build Status](https://travis-ci.org/advanced-rest-client/api-example-generator.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/api-example-generator)
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/api-components/api-example-generator)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/advanced-rest-client/api-example-generator)
 
 ## &lt;api-example-generator&gt;
 
@@ -38,16 +38,16 @@ npm install --save @api-components/api-example-generator
 </html>
 ```
 
-### In a Polymer 3 element
+### In a LitElement element
 
 ```js
-import {PolymerElement, html} from '@polymer/polymer';
+import { LitElement, html } from 'lit-element';
 import '@api-components/api-example-generator/api-example-generator.js';
 
-class SampleElement extends PolymerElement {
-  static get template() {
+class SampleElement extends LitElement {
+  render() {
     return html`
-    <api-example-generator></api-example-generator>
+    <api-example-generator .amf="${this.model}"></api-example-generator>
     `;
   }
 }
@@ -57,20 +57,18 @@ customElements.define('sample-element', SampleElement);
 ### Installation
 
 ```sh
-git clone https://github.com/api-components/api-example-generator
-cd api-url-editor
+git clone https://github.com/advanced-rest-client/api-example-generator
+cd api-example-generator
 npm install
-npm install -g polymer-cli
 ```
 
 ### Running the demo locally
 
 ```sh
-polymer serve --npm
-open http://127.0.0.1:<port>/demo/
+npm start
 ```
 
 ### Running the tests
 ```sh
-polymer test --npm
+npm test
 ```

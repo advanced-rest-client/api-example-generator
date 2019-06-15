@@ -1,5 +1,5 @@
-import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
-import {AmfHelperMixin} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import { LitElement } from 'lit-element';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 /**
  * `api-example-generator`
  *
@@ -62,13 +62,7 @@ import {AmfHelperMixin} from '../../@api-components/amf-helper-mixin/amf-helper-
  * @memberof ApiElements
  * @appliesMixin AmfHelperMixin
  */
-export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
-  /**
-   * @type {String}
-   */
-  static get is() {
-    return 'api-example-generator';
-  }
+export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
   /**
    * Lists media types names for payloads.
    * The `payloads` is an array of AMF Payload shape. It can be single Payload
@@ -1255,4 +1249,4 @@ export class ApiExampleGenerator extends AmfHelperMixin(PolymerElement) {
     return key;
   }
 }
-window.customElements.define(ApiExampleGenerator.is, ApiExampleGenerator);
+window.customElements.define('api-example-generator', ApiExampleGenerator);

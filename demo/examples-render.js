@@ -1,14 +1,11 @@
-import {PolymerElement} from '../../../@polymer/polymer/polymer-element.js';
-import {html} from '../../../@polymer/polymer/lib/utils/html-tag.js';
+import { LitElement, html, css } from 'lit-element';
 /**
  * @customElement
  * @polymer
  */
-class ExamplesRender extends PolymerElement {
-  static get template() {
-    return html`
-    <style>
-    :host {
+class ExamplesRender extends LitElement {
+  static get styles() {
+    return css`:host {
       display: block;
     };
 
@@ -26,71 +23,67 @@ class ExamplesRender extends PolymerElement {
       text-decoration: underline;
       color: blue;
       cursor: pointer;
-    }
-    </style>
-    <template is="dom-if" if="[[isUnion]]" restamp="">
-      <paper-dropdown-menu label="Select union type">
-        <paper-listbox slot="dropdown-content" selected="{{selectedUnion}}">
-          <template is="dom-repeat" items="[[unions]]">
-            <paper-item data-type\$="[[item]]">[[item]]</paper-item>
-          </template>
-        </paper-listbox>
-      </paper-dropdown-menu>
-
-      <template is="dom-if" if="[[unionExample]]">
-        <examples-render example="[[unionExample]]"></examples-render>
-      </template>
-    </template>
-    <template is="dom-if" if="[[!isUnion]]">
-      <template is="dom-if" if="[[example.hasTitle]]">
-        <h3>[[example.title]]</h3>
-      </template>
-      <pre class="output">[[example.value]]</pre>
-      <template is="dom-if" if="[[example.hasRaw]]">
-        <p>Example has raw value. <span class="raw-toggle" role="button" on-click="toggleRaw">Toggle raw.</span></p>
-        <template is="dom-if" if="[[rawOpened]]" restamp="">
-          <pre class="output-raw">[[example.raw]]</pre>
-        </template>
-      </template>
-    </template>
-`;
+    }`;
   }
 
-  static get is() {
-    return 'examples-render';
-  }
   static get properties() {
     return {
       example: Object,
+
       isUnion: {
-        type: Boolean,
-        computed: '_computeIsUnion(example)'
+        type: Boolean
       },
+
       rawOpened: Boolean,
+
       unions: {
         type: Array,
-        computed: '_computeUnions(isUnion, example)'
       },
 
       selectedUnion: Number,
 
       unionExample: {
-        type: Object,
-        computed: '_computeUnionExamples(selectedUnion, example)'
+        type: Object
       }
     };
   }
 
-  _computeIsUnion(example) {
-    return !!(example && example.hasUnion);
+  get example() {
+    return this._example;
+  }
+
+  set example(value) {
+    const oldValue = this._example;
+    if (value === oldValue) {
+      return;
+    }
+    this._example = value;
+    this.requestUpdate('example', oldValue);
+    this.isUnion = !!(value && value.hasUnion);
+    this.unions = this.isUnion ? this._computeUnions(value) : undefined;
+    this.unionExample = this._computeUnionExamples(this._selectedUnion, value);
+  }
+
+  get selectedUnion() {
+    return this._selectedUnion;
+  }
+
+  set selectedUnion(value) {
+    const oldValue = this._selectedUnion;
+    if (value === oldValue) {
+      return;
+    }
+    this._selectedUnion = value;
+    this.requestUpdate('selectedUnion', oldValue);
+    this.unionExample = this._computeUnionExamples(value, this._example);
   }
 
   toggleRaw() {
     this.rawOpened = !this.rawOpened;
   }
 
-  _computeUnions(isUnion, example) {
-    if (!isUnion || !example || !example.values) {
+  _computeUnions(example) {
+    if (!example.values) {
       return;
     }
     return example.values.map((item) => item.title);
@@ -105,5 +98,45 @@ class ExamplesRender extends PolymerElement {
     }
     return example.values[selectedUnion];
   }
+
+  _unionChangeHandler(e) {
+    this.selectedUnion = e.detail.value;
+  }
+
+  _unionTemplate() {
+    const unions = this.unions;
+    if (!unions) {
+      return html`<p>Unions not set</p>`;
+    }
+    return html`
+    <paper-dropdown-menu label="Select union type">
+      <paper-listbox slot="dropdown-content"
+        .selected="${this.selectedUnion}" @selected-changed="${this._unionChangeHandler}">
+      ${unions.map((item) => html`<paper-item data-type="${item}">${item}</paper-item>`)}
+      </paper-listbox>
+    </paper-dropdown-menu>
+    ${this.unionExample ? html`<examples-render .example="${this.unionExample}"></examples-render>` : undefined}
+    `;
+  }
+
+  _exampleTemplate() {
+    const example = this.example;
+    if (!example) {
+      return html`<p>Example not set</p>`;
+    }
+    return html`
+    ${example.hasTitle ? html`<h3>${example.title}</h3>`: undefined}
+    <pre class="output">${example.value}</pre>
+    ${example.hasRaw ?
+      html`
+      <p>Example has raw value. <span class="raw-toggle" role="button" @click="${this.toggleRaw}">Toggle raw.</span></p>
+      ${this.rawOpened ? html`<pre class="output-raw">${example.raw}</pre>`: undefined}` :
+      undefined}
+    `;
+  }
+
+  render() {
+    return this.isUnion ? this._unionTemplate() : this._exampleTemplate();
+  }
 }
-window.customElements.define(ExamplesRender.is, ExamplesRender);
+window.customElements.define('examples-render', ExamplesRender);
