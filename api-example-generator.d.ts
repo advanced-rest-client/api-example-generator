@@ -5,15 +5,18 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   api-example-generator.html
+ *   api-example-generator.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
+import {LitElement} from 'lit-element';
+
+import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+
+export {ApiExampleGenerator};
 
 declare namespace ApiElements {
 
@@ -74,7 +77,7 @@ declare namespace ApiElements {
    * - `typeName` - Processed type name, used for XML types to use right XML element wrapper name.
    */
   class ApiExampleGenerator extends
-    ApiElements.AmfHelperMixin(
+    AmfHelperMixin(
     Object) {
 
     /**
@@ -153,6 +156,19 @@ declare namespace ApiElements {
     _computeFromExamples(examples: Array<object|null>|null, mime: String|null, opts: object|null): Array<object|null>|null|undefined;
 
     /**
+     * In AMF 4 the examples model changes from being an array of examples
+     * to an object that contains an array of examples.
+     * This function extracts the array of examples back to the `examples` variable,
+     * respecting that the compact model can be an object instead of array.
+     * If the argument is an array with more than one item it means it's pre-4.0.0
+     * model.
+     *
+     * @param examples Examples model.
+     * @returns List of examples to process.
+     */
+    _processExamples(examples: any[]|object|null): any[]|null|undefined;
+
+    /**
      * Uses Example shape's source maps to determine which examples should be rendered.
      *
      * @param examples List of AMF Example schapes.
@@ -225,6 +241,15 @@ declare namespace ApiElements {
     _computeJsonScalarValue(range: any): any;
 
     /**
+     * Casts the value to given data type represented in AMF notation.
+     *
+     * @param value Value encoded in AMF
+     * @param type AMF data type
+     * @returns Casted value.
+     */
+    _typeToValue(value: String|null, type: String|null): String|Number|Boolean|null;
+
+    /**
      * Computes JSON example from UnionShape
      *
      * @param range Type definition
@@ -233,6 +258,7 @@ declare namespace ApiElements {
     _computeJsonUnionValue(range: object|null, typeName: String|null): object|null|undefined;
     _computeJsonObjectValue(range: any): any;
     _computeJsonArrayValue(range: any): any;
+    _extractExampleRawValue(example: any): any;
 
     /**
      * Gets a value from a Range shape for a scalar value.
@@ -279,11 +305,10 @@ declare namespace ApiElements {
      *
      * @param doc Main document
      * @param node Current node
-     * @param property AMF property
      * @param range AMF range
      * @returns Newly created element
      */
-    _appendXmlElement(doc: Document|null, node: Element|null, property: object|null, range: object|null): Element|null;
+    _appendXmlElement(doc: Document|null, node: Element|null, range: object|null): Element|null;
     _appendXmlElements(doc: any, node: any, property: any, range: any): void;
     _appendXmlArray(doc: any, node: any, property: any, range: any, isWrapped: any): void;
     _xmlProcessUnionScalarProperty(doc: any, node: any, property: any, shape: any): void;
@@ -303,6 +328,9 @@ declare namespace ApiElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "api-example-generator": ApiElements.ApiExampleGenerator;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "api-example-generator": ApiElements.ApiExampleGenerator;
+  }
 }

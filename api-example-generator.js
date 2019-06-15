@@ -1,6 +1,5 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../amf-helper-mixin/amf-helper-mixin.html">
-<script>
+import { LitElement } from 'lit-element';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 /**
  * `api-example-generator`
  *
@@ -61,15 +60,9 @@
  * @polymer
  * @demo demo/index.html
  * @memberof ApiElements
- * @appliesMixin ApiElements.AmfHelperMixin
+ * @appliesMixin AmfHelperMixin
  */
-class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
-  /**
-   * @type {String}
-   */
-  static get is() {
-    return 'api-example-generator';
-  }
+export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
   /**
    * Lists media types names for payloads.
    * The `payloads` is an array of AMF Payload shape. It can be single Payload
@@ -271,6 +264,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * @return {Array<Object>|undefined}
    */
   _computeFromExamples(examples, mime, opts) {
+    examples = this._processExamples(examples);
     examples = this._listTypeExamples(examples, opts.typeId);
     if (!examples) {
       return;
@@ -284,6 +278,29 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       }
     }
     return result;
+  }
+  /**
+   * In AMF 4 the examples model changes from being an array of examples
+   * to an object that contains an array of examples.
+   * This function extracts the array of examples back to the `examples` variable,
+   * respecting that the compact model can be an object instead of array.
+   * If the argument is an array with more than one item it means it's pre-4.0.0
+   * model.
+   * @param {Array|Object} examples Examples model.
+   * @return {Array|undefined} List of examples to process.
+   */
+  _processExamples(examples) {
+    const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+    if (!(examples instanceof Array)) {
+      if (this._hasType(examples, this.ns.raml.vocabularies.document + 'NamedExamples')) {
+        return this._ensureArray(examples[key]);
+      }
+      return;
+    }
+    if (examples.length === 1 && this._hasType(examples[0], this.ns.raml.vocabularies.document + 'NamedExamples')) {
+      return this._ensureArray(examples[0][key]);
+    }
+    return examples;
   }
   /**
    * Uses Example shape's source maps to determine which examples should be rendered.
@@ -758,10 +775,22 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   _computeJsonScalarValue(range) {
     let value = this._getTypeScalarValue(range);
     if (!value) {
-      return '';
-      // Don't change this. User's don't like data types included into the body
-      // editor.
-      // this._computeScalarType(range);
+      // This is to work with mocking services when the user just want to send an
+      // example value to the server. This ensures valid input from the client
+      // even of this alters the `default` value for the API (when one does not
+      // exist)
+      const type = this._computeScalarType(range);
+      switch (type) {
+        case 'Number':
+        case 'Integer':
+        case 'Long':
+        case 'Float':
+        case 'Double': return 0;
+        case 'Boolean': return false;
+        case 'Nil':
+        case 'Null': return null;
+        default: return '';
+      }
     }
     const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
     let dt = range[dtKey];
@@ -797,6 +826,13 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
           return value === 'true' ? true : false;
         }
         return value;
+
+      case prefix + 'nil':
+      case ramlPrefix + 'nil':
+      case this.ns.w3.xmlSchema + 'nil':
+      case this.ns.raml.vocabularies.shapes + 'nil':
+        return null;
+
       case prefix + 'integer':
       case ramlPrefix + 'integer':
       case this.ns.w3.xmlSchema + 'integer':
@@ -894,6 +930,20 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     }
     return result;
   }
+
+  _extractExampleRawValue(example) {
+    if (example instanceof Array) {
+      example = example[0];
+    }
+    if (this._hasType(example, this.ns.raml.vocabularies.document + 'NamedExamples')) {
+      const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+      example = example[key];
+      if (example instanceof Array) {
+        example = example[0];
+      }
+    }
+    return this._getValue(example, this.ns.w3.shacl.name + 'raw');
+  }
   /**
    * Gets a value from a Range shape for a scalar value.
    * @param {Object} range AMF's range model.
@@ -911,10 +961,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     const rKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
     let ex = range[rKey];
     if (ex) {
-      if (ex instanceof Array) {
-        ex = ex[0];
-      }
-      return this._getValue(ex, this.ns.w3.shacl.name + 'raw');
+      return this._extractExampleRawValue(ex);
     }
   }
   /**
@@ -998,7 +1045,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       this._appendXmlArray(doc, node, property, range, isWrapped);
       return;
     }
-    this._appendXmlElement(doc, node, property, range);
+    this._appendXmlElement(doc, node, range);
   }
   /**
    * Reads property data type.
@@ -1045,12 +1092,11 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
    * Appends an element to the node tree from a type
    * @param {Document} doc Main document
    * @param {Element} node Current node
-   * @param {Object} property AMF property
    * @param {Object} range AMF range
    * @return {Element} Newly created element
    */
-  _appendXmlElement(doc, node, property, range) {
-    const name = this._getValue(range, this.ns.w3.shacl.name + 'name');
+  _appendXmlElement(doc, node, range) {
+    let name = this._getValue(range, this.ns.w3.shacl.name + 'name');
     if (!name) {
       return;
     }
@@ -1059,10 +1105,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
       let example = range[eKey];
       if (example) {
-        if (example instanceof Array) {
-          example = example[0];
-        }
-        nodeValue = this._getValue(example, this.ns.w3.shacl.name + 'raw');
+        nodeValue = this._extractExampleRawValue(example);
       }
     }
     if (!nodeValue) {
@@ -1071,6 +1114,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
       // Mocking service would mark is as an error.
       // this._readDataType(range);
     }
+    name = name.replace(/[^a-zA-Z0-9\-]*/g, '');
     const element = doc.createElement(name);
     if (nodeValue) {
       const vn = doc.createTextNode(nodeValue);
@@ -1083,7 +1127,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
   _appendXmlElements(doc, node, property, range) {
     const pKey = this._getAmfKey(this.ns.w3.shacl.name + 'property');
     const properties = this._ensureArray(range[pKey]);
-    const element = this._appendXmlElement(doc, node, property, range);
+    const element = this._appendXmlElement(doc, node, range);
     if (!properties) {
       return;
     }
@@ -1094,7 +1138,7 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
 
   _appendXmlArray(doc, node, property, range, isWrapped) {
     if (isWrapped) {
-      const element = this._appendXmlElement(doc, node, property, range);
+      const element = this._appendXmlElement(doc, node, range);
       node.appendChild(element);
       node = element;
     }
@@ -1205,5 +1249,4 @@ class ApiExampleGenerator extends ApiElements.AmfHelperMixin(Polymer.Element) {
     return key;
   }
 }
-window.customElements.define(ApiExampleGenerator.is, ApiExampleGenerator);
-</script>
+window.customElements.define('api-example-generator', ApiExampleGenerator);

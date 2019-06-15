@@ -9,7 +9,7 @@
 ],
 "doc:encodes": [
 {
-"@id": "#173",
+"@id": "#175",
 "@type": [
 "schema-org:WebAPI",
 "doc:RootDomainElement",
@@ -22,7 +22,7 @@
 ],
 "raml-http:endpoint": [
 {
-"@id": "#174",
+"@id": "#176",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -44,7 +44,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#175",
+"@id": "#177",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -66,14 +66,14 @@
 ],
 "hydra:expects": [
 {
-"@id": "#176",
+"@id": "#178",
 "@type": [
 "raml-http:Request",
 "doc:DomainElement"
 ],
 "raml-http:header": [
 {
-"@id": "#177",
+"@id": "#179",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -100,7 +100,7 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#178",
+"@id": "#180",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -119,7 +119,7 @@
 ],
 "doc:examples": [
 {
-"@id": "#179",
+"@id": "#181",
 "@type": [
 "doc:Example",
 "doc:DomainElement"
@@ -131,9 +131,11 @@
 ],
 "doc:structuredValue": [
 {
-"@id": "#179",
+"@id": "#181",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -143,7 +145,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#179/source-map",
+"@id": "#181/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -151,7 +153,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#179"
+"@value": "amf://id#181"
 }
 ],
 "sourcemaps:value": [
@@ -172,7 +174,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#179/source-map",
+"@id": "#181/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -206,7 +208,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#179"
+"@value": "amf://id#181"
 }
 ],
 "sourcemaps:value": [
@@ -220,12 +222,12 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#179"
+"@value": "amf://id#181"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "amf://id#177"
+"@value": "amf://id#179"
 }
 ]
 }
@@ -236,7 +238,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#178/source-map",
+"@id": "#180/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -244,7 +246,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#178"
+"@value": "amf://id#180"
 }
 ],
 "sourcemaps:value": [
@@ -270,7 +272,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#178"
+"@value": "amf://id#180"
 }
 ],
 "sourcemaps:value": [
@@ -286,7 +288,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#177/source-map",
+"@id": "#179/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -306,7 +308,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#177"
+"@value": "amf://id#179"
 }
 ],
 "sourcemaps:value": [
@@ -322,7 +324,7 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#180",
+"@id": "#174",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -334,7 +336,7 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#172/linked_2",
+"@id": "#90/linked_2",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -343,7 +345,7 @@
 ],
 "doc:link-target": [
 {
-"@id": "#172"
+"@id": "#90"
 }
 ],
 "doc:link-label": [
@@ -355,7 +357,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#180/source-map",
+"@id": "#174/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -363,7 +365,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#180"
+"@value": "amf://id#174"
 }
 ],
 "sourcemaps:value": [
@@ -379,7 +381,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#176/source-map",
+"@id": "#178/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -393,6 +395,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(18,4)-(22,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#178"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(11,0)-(22,0)]"
 }
 ]
 },
@@ -415,7 +429,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#175/source-map",
+"@id": "#177/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -435,7 +449,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#175"
+"@value": "amf://id#177"
 }
 ],
 "sourcemaps:value": [
@@ -463,7 +477,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#174/source-map",
+"@id": "#176/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -483,7 +497,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#174"
+"@value": "amf://id#176"
 }
 ],
 "sourcemaps:value": [
@@ -511,7 +525,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#173/source-map",
+"@id": "#175/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -519,7 +533,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#173"
+"@value": "amf://id#175"
 }
 ],
 "sourcemaps:value": [
@@ -545,7 +559,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#173"
+"@value": "amf://id#175"
 }
 ],
 "sourcemaps:value": [
@@ -563,7 +577,7 @@
 {
 "@id": "#1",
 "@type": [
-"doc:NamedExample",
+"doc:ExternalFragment",
 "doc:Fragment",
 "doc:Unit"
 ],
@@ -571,3010 +585,17 @@
 {
 "@id": "#2",
 "@type": [
-"doc:Example",
+"doc:ExternalDomainElement",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"doc:raw": [
 {
-"@value": "cordCreateRequestExample"
+"@value": "#%RAML 1.0 NamedExample\ncordCreateRequestExample:\n  allOrNone: false\n  records:\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70226\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70227\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n"
 }
 ],
-"doc:strict": [
+"raml-http:mediaType": [
 {
-"@value": true
-}
-],
-"doc:structuredValue": [
-{
-"@id": "#2",
-"@type": [
-"data:Object"
-],
-"data:allOrNone": [
-{
-"@id": "#3",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "false",
-"@type": "xsd:boolean"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#3/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#3"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(3,13)-(3,18)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:records": [
-{
-"@id": "#4",
-"@type": [
-"data:Array",
-"rdf:Seq"
-],
-"rdf:member": [
-{
-"@id": "#5",
-"@type": [
-"data:Object"
-],
-"data:AS400CityName": [
-{
-"@id": "#6",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Omaha, DG",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#6/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#6"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(10,21)-(10,32)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AS400ECM": [
-{
-"@id": "#7",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "401571.60",
-"@type": "xsd:double"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#7/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#7"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,16)-(22,25)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AS400Location": [
-{
-"@id": "#8",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "OMANE",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#8/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#8"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(9,21)-(9,28)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AS400Status": [
-{
-"@id": "#9",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "INVTM",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#9/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#9"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(23,19)-(23,26)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AcquiredDate": [
-{
-"@id": "#10",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#10/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#10"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(18,20)-(18,32)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Age": [
-{
-"@id": "#11",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "1",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#11/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#11"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(36,11)-(36,12)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AssetDescription": [
-{
-"@id": "#12",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Asset",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#12/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#12"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(37,24)-(37,31)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Axles": [
-{
-"@id": "#13",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "14",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#13/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#13"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(43,13)-(43,15)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:BookValue": [
-{
-"@id": "#14",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "10000",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#14/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#14"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(33,17)-(33,22)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:BookValueAsOf": [
-{
-"@id": "#15",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#15/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#15"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(34,21)-(34,33)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:CabType": [
-{
-"@id": "#16",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "A",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#16/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#16"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(38,15)-(38,18)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Color": [
-{
-"@id": "#17",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "BLUE",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#17/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#17"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(39,13)-(39,19)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Depreciation": [
-{
-"@id": "#18",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "10",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#18/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#18"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(35,20)-(35,22)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Engine": [
-{
-"@id": "#19",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "D13",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#19/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#19"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(25,14)-(25,19)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:EngineArrangement": [
-{
-"@id": "#20",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "ABC123",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#20/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#20"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(28,25)-(28,33)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:EngineSerial": [
-{
-"@id": "#21",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "ABC123",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#21/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#21"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(26,20)-(26,28)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:EngineWarranty": [
-{
-"@id": "#22",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#22/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#22"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(27,22)-(27,34)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:IQDate": [
-{
-"@id": "#23",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#23/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#23"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(24,14)-(24,26)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:InService": [
-{
-"@id": "#24",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#24/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#24"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(19,17)-(19,29)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:InventoryType": [
-{
-"@id": "#25",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Tractor",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#25/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#25"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(44,21)-(44,28)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Length": [
-{
-"@id": "#26",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "12",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#26/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#26"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(42,14)-(42,16)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:MaintenanceCode": [
-{
-"@id": "#27",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "V9",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#27/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#27"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(20,23)-(20,27)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:MaintenanceCodeDescription": [
-{
-"@id": "#28",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "V9",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#28/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#28"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(21,34)-(21,38)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Make": [
-{
-"@id": "#29",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "FRT",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#29/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#29"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(12,12)-(12,17)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Model": [
-{
-"@id": "#30",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "CASCADIA",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#30/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#30"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(13,13)-(13,23)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:ModelType": [
-{
-"@id": "#31",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "CAS",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#31/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#31"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(14,17)-(14,22)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Name": [
-{
-"@id": "#32",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "70226",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#32/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#32"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(8,12)-(8,19)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Serial": [
-{
-"@id": "#33",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "ABCDEF123",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#33/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#33"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(17,14)-(17,25)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TCUHours": [
-{
-"@id": "#34",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "12",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#34/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#34"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(41,16)-(41,18)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TCUType": [
-{
-"@id": "#35",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "THERMOKING",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#35/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#35"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(40,15)-(40,27)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TransmissionFrontRearSN": [
-{
-"@id": "#36",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "1",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#36/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#36"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(32,31)-(32,34)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TransmissionRearRatio": [
-{
-"@id": "#37",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "1",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#37/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#37"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(30,29)-(30,30)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TransmissionRearRearSN": [
-{
-"@id": "#38",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "1",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#38/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#38"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(31,30)-(31,33)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TransmissionSerial": [
-{
-"@id": "#39",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "ABC123",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#39/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#39"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(29,26)-(29,34)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Type": [
-{
-"@id": "#40",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "OOP",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#40/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#40"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(15,12)-(15,17)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Weight": [
-{
-"@id": "#41",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "9300",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#41/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#41"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(16,14)-(16,18)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Year": [
-{
-"@id": "#42",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2016",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#42/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#42"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(11,12)-(11,18)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:attributes": [
-{
-"@id": "#43",
-"@type": [
-"data:Object"
-],
-"data:type": [
-{
-"@id": "#44",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Inventory__c",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#44/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#44"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(7,14)-(7,28)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#43/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#43"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "type->[(7,8)-(8,0)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#43"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(7,0)-(8,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#5/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#5"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "Name->[(8,6)-(9,0)]#TransmissionRearRatio->[(30,6)-(31,0)]#Engine->[(25,6)-(26,0)]#Axles->[(43,6)-(44,0)]#InService->[(19,6)-(20,0)]#Length->[(42,6)-(43,0)]#Make->[(12,6)-(13,0)]#EngineArrangement->[(28,6)-(29,0)]#MaintenanceCodeDescription->[(21,6)-(22,0)]#CabType->[(38,6)-(39,0)]#BookValueAsOf->[(34,6)-(35,0)]#AS400CityName->[(10,6)-(11,0)]#AcquiredDate->[(18,6)-(19,0)]#Year->[(11,6)-(12,0)]#Weight->[(16,6)-(17,0)]#attributes->[(6,6)-(8,0)]#AS400ECM->[(22,6)-(23,0)]#Model->[(13,6)-(14,0)]#InventoryType->[(44,6)-(45,0)]#TCUHours->[(41,6)-(42,0)]#AS400Location->[(9,6)-(10,0)]#TCUType->[(40,6)-(41,0)]#Age->[(36,6)-(37,0)]#IQDate->[(24,6)-(25,0)]#AS400Status->[(23,6)-(24,0)]#MaintenanceCode->[(20,6)-(21,0)]#ModelType->[(14,6)-(15,0)]#TransmissionRearRearSN->[(31,6)-(32,0)]#TransmissionSerial->[(29,6)-(30,0)]#AssetDescription->[(37,6)-(38,0)]#TransmissionFrontRearSN->[(32,6)-(33,0)]#BookValue->[(33,6)-(34,0)]#EngineWarranty->[(27,6)-(28,0)]#Color->[(39,6)-(40,0)]#Depreciation->[(35,6)-(36,0)]#EngineSerial->[(26,6)-(27,0)]#Serial->[(17,6)-(18,0)]#Type->[(15,6)-(16,0)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#5"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(6,0)-(45,0)]"
-}
-]
-}
-]
-}
-]
-},
-{
-"@id": "#45",
-"@type": [
-"data:Object"
-],
-"data:AS400CityName": [
-{
-"@id": "#46",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Omaha, DG",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#46/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#46"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(50,21)-(50,32)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AS400ECM": [
-{
-"@id": "#47",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "401571.60",
-"@type": "xsd:double"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#47/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#47"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(62,16)-(62,25)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AS400Location": [
-{
-"@id": "#48",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "OMANE",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#48/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#48"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(49,21)-(49,28)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AS400Status": [
-{
-"@id": "#49",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "INVTM",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#49/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#49"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(63,19)-(63,26)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AcquiredDate": [
-{
-"@id": "#50",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#50/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#50"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(58,20)-(58,32)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Age": [
-{
-"@id": "#51",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "1",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#51/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#51"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(76,11)-(76,12)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:AssetDescription": [
-{
-"@id": "#52",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Asset",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#52/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#52"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(77,24)-(77,31)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Axles": [
-{
-"@id": "#53",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "14",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#53/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#53"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(83,13)-(83,15)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:BookValue": [
-{
-"@id": "#54",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "10000",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#54/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#54"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(73,17)-(73,22)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:BookValueAsOf": [
-{
-"@id": "#55",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#55/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#55"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(74,21)-(74,33)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:CabType": [
-{
-"@id": "#56",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "A",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#56/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#56"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(78,15)-(78,18)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Color": [
-{
-"@id": "#57",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "BLUE",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#57/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#57"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(79,13)-(79,19)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Depreciation": [
-{
-"@id": "#58",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "10",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#58/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#58"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(75,20)-(75,22)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Engine": [
-{
-"@id": "#59",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "D13",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#59/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#59"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(65,14)-(65,19)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:EngineArrangement": [
-{
-"@id": "#60",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "ABC123",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#60/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#60"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(68,25)-(68,33)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:EngineSerial": [
-{
-"@id": "#61",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "ABC123",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#61/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#61"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(66,20)-(66,28)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:EngineWarranty": [
-{
-"@id": "#62",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#62/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#62"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(67,22)-(67,34)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:IQDate": [
-{
-"@id": "#63",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#63/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#63"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(64,14)-(64,26)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:InService": [
-{
-"@id": "#64",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2019-01-16",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#64/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#64"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(59,17)-(59,29)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:InventoryType": [
-{
-"@id": "#65",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Tractor",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#65/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#65"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(84,21)-(84,28)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Length": [
-{
-"@id": "#66",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "12",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#66/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#66"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(82,14)-(82,16)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:MaintenanceCode": [
-{
-"@id": "#67",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "V9",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#67/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#67"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(60,23)-(60,27)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:MaintenanceCodeDescription": [
-{
-"@id": "#68",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "V9",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#68/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#68"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(61,34)-(61,38)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Make": [
-{
-"@id": "#69",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "FRT",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#69/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#69"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(52,12)-(52,17)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Model": [
-{
-"@id": "#70",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "CASCADIA",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#70/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#70"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(53,13)-(53,23)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:ModelType": [
-{
-"@id": "#71",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "CAS",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#71/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#71"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(54,17)-(54,22)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Name": [
-{
-"@id": "#72",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "70227",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#72/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#72"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(48,12)-(48,19)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Serial": [
-{
-"@id": "#73",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "ABCDEF123",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#73/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#73"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(57,14)-(57,25)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TCUHours": [
-{
-"@id": "#74",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "12",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#74/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#74"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(81,16)-(81,18)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TCUType": [
-{
-"@id": "#75",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "THERMOKING",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#75/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#75"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(80,15)-(80,27)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TransmissionFrontRearSN": [
-{
-"@id": "#76",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "1",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#76/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#76"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(72,31)-(72,34)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TransmissionRearRatio": [
-{
-"@id": "#77",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "1",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#77/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#77"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(70,29)-(70,30)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TransmissionRearRearSN": [
-{
-"@id": "#78",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "1",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#78/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#78"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(71,30)-(71,33)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:TransmissionSerial": [
-{
-"@id": "#79",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "ABC123",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#79/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#79"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(69,26)-(69,34)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Type": [
-{
-"@id": "#80",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "OOP",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#80/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#80"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(55,12)-(55,17)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Weight": [
-{
-"@id": "#81",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "9300",
-"@type": "xsd:integer"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#81/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#81"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(56,14)-(56,18)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:Year": [
-{
-"@id": "#82",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "2016",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#82/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#82"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(51,12)-(51,18)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:attributes": [
-{
-"@id": "#83",
-"@type": [
-"data:Object"
-],
-"data:type": [
-{
-"@id": "#84",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "Inventory__c",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#84/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#84"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(47,14)-(47,28)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#83/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#83"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "type->[(47,8)-(48,0)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#83"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(47,0)-(48,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#45/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#45"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "Name->[(48,6)-(49,0)]#TransmissionRearRatio->[(70,6)-(71,0)]#Engine->[(65,6)-(66,0)]#Axles->[(83,6)-(84,0)]#InService->[(59,6)-(60,0)]#Length->[(82,6)-(83,0)]#Make->[(52,6)-(53,0)]#EngineArrangement->[(68,6)-(69,0)]#MaintenanceCodeDescription->[(61,6)-(62,0)]#CabType->[(78,6)-(79,0)]#BookValueAsOf->[(74,6)-(75,0)]#AS400CityName->[(50,6)-(51,0)]#AcquiredDate->[(58,6)-(59,0)]#Year->[(51,6)-(52,0)]#Weight->[(56,6)-(57,0)]#attributes->[(46,6)-(48,0)]#AS400ECM->[(62,6)-(63,0)]#Model->[(53,6)-(54,0)]#InventoryType->[(84,6)-(85,0)]#TCUHours->[(81,6)-(82,0)]#AS400Location->[(49,6)-(50,0)]#TCUType->[(80,6)-(81,0)]#Age->[(76,6)-(77,0)]#IQDate->[(64,6)-(65,0)]#AS400Status->[(63,6)-(64,0)]#MaintenanceCode->[(60,6)-(61,0)]#ModelType->[(54,6)-(55,0)]#TransmissionRearRearSN->[(71,6)-(72,0)]#TransmissionSerial->[(69,6)-(70,0)]#AssetDescription->[(77,6)-(78,0)]#TransmissionFrontRearSN->[(72,6)-(73,0)]#BookValue->[(73,6)-(74,0)]#EngineWarranty->[(67,6)-(68,0)]#Color->[(79,6)-(80,0)]#Depreciation->[(75,6)-(76,0)]#EngineSerial->[(66,6)-(67,0)]#Serial->[(57,6)-(58,0)]#Type->[(55,6)-(56,0)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#45"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(46,0)-(85,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:pos0": [
-{
-"@id": "#5"
-}
-],
-"data:pos1": [
-{
-"@id": "#45"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#4/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#4"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(4,10)-(85,0)]"
-}
-]
-}
-]
-}
-]
+"@value": "application/raml+yaml"
 }
 ],
 "sourcemaps:sources": [
@@ -3582,63 +603,6 @@
 "@id": "#2/source-map",
 "@type": [
 "sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#2"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(3,0)-(85,0)]"
-}
-]
-}
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#2"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "allOrNone->[(3,2)-(4,0)]#records->[(4,2)-(85,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"shacl:raw": [
-{
-"@value": "\n  allOrNone: false\n  records:\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70226\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70227\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#2/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:synthesized-field": [
-{
-"sourcemaps:element": [
-{
-"@value": "doc:strict"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "true"
-}
-]
-}
 ],
 "sourcemaps:source-vendor": [
 {
@@ -3650,58 +614,6 @@
 "sourcemaps:value": [
 {
 "@value": "RAML 1.0"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "shacl:raw"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(3,0)-(85,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#2"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(2,0)-(85,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:name"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(2,0)-(85,0)]"
-}
-]
-}
-],
-"sourcemaps:local-element": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#2"
-}
-],
-"sourcemaps:value": [
-{
-"@value": ""
 }
 ]
 }
@@ -3734,7 +646,7 @@
 ]
 },
 {
-"@id": "#85",
+"@id": "#3",
 "@type": [
 "doc:DataType",
 "doc:Fragment",
@@ -3742,7 +654,7 @@
 ],
 "doc:encodes": [
 {
-"@id": "#86",
+"@id": "#4",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -3756,7 +668,7 @@
 ],
 "shacl:property": [
 {
-"@id": "#87",
+"@id": "#5",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -3769,7 +681,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#88",
+"@id": "#6",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -3788,7 +700,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#88/source-map",
+"@id": "#6/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3796,7 +708,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#88"
+"@value": "amf://id#6"
 }
 ],
 "sourcemaps:value": [
@@ -3822,7 +734,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#88"
+"@value": "amf://id#6"
 }
 ],
 "sourcemaps:value": [
@@ -3848,7 +760,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#87/source-map",
+"@id": "#5/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3868,7 +780,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#87"
+"@value": "amf://id#5"
 }
 ],
 "sourcemaps:value": [
@@ -3882,7 +794,7 @@
 ]
 },
 {
-"@id": "#89",
+"@id": "#7",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -3895,7 +807,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#90",
+"@id": "#8",
 "@type": [
 "raml-shapes:ArrayShape",
 "shacl:Shape",
@@ -3904,7 +816,7 @@
 ],
 "raml-shapes:items": [
 {
-"@id": "#91",
+"@id": "#9",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -3918,7 +830,7 @@
 ],
 "shacl:property": [
 {
-"@id": "#92",
+"@id": "#10",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -3931,7 +843,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#93",
+"@id": "#11",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -3945,7 +857,7 @@
 ],
 "shacl:property": [
 {
-"@id": "#94",
+"@id": "#12",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -3958,7 +870,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#95",
+"@id": "#13",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -3977,7 +889,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#95/source-map",
+"@id": "#13/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3985,7 +897,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#95"
+"@value": "amf://id#13"
 }
 ],
 "sourcemaps:value": [
@@ -4011,7 +923,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#95"
+"@value": "amf://id#13"
 }
 ],
 "sourcemaps:value": [
@@ -4037,7 +949,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#94/source-map",
+"@id": "#12/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4057,7 +969,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#94"
+"@value": "amf://id#12"
 }
 ],
 "sourcemaps:value": [
@@ -4078,7 +990,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#93/source-map",
+"@id": "#11/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4086,7 +998,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#93"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
@@ -4100,7 +1012,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#93"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
@@ -4126,7 +1038,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#92/source-map",
+"@id": "#10/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4134,7 +1046,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#92"
+"@value": "amf://id#10"
 }
 ],
 "sourcemaps:value": [
@@ -4148,7 +1060,7 @@
 ]
 },
 {
-"@id": "#96",
+"@id": "#14",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -4161,7 +1073,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#97",
+"@id": "#15",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -4180,7 +1092,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#97/source-map",
+"@id": "#15/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4188,7 +1100,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#97"
+"@value": "amf://id#15"
 }
 ],
 "sourcemaps:value": [
@@ -4214,7 +1126,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#97"
+"@value": "amf://id#15"
 }
 ],
 "sourcemaps:value": [
@@ -4240,7 +1152,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#96/source-map",
+"@id": "#14/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4260,7 +1172,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#96"
+"@value": "amf://id#14"
 }
 ],
 "sourcemaps:value": [
@@ -4274,7 +1186,7 @@
 ]
 },
 {
-"@id": "#98",
+"@id": "#16",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -4287,7 +1199,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#99",
+"@id": "#17",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -4306,7 +1218,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#99/source-map",
+"@id": "#17/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4314,7 +1226,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#99"
+"@value": "amf://id#17"
 }
 ],
 "sourcemaps:value": [
@@ -4340,7 +1252,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#99"
+"@value": "amf://id#17"
 }
 ],
 "sourcemaps:value": [
@@ -4366,7 +1278,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#98/source-map",
+"@id": "#16/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4386,7 +1298,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#98"
+"@value": "amf://id#16"
 }
 ],
 "sourcemaps:value": [
@@ -4400,7 +1312,7 @@
 ]
 },
 {
-"@id": "#100",
+"@id": "#18",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -4413,7 +1325,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#101",
+"@id": "#19",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -4432,7 +1344,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#101/source-map",
+"@id": "#19/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4440,7 +1352,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#101"
+"@value": "amf://id#19"
 }
 ],
 "sourcemaps:value": [
@@ -4466,7 +1378,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#101"
+"@value": "amf://id#19"
 }
 ],
 "sourcemaps:value": [
@@ -4492,7 +1404,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#100/source-map",
+"@id": "#18/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4512,7 +1424,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#100"
+"@value": "amf://id#18"
 }
 ],
 "sourcemaps:value": [
@@ -4526,7 +1438,7 @@
 ]
 },
 {
-"@id": "#102",
+"@id": "#20",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -4539,7 +1451,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#103",
+"@id": "#21",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -4558,7 +1470,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#103/source-map",
+"@id": "#21/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4566,7 +1478,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#103"
+"@value": "amf://id#21"
 }
 ],
 "sourcemaps:value": [
@@ -4592,7 +1504,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#103"
+"@value": "amf://id#21"
 }
 ],
 "sourcemaps:value": [
@@ -4618,7 +1530,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#102/source-map",
+"@id": "#20/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4638,7 +1550,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#102"
+"@value": "amf://id#20"
 }
 ],
 "sourcemaps:value": [
@@ -4652,7 +1564,7 @@
 ]
 },
 {
-"@id": "#104",
+"@id": "#22",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -4665,7 +1577,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#105",
+"@id": "#23",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -4684,7 +1596,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#105/source-map",
+"@id": "#23/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4692,7 +1604,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#105"
+"@value": "amf://id#23"
 }
 ],
 "sourcemaps:value": [
@@ -4718,7 +1630,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#105"
+"@value": "amf://id#23"
 }
 ],
 "sourcemaps:value": [
@@ -4744,7 +1656,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#104/source-map",
+"@id": "#22/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4764,7 +1676,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#104"
+"@value": "amf://id#22"
 }
 ],
 "sourcemaps:value": [
@@ -4778,7 +1690,7 @@
 ]
 },
 {
-"@id": "#106",
+"@id": "#24",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -4791,7 +1703,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#107",
+"@id": "#25",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -4810,7 +1722,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#107/source-map",
+"@id": "#25/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4818,7 +1730,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#107"
+"@value": "amf://id#25"
 }
 ],
 "sourcemaps:value": [
@@ -4844,7 +1756,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#107"
+"@value": "amf://id#25"
 }
 ],
 "sourcemaps:value": [
@@ -4870,7 +1782,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#106/source-map",
+"@id": "#24/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4890,7 +1802,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#106"
+"@value": "amf://id#24"
 }
 ],
 "sourcemaps:value": [
@@ -4904,7 +1816,7 @@
 ]
 },
 {
-"@id": "#108",
+"@id": "#26",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -4917,7 +1829,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#109",
+"@id": "#27",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -4936,7 +1848,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#109/source-map",
+"@id": "#27/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4944,7 +1856,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#109"
+"@value": "amf://id#27"
 }
 ],
 "sourcemaps:value": [
@@ -4970,7 +1882,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#109"
+"@value": "amf://id#27"
 }
 ],
 "sourcemaps:value": [
@@ -4996,7 +1908,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#108/source-map",
+"@id": "#26/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5016,7 +1928,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#108"
+"@value": "amf://id#26"
 }
 ],
 "sourcemaps:value": [
@@ -5030,7 +1942,7 @@
 ]
 },
 {
-"@id": "#110",
+"@id": "#28",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5043,7 +1955,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#111",
+"@id": "#29",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -5062,7 +1974,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#111/source-map",
+"@id": "#29/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5070,7 +1982,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#111"
+"@value": "amf://id#29"
 }
 ],
 "sourcemaps:value": [
@@ -5096,7 +2008,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#111"
+"@value": "amf://id#29"
 }
 ],
 "sourcemaps:value": [
@@ -5122,7 +2034,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#110/source-map",
+"@id": "#28/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5142,7 +2054,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#110"
+"@value": "amf://id#28"
 }
 ],
 "sourcemaps:value": [
@@ -5156,7 +2068,7 @@
 ]
 },
 {
-"@id": "#112",
+"@id": "#30",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5169,7 +2081,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#113",
+"@id": "#31",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -5188,7 +2100,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#113/source-map",
+"@id": "#31/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5196,7 +2108,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#113"
+"@value": "amf://id#31"
 }
 ],
 "sourcemaps:value": [
@@ -5222,7 +2134,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#113"
+"@value": "amf://id#31"
 }
 ],
 "sourcemaps:value": [
@@ -5248,7 +2160,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#30/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5268,7 +2180,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#30"
 }
 ],
 "sourcemaps:value": [
@@ -5282,7 +2194,7 @@
 ]
 },
 {
-"@id": "#114",
+"@id": "#32",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5295,7 +2207,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#115",
+"@id": "#33",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -5314,7 +2226,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#115/source-map",
+"@id": "#33/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5322,7 +2234,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#115"
+"@value": "amf://id#33"
 }
 ],
 "sourcemaps:value": [
@@ -5348,7 +2260,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#115"
+"@value": "amf://id#33"
 }
 ],
 "sourcemaps:value": [
@@ -5374,7 +2286,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#114/source-map",
+"@id": "#32/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5394,7 +2306,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#114"
+"@value": "amf://id#32"
 }
 ],
 "sourcemaps:value": [
@@ -5408,7 +2320,7 @@
 ]
 },
 {
-"@id": "#116",
+"@id": "#34",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5421,7 +2333,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#117",
+"@id": "#35",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -5440,7 +2352,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#117/source-map",
+"@id": "#35/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5448,7 +2360,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#117"
+"@value": "amf://id#35"
 }
 ],
 "sourcemaps:value": [
@@ -5474,7 +2386,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#117"
+"@value": "amf://id#35"
 }
 ],
 "sourcemaps:value": [
@@ -5500,7 +2412,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#116/source-map",
+"@id": "#34/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5520,7 +2432,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#116"
+"@value": "amf://id#34"
 }
 ],
 "sourcemaps:value": [
@@ -5534,7 +2446,7 @@
 ]
 },
 {
-"@id": "#118",
+"@id": "#36",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5547,7 +2459,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#119",
+"@id": "#37",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -5566,7 +2478,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#119/source-map",
+"@id": "#37/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5574,7 +2486,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#119"
+"@value": "amf://id#37"
 }
 ],
 "sourcemaps:value": [
@@ -5600,7 +2512,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#119"
+"@value": "amf://id#37"
 }
 ],
 "sourcemaps:value": [
@@ -5626,7 +2538,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#118/source-map",
+"@id": "#36/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5646,7 +2558,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#118"
+"@value": "amf://id#36"
 }
 ],
 "sourcemaps:value": [
@@ -5660,7 +2572,7 @@
 ]
 },
 {
-"@id": "#120",
+"@id": "#38",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5673,7 +2585,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#121",
+"@id": "#39",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -5692,7 +2604,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#121/source-map",
+"@id": "#39/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5700,7 +2612,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#121"
+"@value": "amf://id#39"
 }
 ],
 "sourcemaps:value": [
@@ -5726,7 +2638,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#121"
+"@value": "amf://id#39"
 }
 ],
 "sourcemaps:value": [
@@ -5752,7 +2664,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#120/source-map",
+"@id": "#38/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5772,7 +2684,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#120"
+"@value": "amf://id#38"
 }
 ],
 "sourcemaps:value": [
@@ -5786,7 +2698,7 @@
 ]
 },
 {
-"@id": "#122",
+"@id": "#40",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5799,7 +2711,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#123",
+"@id": "#41",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -5818,7 +2730,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#123/source-map",
+"@id": "#41/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5826,7 +2738,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#123"
+"@value": "amf://id#41"
 }
 ],
 "sourcemaps:value": [
@@ -5852,7 +2764,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#123"
+"@value": "amf://id#41"
 }
 ],
 "sourcemaps:value": [
@@ -5878,7 +2790,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#122/source-map",
+"@id": "#40/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5898,7 +2810,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#122"
+"@value": "amf://id#40"
 }
 ],
 "sourcemaps:value": [
@@ -5912,7 +2824,7 @@
 ]
 },
 {
-"@id": "#124",
+"@id": "#42",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5925,7 +2837,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#125",
+"@id": "#43",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -5944,7 +2856,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#125/source-map",
+"@id": "#43/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5952,7 +2864,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#125"
+"@value": "amf://id#43"
 }
 ],
 "sourcemaps:value": [
@@ -5978,7 +2890,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#125"
+"@value": "amf://id#43"
 }
 ],
 "sourcemaps:value": [
@@ -6004,7 +2916,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#124/source-map",
+"@id": "#42/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6024,7 +2936,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#124"
+"@value": "amf://id#42"
 }
 ],
 "sourcemaps:value": [
@@ -6038,7 +2950,7 @@
 ]
 },
 {
-"@id": "#126",
+"@id": "#44",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6051,7 +2963,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#127",
+"@id": "#45",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6070,7 +2982,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#127/source-map",
+"@id": "#45/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6078,7 +2990,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#127"
+"@value": "amf://id#45"
 }
 ],
 "sourcemaps:value": [
@@ -6104,7 +3016,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#127"
+"@value": "amf://id#45"
 }
 ],
 "sourcemaps:value": [
@@ -6130,7 +3042,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#126/source-map",
+"@id": "#44/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6150,7 +3062,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#126"
+"@value": "amf://id#44"
 }
 ],
 "sourcemaps:value": [
@@ -6164,7 +3076,7 @@
 ]
 },
 {
-"@id": "#128",
+"@id": "#46",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6177,7 +3089,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#129",
+"@id": "#47",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6196,7 +3108,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#129/source-map",
+"@id": "#47/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6204,7 +3116,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#129"
+"@value": "amf://id#47"
 }
 ],
 "sourcemaps:value": [
@@ -6230,7 +3142,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#129"
+"@value": "amf://id#47"
 }
 ],
 "sourcemaps:value": [
@@ -6256,7 +3168,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#128/source-map",
+"@id": "#46/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6276,7 +3188,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#128"
+"@value": "amf://id#46"
 }
 ],
 "sourcemaps:value": [
@@ -6290,7 +3202,7 @@
 ]
 },
 {
-"@id": "#130",
+"@id": "#48",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6303,7 +3215,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#131",
+"@id": "#49",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6322,7 +3234,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#131/source-map",
+"@id": "#49/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6330,7 +3242,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#131"
+"@value": "amf://id#49"
 }
 ],
 "sourcemaps:value": [
@@ -6356,7 +3268,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#131"
+"@value": "amf://id#49"
 }
 ],
 "sourcemaps:value": [
@@ -6382,7 +3294,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#130/source-map",
+"@id": "#48/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6402,7 +3314,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#130"
+"@value": "amf://id#48"
 }
 ],
 "sourcemaps:value": [
@@ -6416,7 +3328,7 @@
 ]
 },
 {
-"@id": "#132",
+"@id": "#50",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6429,7 +3341,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#133",
+"@id": "#51",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6448,7 +3360,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#133/source-map",
+"@id": "#51/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6456,7 +3368,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#133"
+"@value": "amf://id#51"
 }
 ],
 "sourcemaps:value": [
@@ -6482,7 +3394,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#133"
+"@value": "amf://id#51"
 }
 ],
 "sourcemaps:value": [
@@ -6508,7 +3420,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#132/source-map",
+"@id": "#50/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6528,7 +3440,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#132"
+"@value": "amf://id#50"
 }
 ],
 "sourcemaps:value": [
@@ -6542,7 +3454,7 @@
 ]
 },
 {
-"@id": "#134",
+"@id": "#52",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6555,7 +3467,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#135",
+"@id": "#53",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6574,7 +3486,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#135/source-map",
+"@id": "#53/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6582,7 +3494,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#135"
+"@value": "amf://id#53"
 }
 ],
 "sourcemaps:value": [
@@ -6608,7 +3520,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#135"
+"@value": "amf://id#53"
 }
 ],
 "sourcemaps:value": [
@@ -6634,7 +3546,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#134/source-map",
+"@id": "#52/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6654,7 +3566,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#134"
+"@value": "amf://id#52"
 }
 ],
 "sourcemaps:value": [
@@ -6668,7 +3580,7 @@
 ]
 },
 {
-"@id": "#136",
+"@id": "#54",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6681,7 +3593,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#137",
+"@id": "#55",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6700,7 +3612,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#137/source-map",
+"@id": "#55/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6708,7 +3620,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#137"
+"@value": "amf://id#55"
 }
 ],
 "sourcemaps:value": [
@@ -6734,7 +3646,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#137"
+"@value": "amf://id#55"
 }
 ],
 "sourcemaps:value": [
@@ -6760,7 +3672,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#136/source-map",
+"@id": "#54/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6780,7 +3692,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#136"
+"@value": "amf://id#54"
 }
 ],
 "sourcemaps:value": [
@@ -6794,7 +3706,7 @@
 ]
 },
 {
-"@id": "#138",
+"@id": "#56",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6807,7 +3719,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#139",
+"@id": "#57",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6826,7 +3738,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#139/source-map",
+"@id": "#57/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6834,7 +3746,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#139"
+"@value": "amf://id#57"
 }
 ],
 "sourcemaps:value": [
@@ -6860,7 +3772,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#139"
+"@value": "amf://id#57"
 }
 ],
 "sourcemaps:value": [
@@ -6886,7 +3798,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#138/source-map",
+"@id": "#56/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6906,7 +3818,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#138"
+"@value": "amf://id#56"
 }
 ],
 "sourcemaps:value": [
@@ -6920,7 +3832,7 @@
 ]
 },
 {
-"@id": "#140",
+"@id": "#58",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6933,7 +3845,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#141",
+"@id": "#59",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6952,7 +3864,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#141/source-map",
+"@id": "#59/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6960,7 +3872,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#141"
+"@value": "amf://id#59"
 }
 ],
 "sourcemaps:value": [
@@ -6986,7 +3898,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#141"
+"@value": "amf://id#59"
 }
 ],
 "sourcemaps:value": [
@@ -7012,7 +3924,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#140/source-map",
+"@id": "#58/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7032,7 +3944,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#140"
+"@value": "amf://id#58"
 }
 ],
 "sourcemaps:value": [
@@ -7046,7 +3958,7 @@
 ]
 },
 {
-"@id": "#142",
+"@id": "#60",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -7059,7 +3971,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#143",
+"@id": "#61",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -7078,7 +3990,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#143/source-map",
+"@id": "#61/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7086,7 +3998,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#143"
+"@value": "amf://id#61"
 }
 ],
 "sourcemaps:value": [
@@ -7112,7 +4024,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#143"
+"@value": "amf://id#61"
 }
 ],
 "sourcemaps:value": [
@@ -7138,7 +4050,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#142/source-map",
+"@id": "#60/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7158,7 +4070,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#142"
+"@value": "amf://id#60"
 }
 ],
 "sourcemaps:value": [
@@ -7172,7 +4084,7 @@
 ]
 },
 {
-"@id": "#144",
+"@id": "#62",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -7185,7 +4097,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#145",
+"@id": "#63",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -7204,7 +4116,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#145/source-map",
+"@id": "#63/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7212,7 +4124,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#145"
+"@value": "amf://id#63"
 }
 ],
 "sourcemaps:value": [
@@ -7238,7 +4150,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#145"
+"@value": "amf://id#63"
 }
 ],
 "sourcemaps:value": [
@@ -7264,7 +4176,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#144/source-map",
+"@id": "#62/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7284,7 +4196,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#144"
+"@value": "amf://id#62"
 }
 ],
 "sourcemaps:value": [
@@ -7298,7 +4210,7 @@
 ]
 },
 {
-"@id": "#146",
+"@id": "#64",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -7311,7 +4223,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#147",
+"@id": "#65",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -7330,7 +4242,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#147/source-map",
+"@id": "#65/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7338,7 +4250,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#147"
+"@value": "amf://id#65"
 }
 ],
 "sourcemaps:value": [
@@ -7364,7 +4276,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#147"
+"@value": "amf://id#65"
 }
 ],
 "sourcemaps:value": [
@@ -7390,7 +4302,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#146/source-map",
+"@id": "#64/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7410,7 +4322,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#146"
+"@value": "amf://id#64"
 }
 ],
 "sourcemaps:value": [
@@ -7424,7 +4336,7 @@
 ]
 },
 {
-"@id": "#148",
+"@id": "#66",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -7437,7 +4349,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#149",
+"@id": "#67",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -7456,7 +4368,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#149/source-map",
+"@id": "#67/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7464,7 +4376,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#149"
+"@value": "amf://id#67"
 }
 ],
 "sourcemaps:value": [
@@ -7490,7 +4402,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#149"
+"@value": "amf://id#67"
 }
 ],
 "sourcemaps:value": [
@@ -7516,7 +4428,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#148/source-map",
+"@id": "#66/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7536,7 +4448,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#148"
+"@value": "amf://id#66"
 }
 ],
 "sourcemaps:value": [
@@ -7550,7 +4462,7 @@
 ]
 },
 {
-"@id": "#150",
+"@id": "#68",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -7563,7 +4475,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#151",
+"@id": "#69",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -7582,7 +4494,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#151/source-map",
+"@id": "#69/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7590,7 +4502,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#151"
+"@value": "amf://id#69"
 }
 ],
 "sourcemaps:value": [
@@ -7616,7 +4528,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#151"
+"@value": "amf://id#69"
 }
 ],
 "sourcemaps:value": [
@@ -7642,7 +4554,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#150/source-map",
+"@id": "#68/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7662,7 +4574,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#150"
+"@value": "amf://id#68"
 }
 ],
 "sourcemaps:value": [
@@ -7676,7 +4588,7 @@
 ]
 },
 {
-"@id": "#152",
+"@id": "#70",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -7689,7 +4601,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#153",
+"@id": "#71",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -7708,7 +4620,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#153/source-map",
+"@id": "#71/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7716,7 +4628,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#153"
+"@value": "amf://id#71"
 }
 ],
 "sourcemaps:value": [
@@ -7742,7 +4654,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#153"
+"@value": "amf://id#71"
 }
 ],
 "sourcemaps:value": [
@@ -7768,7 +4680,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#152/source-map",
+"@id": "#70/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7788,7 +4700,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#152"
+"@value": "amf://id#70"
 }
 ],
 "sourcemaps:value": [
@@ -7802,7 +4714,7 @@
 ]
 },
 {
-"@id": "#154",
+"@id": "#72",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -7815,7 +4727,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#155",
+"@id": "#73",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -7834,7 +4746,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#155/source-map",
+"@id": "#73/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7842,7 +4754,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#155"
+"@value": "amf://id#73"
 }
 ],
 "sourcemaps:value": [
@@ -7868,7 +4780,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#155"
+"@value": "amf://id#73"
 }
 ],
 "sourcemaps:value": [
@@ -7894,7 +4806,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#154/source-map",
+"@id": "#72/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7914,7 +4826,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#154"
+"@value": "amf://id#72"
 }
 ],
 "sourcemaps:value": [
@@ -7928,7 +4840,7 @@
 ]
 },
 {
-"@id": "#156",
+"@id": "#74",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -7941,7 +4853,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#157",
+"@id": "#75",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -7960,7 +4872,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#157/source-map",
+"@id": "#75/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7968,7 +4880,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#157"
+"@value": "amf://id#75"
 }
 ],
 "sourcemaps:value": [
@@ -7994,7 +4906,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#157"
+"@value": "amf://id#75"
 }
 ],
 "sourcemaps:value": [
@@ -8020,7 +4932,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#156/source-map",
+"@id": "#74/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8040,7 +4952,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#156"
+"@value": "amf://id#74"
 }
 ],
 "sourcemaps:value": [
@@ -8054,7 +4966,7 @@
 ]
 },
 {
-"@id": "#158",
+"@id": "#76",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -8067,7 +4979,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#159",
+"@id": "#77",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -8086,7 +4998,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#159/source-map",
+"@id": "#77/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8094,7 +5006,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#159"
+"@value": "amf://id#77"
 }
 ],
 "sourcemaps:value": [
@@ -8120,7 +5032,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#159"
+"@value": "amf://id#77"
 }
 ],
 "sourcemaps:value": [
@@ -8146,7 +5058,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#158/source-map",
+"@id": "#76/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8166,7 +5078,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#158"
+"@value": "amf://id#76"
 }
 ],
 "sourcemaps:value": [
@@ -8180,7 +5092,7 @@
 ]
 },
 {
-"@id": "#160",
+"@id": "#78",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -8193,7 +5105,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#161",
+"@id": "#79",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -8212,7 +5124,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#161/source-map",
+"@id": "#79/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8220,7 +5132,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#161"
+"@value": "amf://id#79"
 }
 ],
 "sourcemaps:value": [
@@ -8246,7 +5158,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#161"
+"@value": "amf://id#79"
 }
 ],
 "sourcemaps:value": [
@@ -8272,7 +5184,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#160/source-map",
+"@id": "#78/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8292,7 +5204,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#160"
+"@value": "amf://id#78"
 }
 ],
 "sourcemaps:value": [
@@ -8306,7 +5218,7 @@
 ]
 },
 {
-"@id": "#162",
+"@id": "#80",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -8319,7 +5231,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#163",
+"@id": "#81",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -8338,7 +5250,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#163/source-map",
+"@id": "#81/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8346,7 +5258,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#163"
+"@value": "amf://id#81"
 }
 ],
 "sourcemaps:value": [
@@ -8372,7 +5284,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#163"
+"@value": "amf://id#81"
 }
 ],
 "sourcemaps:value": [
@@ -8398,7 +5310,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#162/source-map",
+"@id": "#80/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8418,7 +5330,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#162"
+"@value": "amf://id#80"
 }
 ],
 "sourcemaps:value": [
@@ -8432,7 +5344,7 @@
 ]
 },
 {
-"@id": "#164",
+"@id": "#82",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -8445,7 +5357,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#165",
+"@id": "#83",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -8464,7 +5376,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#165/source-map",
+"@id": "#83/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8472,7 +5384,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#165"
+"@value": "amf://id#83"
 }
 ],
 "sourcemaps:value": [
@@ -8498,7 +5410,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#165"
+"@value": "amf://id#83"
 }
 ],
 "sourcemaps:value": [
@@ -8524,7 +5436,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#164/source-map",
+"@id": "#82/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8544,7 +5456,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#164"
+"@value": "amf://id#82"
 }
 ],
 "sourcemaps:value": [
@@ -8558,7 +5470,7 @@
 ]
 },
 {
-"@id": "#166",
+"@id": "#84",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -8571,7 +5483,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#167",
+"@id": "#85",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -8590,7 +5502,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#167/source-map",
+"@id": "#85/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8598,7 +5510,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#167"
+"@value": "amf://id#85"
 }
 ],
 "sourcemaps:value": [
@@ -8624,7 +5536,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#167"
+"@value": "amf://id#85"
 }
 ],
 "sourcemaps:value": [
@@ -8650,7 +5562,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#166/source-map",
+"@id": "#84/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8670,7 +5582,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#166"
+"@value": "amf://id#84"
 }
 ],
 "sourcemaps:value": [
@@ -8684,7 +5596,7 @@
 ]
 },
 {
-"@id": "#168",
+"@id": "#86",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -8697,7 +5609,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#169",
+"@id": "#87",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -8716,13 +5628,15 @@
 ],
 "shacl:in": [
 {
-"@id": "#169/list",
+"@id": "#87/list",
 "@type": "rdfs:Seq",
 "rdfs:_1": [
 {
-"@id": "#170",
+"@id": "#88",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -8732,7 +5646,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#170/source-map",
+"@id": "#88/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8740,7 +5654,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#170"
+"@value": "amf://id#88"
 }
 ],
 "sourcemaps:value": [
@@ -8756,9 +5670,11 @@
 ],
 "rdfs:_2": [
 {
-"@id": "#171",
+"@id": "#89",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -8768,7 +5684,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#171/source-map",
+"@id": "#89/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8776,7 +5692,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#171"
+"@value": "amf://id#89"
 }
 ],
 "sourcemaps:value": [
@@ -8794,7 +5710,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#169/source-map",
+"@id": "#87/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8802,7 +5718,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#169"
+"@value": "amf://id#87"
 }
 ],
 "sourcemaps:value": [
@@ -8828,7 +5744,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#169"
+"@value": "amf://id#87"
 }
 ],
 "sourcemaps:value": [
@@ -8866,7 +5782,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#168/source-map",
+"@id": "#86/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8886,7 +5802,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#168"
+"@value": "amf://id#86"
 }
 ],
 "sourcemaps:value": [
@@ -8907,7 +5823,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#91/source-map",
+"@id": "#9/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8915,7 +5831,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#91"
+"@value": "amf://id#9"
 }
 ],
 "sourcemaps:value": [
@@ -8929,7 +5845,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#91"
+"@value": "amf://id#9"
 }
 ],
 "sourcemaps:value": [
@@ -8950,7 +5866,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#90/source-map",
+"@id": "#8/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -8958,7 +5874,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#90"
+"@value": "amf://id#8"
 }
 ],
 "sourcemaps:value": [
@@ -8972,7 +5888,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#90"
+"@value": "amf://id#8"
 }
 ],
 "sourcemaps:value": [
@@ -8998,7 +5914,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#89/source-map",
+"@id": "#7/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9018,7 +5934,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#89"
+"@value": "amf://id#7"
 }
 ],
 "sourcemaps:value": [
@@ -9049,7 +5965,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#86/source-map",
+"@id": "#4/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9057,7 +5973,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#86"
+"@value": "amf://id#4"
 }
 ],
 "sourcemaps:value": [
@@ -9083,7 +5999,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#86"
+"@value": "amf://id#4"
 }
 ],
 "sourcemaps:value": [
@@ -9111,7 +6027,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#85/source-map",
+"@id": "#3/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9119,7 +6035,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#85"
+"@value": "amf://id#3"
 }
 ],
 "sourcemaps:value": [
@@ -9135,7 +6051,7 @@
 ],
 "doc:declares": [
 {
-"@id": "#172",
+"@id": "#90",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -9149,7 +6065,7 @@
 ],
 "shacl:property": [
 {
-"@id": "#87",
+"@id": "#5",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -9162,7 +6078,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#88",
+"@id": "#6",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -9181,7 +6097,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#88/source-map",
+"@id": "#6/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9189,7 +6105,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#88"
+"@value": "amf://id#6"
 }
 ],
 "sourcemaps:value": [
@@ -9215,7 +6131,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#88"
+"@value": "amf://id#6"
 }
 ],
 "sourcemaps:value": [
@@ -9241,7 +6157,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#87/source-map",
+"@id": "#5/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9261,7 +6177,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#87"
+"@value": "amf://id#5"
 }
 ],
 "sourcemaps:value": [
@@ -9275,7 +6191,7 @@
 ]
 },
 {
-"@id": "#89",
+"@id": "#7",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -9288,7 +6204,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#90",
+"@id": "#8",
 "@type": [
 "raml-shapes:ArrayShape",
 "shacl:Shape",
@@ -9297,7 +6213,7 @@
 ],
 "raml-shapes:items": [
 {
-"@id": "#91",
+"@id": "#9",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -9311,7 +6227,7 @@
 ],
 "shacl:property": [
 {
-"@id": "#92",
+"@id": "#10",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -9324,7 +6240,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#93",
+"@id": "#11",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
@@ -9338,7 +6254,7 @@
 ],
 "shacl:property": [
 {
-"@id": "#94",
+"@id": "#12",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -9351,7 +6267,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#95",
+"@id": "#13",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -9370,7 +6286,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#95/source-map",
+"@id": "#13/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9378,7 +6294,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#95"
+"@value": "amf://id#13"
 }
 ],
 "sourcemaps:value": [
@@ -9404,7 +6320,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#95"
+"@value": "amf://id#13"
 }
 ],
 "sourcemaps:value": [
@@ -9430,7 +6346,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#94/source-map",
+"@id": "#12/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9450,7 +6366,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#94"
+"@value": "amf://id#12"
 }
 ],
 "sourcemaps:value": [
@@ -9471,7 +6387,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#93/source-map",
+"@id": "#11/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9479,7 +6395,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#93"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
@@ -9493,7 +6409,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#93"
+"@value": "amf://id#11"
 }
 ],
 "sourcemaps:value": [
@@ -9519,7 +6435,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#92/source-map",
+"@id": "#10/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9527,7 +6443,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#92"
+"@value": "amf://id#10"
 }
 ],
 "sourcemaps:value": [
@@ -9541,7 +6457,7 @@
 ]
 },
 {
-"@id": "#96",
+"@id": "#14",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -9554,7 +6470,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#97",
+"@id": "#15",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -9573,7 +6489,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#97/source-map",
+"@id": "#15/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9581,7 +6497,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#97"
+"@value": "amf://id#15"
 }
 ],
 "sourcemaps:value": [
@@ -9607,7 +6523,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#97"
+"@value": "amf://id#15"
 }
 ],
 "sourcemaps:value": [
@@ -9633,7 +6549,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#96/source-map",
+"@id": "#14/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9653,7 +6569,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#96"
+"@value": "amf://id#14"
 }
 ],
 "sourcemaps:value": [
@@ -9667,7 +6583,7 @@
 ]
 },
 {
-"@id": "#98",
+"@id": "#16",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -9680,7 +6596,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#99",
+"@id": "#17",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -9699,7 +6615,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#99/source-map",
+"@id": "#17/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9707,7 +6623,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#99"
+"@value": "amf://id#17"
 }
 ],
 "sourcemaps:value": [
@@ -9733,7 +6649,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#99"
+"@value": "amf://id#17"
 }
 ],
 "sourcemaps:value": [
@@ -9759,7 +6675,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#98/source-map",
+"@id": "#16/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9779,7 +6695,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#98"
+"@value": "amf://id#16"
 }
 ],
 "sourcemaps:value": [
@@ -9793,7 +6709,7 @@
 ]
 },
 {
-"@id": "#100",
+"@id": "#18",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -9806,7 +6722,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#101",
+"@id": "#19",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -9825,7 +6741,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#101/source-map",
+"@id": "#19/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9833,7 +6749,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#101"
+"@value": "amf://id#19"
 }
 ],
 "sourcemaps:value": [
@@ -9859,7 +6775,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#101"
+"@value": "amf://id#19"
 }
 ],
 "sourcemaps:value": [
@@ -9885,7 +6801,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#100/source-map",
+"@id": "#18/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9905,7 +6821,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#100"
+"@value": "amf://id#18"
 }
 ],
 "sourcemaps:value": [
@@ -9919,7 +6835,7 @@
 ]
 },
 {
-"@id": "#102",
+"@id": "#20",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -9932,7 +6848,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#103",
+"@id": "#21",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -9951,7 +6867,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#103/source-map",
+"@id": "#21/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9959,7 +6875,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#103"
+"@value": "amf://id#21"
 }
 ],
 "sourcemaps:value": [
@@ -9985,7 +6901,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#103"
+"@value": "amf://id#21"
 }
 ],
 "sourcemaps:value": [
@@ -10011,7 +6927,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#102/source-map",
+"@id": "#20/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10031,7 +6947,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#102"
+"@value": "amf://id#20"
 }
 ],
 "sourcemaps:value": [
@@ -10045,7 +6961,7 @@
 ]
 },
 {
-"@id": "#104",
+"@id": "#22",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -10058,7 +6974,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#105",
+"@id": "#23",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -10077,7 +6993,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#105/source-map",
+"@id": "#23/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10085,7 +7001,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#105"
+"@value": "amf://id#23"
 }
 ],
 "sourcemaps:value": [
@@ -10111,7 +7027,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#105"
+"@value": "amf://id#23"
 }
 ],
 "sourcemaps:value": [
@@ -10137,7 +7053,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#104/source-map",
+"@id": "#22/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10157,7 +7073,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#104"
+"@value": "amf://id#22"
 }
 ],
 "sourcemaps:value": [
@@ -10171,7 +7087,7 @@
 ]
 },
 {
-"@id": "#106",
+"@id": "#24",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -10184,7 +7100,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#107",
+"@id": "#25",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -10203,7 +7119,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#107/source-map",
+"@id": "#25/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10211,7 +7127,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#107"
+"@value": "amf://id#25"
 }
 ],
 "sourcemaps:value": [
@@ -10237,7 +7153,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#107"
+"@value": "amf://id#25"
 }
 ],
 "sourcemaps:value": [
@@ -10263,7 +7179,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#106/source-map",
+"@id": "#24/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10283,7 +7199,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#106"
+"@value": "amf://id#24"
 }
 ],
 "sourcemaps:value": [
@@ -10297,7 +7213,7 @@
 ]
 },
 {
-"@id": "#108",
+"@id": "#26",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -10310,7 +7226,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#109",
+"@id": "#27",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -10329,7 +7245,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#109/source-map",
+"@id": "#27/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10337,7 +7253,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#109"
+"@value": "amf://id#27"
 }
 ],
 "sourcemaps:value": [
@@ -10363,7 +7279,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#109"
+"@value": "amf://id#27"
 }
 ],
 "sourcemaps:value": [
@@ -10389,7 +7305,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#108/source-map",
+"@id": "#26/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10409,7 +7325,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#108"
+"@value": "amf://id#26"
 }
 ],
 "sourcemaps:value": [
@@ -10423,7 +7339,7 @@
 ]
 },
 {
-"@id": "#110",
+"@id": "#28",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -10436,7 +7352,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#111",
+"@id": "#29",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -10455,7 +7371,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#111/source-map",
+"@id": "#29/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10463,7 +7379,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#111"
+"@value": "amf://id#29"
 }
 ],
 "sourcemaps:value": [
@@ -10489,7 +7405,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#111"
+"@value": "amf://id#29"
 }
 ],
 "sourcemaps:value": [
@@ -10515,7 +7431,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#110/source-map",
+"@id": "#28/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10535,7 +7451,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#110"
+"@value": "amf://id#28"
 }
 ],
 "sourcemaps:value": [
@@ -10549,7 +7465,7 @@
 ]
 },
 {
-"@id": "#112",
+"@id": "#30",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -10562,7 +7478,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#113",
+"@id": "#31",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -10581,7 +7497,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#113/source-map",
+"@id": "#31/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10589,7 +7505,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#113"
+"@value": "amf://id#31"
 }
 ],
 "sourcemaps:value": [
@@ -10615,7 +7531,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#113"
+"@value": "amf://id#31"
 }
 ],
 "sourcemaps:value": [
@@ -10641,7 +7557,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#30/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10661,7 +7577,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#30"
 }
 ],
 "sourcemaps:value": [
@@ -10675,7 +7591,7 @@
 ]
 },
 {
-"@id": "#114",
+"@id": "#32",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -10688,7 +7604,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#115",
+"@id": "#33",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -10707,7 +7623,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#115/source-map",
+"@id": "#33/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10715,7 +7631,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#115"
+"@value": "amf://id#33"
 }
 ],
 "sourcemaps:value": [
@@ -10741,7 +7657,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#115"
+"@value": "amf://id#33"
 }
 ],
 "sourcemaps:value": [
@@ -10767,7 +7683,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#114/source-map",
+"@id": "#32/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10787,7 +7703,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#114"
+"@value": "amf://id#32"
 }
 ],
 "sourcemaps:value": [
@@ -10801,7 +7717,7 @@
 ]
 },
 {
-"@id": "#116",
+"@id": "#34",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -10814,7 +7730,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#117",
+"@id": "#35",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -10833,7 +7749,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#117/source-map",
+"@id": "#35/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10841,7 +7757,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#117"
+"@value": "amf://id#35"
 }
 ],
 "sourcemaps:value": [
@@ -10867,7 +7783,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#117"
+"@value": "amf://id#35"
 }
 ],
 "sourcemaps:value": [
@@ -10893,7 +7809,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#116/source-map",
+"@id": "#34/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10913,7 +7829,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#116"
+"@value": "amf://id#34"
 }
 ],
 "sourcemaps:value": [
@@ -10927,7 +7843,7 @@
 ]
 },
 {
-"@id": "#118",
+"@id": "#36",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -10940,7 +7856,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#119",
+"@id": "#37",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -10959,7 +7875,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#119/source-map",
+"@id": "#37/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10967,7 +7883,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#119"
+"@value": "amf://id#37"
 }
 ],
 "sourcemaps:value": [
@@ -10993,7 +7909,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#119"
+"@value": "amf://id#37"
 }
 ],
 "sourcemaps:value": [
@@ -11019,7 +7935,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#118/source-map",
+"@id": "#36/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11039,7 +7955,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#118"
+"@value": "amf://id#36"
 }
 ],
 "sourcemaps:value": [
@@ -11053,7 +7969,7 @@
 ]
 },
 {
-"@id": "#120",
+"@id": "#38",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -11066,7 +7982,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#121",
+"@id": "#39",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -11085,7 +8001,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#121/source-map",
+"@id": "#39/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11093,7 +8009,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#121"
+"@value": "amf://id#39"
 }
 ],
 "sourcemaps:value": [
@@ -11119,7 +8035,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#121"
+"@value": "amf://id#39"
 }
 ],
 "sourcemaps:value": [
@@ -11145,7 +8061,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#120/source-map",
+"@id": "#38/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11165,7 +8081,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#120"
+"@value": "amf://id#38"
 }
 ],
 "sourcemaps:value": [
@@ -11179,7 +8095,7 @@
 ]
 },
 {
-"@id": "#122",
+"@id": "#40",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -11192,7 +8108,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#123",
+"@id": "#41",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -11211,7 +8127,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#123/source-map",
+"@id": "#41/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11219,7 +8135,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#123"
+"@value": "amf://id#41"
 }
 ],
 "sourcemaps:value": [
@@ -11245,7 +8161,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#123"
+"@value": "amf://id#41"
 }
 ],
 "sourcemaps:value": [
@@ -11271,7 +8187,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#122/source-map",
+"@id": "#40/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11291,7 +8207,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#122"
+"@value": "amf://id#40"
 }
 ],
 "sourcemaps:value": [
@@ -11305,7 +8221,7 @@
 ]
 },
 {
-"@id": "#124",
+"@id": "#42",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -11318,7 +8234,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#125",
+"@id": "#43",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -11337,7 +8253,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#125/source-map",
+"@id": "#43/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11345,7 +8261,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#125"
+"@value": "amf://id#43"
 }
 ],
 "sourcemaps:value": [
@@ -11371,7 +8287,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#125"
+"@value": "amf://id#43"
 }
 ],
 "sourcemaps:value": [
@@ -11397,7 +8313,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#124/source-map",
+"@id": "#42/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11417,7 +8333,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#124"
+"@value": "amf://id#42"
 }
 ],
 "sourcemaps:value": [
@@ -11431,7 +8347,7 @@
 ]
 },
 {
-"@id": "#126",
+"@id": "#44",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -11444,7 +8360,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#127",
+"@id": "#45",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -11463,7 +8379,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#127/source-map",
+"@id": "#45/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11471,7 +8387,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#127"
+"@value": "amf://id#45"
 }
 ],
 "sourcemaps:value": [
@@ -11497,7 +8413,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#127"
+"@value": "amf://id#45"
 }
 ],
 "sourcemaps:value": [
@@ -11523,7 +8439,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#126/source-map",
+"@id": "#44/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11543,7 +8459,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#126"
+"@value": "amf://id#44"
 }
 ],
 "sourcemaps:value": [
@@ -11557,7 +8473,7 @@
 ]
 },
 {
-"@id": "#128",
+"@id": "#46",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -11570,7 +8486,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#129",
+"@id": "#47",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -11589,7 +8505,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#129/source-map",
+"@id": "#47/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11597,7 +8513,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#129"
+"@value": "amf://id#47"
 }
 ],
 "sourcemaps:value": [
@@ -11623,7 +8539,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#129"
+"@value": "amf://id#47"
 }
 ],
 "sourcemaps:value": [
@@ -11649,7 +8565,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#128/source-map",
+"@id": "#46/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11669,7 +8585,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#128"
+"@value": "amf://id#46"
 }
 ],
 "sourcemaps:value": [
@@ -11683,7 +8599,7 @@
 ]
 },
 {
-"@id": "#130",
+"@id": "#48",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -11696,7 +8612,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#131",
+"@id": "#49",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -11715,7 +8631,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#131/source-map",
+"@id": "#49/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11723,7 +8639,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#131"
+"@value": "amf://id#49"
 }
 ],
 "sourcemaps:value": [
@@ -11749,7 +8665,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#131"
+"@value": "amf://id#49"
 }
 ],
 "sourcemaps:value": [
@@ -11775,7 +8691,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#130/source-map",
+"@id": "#48/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11795,7 +8711,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#130"
+"@value": "amf://id#48"
 }
 ],
 "sourcemaps:value": [
@@ -11809,7 +8725,7 @@
 ]
 },
 {
-"@id": "#132",
+"@id": "#50",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -11822,7 +8738,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#133",
+"@id": "#51",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -11841,7 +8757,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#133/source-map",
+"@id": "#51/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11849,7 +8765,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#133"
+"@value": "amf://id#51"
 }
 ],
 "sourcemaps:value": [
@@ -11875,7 +8791,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#133"
+"@value": "amf://id#51"
 }
 ],
 "sourcemaps:value": [
@@ -11901,7 +8817,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#132/source-map",
+"@id": "#50/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11921,7 +8837,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#132"
+"@value": "amf://id#50"
 }
 ],
 "sourcemaps:value": [
@@ -11935,7 +8851,7 @@
 ]
 },
 {
-"@id": "#134",
+"@id": "#52",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -11948,7 +8864,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#135",
+"@id": "#53",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -11967,7 +8883,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#135/source-map",
+"@id": "#53/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11975,7 +8891,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#135"
+"@value": "amf://id#53"
 }
 ],
 "sourcemaps:value": [
@@ -12001,7 +8917,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#135"
+"@value": "amf://id#53"
 }
 ],
 "sourcemaps:value": [
@@ -12027,7 +8943,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#134/source-map",
+"@id": "#52/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12047,7 +8963,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#134"
+"@value": "amf://id#52"
 }
 ],
 "sourcemaps:value": [
@@ -12061,7 +8977,7 @@
 ]
 },
 {
-"@id": "#136",
+"@id": "#54",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -12074,7 +8990,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#137",
+"@id": "#55",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -12093,7 +9009,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#137/source-map",
+"@id": "#55/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12101,7 +9017,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#137"
+"@value": "amf://id#55"
 }
 ],
 "sourcemaps:value": [
@@ -12127,7 +9043,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#137"
+"@value": "amf://id#55"
 }
 ],
 "sourcemaps:value": [
@@ -12153,7 +9069,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#136/source-map",
+"@id": "#54/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12173,7 +9089,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#136"
+"@value": "amf://id#54"
 }
 ],
 "sourcemaps:value": [
@@ -12187,7 +9103,7 @@
 ]
 },
 {
-"@id": "#138",
+"@id": "#56",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -12200,7 +9116,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#139",
+"@id": "#57",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -12219,7 +9135,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#139/source-map",
+"@id": "#57/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12227,7 +9143,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#139"
+"@value": "amf://id#57"
 }
 ],
 "sourcemaps:value": [
@@ -12253,7 +9169,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#139"
+"@value": "amf://id#57"
 }
 ],
 "sourcemaps:value": [
@@ -12279,7 +9195,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#138/source-map",
+"@id": "#56/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12299,7 +9215,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#138"
+"@value": "amf://id#56"
 }
 ],
 "sourcemaps:value": [
@@ -12313,7 +9229,7 @@
 ]
 },
 {
-"@id": "#140",
+"@id": "#58",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -12326,7 +9242,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#141",
+"@id": "#59",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -12345,7 +9261,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#141/source-map",
+"@id": "#59/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12353,7 +9269,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#141"
+"@value": "amf://id#59"
 }
 ],
 "sourcemaps:value": [
@@ -12379,7 +9295,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#141"
+"@value": "amf://id#59"
 }
 ],
 "sourcemaps:value": [
@@ -12405,7 +9321,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#140/source-map",
+"@id": "#58/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12425,7 +9341,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#140"
+"@value": "amf://id#58"
 }
 ],
 "sourcemaps:value": [
@@ -12439,7 +9355,7 @@
 ]
 },
 {
-"@id": "#142",
+"@id": "#60",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -12452,7 +9368,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#143",
+"@id": "#61",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -12471,7 +9387,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#143/source-map",
+"@id": "#61/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12479,7 +9395,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#143"
+"@value": "amf://id#61"
 }
 ],
 "sourcemaps:value": [
@@ -12505,7 +9421,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#143"
+"@value": "amf://id#61"
 }
 ],
 "sourcemaps:value": [
@@ -12531,7 +9447,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#142/source-map",
+"@id": "#60/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12551,7 +9467,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#142"
+"@value": "amf://id#60"
 }
 ],
 "sourcemaps:value": [
@@ -12565,7 +9481,7 @@
 ]
 },
 {
-"@id": "#144",
+"@id": "#62",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -12578,7 +9494,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#145",
+"@id": "#63",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -12597,7 +9513,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#145/source-map",
+"@id": "#63/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12605,7 +9521,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#145"
+"@value": "amf://id#63"
 }
 ],
 "sourcemaps:value": [
@@ -12631,7 +9547,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#145"
+"@value": "amf://id#63"
 }
 ],
 "sourcemaps:value": [
@@ -12657,7 +9573,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#144/source-map",
+"@id": "#62/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12677,7 +9593,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#144"
+"@value": "amf://id#62"
 }
 ],
 "sourcemaps:value": [
@@ -12691,7 +9607,7 @@
 ]
 },
 {
-"@id": "#146",
+"@id": "#64",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -12704,7 +9620,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#147",
+"@id": "#65",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -12723,7 +9639,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#147/source-map",
+"@id": "#65/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12731,7 +9647,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#147"
+"@value": "amf://id#65"
 }
 ],
 "sourcemaps:value": [
@@ -12757,7 +9673,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#147"
+"@value": "amf://id#65"
 }
 ],
 "sourcemaps:value": [
@@ -12783,7 +9699,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#146/source-map",
+"@id": "#64/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12803,7 +9719,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#146"
+"@value": "amf://id#64"
 }
 ],
 "sourcemaps:value": [
@@ -12817,7 +9733,7 @@
 ]
 },
 {
-"@id": "#148",
+"@id": "#66",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -12830,7 +9746,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#149",
+"@id": "#67",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -12849,7 +9765,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#149/source-map",
+"@id": "#67/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12857,7 +9773,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#149"
+"@value": "amf://id#67"
 }
 ],
 "sourcemaps:value": [
@@ -12883,7 +9799,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#149"
+"@value": "amf://id#67"
 }
 ],
 "sourcemaps:value": [
@@ -12909,7 +9825,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#148/source-map",
+"@id": "#66/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12929,7 +9845,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#148"
+"@value": "amf://id#66"
 }
 ],
 "sourcemaps:value": [
@@ -12943,7 +9859,7 @@
 ]
 },
 {
-"@id": "#150",
+"@id": "#68",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -12956,7 +9872,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#151",
+"@id": "#69",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -12975,7 +9891,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#151/source-map",
+"@id": "#69/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -12983,7 +9899,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#151"
+"@value": "amf://id#69"
 }
 ],
 "sourcemaps:value": [
@@ -13009,7 +9925,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#151"
+"@value": "amf://id#69"
 }
 ],
 "sourcemaps:value": [
@@ -13035,7 +9951,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#150/source-map",
+"@id": "#68/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13055,7 +9971,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#150"
+"@value": "amf://id#68"
 }
 ],
 "sourcemaps:value": [
@@ -13069,7 +9985,7 @@
 ]
 },
 {
-"@id": "#152",
+"@id": "#70",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -13082,7 +9998,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#153",
+"@id": "#71",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -13101,7 +10017,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#153/source-map",
+"@id": "#71/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13109,7 +10025,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#153"
+"@value": "amf://id#71"
 }
 ],
 "sourcemaps:value": [
@@ -13135,7 +10051,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#153"
+"@value": "amf://id#71"
 }
 ],
 "sourcemaps:value": [
@@ -13161,7 +10077,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#152/source-map",
+"@id": "#70/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13181,7 +10097,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#152"
+"@value": "amf://id#70"
 }
 ],
 "sourcemaps:value": [
@@ -13195,7 +10111,7 @@
 ]
 },
 {
-"@id": "#154",
+"@id": "#72",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -13208,7 +10124,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#155",
+"@id": "#73",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -13227,7 +10143,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#155/source-map",
+"@id": "#73/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13235,7 +10151,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#155"
+"@value": "amf://id#73"
 }
 ],
 "sourcemaps:value": [
@@ -13261,7 +10177,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#155"
+"@value": "amf://id#73"
 }
 ],
 "sourcemaps:value": [
@@ -13287,7 +10203,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#154/source-map",
+"@id": "#72/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13307,7 +10223,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#154"
+"@value": "amf://id#72"
 }
 ],
 "sourcemaps:value": [
@@ -13321,7 +10237,7 @@
 ]
 },
 {
-"@id": "#156",
+"@id": "#74",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -13334,7 +10250,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#157",
+"@id": "#75",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -13353,7 +10269,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#157/source-map",
+"@id": "#75/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13361,7 +10277,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#157"
+"@value": "amf://id#75"
 }
 ],
 "sourcemaps:value": [
@@ -13387,7 +10303,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#157"
+"@value": "amf://id#75"
 }
 ],
 "sourcemaps:value": [
@@ -13413,7 +10329,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#156/source-map",
+"@id": "#74/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13433,7 +10349,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#156"
+"@value": "amf://id#74"
 }
 ],
 "sourcemaps:value": [
@@ -13447,7 +10363,7 @@
 ]
 },
 {
-"@id": "#158",
+"@id": "#76",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -13460,7 +10376,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#159",
+"@id": "#77",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -13479,7 +10395,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#159/source-map",
+"@id": "#77/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13487,7 +10403,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#159"
+"@value": "amf://id#77"
 }
 ],
 "sourcemaps:value": [
@@ -13513,7 +10429,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#159"
+"@value": "amf://id#77"
 }
 ],
 "sourcemaps:value": [
@@ -13539,7 +10455,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#158/source-map",
+"@id": "#76/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13559,7 +10475,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#158"
+"@value": "amf://id#76"
 }
 ],
 "sourcemaps:value": [
@@ -13573,7 +10489,7 @@
 ]
 },
 {
-"@id": "#160",
+"@id": "#78",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -13586,7 +10502,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#161",
+"@id": "#79",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -13605,7 +10521,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#161/source-map",
+"@id": "#79/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13613,7 +10529,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#161"
+"@value": "amf://id#79"
 }
 ],
 "sourcemaps:value": [
@@ -13639,7 +10555,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#161"
+"@value": "amf://id#79"
 }
 ],
 "sourcemaps:value": [
@@ -13665,7 +10581,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#160/source-map",
+"@id": "#78/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13685,7 +10601,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#160"
+"@value": "amf://id#78"
 }
 ],
 "sourcemaps:value": [
@@ -13699,7 +10615,7 @@
 ]
 },
 {
-"@id": "#162",
+"@id": "#80",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -13712,7 +10628,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#163",
+"@id": "#81",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -13731,7 +10647,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#163/source-map",
+"@id": "#81/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13739,7 +10655,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#163"
+"@value": "amf://id#81"
 }
 ],
 "sourcemaps:value": [
@@ -13765,7 +10681,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#163"
+"@value": "amf://id#81"
 }
 ],
 "sourcemaps:value": [
@@ -13791,7 +10707,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#162/source-map",
+"@id": "#80/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13811,7 +10727,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#162"
+"@value": "amf://id#80"
 }
 ],
 "sourcemaps:value": [
@@ -13825,7 +10741,7 @@
 ]
 },
 {
-"@id": "#164",
+"@id": "#82",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -13838,7 +10754,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#165",
+"@id": "#83",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -13857,7 +10773,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#165/source-map",
+"@id": "#83/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13865,7 +10781,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#165"
+"@value": "amf://id#83"
 }
 ],
 "sourcemaps:value": [
@@ -13891,7 +10807,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#165"
+"@value": "amf://id#83"
 }
 ],
 "sourcemaps:value": [
@@ -13917,7 +10833,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#164/source-map",
+"@id": "#82/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13937,7 +10853,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#164"
+"@value": "amf://id#82"
 }
 ],
 "sourcemaps:value": [
@@ -13951,7 +10867,7 @@
 ]
 },
 {
-"@id": "#166",
+"@id": "#84",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -13964,7 +10880,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#167",
+"@id": "#85",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -13983,7 +10899,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#167/source-map",
+"@id": "#85/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -13991,7 +10907,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#167"
+"@value": "amf://id#85"
 }
 ],
 "sourcemaps:value": [
@@ -14017,7 +10933,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#167"
+"@value": "amf://id#85"
 }
 ],
 "sourcemaps:value": [
@@ -14043,7 +10959,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#166/source-map",
+"@id": "#84/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14063,7 +10979,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#166"
+"@value": "amf://id#84"
 }
 ],
 "sourcemaps:value": [
@@ -14077,7 +10993,7 @@
 ]
 },
 {
-"@id": "#168",
+"@id": "#86",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -14090,7 +11006,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#169",
+"@id": "#87",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -14109,13 +11025,15 @@
 ],
 "shacl:in": [
 {
-"@id": "#169/list",
+"@id": "#87/list",
 "@type": "rdfs:Seq",
 "rdfs:_1": [
 {
-"@id": "#170",
+"@id": "#88",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14125,7 +11043,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#170/source-map",
+"@id": "#88/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14133,7 +11051,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#170"
+"@value": "amf://id#88"
 }
 ],
 "sourcemaps:value": [
@@ -14149,9 +11067,11 @@
 ],
 "rdfs:_2": [
 {
-"@id": "#171",
+"@id": "#89",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14161,7 +11081,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#171/source-map",
+"@id": "#89/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14169,7 +11089,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#171"
+"@value": "amf://id#89"
 }
 ],
 "sourcemaps:value": [
@@ -14187,7 +11107,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#169/source-map",
+"@id": "#87/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14195,7 +11115,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#169"
+"@value": "amf://id#87"
 }
 ],
 "sourcemaps:value": [
@@ -14221,7 +11141,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#169"
+"@value": "amf://id#87"
 }
 ],
 "sourcemaps:value": [
@@ -14259,7 +11179,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#168/source-map",
+"@id": "#86/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14279,7 +11199,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#168"
+"@value": "amf://id#86"
 }
 ],
 "sourcemaps:value": [
@@ -14300,7 +11220,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#91/source-map",
+"@id": "#9/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14308,7 +11228,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#91"
+"@value": "amf://id#9"
 }
 ],
 "sourcemaps:value": [
@@ -14322,7 +11242,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#91"
+"@value": "amf://id#9"
 }
 ],
 "sourcemaps:value": [
@@ -14343,7 +11263,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#90/source-map",
+"@id": "#8/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14351,7 +11271,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#90"
+"@value": "amf://id#8"
 }
 ],
 "sourcemaps:value": [
@@ -14365,7 +11285,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#90"
+"@value": "amf://id#8"
 }
 ],
 "sourcemaps:value": [
@@ -14391,7 +11311,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#89/source-map",
+"@id": "#7/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14411,7 +11331,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#89"
+"@value": "amf://id#7"
 }
 ],
 "sourcemaps:value": [
@@ -14442,7 +11362,7 @@
 ],
 "doc:examples": [
 {
-"@id": "#2",
+"@id": "#91",
 "@type": [
 "doc:Example",
 "doc:DomainElement"
@@ -14459,15 +11379,19 @@
 ],
 "doc:structuredValue": [
 {
-"@id": "#2",
+"@id": "#91",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:allOrNone": [
 {
-"@id": "#3",
+"@id": "#92",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14477,7 +11401,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#3/source-map",
+"@id": "#92/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14485,7 +11409,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#3"
+"@value": "amf://id#92"
 }
 ],
 "sourcemaps:value": [
@@ -14501,22 +11425,28 @@
 ],
 "data:records": [
 {
-"@id": "#4",
+"@id": "#93",
 "@type": [
 "data:Array",
-"rdf:Seq"
+"rdf:Seq",
+"data:Node",
+"doc:DomainElement"
 ],
 "rdf:member": [
 {
-"@id": "#5",
+"@id": "#94",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:AS400CityName": [
 {
-"@id": "#6",
+"@id": "#95",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14526,7 +11456,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#6/source-map",
+"@id": "#95/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14534,7 +11464,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#6"
+"@value": "amf://id#95"
 }
 ],
 "sourcemaps:value": [
@@ -14550,9 +11480,11 @@
 ],
 "data:AS400ECM": [
 {
-"@id": "#7",
+"@id": "#96",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14562,7 +11494,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#7/source-map",
+"@id": "#96/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14570,7 +11502,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#7"
+"@value": "amf://id#96"
 }
 ],
 "sourcemaps:value": [
@@ -14586,9 +11518,11 @@
 ],
 "data:AS400Location": [
 {
-"@id": "#8",
+"@id": "#97",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14598,7 +11532,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#8/source-map",
+"@id": "#97/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14606,7 +11540,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#8"
+"@value": "amf://id#97"
 }
 ],
 "sourcemaps:value": [
@@ -14622,9 +11556,11 @@
 ],
 "data:AS400Status": [
 {
-"@id": "#9",
+"@id": "#98",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14634,7 +11570,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#9/source-map",
+"@id": "#98/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14642,7 +11578,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#9"
+"@value": "amf://id#98"
 }
 ],
 "sourcemaps:value": [
@@ -14658,9 +11594,11 @@
 ],
 "data:AcquiredDate": [
 {
-"@id": "#10",
+"@id": "#99",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14670,7 +11608,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#10/source-map",
+"@id": "#99/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14678,7 +11616,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#10"
+"@value": "amf://id#99"
 }
 ],
 "sourcemaps:value": [
@@ -14694,9 +11632,11 @@
 ],
 "data:Age": [
 {
-"@id": "#11",
+"@id": "#100",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14706,7 +11646,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#11/source-map",
+"@id": "#100/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14714,7 +11654,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#11"
+"@value": "amf://id#100"
 }
 ],
 "sourcemaps:value": [
@@ -14730,9 +11670,11 @@
 ],
 "data:AssetDescription": [
 {
-"@id": "#12",
+"@id": "#101",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14742,7 +11684,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#12/source-map",
+"@id": "#101/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14750,7 +11692,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#12"
+"@value": "amf://id#101"
 }
 ],
 "sourcemaps:value": [
@@ -14766,9 +11708,11 @@
 ],
 "data:Axles": [
 {
-"@id": "#13",
+"@id": "#102",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14778,7 +11722,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#13/source-map",
+"@id": "#102/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14786,7 +11730,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#13"
+"@value": "amf://id#102"
 }
 ],
 "sourcemaps:value": [
@@ -14802,9 +11746,11 @@
 ],
 "data:BookValue": [
 {
-"@id": "#14",
+"@id": "#103",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14814,7 +11760,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#14/source-map",
+"@id": "#103/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14822,7 +11768,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#14"
+"@value": "amf://id#103"
 }
 ],
 "sourcemaps:value": [
@@ -14838,9 +11784,11 @@
 ],
 "data:BookValueAsOf": [
 {
-"@id": "#15",
+"@id": "#104",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14850,7 +11798,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#15/source-map",
+"@id": "#104/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14858,7 +11806,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#15"
+"@value": "amf://id#104"
 }
 ],
 "sourcemaps:value": [
@@ -14874,9 +11822,11 @@
 ],
 "data:CabType": [
 {
-"@id": "#16",
+"@id": "#105",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14886,7 +11836,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#16/source-map",
+"@id": "#105/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14894,7 +11844,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#16"
+"@value": "amf://id#105"
 }
 ],
 "sourcemaps:value": [
@@ -14910,9 +11860,11 @@
 ],
 "data:Color": [
 {
-"@id": "#17",
+"@id": "#106",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14922,7 +11874,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#17/source-map",
+"@id": "#106/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14930,7 +11882,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#17"
+"@value": "amf://id#106"
 }
 ],
 "sourcemaps:value": [
@@ -14946,9 +11898,11 @@
 ],
 "data:Depreciation": [
 {
-"@id": "#18",
+"@id": "#107",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14958,7 +11912,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#18/source-map",
+"@id": "#107/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -14966,7 +11920,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#18"
+"@value": "amf://id#107"
 }
 ],
 "sourcemaps:value": [
@@ -14982,9 +11936,11 @@
 ],
 "data:Engine": [
 {
-"@id": "#19",
+"@id": "#108",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -14994,7 +11950,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#19/source-map",
+"@id": "#108/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15002,7 +11958,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#19"
+"@value": "amf://id#108"
 }
 ],
 "sourcemaps:value": [
@@ -15018,9 +11974,11 @@
 ],
 "data:EngineArrangement": [
 {
-"@id": "#20",
+"@id": "#109",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15030,7 +11988,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#20/source-map",
+"@id": "#109/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15038,7 +11996,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#20"
+"@value": "amf://id#109"
 }
 ],
 "sourcemaps:value": [
@@ -15054,9 +12012,11 @@
 ],
 "data:EngineSerial": [
 {
-"@id": "#21",
+"@id": "#110",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15066,7 +12026,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#21/source-map",
+"@id": "#110/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15074,7 +12034,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#21"
+"@value": "amf://id#110"
 }
 ],
 "sourcemaps:value": [
@@ -15090,9 +12050,11 @@
 ],
 "data:EngineWarranty": [
 {
-"@id": "#22",
+"@id": "#111",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15102,7 +12064,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#22/source-map",
+"@id": "#111/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15110,7 +12072,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#22"
+"@value": "amf://id#111"
 }
 ],
 "sourcemaps:value": [
@@ -15126,9 +12088,11 @@
 ],
 "data:IQDate": [
 {
-"@id": "#23",
+"@id": "#112",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15138,7 +12102,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#23/source-map",
+"@id": "#112/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15146,7 +12110,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#23"
+"@value": "amf://id#112"
 }
 ],
 "sourcemaps:value": [
@@ -15162,9 +12126,11 @@
 ],
 "data:InService": [
 {
-"@id": "#24",
+"@id": "#113",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15174,7 +12140,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#24/source-map",
+"@id": "#113/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15182,7 +12148,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#24"
+"@value": "amf://id#113"
 }
 ],
 "sourcemaps:value": [
@@ -15198,9 +12164,11 @@
 ],
 "data:InventoryType": [
 {
-"@id": "#25",
+"@id": "#114",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15210,7 +12178,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#25/source-map",
+"@id": "#114/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15218,7 +12186,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#25"
+"@value": "amf://id#114"
 }
 ],
 "sourcemaps:value": [
@@ -15234,9 +12202,11 @@
 ],
 "data:Length": [
 {
-"@id": "#26",
+"@id": "#115",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15246,7 +12216,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#26/source-map",
+"@id": "#115/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15254,7 +12224,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#26"
+"@value": "amf://id#115"
 }
 ],
 "sourcemaps:value": [
@@ -15270,9 +12240,11 @@
 ],
 "data:MaintenanceCode": [
 {
-"@id": "#27",
+"@id": "#116",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15282,7 +12254,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#27/source-map",
+"@id": "#116/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15290,7 +12262,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#27"
+"@value": "amf://id#116"
 }
 ],
 "sourcemaps:value": [
@@ -15306,9 +12278,11 @@
 ],
 "data:MaintenanceCodeDescription": [
 {
-"@id": "#28",
+"@id": "#117",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15318,7 +12292,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#28/source-map",
+"@id": "#117/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15326,7 +12300,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#28"
+"@value": "amf://id#117"
 }
 ],
 "sourcemaps:value": [
@@ -15342,9 +12316,11 @@
 ],
 "data:Make": [
 {
-"@id": "#29",
+"@id": "#118",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15354,7 +12330,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#29/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15362,7 +12338,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#29"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -15378,9 +12354,11 @@
 ],
 "data:Model": [
 {
-"@id": "#30",
+"@id": "#119",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15390,7 +12368,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#30/source-map",
+"@id": "#119/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15398,7 +12376,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#30"
+"@value": "amf://id#119"
 }
 ],
 "sourcemaps:value": [
@@ -15414,9 +12392,11 @@
 ],
 "data:ModelType": [
 {
-"@id": "#31",
+"@id": "#120",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15426,7 +12406,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#31/source-map",
+"@id": "#120/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15434,7 +12414,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#31"
+"@value": "amf://id#120"
 }
 ],
 "sourcemaps:value": [
@@ -15450,9 +12430,11 @@
 ],
 "data:Name": [
 {
-"@id": "#32",
+"@id": "#121",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15462,7 +12444,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#32/source-map",
+"@id": "#121/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15470,7 +12452,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#32"
+"@value": "amf://id#121"
 }
 ],
 "sourcemaps:value": [
@@ -15486,9 +12468,11 @@
 ],
 "data:Serial": [
 {
-"@id": "#33",
+"@id": "#122",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15498,7 +12482,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#33/source-map",
+"@id": "#122/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15506,7 +12490,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#33"
+"@value": "amf://id#122"
 }
 ],
 "sourcemaps:value": [
@@ -15522,9 +12506,11 @@
 ],
 "data:TCUHours": [
 {
-"@id": "#34",
+"@id": "#123",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15534,7 +12520,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#34/source-map",
+"@id": "#123/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15542,7 +12528,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#34"
+"@value": "amf://id#123"
 }
 ],
 "sourcemaps:value": [
@@ -15558,9 +12544,11 @@
 ],
 "data:TCUType": [
 {
-"@id": "#35",
+"@id": "#124",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15570,7 +12558,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#35/source-map",
+"@id": "#124/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15578,7 +12566,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#35"
+"@value": "amf://id#124"
 }
 ],
 "sourcemaps:value": [
@@ -15594,9 +12582,11 @@
 ],
 "data:TransmissionFrontRearSN": [
 {
-"@id": "#36",
+"@id": "#125",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15606,7 +12596,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#36/source-map",
+"@id": "#125/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15614,7 +12604,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#36"
+"@value": "amf://id#125"
 }
 ],
 "sourcemaps:value": [
@@ -15630,9 +12620,11 @@
 ],
 "data:TransmissionRearRatio": [
 {
-"@id": "#37",
+"@id": "#126",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15642,7 +12634,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#37/source-map",
+"@id": "#126/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15650,7 +12642,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#37"
+"@value": "amf://id#126"
 }
 ],
 "sourcemaps:value": [
@@ -15666,9 +12658,11 @@
 ],
 "data:TransmissionRearRearSN": [
 {
-"@id": "#38",
+"@id": "#127",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15678,7 +12672,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#38/source-map",
+"@id": "#127/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15686,7 +12680,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#38"
+"@value": "amf://id#127"
 }
 ],
 "sourcemaps:value": [
@@ -15702,9 +12696,11 @@
 ],
 "data:TransmissionSerial": [
 {
-"@id": "#39",
+"@id": "#128",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15714,7 +12710,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#39/source-map",
+"@id": "#128/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15722,7 +12718,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#39"
+"@value": "amf://id#128"
 }
 ],
 "sourcemaps:value": [
@@ -15738,9 +12734,11 @@
 ],
 "data:Type": [
 {
-"@id": "#40",
+"@id": "#129",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15750,7 +12748,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#40/source-map",
+"@id": "#129/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15758,7 +12756,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#40"
+"@value": "amf://id#129"
 }
 ],
 "sourcemaps:value": [
@@ -15774,9 +12772,11 @@
 ],
 "data:Weight": [
 {
-"@id": "#41",
+"@id": "#130",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15786,7 +12786,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#41/source-map",
+"@id": "#130/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15794,7 +12794,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#41"
+"@value": "amf://id#130"
 }
 ],
 "sourcemaps:value": [
@@ -15810,9 +12810,11 @@
 ],
 "data:Year": [
 {
-"@id": "#42",
+"@id": "#131",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15822,7 +12824,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#42/source-map",
+"@id": "#131/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15830,7 +12832,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#42"
+"@value": "amf://id#131"
 }
 ],
 "sourcemaps:value": [
@@ -15846,15 +12848,19 @@
 ],
 "data:attributes": [
 {
-"@id": "#43",
+"@id": "#132",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:type": [
 {
-"@id": "#44",
+"@id": "#133",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15864,7 +12870,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#44/source-map",
+"@id": "#133/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15872,7 +12878,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#44"
+"@value": "amf://id#133"
 }
 ],
 "sourcemaps:value": [
@@ -15888,7 +12894,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#43/source-map",
+"@id": "#132/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15896,7 +12902,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#43"
+"@value": "amf://id#132"
 }
 ],
 "sourcemaps:value": [
@@ -15910,7 +12916,19 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#43"
+"@value": "data:type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(7,14)-(7,28)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#132"
 }
 ],
 "sourcemaps:value": [
@@ -15926,7 +12944,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#5/source-map",
+"@id": "#94/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15934,7 +12952,19 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#5"
+"@value": "data:attributes"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "type->[(7,8)-(8,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#94"
 }
 ],
 "sourcemaps:value": [
@@ -15948,12 +12978,468 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#5"
+"@value": "data:attributes"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(7,0)-(8,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Weight"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(16,14)-(16,18)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TransmissionSerial"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(29,26)-(29,34)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TransmissionRearRatio"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(30,29)-(30,30)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TCUType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(40,15)-(40,27)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Serial"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(17,14)-(17,25)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:ModelType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(14,17)-(14,22)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Make"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(12,12)-(12,17)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:MaintenanceCode"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(20,23)-(20,27)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:InventoryType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(44,21)-(44,28)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:IQDate"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(24,14)-(24,26)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:EngineSerial"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(26,20)-(26,28)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Engine"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(25,14)-(25,19)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Color"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(39,13)-(39,19)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:BookValueAsOf"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(34,21)-(34,33)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Axles"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(43,13)-(43,15)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Age"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,11)-(36,12)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AS400Status"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(23,19)-(23,26)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AS400ECM"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,16)-(22,25)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#94"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(6,0)-(45,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AS400CityName"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(10,21)-(10,32)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AS400Location"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(9,21)-(9,28)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AcquiredDate"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(18,20)-(18,32)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AssetDescription"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,24)-(37,31)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:BookValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(33,17)-(33,22)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:CabType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,15)-(38,18)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Depreciation"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(35,20)-(35,22)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:EngineArrangement"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(28,25)-(28,33)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:EngineWarranty"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(27,22)-(27,34)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:InService"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(19,17)-(19,29)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Length"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(42,14)-(42,16)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:MaintenanceCodeDescription"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(21,34)-(21,38)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Model"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(13,13)-(13,23)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(8,12)-(8,19)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TCUHours"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(41,16)-(41,18)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TransmissionFrontRearSN"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(32,31)-(32,34)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TransmissionRearRearSN"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(31,30)-(31,33)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(15,12)-(15,17)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Year"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(11,12)-(11,18)]"
 }
 ]
 }
@@ -15962,15 +13448,19 @@
 ]
 },
 {
-"@id": "#45",
+"@id": "#134",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:AS400CityName": [
 {
-"@id": "#46",
+"@id": "#135",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -15980,7 +13470,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#46/source-map",
+"@id": "#135/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -15988,7 +13478,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#46"
+"@value": "amf://id#135"
 }
 ],
 "sourcemaps:value": [
@@ -16004,9 +13494,11 @@
 ],
 "data:AS400ECM": [
 {
-"@id": "#47",
+"@id": "#136",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16016,7 +13508,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#47/source-map",
+"@id": "#136/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16024,7 +13516,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#47"
+"@value": "amf://id#136"
 }
 ],
 "sourcemaps:value": [
@@ -16040,9 +13532,11 @@
 ],
 "data:AS400Location": [
 {
-"@id": "#48",
+"@id": "#137",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16052,7 +13546,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#48/source-map",
+"@id": "#137/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16060,7 +13554,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#48"
+"@value": "amf://id#137"
 }
 ],
 "sourcemaps:value": [
@@ -16076,9 +13570,11 @@
 ],
 "data:AS400Status": [
 {
-"@id": "#49",
+"@id": "#138",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16088,7 +13584,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#49/source-map",
+"@id": "#138/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16096,7 +13592,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#49"
+"@value": "amf://id#138"
 }
 ],
 "sourcemaps:value": [
@@ -16112,9 +13608,11 @@
 ],
 "data:AcquiredDate": [
 {
-"@id": "#50",
+"@id": "#139",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16124,7 +13622,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#50/source-map",
+"@id": "#139/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16132,7 +13630,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#50"
+"@value": "amf://id#139"
 }
 ],
 "sourcemaps:value": [
@@ -16148,9 +13646,11 @@
 ],
 "data:Age": [
 {
-"@id": "#51",
+"@id": "#140",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16160,7 +13660,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#51/source-map",
+"@id": "#140/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16168,7 +13668,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#51"
+"@value": "amf://id#140"
 }
 ],
 "sourcemaps:value": [
@@ -16184,9 +13684,11 @@
 ],
 "data:AssetDescription": [
 {
-"@id": "#52",
+"@id": "#141",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16196,7 +13698,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#52/source-map",
+"@id": "#141/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16204,7 +13706,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#52"
+"@value": "amf://id#141"
 }
 ],
 "sourcemaps:value": [
@@ -16220,9 +13722,11 @@
 ],
 "data:Axles": [
 {
-"@id": "#53",
+"@id": "#142",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16232,7 +13736,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#53/source-map",
+"@id": "#142/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16240,7 +13744,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#53"
+"@value": "amf://id#142"
 }
 ],
 "sourcemaps:value": [
@@ -16256,9 +13760,11 @@
 ],
 "data:BookValue": [
 {
-"@id": "#54",
+"@id": "#143",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16268,7 +13774,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#54/source-map",
+"@id": "#143/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16276,7 +13782,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#54"
+"@value": "amf://id#143"
 }
 ],
 "sourcemaps:value": [
@@ -16292,9 +13798,11 @@
 ],
 "data:BookValueAsOf": [
 {
-"@id": "#55",
+"@id": "#144",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16304,7 +13812,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#55/source-map",
+"@id": "#144/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16312,7 +13820,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#55"
+"@value": "amf://id#144"
 }
 ],
 "sourcemaps:value": [
@@ -16328,9 +13836,11 @@
 ],
 "data:CabType": [
 {
-"@id": "#56",
+"@id": "#145",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16340,7 +13850,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#56/source-map",
+"@id": "#145/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16348,7 +13858,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#56"
+"@value": "amf://id#145"
 }
 ],
 "sourcemaps:value": [
@@ -16364,9 +13874,11 @@
 ],
 "data:Color": [
 {
-"@id": "#57",
+"@id": "#146",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16376,7 +13888,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#57/source-map",
+"@id": "#146/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16384,7 +13896,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#57"
+"@value": "amf://id#146"
 }
 ],
 "sourcemaps:value": [
@@ -16400,9 +13912,11 @@
 ],
 "data:Depreciation": [
 {
-"@id": "#58",
+"@id": "#147",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16412,7 +13926,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#58/source-map",
+"@id": "#147/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16420,7 +13934,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#58"
+"@value": "amf://id#147"
 }
 ],
 "sourcemaps:value": [
@@ -16436,9 +13950,11 @@
 ],
 "data:Engine": [
 {
-"@id": "#59",
+"@id": "#148",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16448,7 +13964,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#59/source-map",
+"@id": "#148/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16456,7 +13972,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#59"
+"@value": "amf://id#148"
 }
 ],
 "sourcemaps:value": [
@@ -16472,9 +13988,11 @@
 ],
 "data:EngineArrangement": [
 {
-"@id": "#60",
+"@id": "#149",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16484,7 +14002,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#60/source-map",
+"@id": "#149/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16492,7 +14010,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#60"
+"@value": "amf://id#149"
 }
 ],
 "sourcemaps:value": [
@@ -16508,9 +14026,11 @@
 ],
 "data:EngineSerial": [
 {
-"@id": "#61",
+"@id": "#150",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16520,7 +14040,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#61/source-map",
+"@id": "#150/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16528,7 +14048,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#61"
+"@value": "amf://id#150"
 }
 ],
 "sourcemaps:value": [
@@ -16544,9 +14064,11 @@
 ],
 "data:EngineWarranty": [
 {
-"@id": "#62",
+"@id": "#151",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16556,7 +14078,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#62/source-map",
+"@id": "#151/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16564,7 +14086,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#62"
+"@value": "amf://id#151"
 }
 ],
 "sourcemaps:value": [
@@ -16580,9 +14102,11 @@
 ],
 "data:IQDate": [
 {
-"@id": "#63",
+"@id": "#152",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16592,7 +14116,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#63/source-map",
+"@id": "#152/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16600,7 +14124,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#63"
+"@value": "amf://id#152"
 }
 ],
 "sourcemaps:value": [
@@ -16616,9 +14140,11 @@
 ],
 "data:InService": [
 {
-"@id": "#64",
+"@id": "#153",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16628,7 +14154,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#64/source-map",
+"@id": "#153/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16636,7 +14162,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#64"
+"@value": "amf://id#153"
 }
 ],
 "sourcemaps:value": [
@@ -16652,9 +14178,11 @@
 ],
 "data:InventoryType": [
 {
-"@id": "#65",
+"@id": "#154",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16664,7 +14192,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#65/source-map",
+"@id": "#154/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16672,7 +14200,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#65"
+"@value": "amf://id#154"
 }
 ],
 "sourcemaps:value": [
@@ -16688,9 +14216,11 @@
 ],
 "data:Length": [
 {
-"@id": "#66",
+"@id": "#155",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16700,7 +14230,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#66/source-map",
+"@id": "#155/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16708,7 +14238,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#66"
+"@value": "amf://id#155"
 }
 ],
 "sourcemaps:value": [
@@ -16724,9 +14254,11 @@
 ],
 "data:MaintenanceCode": [
 {
-"@id": "#67",
+"@id": "#156",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16736,7 +14268,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#67/source-map",
+"@id": "#156/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16744,7 +14276,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#67"
+"@value": "amf://id#156"
 }
 ],
 "sourcemaps:value": [
@@ -16760,9 +14292,11 @@
 ],
 "data:MaintenanceCodeDescription": [
 {
-"@id": "#68",
+"@id": "#157",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16772,7 +14306,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#68/source-map",
+"@id": "#157/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16780,7 +14314,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#68"
+"@value": "amf://id#157"
 }
 ],
 "sourcemaps:value": [
@@ -16796,9 +14330,11 @@
 ],
 "data:Make": [
 {
-"@id": "#69",
+"@id": "#158",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16808,7 +14344,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#69/source-map",
+"@id": "#158/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16816,7 +14352,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#69"
+"@value": "amf://id#158"
 }
 ],
 "sourcemaps:value": [
@@ -16832,9 +14368,11 @@
 ],
 "data:Model": [
 {
-"@id": "#70",
+"@id": "#159",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16844,7 +14382,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#70/source-map",
+"@id": "#159/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16852,7 +14390,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#70"
+"@value": "amf://id#159"
 }
 ],
 "sourcemaps:value": [
@@ -16868,9 +14406,11 @@
 ],
 "data:ModelType": [
 {
-"@id": "#71",
+"@id": "#160",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16880,7 +14420,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#71/source-map",
+"@id": "#160/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16888,7 +14428,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#71"
+"@value": "amf://id#160"
 }
 ],
 "sourcemaps:value": [
@@ -16904,9 +14444,11 @@
 ],
 "data:Name": [
 {
-"@id": "#72",
+"@id": "#161",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16916,7 +14458,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#72/source-map",
+"@id": "#161/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16924,7 +14466,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#72"
+"@value": "amf://id#161"
 }
 ],
 "sourcemaps:value": [
@@ -16940,9 +14482,11 @@
 ],
 "data:Serial": [
 {
-"@id": "#73",
+"@id": "#162",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16952,7 +14496,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#73/source-map",
+"@id": "#162/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16960,7 +14504,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#73"
+"@value": "amf://id#162"
 }
 ],
 "sourcemaps:value": [
@@ -16976,9 +14520,11 @@
 ],
 "data:TCUHours": [
 {
-"@id": "#74",
+"@id": "#163",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -16988,7 +14534,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#74/source-map",
+"@id": "#163/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -16996,7 +14542,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#74"
+"@value": "amf://id#163"
 }
 ],
 "sourcemaps:value": [
@@ -17012,9 +14558,11 @@
 ],
 "data:TCUType": [
 {
-"@id": "#75",
+"@id": "#164",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -17024,7 +14572,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#75/source-map",
+"@id": "#164/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17032,7 +14580,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#75"
+"@value": "amf://id#164"
 }
 ],
 "sourcemaps:value": [
@@ -17048,9 +14596,11 @@
 ],
 "data:TransmissionFrontRearSN": [
 {
-"@id": "#76",
+"@id": "#165",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -17060,7 +14610,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#76/source-map",
+"@id": "#165/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17068,7 +14618,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#76"
+"@value": "amf://id#165"
 }
 ],
 "sourcemaps:value": [
@@ -17084,9 +14634,11 @@
 ],
 "data:TransmissionRearRatio": [
 {
-"@id": "#77",
+"@id": "#166",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -17096,7 +14648,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#77/source-map",
+"@id": "#166/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17104,7 +14656,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#77"
+"@value": "amf://id#166"
 }
 ],
 "sourcemaps:value": [
@@ -17120,9 +14672,11 @@
 ],
 "data:TransmissionRearRearSN": [
 {
-"@id": "#78",
+"@id": "#167",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -17132,7 +14686,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#78/source-map",
+"@id": "#167/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17140,7 +14694,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#78"
+"@value": "amf://id#167"
 }
 ],
 "sourcemaps:value": [
@@ -17156,9 +14710,11 @@
 ],
 "data:TransmissionSerial": [
 {
-"@id": "#79",
+"@id": "#168",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -17168,7 +14724,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#79/source-map",
+"@id": "#168/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17176,7 +14732,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#79"
+"@value": "amf://id#168"
 }
 ],
 "sourcemaps:value": [
@@ -17192,9 +14748,11 @@
 ],
 "data:Type": [
 {
-"@id": "#80",
+"@id": "#169",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -17204,7 +14762,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#80/source-map",
+"@id": "#169/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17212,7 +14770,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#80"
+"@value": "amf://id#169"
 }
 ],
 "sourcemaps:value": [
@@ -17228,9 +14786,11 @@
 ],
 "data:Weight": [
 {
-"@id": "#81",
+"@id": "#170",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -17240,7 +14800,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#81/source-map",
+"@id": "#170/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17248,7 +14808,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#81"
+"@value": "amf://id#170"
 }
 ],
 "sourcemaps:value": [
@@ -17264,9 +14824,11 @@
 ],
 "data:Year": [
 {
-"@id": "#82",
+"@id": "#171",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -17276,7 +14838,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#82/source-map",
+"@id": "#171/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17284,7 +14846,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#82"
+"@value": "amf://id#171"
 }
 ],
 "sourcemaps:value": [
@@ -17300,15 +14862,19 @@
 ],
 "data:attributes": [
 {
-"@id": "#83",
+"@id": "#172",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:type": [
 {
-"@id": "#84",
+"@id": "#173",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -17318,7 +14884,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#84/source-map",
+"@id": "#173/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17326,7 +14892,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#84"
+"@value": "amf://id#173"
 }
 ],
 "sourcemaps:value": [
@@ -17342,7 +14908,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#83/source-map",
+"@id": "#172/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17350,7 +14916,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#83"
+"@value": "amf://id#172"
 }
 ],
 "sourcemaps:value": [
@@ -17364,7 +14930,19 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#83"
+"@value": "data:type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(47,14)-(47,28)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#172"
 }
 ],
 "sourcemaps:value": [
@@ -17380,7 +14958,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#45/source-map",
+"@id": "#134/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17388,7 +14966,19 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#45"
+"@value": "data:attributes"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "type->[(47,8)-(48,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#134"
 }
 ],
 "sourcemaps:value": [
@@ -17402,12 +14992,468 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#45"
+"@value": "data:attributes"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(47,0)-(48,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Weight"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(56,14)-(56,18)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TransmissionSerial"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(69,26)-(69,34)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TransmissionRearRatio"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(70,29)-(70,30)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TCUType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(80,15)-(80,27)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Serial"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(57,14)-(57,25)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:ModelType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(54,17)-(54,22)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Make"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(52,12)-(52,17)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:MaintenanceCode"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(60,23)-(60,27)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:InventoryType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(84,21)-(84,28)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:IQDate"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(64,14)-(64,26)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:EngineSerial"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(66,20)-(66,28)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Engine"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(65,14)-(65,19)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Color"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(79,13)-(79,19)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:BookValueAsOf"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(74,21)-(74,33)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Axles"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(83,13)-(83,15)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Age"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(76,11)-(76,12)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AS400Status"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(63,19)-(63,26)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AS400ECM"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(62,16)-(62,25)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#134"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(46,0)-(85,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AS400CityName"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(50,21)-(50,32)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AS400Location"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(49,21)-(49,28)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AcquiredDate"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(58,20)-(58,32)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:AssetDescription"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(77,24)-(77,31)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:BookValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(73,17)-(73,22)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:CabType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(78,15)-(78,18)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Depreciation"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(75,20)-(75,22)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:EngineArrangement"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(68,25)-(68,33)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:EngineWarranty"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(67,22)-(67,34)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:InService"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(59,17)-(59,29)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Length"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(82,14)-(82,16)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:MaintenanceCodeDescription"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(61,34)-(61,38)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Model"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(53,13)-(53,23)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(48,12)-(48,19)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TCUHours"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(81,16)-(81,18)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TransmissionFrontRearSN"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(72,31)-(72,34)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:TransmissionRearRearSN"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(71,30)-(71,33)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(55,12)-(55,17)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:Year"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(51,12)-(51,18)]"
 }
 ]
 }
@@ -17418,17 +15464,17 @@
 ],
 "data:pos0": [
 {
-"@id": "#5"
+"@id": "#94"
 }
 ],
 "data:pos1": [
 {
-"@id": "#45"
+"@id": "#134"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#4/source-map",
+"@id": "#93/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17436,7 +15482,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#4"
+"@value": "amf://id#93"
 }
 ],
 "sourcemaps:value": [
@@ -17452,7 +15498,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#2/source-map",
+"@id": "#91/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17460,12 +15506,36 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "data:records"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(4,10)-(85,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#91"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(3,0)-(85,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:allOrNone"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(3,13)-(3,18)]"
 }
 ]
 }
@@ -17474,7 +15544,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#91"
 }
 ],
 "sourcemaps:value": [
@@ -17495,7 +15565,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#2/source-map",
+"@id": "#91/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17509,20 +15579,6 @@
 "sourcemaps:value": [
 {
 "@value": "true"
-}
-]
-}
-],
-"sourcemaps:source-vendor": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#2"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "RAML 1.0"
 }
 ]
 }
@@ -17543,7 +15599,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#91"
 }
 ],
 "sourcemaps:value": [
@@ -17569,12 +15625,26 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#2"
+"@value": "amf://id#91"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": ""
+}
+]
+}
+],
+"sourcemaps:tracked-element": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#91"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "amf://id#174"
 }
 ]
 }
@@ -17585,7 +15655,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#172/source-map",
+"@id": "#90/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -17593,7 +15663,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#172"
+"@value": "amf://id#90"
 }
 ],
 "sourcemaps:value": [
@@ -17619,7 +15689,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#172"
+"@value": "amf://id#90"
 }
 ],
 "sourcemaps:value": [
@@ -17645,7 +15715,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#172"
+"@value": "amf://id#90"
 }
 ],
 "sourcemaps:value": [

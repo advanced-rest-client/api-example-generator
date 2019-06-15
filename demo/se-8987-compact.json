@@ -125,6 +125,18 @@
 "@value": "[(24,4)-(27,0)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#17"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(24,0)-(29,0)]"
+}
+]
 }
 ]
 }
@@ -333,6 +345,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(31,4)-(34,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#23"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(31,0)-(36,0)]"
 }
 ]
 }
@@ -898,13 +922,17 @@
 {
 "@id": "#8",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:name": [
 {
 "@id": "#9",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -943,6 +971,18 @@
 "sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "data:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(13,12)-(13,16)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -1048,13 +1088,17 @@
 {
 "@id": "#10",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:age": [
 {
 "@id": "#11",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1093,6 +1137,18 @@
 "sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "data:age"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(20,11)-(20,13)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -1369,13 +1425,17 @@
 {
 "@id": "#8",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:name": [
 {
 "@id": "#9",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1414,6 +1474,18 @@
 "sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "data:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(13,12)-(13,16)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -1718,13 +1790,17 @@
 {
 "@id": "#10",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:age": [
 {
 "@id": "#11",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1763,6 +1839,18 @@
 "sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "data:age"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(20,11)-(20,13)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
