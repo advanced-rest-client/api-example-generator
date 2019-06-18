@@ -452,17 +452,34 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       const result = this.computeExamples(item, mime, opts);
       if (result) {
         if (isJson) {
-          result.forEach((item) => {
-            if (item.values) {
-              if (item.values[0].value && item.values[0].value[0] !== '[') {
-                item.values[0].value = `[${item.values[0].value}]`;
-              }
-            } else if (item.value !== undefined && item.value[0] !== '[') {
-              item.value = '[' + item.value + ']';
-            }
-          });
+          this._processJsonArrayExamples(result);
         }
         return result;
+      }
+    }
+  }
+  /**
+   * Processes JSON examples that should be an arrays and adds brackets
+   * if nescesary. When the example is empty string it adds empty string literal
+   * to the example value.
+   * It does the same for unions which has array of values.
+   * @param {Array<Object>} examples
+   */
+  _processJsonArrayExamples(examples) {
+    for (let i = 0; i < examples.length; i++) {
+      const item = examples[i];
+      if (item.values) {
+        if (item.values[0].value !== undefined && item.values[0].value[0] !== '[') {
+          if (item.values[0].value === '') {
+            item.values[0].value = '""';
+          }
+          item.values[0].value = `[${item.values[0].value}]`;
+        }
+      } else if (item.value !== undefined && item.value[0] !== '[') {
+        if (item.value === '') {
+          item.value = '""';
+        }
+        item.value = '[' + item.value + ']';
       }
     }
   }

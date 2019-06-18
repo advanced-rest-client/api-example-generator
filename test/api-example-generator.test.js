@@ -1539,6 +1539,55 @@ describe('<api-example-generator>', () => {
     });
   });
 
+  describe('_processJsonArrayExamples()', () => {
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+    });
+
+    it('Adds brackets to the "value" property', () => {
+      const examples = [{
+        value: 'test'
+      }];
+      element._processJsonArrayExamples(examples);
+      assert.equal(examples[0].value, '[test]');
+    });
+
+    it('Adds default string value', () => {
+      const examples = [{
+        value: ''
+      }];
+      element._processJsonArrayExamples(examples);
+      assert.equal(examples[0].value, '[""]');
+    });
+
+    it('Adds brackets to the "value" property of a union', () => {
+      const examples = [{
+        values: [{
+          value: 'test'
+        }]
+      }];
+      element._processJsonArrayExamples(examples);
+      assert.equal(examples[0].values[0].value, '[test]');
+    });
+
+    it('Adds default string value of an union', () => {
+      const examples = [{
+        values: [{
+          value: ''
+        }]
+      }];
+      element._processJsonArrayExamples(examples);
+      assert.equal(examples[0].values[0].value, '[""]');
+    });
+
+    it('Ignores entry when no value', () => {
+      const examples = [{}];
+      element._processJsonArrayExamples(examples);
+      // no error, coverage
+    });
+  });
+
   describe('_computeJsonProperyValue()', () => {
     [
       ['json+ld data model', false],
