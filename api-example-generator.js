@@ -453,7 +453,11 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       if (result) {
         if (isJson) {
           result.forEach((item) => {
-            if (item.value[0] !== '[') {
+            if (item.values) {
+              if (item.values[0].value && item.values[0].value[0] !== '[') {
+                item.values[0].value[0] = `[${item.values[0].value[0]}]`;
+              }
+            } else if (item.value !== undefined && item.value[0] !== '[') {
               item.value = '[' + item.value + ']';
             }
           });
