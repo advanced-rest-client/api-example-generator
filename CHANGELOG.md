@@ -824,3 +824,13 @@
 
 
 
+## 3.0.3 (2019-09-07)
+
+
+### Bug Fixes
+
+* fixes APIC-233 - rendering of non-latic caracters in exampels ([f6cd0ae](https://github.com/advanced-rest-client/api-example-generator/commit/f6cd0ae))
+* fixing errors after AMF model change ([6676631](https://github.com/advanced-rest-client/api-example-generator/commit/6676631))
+
+
+
