@@ -774,11 +774,31 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       if (range instanceof Array) {
         range = range[0];
       }
-      let value = this._computeJsonProperyValue(range);
-      if (value === undefined) {
-        value = '';
+      const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+      const examples = this._ensureArray(range[eKey]);
+      if (examples) {
+        const sKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'structuredValue');
+        examples.forEach((example) => {
+          let structure = example[sKey];
+          if (!structure) {
+            result[name] = '';
+            return;
+          }
+          if (structure instanceof Array) {
+            structure = structure[0];
+          }
+          const data = this._jsonFromStructure(structure);
+          if (data !== undefined) {
+            result[name] = data;
+          }
+        });
+      } else {
+        let value = this._computeJsonProperyValue(range);
+        if (value === undefined) {
+          value = '';
+        }
+        result[name] = value;
       }
-      result[name] = value;
     }
     return result;
   }
@@ -1037,6 +1057,21 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     if (range instanceof Array) {
       range = range[0];
     }
+    const sKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'xmlSerialization');
+    let serialization = range[sKey];
+    if (serialization instanceof Array) {
+      serialization = serialization[0];
+    }
+    const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+    const examples = this._ensureArray(range[eKey]);
+    if (examples) {
+      let name = this._getValue(serialization, this.ns.raml.vocabularies.shapes + 'xmlName');
+      if (!name) {
+        name = this._getValue(range, this.ns.w3.shacl.name + 'name');
+      }
+      this._xmlFromExamples(doc, node, examples[0], name);
+      return;
+    }
     if (this._hasType(range, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
       const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
       const list = this._ensureArray(range[key]);
@@ -1051,14 +1086,8 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       }
       return;
     }
-
-    const sKey = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'xmlSerialization');
-    let serialization = range[sKey];
     let isWrapped = false;
     if (serialization) {
-      if (serialization instanceof Array) {
-        serialization = serialization[0];
-      }
       const isAtribute = this._getValue(serialization, this.ns.raml.vocabularies.shapes + 'xmlAttribute');
       if (isAtribute) {
         this._appendXmlAttribute(node, property, range, serialization);
@@ -1075,6 +1104,27 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       return;
     }
     this._appendXmlElement(doc, node, range);
+  }
+  /**
+   * Appends XML example data to a node from an example defined on a "range"
+   * property. This way it does not generate example values from type values
+   * but uses object's example.
+   *
+   * @param {Document} doc XML document
+   * @param {Node} node A node to which append values
+   * @param {Object} example AMF's example definition.
+   * @param {String} propertyName Name of the property being processed
+   */
+  _xmlFromExamples(doc, node, example, propertyName) {
+    const sKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'structuredValue');
+    let structure = example[sKey];
+    if (structure instanceof Array) {
+      structure = structure[0];
+    }
+    if (!structure) {
+      return;
+    }
+    this._xmlProcessDataProperty(doc, node, structure, propertyName);
   }
   /**
    * Reads property data type.

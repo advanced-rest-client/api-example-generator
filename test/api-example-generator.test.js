@@ -673,13 +673,13 @@ describe('<api-example-generator>', () => {
             lastName: 'Psztyc',
             address: {
               street: '',
-              zip: '00000',
+              zip: '94100',
               house: 1
             },
             num: 0,
             int: 0,
             bool: false,
-            defVal: 10
+            defVal: 1
           }]);
         });
 
@@ -689,8 +689,8 @@ describe('<api-example-generator>', () => {
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
           const value = xmlPrefix + '\r\n<PropertyExamples xtra="string">\r\n  <firstName>Pawel</firstName>\r\n  ' +
-          '<lastName>Psztyc</lastName>\r\n  <Address> <street> </street>\r\n  <zip>00000</zip>\r\n  ' +
-          '<house>1</house>\r\n</Address>\r\n<num> </num>\r\n<int> </int>\r\n<bool> </bool>\r\n<defVal>10</defVal>' +
+          '<lastName>Psztyc</lastName>\r\n  <Address> <street> </street>\r\n  <zip>94100</zip>\r\n  ' +
+          '<house>1</house>\r\n</Address>\r\n<num> </num>\r\n<int> </int>\r\n<bool> </bool>\r\n<defVal>1</defVal>' +
           '\r\n</PropertyExamples>';
           assert.equal(result[0].value, value);
         });
@@ -1155,7 +1155,7 @@ describe('<api-example-generator>', () => {
           const result = element._computeJsonObjectValue(type);
           assert.equal(result.house, '1');
           assert.equal(result.street, '');
-          assert.equal(result.zip, '00000');
+          assert.equal(result.zip, '94100');
         });
       });
     });
@@ -1469,7 +1469,7 @@ describe('<api-example-generator>', () => {
           const decoded = JSON.parse(result[0].value);
           assert.typeOf(decoded, 'array');
           const item = decoded[0];
-          assert.equal(item.address.zip, '00000');
+          assert.equal(item.address.zip, '94100');
         });
 
         it('Produces example for scalar value', () => {
