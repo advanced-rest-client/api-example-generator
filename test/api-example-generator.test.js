@@ -202,7 +202,7 @@ describe('<api-example-generator>', () => {
 
         it('Skips generating examples from properties when noAuto is set', () => {
           const payloads = getPayload(element, amf, '/propertyExamples', 'post');
-          const result = element.generatePayloadsExamples(payloads, 'application/json', {noAuto: true});
+          const result = element.generatePayloadsExamples(payloads, 'application/json', { noAuto: true });
           assert.isUndefined(result);
         });
 
@@ -506,7 +506,7 @@ describe('<api-example-generator>', () => {
           assert.isFalse(ex2.hasRaw);
           assert.isFalse(ex2.hasTitle);
           assert.isFalse(ex2.hasUnion);
-          const str2 = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Person error=\"false\">\n  ' +
+          const str2 = '<?xml version="1.0" encoding="UTF-8"?>\n<Person error="false">\n  ' +
           '<id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\n  <name>John Smith</name>\n  ' +
           '<birthday>1990-10-12</birthday>\n  <gender>male</gender>\n  ' +
           '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s</url>\n  <image>\n    ' +
@@ -689,7 +689,7 @@ describe('<api-example-generator>', () => {
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
           const value = xmlPrefix + '\r\n<PropertyExamples xtra="string">\r\n  <firstName>Pawel</firstName>\r\n  ' +
-          '<lastName>Psztyc</lastName>\r\n  <Address> <street> </street>\r\n  <zip>"00000"</zip>\r\n  ' +
+          '<lastName>Psztyc</lastName>\r\n  <Address> <street> </street>\r\n  <zip>00000</zip>\r\n  ' +
           '<house>1</house>\r\n</Address>\r\n<num> </num>\r\n<int> </int>\r\n<bool> </bool>\r\n<defVal>10</defVal>' +
           '\r\n</PropertyExamples>';
           assert.equal(result[0].value, value);
@@ -768,16 +768,14 @@ describe('<api-example-generator>', () => {
           assert.isTrue(ex1.hasTitle, 'Example 1 hasTitle is true');
           assert.isFalse(ex1.hasUnion, 'Example 1 hasUnion is false');
           assert.equal(ex1.title, 'Person', 'Example 1 has title');
-          const value1 = xmlPrefix + '\r\n<model>\r\n  <birthday>20-10-1983</birthday>';
-          assert.equal(ex1.value.indexOf(value1), 0, 'Example 1 value is set');
-          assert.equal(ex1.raw.indexOf('\n      error: false'), 0, 'Example 1 raw is set');
+          assert.include(ex1.value, '<birthday>20-10-1983</birthday>', 'Example 1 value is set');
+          assert.include(ex1.raw, 'birthday: 20-10-1983', 'Example 1 raw is set');
           const ex2 = result[0].values[1];
           assert.isFalse(ex2.hasRaw, 'Example 2 hasRaw is false');
           assert.isTrue(ex2.hasTitle, 'Example 2 hasTitle is true');
           assert.isFalse(ex2.hasUnion, 'Example 2 hasUnion is false');
           assert.equal(ex2.title, 'PropertyExamples', 'Example 2 title is set');
-          const value2 = xmlPrefix + '\r\n<PropertyExamples xtra="string">\r\n  <firstName>Pawel</firstName>';
-          assert.equal(ex2.value.indexOf(value2), 0, 'Example 2 value is set');
+          assert.include(ex2.value, '<firstName>Pawel</firstName>', 0, 'Example 2 value is set');
         });
       });
     });
@@ -1218,7 +1216,7 @@ describe('<api-example-generator>', () => {
           const value = getStructuredValue(element, type);
           const result = element._jsonFromStructure(value);
           assert.typeOf(result, 'array');
-          assert.deepEqual(result, [{thumb: 'thumb 1', url: 'url 1'}]);
+          assert.deepEqual(result, [{ thumb: 'thumb 1', url: 'url 1' }]);
         });
       });
     });
@@ -1238,6 +1236,8 @@ describe('<api-example-generator>', () => {
         });
 
         let prefix;
+        let valueKey;
+        let typeKey;
         beforeEach(async () => {
           element = await basicFixture();
           element.amf = amf;
@@ -1245,12 +1245,20 @@ describe('<api-example-generator>', () => {
           if (prefix !== element.ns.w3.xmlSchema) {
             prefix += ':';
           }
+          valueKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'value');
+          typeKey = element._getAmfKey(element.ns.w3.shacl.name + 'datatype');
         });
 
-        it('Returns undefined when no argument', () => {
-          const result = element._getTypedValue();
-          assert.isUndefined(result);
-        });
+        function constructType(type, value) {
+          const obj = {};
+          obj[valueKey] = [{
+            '@value': value
+          }];
+          obj[typeKey] = [{
+            '@id': type
+          }];
+          return obj;
+        }
 
         it('Returns undefined when no @value', () => {
           const result = element._getTypedValue({});
@@ -1258,135 +1266,103 @@ describe('<api-example-generator>', () => {
         });
 
         it('Returns type for "boolean" (true) - compact', () => {
-          const result = element._getTypedValue({
+          const obj = constructType(prefix + 'boolean', 'true');
+          const result = element._getTypedValue(obj);
+          assert.typeOf(result, 'boolean');
+          assert.isTrue(result);
+        });
+
+        it('Returns type for "boolean" (true) - compact - old model', () => {
+          const obj = {};
+          obj[valueKey] = [{
             '@type': prefix + 'boolean',
             '@value': 'true'
-          });
+          }];
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'boolean');
           assert.isTrue(result);
         });
 
         it('Returns type for "boolean" (true) - full', () => {
-          const result = element._getTypedValue({
-            '@type': element.ns.w3.xmlSchema + 'boolean',
-            '@value': 'true'
-          });
+          const obj = constructType(element.ns.w3.xmlSchema + 'boolean', 'true');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'boolean');
           assert.isTrue(result);
         });
 
         it('Returns type for "boolean" (false) - compact', () => {
-          const result = element._getTypedValue({
-            '@type': prefix + 'boolean',
-            '@value': 'false'
-          });
+          const obj = constructType(prefix + 'boolean', 'false');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'boolean');
           assert.isFalse(result);
         });
 
         it('Returns type for "boolean" (false) - full', () => {
-          const result = element._getTypedValue({
-            '@type': element.ns.w3.xmlSchema + 'boolean',
-            '@value': 'false'
-          });
+          const obj = constructType(element.ns.w3.xmlSchema + 'boolean', 'false');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'boolean');
           assert.isFalse(result);
         });
 
         it('Returns type for "nil" - compact', () => {
-          const result = element._getTypedValue({
-            '@type': prefix + 'nil',
-            '@value': 'null'
-          });
+          const obj = constructType(prefix + 'nil', 'null');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'null');
           assert.equal(result, null);
         });
 
-        it('Returns type for "nil" (true) - full', () => {
-          const result = element._getTypedValue({
-            '@type': element.ns.w3.xmlSchema + 'nil',
-            '@value': 'true'
-          });
+        it('Returns type for "nil" - full', () => {
+          const obj = constructType(element.ns.w3.xmlSchema + 'nil', 'null');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'null');
           assert.equal(result, null);
         });
 
         it('Returns type for "integer" - compact', () => {
-          const result = element._getTypedValue({
-            '@type': prefix + 'integer',
-            '@value': '10'
-          });
+          const obj = constructType(prefix + 'integer', '10');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 10);
         });
 
         it('Returns type for "integer" (false) - full', () => {
-          const result = element._getTypedValue({
-            '@type': element.ns.w3.xmlSchema + 'integer',
-            '@value': '10'
-          });
+          const obj = constructType(element.ns.w3.xmlSchema + 'integer', '10');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 10);
         });
 
         it('Returns type for "number" - compact', () => {
-          const result = element._getTypedValue({
-            '@type': prefix + 'number',
-            '@value': '10'
-          });
+          const obj = constructType(prefix + 'number', '10');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 10);
         });
 
         it('Returns type for "number" (false) - full', () => {
-          const result = element._getTypedValue({
-            '@type': element.ns.w3.xmlSchema + 'number',
-            '@value': '10'
-          });
+          const obj = constructType(element.ns.w3.xmlSchema + 'number', '10');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 10);
         });
 
         it('Returns 0 when expected number is NaN', () => {
-          const result = element._getTypedValue({
-            '@type': prefix + 'number',
-            '@value': 'test'
-          });
+          const obj = constructType(prefix + 'number', 'test');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 0);
         });
 
         it('Returns passed value for anything else', () => {
-          const result = element._getTypedValue({
-            '@type': prefix + 'string',
-            '@value': 'test'
-          });
+          const obj = constructType(prefix + 'string', 'test');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'string');
           assert.equal(result, 'test');
-        });
-
-        it('Handles argument to be an array', () => {
-          const result = element._getTypedValue([{
-            '@type': prefix + 'string',
-            '@value': 'test'
-          }]);
-          assert.typeOf(result, 'string');
-          assert.equal(result, 'test');
-        });
-
-        it('Handles @type to be an array', () => {
-          const result = element._getTypedValue([{
-            '@type': [prefix + 'number'],
-            '@value': '10'
-          }]);
-          assert.typeOf(result, 'number');
-          assert.equal(result, 10);
         });
 
         it('Returns value when type is missing', () => {
-          const result = element._getTypedValue([{
-            '@value': '10'
-          }]);
+          const obj = constructType(undefined, '10');
+          const result = element._getTypedValue(obj);
           assert.typeOf(result, 'string');
           assert.equal(result, '10');
         });
@@ -1510,7 +1486,7 @@ describe('<api-example-generator>', () => {
           assert.typeOf(result, 'array');
           const decoded = JSON.parse(result[0].value);
           assert.typeOf(decoded, 'array');
-          assert.deepEqual(decoded, [{test: false, other: ''}]);
+          assert.deepEqual(decoded, [{ test: false, other: '' }]);
         });
 
         it('Generates example from properties for XML', () => {
@@ -1525,7 +1501,7 @@ describe('<api-example-generator>', () => {
         it('Prohibits generation with noAuto', () => {
           let schema = getPayloadSchema(element, amf, '/arrayPropertyGeneratedExamples', 'post')[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(schema, 'application/json', {noAuto: true});
+          const result = element._computeExampleArraySchape(schema, 'application/json', { noAuto: true });
           assert.isUndefined(result, 'array');
         });
 
@@ -1644,7 +1620,7 @@ describe('<api-example-generator>', () => {
           schema = element._resolve(schema);
           const result = element._computeJsonProperyValue(schema);
           assert.typeOf(result, 'array');
-          assert.deepEqual(result[0], {firstName: '', lastName: ''});
+          assert.deepEqual(result[0], { firstName: '', lastName: '' });
         });
       });
     });
@@ -1670,13 +1646,13 @@ describe('<api-example-generator>', () => {
 
         it('Generates example from JSON schema', () => {
           const payloads = getPayload(element, amf, '/purina/b2b/supplier/purchaseOrder', 'post');
-          const result = element.generatePayloadsExamples(payloads[0], null, {rawOnly: true});
+          const result = element.generatePayloadsExamples(payloads[0], null, { rawOnly: true });
           assert.typeOf(result, 'array');
         });
 
         it('Example has "raw" property', () => {
           const payloads = getPayload(element, amf, '/purina/b2b/supplier/purchaseOrder', 'post');
-          const result = element.generatePayloadsExamples(payloads[0], null, {rawOnly: true});
+          const result = element.generatePayloadsExamples(payloads[0], null, { rawOnly: true });
           const example = result[0];
           assert.typeOf(example.raw, 'string');
           assert.isTrue(example.hasRaw);
@@ -1684,7 +1660,7 @@ describe('<api-example-generator>', () => {
 
         it('Example has "value" property', () => {
           const payloads = getPayload(element, amf, '/purina/b2b/supplier/purchaseOrder', 'post');
-          const result = element.generatePayloadsExamples(payloads[0], null, {rawOnly: true});
+          const result = element.generatePayloadsExamples(payloads[0], null, { rawOnly: true });
           const example = result[0];
           assert.typeOf(example.value, 'string');
         });
@@ -1859,8 +1835,8 @@ describe('<api-example-generator>', () => {
 
         ].forEach((item) => {
           it(`Returns ${item[1]} type (${item[0]})`, () => {
-            const shape = getType(element, amf, 'recordCreateRequest');
-            const result = element.computeExamples(shape, 'application/json');
+            const shape = getPayloadSchema(element, amf, '/record', 'post', 0);
+            const result = element.computeExamples(shape[0], 'application/json');
             const data = JSON.parse(result[0].value);
             assert.typeOf(data.records[0][item[0]], item[1], 'Data type matches');
             assert.equal(data.records[0][item[0]], item[2], 'Value matches');
@@ -1940,6 +1916,157 @@ describe('<api-example-generator>', () => {
           assert.ok(node);
         });
       });
+    });
+  });
+
+  describe('_computeStructuredExampleValue()', () => {
+    let baseObj;
+    let valueKey;
+    let element;
+    let model;
+    before(async () => {
+      model = await AmfLoader.load();
+    });
+
+    beforeEach(async () => {
+      element = await basicFixture();
+      element.amf = model;
+      const typeKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'Scalar');
+      valueKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'value');
+      baseObj = {};
+      baseObj['@type'] = [typeKey];
+      baseObj[valueKey] = [
+        {
+          '@type': '',
+          '@value': ''
+        }
+      ];
+    });
+
+    it('Returns undefined when no argument', () => {
+      const result = element._computeStructuredExampleValue();
+      assert.isUndefined(result);
+    });
+
+    it('Returns the same value as argument when string', () => {
+      const result = element._computeStructuredExampleValue('test');
+      assert.equal(result, 'test');
+    });
+
+    it('Returns boolean value - true (full key)', () => {
+      baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'boolean';
+      baseObj[valueKey][0]['@value'] = 'true';
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.typeOf(result, 'boolean');
+      assert.isTrue(result);
+    });
+
+    it('Returns boolean value - false (full key)', () => {
+      baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'boolean';
+      baseObj[valueKey][0]['@value'] = 'false';
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.typeOf(result, 'boolean');
+      assert.isFalse(result);
+    });
+
+    it('Returns numeric value for integer (full key)', () => {
+      baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'integer';
+      baseObj[valueKey][0]['@value'] = '10';
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.typeOf(result, 'number');
+      assert.equal(result, 10);
+    });
+
+    it('Returns numeric value for long (full key)', () => {
+      baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'long';
+      baseObj[valueKey][0]['@value'] = '1000000000';
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.typeOf(result, 'number');
+      assert.equal(result, 1000000000);
+    });
+
+    it('Returns numeric value for double (full key)', () => {
+      baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'double';
+      baseObj[valueKey][0]['@value'] = '12.1234';
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.typeOf(result, 'number');
+      assert.equal(result, 12.1234);
+    });
+
+    it('Returns numeric value for float (full key)', () => {
+      baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'float';
+      baseObj[valueKey][0]['@value'] = '12.1234';
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.typeOf(result, 'number');
+      assert.equal(result, 12.1234);
+    });
+
+    it('Returns string otherwise', () => {
+      baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'string';
+      baseObj[valueKey][0]['@value'] = 'test';
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.typeOf(result, 'string');
+      assert.equal(result, 'test');
+    });
+  });
+
+  describe('_computeExampleFromStructuredValue()', () => {
+    let element;
+    let model;
+    before(async () => {
+      model = await AmfLoader.load(true);
+    });
+
+    beforeEach(async () => {
+      element = await basicFixture();
+      element.amf = model;
+    });
+
+    function createProperty(type, value) {
+      const typeKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'Scalar');
+      const valueKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'value');
+      const baseObj = {};
+      baseObj['@type'] = [typeKey];
+      baseObj[valueKey] = [
+        {
+          '@type': type,
+          '@value': value
+        }
+      ];
+      return baseObj;
+    }
+
+    it('returns scalar value', () => {
+      const valueKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'value');
+      const baseObj = {};
+      baseObj[valueKey] = ['test'];
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.equal(result, 'test');
+    });
+
+    it('returns an object for an object type', () => {
+      const typeKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'Object');
+      const baseObj = {};
+      baseObj['@type'] = [typeKey];
+
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.typeOf(result, 'object');
+    });
+
+    it('returns an array for non-object type', () => {
+      const baseObj = {};
+      baseObj['@type'] = [];
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.typeOf(result, 'array');
+    });
+
+    it('returns example value for a property', () => {
+      const typeKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'Object');
+      const baseObj = {};
+      baseObj['@type'] = [typeKey];
+      baseObj.test = [createProperty(element.ns.w3.xmlSchema + 'string', 'test')];
+      const result = element._computeStructuredExampleValue(baseObj);
+      assert.deepEqual(result, { test: 'test' });
     });
   });
 });

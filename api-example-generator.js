@@ -391,7 +391,9 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
           result.hasRaw = false;
           result.value = raw;
           return result;
-        } catch (_) {}
+        } catch (_) {
+          // ...
+        }
       }
       if (isXml) {
         if (raw.trim()[0] === '<') {
@@ -486,7 +488,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
 
   _computeUnionExamples(schema, mime, opts) {
     const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
-    let anyOf = this._ensureArray(schema[key]);
+    const anyOf = this._ensureArray(schema[key]);
     if (!anyOf) {
       return;
     }
@@ -558,8 +560,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     }
     const prefix = this.ns.raml.vocabularies.data;
     if (this._hasType(structure, prefix + 'Scalar')) {
-      const key = this._getAmfKey(prefix + 'value');
-      return this._getTypedValue(structure[key]);
+      return this._getTypedValue(structure);
     }
     let obj;
     let isArray = false;
@@ -584,7 +585,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
         if (key.indexOf(resolvedPrefix) !== 0) {
           return;
         }
-        let v = structure[key];
+        const v = structure[key];
         this._jsonFromStructureValue(v, obj, isArray, key, resolvedPrefix);
       });
     }
@@ -607,6 +608,11 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       if (key[0] === ':') {
         key = key.substr(1);
       }
+      try {
+        key = decodeURIComponent(key);
+      } catch (_) {
+        // ...
+      }
       obj[key] = tmp;
     }
   }
@@ -616,12 +622,10 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     const doc = document.implementation.createDocument('', typeName, null);
     const main = doc.documentElement;
     const keys = Object.keys(structure);
-    const exclude = ['@id', '@type', '__apicResolved',
-      this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources')
-    ];
+    const dataPrefix = this._getAmfKey(this.ns.raml.vocabularies.data);
     for (let i = 0, len = keys.length; i < len; i++) {
-      let key = keys[i];
-      if (exclude.indexOf(key) !== -1) {
+      const key = keys[i];
+      if (key.indexOf(dataPrefix) !== 0) {
         continue;
       }
       let item = structure[key];
@@ -648,7 +652,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
         indent = 0;
       } else if (node.match(/^<\/\w/) && pad > 0) {
         pad -= 1;
-      } else if (node.match(/^<\w[^>]*[^\/]>.*$/)) {
+      } else if (node.match(/^<\w[^>]*[^/]>.*$/)) {
         indent = 1;
       } else {
         indent = 0;
@@ -658,19 +662,27 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     }).join('\r\n');
   }
 
-  _getTypedValue(shape) {
+  _getTypedValue(structure) {
+    const key = this._getAmfKey(this.ns.raml.vocabularies.data + 'value');
+    let shape = structure[key];
     if (!shape) {
       return;
     }
     if (shape instanceof Array) {
       shape = shape[0];
     }
-    let value = shape['@value'];
+    const value = shape['@value'];
     if (!value) {
       return value;
     }
-
     let dt = shape['@type'];
+    if (!dt) {
+      const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
+      dt = this._ensureArray(structure[dtKey]);
+      if (dt) {
+        dt = dt[0]['@id'];
+      }
+    }
     if (!dt) {
       return value || '';
     }
@@ -794,7 +806,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     }
   }
   _computeJsonScalarValue(range) {
-    let value = this._getTypeScalarValue(range);
+    const value = this._getTypeScalarValue(range);
     if (!value) {
       // This is to work with mocking services when the user just want to send an
       // example value to the server. This ensures valid input from the client
@@ -858,22 +870,18 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       case ramlPrefix + 'integer':
       case this.ns.w3.xmlSchema + 'integer':
       case this.ns.raml.vocabularies.shapes + 'integer':
-
       case prefix + 'number':
       case this.ns.w3.xmlSchema + 'number':
       case ramlPrefix + 'number':
       case this.ns.raml.vocabularies.shapes + 'number':
-
       case prefix + 'long':
       case this.ns.w3.xmlSchema + 'long':
       case ramlPrefix + 'long':
       case this.ns.raml.vocabularies.shapes + 'long':
-
       case prefix + 'double':
       case this.ns.w3.xmlSchema + 'double':
       case ramlPrefix + 'double':
       case this.ns.raml.vocabularies.shapes + 'double':
-
       case prefix + 'float':
       case this.ns.w3.xmlSchema + 'float':
       case ramlPrefix + 'float':
@@ -980,7 +988,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       return this._getValue(dv, this.ns.raml.vocabularies.data + 'value');
     }
     const rKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
-    let ex = range[rKey];
+    const ex = range[rKey];
     if (ex) {
       return this._extractExampleRawValue(ex);
     }
@@ -1124,7 +1132,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     let nodeValue = this._getValue(range, this.ns.w3.shacl.name + 'defaultValueStr');
     if (!nodeValue) {
       const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
-      let example = range[eKey];
+      const example = range[eKey];
       if (example) {
         nodeValue = this._extractExampleRawValue(example);
       }
@@ -1135,7 +1143,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       // Mocking service would mark is as an error.
       // this._readDataType(range);
     }
-    name = name.replace(/[^a-zA-Z0-9\-]*/g, '');
+    name = name.replace(/[^a-zA-Z0-9-]*/g, '');
     const element = doc.createElement(name);
     if (nodeValue) {
       const vn = doc.createTextNode(nodeValue);
@@ -1203,8 +1211,8 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     }
     const element = doc.createElement(name);
     if (this._hasType(property, this.ns.raml.vocabularies.data + 'Scalar')) {
-      let value = this._computeStructuredExampleValue(property);
-      if (value) {
+      const value = this._computeStructuredExampleValue(property);
+      if (value !== undefined) {
         const vn = doc.createTextNode(value);
         element.appendChild(vn);
       }
@@ -1219,6 +1227,74 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       return;
     }
     node.appendChild(element);
+  }
+  /**
+   * Computes an example from example structured value.
+   *
+   * @param {Object} model `structuredValue` item model.
+   * @return {Object|Array} Javascript object or array with structured value.
+   * @deprecated Use `amf-excample-generator` for examples generation.
+   */
+  _computeExampleFromStructuredValue(model) {
+    if (this._hasType(model, this.ns.raml.vocabularies.data + 'Scalar')) {
+      return this._computeStructuredExampleValue(this._getValue(model, this.ns.raml.vocabularies.data + 'value'));
+    }
+    const isObject = this._hasType(model, this.ns.raml.vocabularies.data + 'Object');
+    const result = isObject ? {} : [];
+    const modelKeys = ['@id', '@type'];
+    Object.keys(model).forEach((key) => {
+      if (modelKeys.indexOf(key) !== -1) {
+        return;
+      }
+      const value = this._computeStructuredExampleValue(model[key][0]);
+      if (isObject) {
+        const name = key.substr(key.indexOf('#') + 1);
+        result[name] = value;
+      } else {
+        result.push(value);
+      }
+    });
+    return result;
+  }
+  /**
+   * Computes value with propert data type for a structured example.
+   * @param {Object} model Structured example item model.
+   * @return {String|Boolean|Number} Value for the example.
+   * @deprecated Use `amf-excample-generator` for examples generation.
+   */
+  _computeStructuredExampleValue(model) {
+    if (!model) {
+      return;
+    }
+    if (typeof model === 'string') {
+      return model;
+    }
+    if (this._hasType(model, this.ns.raml.vocabularies.data + 'Scalar')) {
+      const key = this._getAmfKey(this.ns.raml.vocabularies.data + 'value');
+      const mValue = this._ensureArray(model[key])[0];
+      const value = mValue['@value'];
+      let type = mValue['@type'];
+      if (!type) {
+        const dtKey = this._getAmfKey(this.ns.w3.shacl.name + 'datatype');
+        type = this._ensureArray(model[dtKey]);
+        if (type) {
+          type = type[0]['@id'];
+        }
+      }
+      switch (type) {
+        case this.ns.w3.xmlSchema + 'boolean':
+          return value === 'true' ? true : false;
+        case this.ns.w3.xmlSchema + 'integer':
+        case this.ns.w3.xmlSchema + 'long':
+        case this.ns.w3.xmlSchema + 'double':
+        case this.ns.w3.xmlSchema + 'float':
+        case this.ns.raml.vocabularies.shapes + 'number':
+          return Number(value);
+        default:
+          return value;
+      }
+    }
+    return this._computeExampleFromStructuredValue(model);
   }
 
   _processDataArrayProperties(doc, node, property, name) {
