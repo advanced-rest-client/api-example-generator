@@ -1,20 +1,42 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const createDefaultConfig = require('@open-wc/testing-karma/default-config');
-const merge = require('webpack-merge');
+const { createDefaultConfig } = require('@open-wc/testing-karma');
+const merge = require('deepmerge');
 
 module.exports = (config) => {
- config.set(
-   merge(createDefaultConfig(config), {
-     files: [
-       // runs all files ending with .test in the test folder,
-       // can be overwritten by passing a --grep flag. examples:
-       //
-       // npm run test -- --grep test/foo/bar.test.js
-       // npm run test -- --grep test/bar/*
-       { pattern: config.grep ? config.grep : 'test/**/*.test.js', type: 'module' }
-     ],
+  config.set(
+    merge(createDefaultConfig(config), {
+      files: [
+        // runs all files ending with .test in the test folder,
+        // can be overwritten by passing a --grep flag. examples:
+        //
+        // npm run test -- --grep test/foo/bar.test.js
+        // npm run test -- --grep test/bar/*
+        {
+          pattern: config.grep ? config.grep : 'test/**/*.test.js',
+          type: 'module'
+        },
+        {
+          pattern: require.resolve('chai/chai.js')
+        },
+        {
+          pattern: config.grep ? config.grep : 'test/**/*.test.js',
+          type: 'module'
+        }
+      ],
 
-     coverageIstanbulReporter: {
+      // see the karma-esm docs for all options
+      esm: {
+        // if you are using 'bare module imports' you will need this option
+        nodeResolve: true
+      },
+
+      client: {
+        mocha: {
+          timeout: 5000
+        }
+      },
+
+      coverageIstanbulReporter: {
         thresholds: {
           global: {
             statements: 80,
@@ -23,8 +45,8 @@ module.exports = (config) => {
             lines: 80
           }
         }
-      }
-   })
- );
- return config;
+      },
+    })
+  );
+  return config;
 };
