@@ -391,7 +391,9 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
           result.hasRaw = false;
           result.value = raw;
           return result;
-        } catch (_) {}
+        } catch (_) {
+          // ...
+        }
       }
       if (isXml) {
         if (raw.trim()[0] === '<') {
@@ -486,7 +488,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
 
   _computeUnionExamples(schema, mime, opts) {
     const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'anyOf');
-    let anyOf = this._ensureArray(schema[key]);
+    const anyOf = this._ensureArray(schema[key]);
     if (!anyOf) {
       return;
     }
@@ -584,7 +586,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
         if (key.indexOf(resolvedPrefix) !== 0) {
           return;
         }
-        let v = structure[key];
+        const v = structure[key];
         this._jsonFromStructureValue(v, obj, isArray, key, resolvedPrefix);
       });
     }
@@ -607,6 +609,11 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       if (key[0] === ':') {
         key = key.substr(1);
       }
+      try {
+        key = decodeURIComponent(key);
+      } catch (_) {
+        // ...
+      }
       obj[key] = tmp;
     }
   }
@@ -620,7 +627,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources')
     ];
     for (let i = 0, len = keys.length; i < len; i++) {
-      let key = keys[i];
+      const key = keys[i];
       if (exclude.indexOf(key) !== -1) {
         continue;
       }
@@ -648,7 +655,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
         indent = 0;
       } else if (node.match(/^<\/\w/) && pad > 0) {
         pad -= 1;
-      } else if (node.match(/^<\w[^>]*[^\/]>.*$/)) {
+      } else if (node.match(/^<\w[^>]*[^/]>.*$/)) {
         indent = 1;
       } else {
         indent = 0;
@@ -665,7 +672,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     if (shape instanceof Array) {
       shape = shape[0];
     }
-    let value = shape['@value'];
+    const value = shape['@value'];
     if (!value) {
       return value;
     }
@@ -794,7 +801,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     }
   }
   _computeJsonScalarValue(range) {
-    let value = this._getTypeScalarValue(range);
+    const value = this._getTypeScalarValue(range);
     if (!value) {
       // This is to work with mocking services when the user just want to send an
       // example value to the server. This ensures valid input from the client
@@ -858,22 +865,18 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       case ramlPrefix + 'integer':
       case this.ns.w3.xmlSchema + 'integer':
       case this.ns.raml.vocabularies.shapes + 'integer':
-
       case prefix + 'number':
       case this.ns.w3.xmlSchema + 'number':
       case ramlPrefix + 'number':
       case this.ns.raml.vocabularies.shapes + 'number':
-
       case prefix + 'long':
       case this.ns.w3.xmlSchema + 'long':
       case ramlPrefix + 'long':
       case this.ns.raml.vocabularies.shapes + 'long':
-
       case prefix + 'double':
       case this.ns.w3.xmlSchema + 'double':
       case ramlPrefix + 'double':
       case this.ns.raml.vocabularies.shapes + 'double':
-
       case prefix + 'float':
       case this.ns.w3.xmlSchema + 'float':
       case ramlPrefix + 'float':
@@ -980,7 +983,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       return this._getValue(dv, this.ns.raml.vocabularies.data + 'value');
     }
     const rKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
-    let ex = range[rKey];
+    const ex = range[rKey];
     if (ex) {
       return this._extractExampleRawValue(ex);
     }
@@ -1124,7 +1127,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     let nodeValue = this._getValue(range, this.ns.w3.shacl.name + 'defaultValueStr');
     if (!nodeValue) {
       const eKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
-      let example = range[eKey];
+      const example = range[eKey];
       if (example) {
         nodeValue = this._extractExampleRawValue(example);
       }
@@ -1135,7 +1138,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       // Mocking service would mark is as an error.
       // this._readDataType(range);
     }
-    name = name.replace(/[^a-zA-Z0-9\-]*/g, '');
+    name = name.replace(/[^a-zA-Z0-9-]*/g, '');
     const element = doc.createElement(name);
     if (nodeValue) {
       const vn = doc.createTextNode(nodeValue);
@@ -1203,7 +1206,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     }
     const element = doc.createElement(name);
     if (this._hasType(property, this.ns.raml.vocabularies.data + 'Scalar')) {
-      let value = this._computeStructuredExampleValue(property);
+      const value = this._computeStructuredExampleValue(property);
       if (value) {
         const vn = doc.createTextNode(value);
         element.appendChild(vn);
