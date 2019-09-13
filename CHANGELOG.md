@@ -857,3 +857,15 @@
 
 
 
+## 3.0.6 (2019-09-13)
+
+
+### Bug Fixes
+
+* fixes APIC-223 - examples serialization from object's examples ([4e73633](https://github.com/advanced-rest-client/api-example-generator/commit/4e73633))
+* fixes APIC-233 - rendering of non-latic caracters in exampels ([f6cd0ae](https://github.com/advanced-rest-client/api-example-generator/commit/f6cd0ae))
+* fixing errors after AMF model change ([6676631](https://github.com/advanced-rest-client/api-example-generator/commit/6676631))
+* fixing XML node creating from different cases of a name ([fead615](https://github.com/advanced-rest-client/api-example-generator/commit/fead615))
+
+
+
