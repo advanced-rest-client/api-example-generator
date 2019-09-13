@@ -1259,6 +1259,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     if (!property || !name) {
       return;
     }
+    name = name.replace(/[^a-zA-Z0-9-_]/g, '');
     const element = doc.createElement(name);
     if (this._hasType(property, this.ns.raml.vocabularies.data + 'Scalar')) {
       const value = this._computeStructuredExampleValue(property);
