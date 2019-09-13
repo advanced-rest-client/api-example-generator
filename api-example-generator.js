@@ -214,7 +214,8 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
         hasRaw: false,
         hasTitle: false,
         hasUnion: false,
-        value: result
+        value: result,
+        isScalar: true
       }];
     }
 
@@ -418,6 +419,13 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     if (structure instanceof Array) {
       structure = structure[0];
     }
+    if (this._hasType(structure, this.ns.raml.vocabularies.data + 'Scalar')) {
+      const value = this._getTypedValue(structure);
+      result.value = value;
+      result.isScalar = true;
+      return result;
+    }
+
     if (isJson) {
       let data = this._jsonFromStructure(structure);
       if (data) {

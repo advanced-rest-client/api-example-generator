@@ -548,6 +548,18 @@ describe('<api-example-generator>', () => {
           });
           assert.isUndefined(result);
         });
+
+        it('sets isScalar for a scalar generated value', () => {
+          const shape = AmfLoader.lookupType(amf, 'ScalarType');
+          const result = element.computeExamples(shape, 'application/json');
+          assert.isTrue(result[0].isScalar);
+        });
+
+        it('sets isScalar for a scalar generated value', () => {
+          const shape = AmfLoader.lookupType(amf, 'ScalarWithExample');
+          const result = element.computeExamples(shape, 'application/json');
+          assert.isTrue(result[0].isScalar);
+        });
       });
     });
   });

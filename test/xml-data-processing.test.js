@@ -89,7 +89,6 @@ describe('XML processing', () => {
 
         it('result has default type name', () => {
           const type = AmfLoader.lookupType(amf, 'Person');
-          console.log(type);
           const shape = AmfLoader.lookupStructuredValue(amf, type);
           const result = element._xmlFromStructure(shape, {});
           assert.include(result, '<model>');
