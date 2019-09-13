@@ -618,7 +618,8 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
   }
 
   _xmlFromStructure(structure, opts) {
-    const typeName = opts && opts.typeName || 'model';
+    let typeName = opts && opts.typeName || 'model';
+    typeName = this._normalizeXmlTagName(typeName);
     const doc = document.implementation.createDocument('', typeName, null);
     const main = doc.documentElement;
     const keys = Object.keys(structure);
@@ -1020,6 +1021,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
    * @return {String}
    */
   _xmlExampleFromProperties(properties, typeName) {
+    typeName = this._normalizeXmlTagName(typeName);
     const doc = document.implementation.createDocument('', typeName, null);
     const main = doc.documentElement;
     for (let i = 0, len = properties.length; i < len; i++) {
@@ -1247,7 +1249,15 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     const element = doc.createElement(name);
     element.appendChild(doc.createTextNode(type));
   }
-
+  /**
+   * Normalizes given name to a value that can be accepted by `createElement`
+   * function on a document object.
+   * @param {String} name A name to process
+   * @return {String} Normalized name
+   */
+  _normalizeXmlTagName(name) {
+    return name.replace(/[^a-zA-Z0-9-_]/g, '');
+  }
   /**
    * Processes XML property from a data shape.
    * @param {Document} doc Main document
@@ -1259,7 +1269,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     if (!property || !name) {
       return;
     }
-    name = name.replace(/[^a-zA-Z0-9-_]/g, '');
+    name = this._normalizeXmlTagName(name);
     const element = doc.createElement(name);
     if (this._hasType(property, this.ns.raml.vocabularies.data + 'Scalar')) {
       const value = this._computeStructuredExampleValue(property);

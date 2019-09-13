@@ -65,3 +65,41 @@ AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
   const payload = response[pKey];
   return payload instanceof Array ? payload : [payload];
 };
+
+AmfLoader.lookupType = function(amf, name) {
+  if (amf instanceof Array) {
+    amf = amf[0];
+  }
+  helper.amf = amf;
+  const dKey = helper._getAmfKey(helper.ns.raml.vocabularies.document + 'declares');
+  const declares = helper._ensureArray(amf[dKey]);
+  const type = declares.find((item) => {
+    // if (!element._hasType(item, element.ns.w3.shacl.name + 'NodeShape')) {
+    //   return false;
+    // }
+    const iName = helper._getValue(item, helper.ns.w3.shacl.name + 'name');
+    return name === iName;
+  });
+  return type;
+};
+
+AmfLoader.lookupStructuredValue = function(model, type) {
+  helper.amf = model;
+  const key = helper._getAmfKey(helper.ns.raml.vocabularies.document + 'examples');
+  let example = helper._ensureArray(type[key])[0];
+  if (helper._hasType(example, helper.ns.raml.vocabularies.document + 'NamedExamples')) {
+    const key = helper._getAmfKey(helper.ns.raml.vocabularies.document + 'examples');
+    example = example[key];
+    if (example instanceof Array) {
+      example = example[0];
+    }
+  }
+  const svKey = helper._getAmfKey(helper.ns.raml.vocabularies.document + 'structuredValue');
+  return helper._ensureArray(example[svKey])[0];
+};
+
+AmfLoader.lookupTypeProperties = function(model, typeName) {
+  const type = AmfLoader.lookupType(model, typeName);
+  const pKey = helper._getAmfKey(helper.ns.w3.shacl.name + 'property');
+  return helper._ensureArray(type[pKey]);
+};
