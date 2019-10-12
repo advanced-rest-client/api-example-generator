@@ -40,9 +40,9 @@ AmfLoader.lookupEndpoint = function(model, endpoint) {
 
 AmfLoader.lookupOperation = function(model, endpoint, operation) {
   const endPoint = AmfLoader.lookupEndpoint(model, endpoint, operation);
-  const opKey = helper._getAmfKey(helper.ns.w3.hydra.supportedOperation);
+  const opKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.supportedOperation);
   const ops = helper._ensureArray(endPoint[opKey]);
-  return ops.find((item) => helper._getValue(item, helper.ns.w3.hydra.core + 'method') === operation);
+  return ops.find((item) => helper._getValue(item, helper.ns.aml.vocabularies.apiContract.method) === operation);
 };
 
 AmfLoader.lookupPayload = function(model, endpoint, operation) {
@@ -52,16 +52,17 @@ AmfLoader.lookupPayload = function(model, endpoint, operation) {
 };
 
 AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
+  helper.amf = model;
   const op = AmfLoader.lookupOperation(model, endpoint, operation);
-  const rKey = helper._getAmfKey(helper.ns.w3.hydra.core + 'returns');
+  const rKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.returns);
   const returns = helper._ensureArray(op[rKey]);
   const response = returns.find((item) => {
-    if (helper._getValue(item, helper.ns.w3.hydra.core + 'statusCode') === String(code)) {
+    if (helper._getValue(item, helper.ns.aml.vocabularies.apiContract.statusCode) === String(code)) {
       return true;
     }
     return false;
   });
-  const pKey = helper._getAmfKey(helper.ns.raml.vocabularies.http + 'payload');
+  const pKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.payload);
   const payload = response[pKey];
   return payload instanceof Array ? payload : [payload];
 };
@@ -71,13 +72,13 @@ AmfLoader.lookupType = function(amf, name) {
     amf = amf[0];
   }
   helper.amf = amf;
-  const dKey = helper._getAmfKey(helper.ns.raml.vocabularies.document + 'declares');
+  const dKey = helper._getAmfKey(helper.ns.raml.vocabularies.document.declares);
   const declares = helper._ensureArray(amf[dKey]);
   const type = declares.find((item) => {
     // if (!element._hasType(item, element.ns.w3.shacl.name + 'NodeShape')) {
     //   return false;
     // }
-    const iName = helper._getValue(item, helper.ns.w3.shacl.name + 'name');
+    const iName = helper._getValue(item, helper.ns.w3.shacl.name);
     return name === iName;
   });
   return type;
@@ -85,21 +86,21 @@ AmfLoader.lookupType = function(amf, name) {
 
 AmfLoader.lookupStructuredValue = function(model, type) {
   helper.amf = model;
-  const key = helper._getAmfKey(helper.ns.raml.vocabularies.document + 'examples');
+  const key = helper._getAmfKey(helper.ns.raml.vocabularies.apiContract.examples);
   let example = helper._ensureArray(type[key])[0];
-  if (helper._hasType(example, helper.ns.raml.vocabularies.document + 'NamedExamples')) {
-    const key = helper._getAmfKey(helper.ns.raml.vocabularies.document + 'examples');
+  if (helper._hasType(example, helper.ns.raml.vocabularies.document.NamedExamples)) {
+    const key = helper._getAmfKey(helper.ns.raml.vocabularies.document.examples);
     example = example[key];
     if (example instanceof Array) {
       example = example[0];
     }
   }
-  const svKey = helper._getAmfKey(helper.ns.raml.vocabularies.document + 'structuredValue');
+  const svKey = helper._getAmfKey(helper.ns.raml.vocabularies.document.structuredValue);
   return helper._ensureArray(example[svKey])[0];
 };
 
 AmfLoader.lookupTypeProperties = function(model, typeName) {
   const type = AmfLoader.lookupType(model, typeName);
-  const pKey = helper._getAmfKey(helper.ns.w3.shacl.name + 'property');
+  const pKey = helper._getAmfKey(helper.ns.w3.shacl.property);
   return helper._ensureArray(type[pKey]);
 };

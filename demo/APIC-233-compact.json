@@ -11,79 +11,79 @@
 {
 "@id": "#1",
 "@type": [
-"schema-org:WebAPI",
+"apiContract:WebAPI",
 "doc:RootDomainElement",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Arabic Test 0.8"
 }
 ],
-"schema-org:version": [
+"core:version": [
 {
 "@value": "v1"
 }
 ],
-"raml-http:endpoint": [
+"apiContract:endpoint": [
 {
 "@id": "#2",
 "@type": [
-"raml-http:EndPoint",
+"apiContract:EndPoint",
 "doc:DomainElement"
 ],
-"raml-http:path": [
+"apiContract:path": [
 {
 "@value": "/stuff"
 }
 ],
-"hydra:supportedOperation": [
+"apiContract:supportedOperation": [
 {
 "@id": "#3",
 "@type": [
-"hydra:Operation",
+"apiContract:Operation",
 "doc:DomainElement"
 ],
-"hydra:method": [
+"apiContract:method": [
 {
 "@value": "get"
 }
 ],
-"hydra:returns": [
+"apiContract:returns": [
 {
 "@id": "#4",
 "@type": [
-"raml-http:Response",
+"apiContract:Response",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "200"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "\u0628\u064A\u0646\u063A"
 }
 ],
-"hydra:statusCode": [
+"apiContract:statusCode": [
 {
 "@value": "200"
 }
 ],
-"raml-http:payload": [
+"apiContract:payload": [
 {
 "@id": "#5",
 "@type": [
-"raml-http:Payload",
+"apiContract:Payload",
 "doc:DomainElement"
 ],
-"raml-http:mediaType": [
+"core:mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#6",
 "@type": [
@@ -97,11 +97,11 @@
 "@value": "application/json"
 }
 ],
-"doc:examples": [
+"apiContract:examples": [
 {
 "@id": "#7",
 "@type": [
-"doc:Example",
+"apiContract:Example",
 "doc:DomainElement"
 ],
 "doc:strict": [
@@ -135,7 +135,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_2"
 }
@@ -182,7 +182,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_3"
 }
@@ -211,7 +211,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_1"
 }
@@ -264,7 +264,7 @@
 ]
 }
 ],
-"shacl:raw": [
+"doc:raw": [
 {
 "@value": "\n              \u0627\u0644\u062D\u0627\u0644\u0629: \u062D\u0633\u0646\u0627\n              message: Shop in \u0627\u0644\u0645\u0645\u0644\n"
 }
@@ -293,7 +293,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "shacl:raw"
+"@value": "doc:raw"
 }
 ],
 "sourcemaps:value": [
@@ -344,6 +344,28 @@
 }
 ]
 }
+],
+"sourcemaps:sources": [
+{
+"@id": "#6/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#6"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(13,0)-(16,0)]"
+}
+]
+}
+]
+}
 ]
 }
 ],
@@ -381,7 +403,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:payload"
+"@value": "apiContract:payload"
 }
 ],
 "sourcemaps:value": [
@@ -405,7 +427,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -429,7 +451,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:returns"
+"@value": "apiContract:returns"
 }
 ],
 "sourcemaps:value": [
@@ -503,7 +525,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:version"
+"@value": "core:version"
 }
 ],
 "sourcemaps:value": [
@@ -527,7 +549,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -541,16 +563,20 @@
 ]
 }
 ],
+"doc:version": [
+{
+"@value": "2.0.0"
+}
+],
 "@context": {
 "@base": "amf://id",
-"raml-http": "http://a.ml/vocabularies/http#",
 "shacl": "http://www.w3.org/ns/shacl#",
 "raml-shapes": "http://a.ml/vocabularies/shapes#",
 "data": "http://a.ml/vocabularies/data#",
 "doc": "http://a.ml/vocabularies/document#",
-"sourcemaps": "http://a.ml/vocabularies/document-source-maps#",
-"schema-org": "http://schema.org/",
-"hydra": "http://www.w3.org/ns/hydra/core#"
+"apiContract": "http://a.ml/vocabularies/apiContract#",
+"core": "http://a.ml/vocabularies/core#",
+"sourcemaps": "http://a.ml/vocabularies/document-source-maps#"
 }
 }
 ]

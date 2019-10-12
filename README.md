@@ -6,15 +6,12 @@
 
 ## &lt;api-example-generator&gt;
 
-Examples generator from AMF model.
+API examples generator from the AMF model.
 
-```html
-<api-example-generator></api-example-generator>
-```
+## Version compatibility
 
-### API components
-
-This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
+This version only works with AMF model version 2 (AMF parser >= 4.0.0).
+For compatibility with previous model version use `3.x.x` version of the component.
 
 ## Usage
 
@@ -23,6 +20,9 @@ This components is a part of [API components ecosystem](https://elements.advance
 npm install --save @api-components/api-example-generator
 ```
 
+### API components
+
+This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
 ### In an html file
 
 ```html
@@ -54,7 +54,24 @@ class SampleElement extends LitElement {
 customElements.define('sample-element', SampleElement);
 ```
 
-### Installation
+### Listing media types for payloads
+
+Use `listMedia()` which accespts list of payloads or a single payload definition.
+
+### Example for Payload(s)
+
+Use `generatePayloadsExamples()` to genmerate a list of examples for payload(s).
+Provide second argument which is a media type that should be used to generate an example.
+Currently only `application/json` and `application/xml` is supported.
+Feel free to send a PR to add support for more media types.
+
+### Example from any AMF shape
+
+The `computeExamples()` method tries to lookup an example property in any AMF shape.
+If possible (and no `rawOnly` or `noAuto` option is set) then it generates an example
+depending on passed object.
+
+## Development
 
 ```sh
 git clone https://github.com/advanced-rest-client/api-example-generator
@@ -72,3 +89,7 @@ npm start
 ```sh
 npm test
 ```
+
+### API components
+
+This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)

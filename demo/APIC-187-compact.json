@@ -11,94 +11,94 @@
 {
 "@id": "#175",
 "@type": [
-"schema-org:WebAPI",
+"apiContract:WebAPI",
 "doc:RootDomainElement",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "api"
 }
 ],
-"raml-http:endpoint": [
+"apiContract:endpoint": [
 {
 "@id": "#176",
 "@type": [
-"raml-http:EndPoint",
+"apiContract:EndPoint",
 "doc:DomainElement"
 ],
-"raml-http:path": [
+"apiContract:path": [
 {
 "@value": "/record"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Inventory Record"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Resource to request the Update and Create inventory records"
 }
 ],
-"hydra:supportedOperation": [
+"apiContract:supportedOperation": [
 {
 "@id": "#177",
 "@type": [
-"hydra:Operation",
+"apiContract:Operation",
 "doc:DomainElement"
 ],
-"hydra:method": [
+"apiContract:method": [
 {
 "@value": "post"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Create inventory records"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Create multiple inventory records"
 }
 ],
-"hydra:expects": [
+"apiContract:expects": [
 {
 "@id": "#178",
 "@type": [
-"raml-http:Request",
+"apiContract:Request",
 "doc:DomainElement"
 ],
-"raml-http:header": [
+"apiContract:header": [
 {
 "@id": "#179",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Authorization"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "Authorization"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": true
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "header"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#180",
 "@type": [
@@ -118,11 +118,11 @@
 "@value": "schema"
 }
 ],
-"doc:examples": [
+"apiContract:examples": [
 {
 "@id": "#181",
 "@type": [
-"doc:Example",
+"apiContract:Example",
 "doc:DomainElement"
 ],
 "doc:strict": [
@@ -148,7 +148,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -177,7 +177,7 @@
 ]
 }
 ],
-"shacl:raw": [
+"doc:raw": [
 {
 "@value": "Bearer 00D3C0000000kXR!ARMAQN942GQWCIeeQMaSCKBQZaAZcYoi0kTx2pOvA8vfGb85Ae6Sb5KNwvqR73K3PCsgH89voKsZZ0ztqAzYWjLiw736BhS4"
 }
@@ -206,7 +206,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "shacl:raw"
+"@value": "doc:raw"
 }
 ],
 "sourcemaps:value": [
@@ -318,7 +318,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -342,7 +342,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -356,19 +356,19 @@
 ]
 }
 ],
-"raml-http:payload": [
+"apiContract:payload": [
 {
 "@id": "#88",
 "@type": [
-"raml-http:Payload",
+"apiContract:Payload",
 "doc:DomainElement"
 ],
-"raml-http:mediaType": [
+"core:mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#4/linked_3",
 "@type": [
@@ -424,7 +424,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:payload"
+"@value": "apiContract:payload"
 }
 ],
 "sourcemaps:value": [
@@ -448,7 +448,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:header"
+"@value": "apiContract:header"
 }
 ],
 "sourcemaps:value": [
@@ -472,7 +472,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -496,7 +496,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -520,7 +520,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -544,7 +544,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -582,7 +582,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -608,6 +608,11 @@
 ]
 }
 ],
+"doc:version": [
+{
+"@value": "2.0.0"
+}
+],
 "doc:references": [
 {
 "@id": "#1",
@@ -628,7 +633,7 @@
 "@value": "#%RAML 1.0 NamedExample\ncordCreateRequestExample:\n  allOrNone: false\n  records:\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70226\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70227\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n"
 }
 ],
-"raml-http:mediaType": [
+"core:mediaType": [
 {
 "@value": "application/raml+yaml"
 }
@@ -657,6 +662,11 @@
 ]
 }
 ],
+"doc:version": [
+{
+"@value": "2.0.0"
+}
+],
 "sourcemaps:sources": [
 {
 "@id": "#1/source-map",
@@ -683,7 +693,7 @@
 {
 "@id": "#3",
 "@type": [
-"doc:DataType",
+"raml-shapes:DataTypeFragment",
 "doc:Fragment",
 "doc:Unit"
 ],
@@ -5767,7 +5777,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -5814,7 +5824,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_2"
 }
@@ -6090,24 +6100,24 @@
 "@value": "recordCreateRequest"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Record type"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Fields for create a new record"
 }
 ],
-"doc:examples": [
+"apiContract:examples": [
 {
 "@id": "#5",
 "@type": [
-"doc:Example",
+"apiContract:Example",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "cordCreateRequestExample"
 }
@@ -6143,7 +6153,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_2"
 }
@@ -6181,7 +6191,7 @@
 "data:Node",
 "doc:DomainElement"
 ],
-"rdf:member": [
+"rdfs:member": [
 {
 "@id": "#8",
 "@type": [
@@ -6215,7 +6225,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_6"
 }
@@ -6244,7 +6254,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_5"
 }
@@ -6303,7 +6313,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_7"
 }
@@ -6350,7 +6360,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_8"
 }
@@ -6397,7 +6407,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_9"
 }
@@ -6444,7 +6454,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_10"
 }
@@ -6491,7 +6501,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_11"
 }
@@ -6538,7 +6548,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_12"
 }
@@ -6585,7 +6595,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_13"
 }
@@ -6632,7 +6642,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_14"
 }
@@ -6679,7 +6689,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_15"
 }
@@ -6726,7 +6736,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_16"
 }
@@ -6773,7 +6783,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_17"
 }
@@ -6820,7 +6830,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_18"
 }
@@ -6867,7 +6877,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_19"
 }
@@ -6914,7 +6924,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_20"
 }
@@ -6961,7 +6971,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#double"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_21"
 }
@@ -7008,7 +7018,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_22"
 }
@@ -7055,7 +7065,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_23"
 }
@@ -7102,7 +7112,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_24"
 }
@@ -7149,7 +7159,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_25"
 }
@@ -7196,7 +7206,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_26"
 }
@@ -7243,7 +7253,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_27"
 }
@@ -7290,7 +7300,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_28"
 }
@@ -7337,7 +7347,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_29"
 }
@@ -7384,7 +7394,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_30"
 }
@@ -7431,7 +7441,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_31"
 }
@@ -7478,7 +7488,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_32"
 }
@@ -7525,7 +7535,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_33"
 }
@@ -7572,7 +7582,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_34"
 }
@@ -7619,7 +7629,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_35"
 }
@@ -7666,7 +7676,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_36"
 }
@@ -7713,7 +7723,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_37"
 }
@@ -7760,7 +7770,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_38"
 }
@@ -7807,7 +7817,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_39"
 }
@@ -7854,7 +7864,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_40"
 }
@@ -7901,7 +7911,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_41"
 }
@@ -7948,7 +7958,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_42"
 }
@@ -7995,7 +8005,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_43"
 }
@@ -8024,7 +8034,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_4"
 }
@@ -8541,7 +8551,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_46"
 }
@@ -8570,7 +8580,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_45"
 }
@@ -8629,7 +8639,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_47"
 }
@@ -8676,7 +8686,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_48"
 }
@@ -8723,7 +8733,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_49"
 }
@@ -8770,7 +8780,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_50"
 }
@@ -8817,7 +8827,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_51"
 }
@@ -8864,7 +8874,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_52"
 }
@@ -8911,7 +8921,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_53"
 }
@@ -8958,7 +8968,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_54"
 }
@@ -9005,7 +9015,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_55"
 }
@@ -9052,7 +9062,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_56"
 }
@@ -9099,7 +9109,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_57"
 }
@@ -9146,7 +9156,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_58"
 }
@@ -9193,7 +9203,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_59"
 }
@@ -9240,7 +9250,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_60"
 }
@@ -9287,7 +9297,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#double"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_61"
 }
@@ -9334,7 +9344,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_62"
 }
@@ -9381,7 +9391,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_63"
 }
@@ -9428,7 +9438,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_64"
 }
@@ -9475,7 +9485,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_65"
 }
@@ -9522,7 +9532,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_66"
 }
@@ -9569,7 +9579,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_67"
 }
@@ -9616,7 +9626,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_68"
 }
@@ -9663,7 +9673,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_69"
 }
@@ -9710,7 +9720,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_70"
 }
@@ -9757,7 +9767,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_71"
 }
@@ -9804,7 +9814,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_72"
 }
@@ -9851,7 +9861,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_73"
 }
@@ -9898,7 +9908,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_74"
 }
@@ -9945,7 +9955,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_75"
 }
@@ -9992,7 +10002,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_76"
 }
@@ -10039,7 +10049,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_77"
 }
@@ -10086,7 +10096,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_78"
 }
@@ -10133,7 +10143,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_79"
 }
@@ -10180,7 +10190,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_80"
 }
@@ -10227,7 +10237,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_81"
 }
@@ -10274,7 +10284,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_82"
 }
@@ -10321,7 +10331,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_83"
 }
@@ -10350,7 +10360,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_44"
 }
@@ -10835,7 +10845,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "array_3"
 }
@@ -10864,7 +10874,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_1"
 }
@@ -10917,7 +10927,7 @@
 ]
 }
 ],
-"shacl:raw": [
+"doc:raw": [
 {
 "@value": "\n  allOrNone: false\n  records:\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70226\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70227\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n"
 }
@@ -10946,7 +10956,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "shacl:raw"
+"@value": "doc:raw"
 }
 ],
 "sourcemaps:value": [
@@ -10958,7 +10968,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -11062,7 +11072,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11086,7 +11096,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -11112,6 +11122,11 @@
 ]
 }
 ]
+}
+],
+"doc:version": [
+{
+"@value": "2.0.0"
 }
 ],
 "sourcemaps:sources": [
@@ -16218,7 +16233,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -16265,7 +16280,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_2"
 }
@@ -16541,12 +16556,12 @@
 "@value": "recordCreateRequest"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Record type"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Fields for create a new record"
 }
@@ -16575,7 +16590,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -16599,7 +16614,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -21705,7 +21720,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -21752,7 +21767,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_2"
 }
@@ -22028,24 +22043,24 @@
 "@value": "recordCreateRequest"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Record type"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Fields for create a new record"
 }
 ],
-"doc:examples": [
+"apiContract:examples": [
 {
 "@id": "#5",
 "@type": [
-"doc:Example",
+"apiContract:Example",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "cordCreateRequestExample"
 }
@@ -22081,7 +22096,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_2"
 }
@@ -22119,7 +22134,7 @@
 "data:Node",
 "doc:DomainElement"
 ],
-"rdf:member": [
+"rdfs:member": [
 {
 "@id": "#8",
 "@type": [
@@ -22153,7 +22168,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_6"
 }
@@ -22182,7 +22197,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_5"
 }
@@ -22241,7 +22256,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_7"
 }
@@ -22288,7 +22303,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_8"
 }
@@ -22335,7 +22350,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_9"
 }
@@ -22382,7 +22397,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_10"
 }
@@ -22429,7 +22444,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_11"
 }
@@ -22476,7 +22491,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_12"
 }
@@ -22523,7 +22538,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_13"
 }
@@ -22570,7 +22585,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_14"
 }
@@ -22617,7 +22632,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_15"
 }
@@ -22664,7 +22679,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_16"
 }
@@ -22711,7 +22726,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_17"
 }
@@ -22758,7 +22773,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_18"
 }
@@ -22805,7 +22820,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_19"
 }
@@ -22852,7 +22867,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_20"
 }
@@ -22899,7 +22914,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#double"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_21"
 }
@@ -22946,7 +22961,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_22"
 }
@@ -22993,7 +23008,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_23"
 }
@@ -23040,7 +23055,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_24"
 }
@@ -23087,7 +23102,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_25"
 }
@@ -23134,7 +23149,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_26"
 }
@@ -23181,7 +23196,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_27"
 }
@@ -23228,7 +23243,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_28"
 }
@@ -23275,7 +23290,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_29"
 }
@@ -23322,7 +23337,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_30"
 }
@@ -23369,7 +23384,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_31"
 }
@@ -23416,7 +23431,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_32"
 }
@@ -23463,7 +23478,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_33"
 }
@@ -23510,7 +23525,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_34"
 }
@@ -23557,7 +23572,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_35"
 }
@@ -23604,7 +23619,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_36"
 }
@@ -23651,7 +23666,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_37"
 }
@@ -23698,7 +23713,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_38"
 }
@@ -23745,7 +23760,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_39"
 }
@@ -23792,7 +23807,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_40"
 }
@@ -23839,7 +23854,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_41"
 }
@@ -23886,7 +23901,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_42"
 }
@@ -23933,7 +23948,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_43"
 }
@@ -23962,7 +23977,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_4"
 }
@@ -24479,7 +24494,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_46"
 }
@@ -24508,7 +24523,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_45"
 }
@@ -24567,7 +24582,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_47"
 }
@@ -24614,7 +24629,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_48"
 }
@@ -24661,7 +24676,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_49"
 }
@@ -24708,7 +24723,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_50"
 }
@@ -24755,7 +24770,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_51"
 }
@@ -24802,7 +24817,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_52"
 }
@@ -24849,7 +24864,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_53"
 }
@@ -24896,7 +24911,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_54"
 }
@@ -24943,7 +24958,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_55"
 }
@@ -24990,7 +25005,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_56"
 }
@@ -25037,7 +25052,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_57"
 }
@@ -25084,7 +25099,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_58"
 }
@@ -25131,7 +25146,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_59"
 }
@@ -25178,7 +25193,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_60"
 }
@@ -25225,7 +25240,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#double"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_61"
 }
@@ -25272,7 +25287,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_62"
 }
@@ -25319,7 +25334,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_63"
 }
@@ -25366,7 +25381,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_64"
 }
@@ -25413,7 +25428,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_65"
 }
@@ -25460,7 +25475,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_66"
 }
@@ -25507,7 +25522,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_67"
 }
@@ -25554,7 +25569,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_68"
 }
@@ -25601,7 +25616,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_69"
 }
@@ -25648,7 +25663,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_70"
 }
@@ -25695,7 +25710,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_71"
 }
@@ -25742,7 +25757,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_72"
 }
@@ -25789,7 +25804,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_73"
 }
@@ -25836,7 +25851,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_74"
 }
@@ -25883,7 +25898,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_75"
 }
@@ -25930,7 +25945,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_76"
 }
@@ -25977,7 +25992,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_77"
 }
@@ -26024,7 +26039,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_78"
 }
@@ -26071,7 +26086,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_79"
 }
@@ -26118,7 +26133,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_80"
 }
@@ -26165,7 +26180,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_81"
 }
@@ -26212,7 +26227,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_82"
 }
@@ -26259,7 +26274,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_83"
 }
@@ -26288,7 +26303,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_44"
 }
@@ -26773,7 +26788,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "array_3"
 }
@@ -26802,7 +26817,7 @@
 ]
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "object_1"
 }
@@ -26855,7 +26870,7 @@
 ]
 }
 ],
-"shacl:raw": [
+"doc:raw": [
 {
 "@value": "\n  allOrNone: false\n  records:\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70226\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n    -\n      attributes:\n        type: \"Inventory__c\"\n      Name: \"70227\"\n      AS400Location: \"OMANE\"\n      AS400CityName: \"Omaha, DG\"\n      Year: \"2016\"\n      Make: \"FRT\"\n      Model: \"CASCADIA\"\n      ModelType: \"CAS\"\n      Type: \"OOP\"\n      Weight: 9300\n      Serial: \"ABCDEF123\"\n      AcquiredDate: \"2019-01-16\"\n      InService: \"2019-01-16\"\n      MaintenanceCode: \"V9\"\n      MaintenanceCodeDescription: \"V9\"\n      AS400ECM: 401571.60\n      AS400Status: \"INVTM\"\n      IQDate: \"2019-01-16\"\n      Engine: \"D13\"\n      EngineSerial: \"ABC123\"\n      EngineWarranty: \"2019-01-16\"\n      EngineArrangement: \"ABC123\"\n      TransmissionSerial: \"ABC123\"\n      TransmissionRearRatio: 1\n      TransmissionRearRearSN: \"1\"\n      TransmissionFrontRearSN: \"1\"\n      BookValue: 10000\n      BookValueAsOf: \"2019-01-16\"\n      Depreciation: 10\n      Age: 1\n      AssetDescription: \"Asset\"\n      CabType: \"A\"\n      Color: \"BLUE\"\n      TCUType: \"THERMOKING\"\n      TCUHours: 12\n      Length: 12\n      Axles: 14\n      InventoryType: Tractor\n"
 }
@@ -26884,7 +26899,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "shacl:raw"
+"@value": "doc:raw"
 }
 ],
 "sourcemaps:value": [
@@ -26896,7 +26911,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -27000,7 +27015,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -27024,7 +27039,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -27054,16 +27069,15 @@
 ],
 "@context": {
 "@base": "amf://id",
-"raml-http": "http://a.ml/vocabularies/http#",
 "shacl": "http://www.w3.org/ns/shacl#",
 "raml-shapes": "http://a.ml/vocabularies/shapes#",
 "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
 "data": "http://a.ml/vocabularies/data#",
 "doc": "http://a.ml/vocabularies/document#",
+"apiContract": "http://a.ml/vocabularies/apiContract#",
+"core": "http://a.ml/vocabularies/core#",
 "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-"sourcemaps": "http://a.ml/vocabularies/document-source-maps#",
-"schema-org": "http://schema.org/",
-"hydra": "http://www.w3.org/ns/hydra/core#"
+"sourcemaps": "http://a.ml/vocabularies/document-source-maps#"
 }
 }
 ]

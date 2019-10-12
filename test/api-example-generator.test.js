@@ -1,30 +1,30 @@
-import { fixture, assert } from '@open-wc/testing';
+import { fixture, assert, html } from '@open-wc/testing';
 import { AmfLoader } from './amf-loader.js';
 import '../api-example-generator.js';
 
 describe('<api-example-generator>', () => {
-  async function basicFixture() {
-    return (await fixture(`<api-example-generator></api-example-generator>`));
+  async function basicFixture(amf) {
+    return (await fixture(html`<api-example-generator .amf="${amf}"></api-example-generator>`));
   }
 
   function getType(element, amf, name) {
     if (amf instanceof Array) {
       amf = amf[0];
     }
-    const dKey = element._getAmfKey(element.ns.raml.vocabularies.document + 'declares');
+    const dKey = element._getAmfKey(element.ns.aml.vocabularies.document.declares);
     const declares = element._ensureArray(amf[dKey]);
     const type = declares.find((item) => {
-      // if (!element._hasType(item, element.ns.w3.shacl.name + 'NodeShape')) {
+      // if (!element._hasType(item, element.ns.w3.shacl.NodeShape)) {
       //   return false;
       // }
-      const iName = element._getValue(item, element.ns.w3.shacl.name + 'name');
+      const iName = element._getValue(item, element.ns.w3.shacl.name);
       return name === iName;
     });
     return type;
   }
 
   function getProperty(element, type, index) {
-    const pKey = element._getAmfKey(element.ns.w3.shacl.name + 'property');
+    const pKey = element._getAmfKey(element.ns.w3.shacl.property);
     const props = element._ensureArray(type[pKey]);
     return props[index];
   }
@@ -37,7 +37,7 @@ describe('<api-example-generator>', () => {
 
   function getTypePropertyRange(element, amf, typeName, propertyIndex) {
     const prop = getTypeProperty(element, amf, typeName, propertyIndex);
-    const rKey = element._getAmfKey(element.ns.raml.vocabularies.shapes + 'range');
+    const rKey = element._getAmfKey(element.ns.raml.vocabularies.shapes.range);
     let range = prop[rKey];
     if (range instanceof Array) {
       range = range[0];
@@ -48,9 +48,9 @@ describe('<api-example-generator>', () => {
   function getPayload(element, amf, endpoint, method) {
     const webApi = element._computeWebApi(amf);
     const endPoint = element._computeEndpointByPath(webApi, endpoint);
-    const opKey = element._getAmfKey(element.ns.w3.hydra.supportedOperation);
+    const opKey = element._getAmfKey(element.ns.aml.vocabularies.apiContract.supportedOperation);
     const ops = element._ensureArray(endPoint[opKey]);
-    const op = ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
+    const op = ops.find((item) => element._getValue(item, element.ns.aml.vocabularies.apiContract.method) === method);
     const expects = element._computeExpects(op);
     return element._ensureArray(element._computePayload(expects));
   }
@@ -60,7 +60,7 @@ describe('<api-example-generator>', () => {
       payloadIndex = 0;
     }
     const payload = getPayload(element, amf, endpoint, method)[payloadIndex];
-    const sKey = element._getAmfKey(element.ns.raml.vocabularies.http + 'schema');
+    const sKey = element._getAmfKey(element.ns.aml.vocabularies.shapes.schema);
     return element._ensureArray(payload[sKey]);
   }
 
@@ -80,8 +80,7 @@ describe('<api-example-generator>', () => {
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = await basicFixture(amf);
         });
 
         it('Returns list of media types', () => {
@@ -519,7 +518,7 @@ describe('<api-example-generator>', () => {
 
         it('Computes example for an Example shape', () => {
           const shape = getType(element, amf, 'SimpleInlineExample');
-          const key = element._getAmfKey(element.ns.raml.vocabularies.document + 'examples');
+          const key = element._getAmfKey(element.ns.raml.vocabularies.apiContract.examples);
           const example = element._ensureArray(shape[key])[0];
           const result = element.computeExamples(example, 'application/json');
           assert.typeOf(result, 'array');
@@ -1113,8 +1112,7 @@ describe('<api-example-generator>', () => {
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = await basicFixture(amf);
         });
 
         it('Returns default value of range', () => {
@@ -1196,10 +1194,10 @@ describe('<api-example-generator>', () => {
         });
 
         function getStructuredValue(element, type) {
-          const key = element._getAmfKey(element.ns.raml.vocabularies.document + 'examples');
+          const key = element._getAmfKey(element.ns.raml.vocabularies.apiContract.examples);
           let example = element._ensureArray(type[key])[0];
           if (element._hasType(example, element.ns.raml.vocabularies.document + 'NamedExamples')) {
-            const key = element._getAmfKey(element.ns.raml.vocabularies.document + 'examples');
+            const key = element._getAmfKey(element.ns.raml.vocabularies.apiContract.examples);
             example = example[key];
             if (example instanceof Array) {
               example = example[0];
@@ -1236,7 +1234,7 @@ describe('<api-example-generator>', () => {
 
   describe('_getTypedValue()', () => {
     [
-      ['json+ld data model', false],
+      // ['json+ld data model', false],
       ['Compact data model', true]
     ].forEach((setupItem) => {
       describe(setupItem[0], () => {
@@ -1251,14 +1249,10 @@ describe('<api-example-generator>', () => {
         let valueKey;
         let typeKey;
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
-          prefix = element._getAmfKey(element.ns.w3.xmlSchema);
-          if (prefix !== element.ns.w3.xmlSchema) {
-            prefix += ':';
-          }
-          valueKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'value');
-          typeKey = element._getAmfKey(element.ns.w3.shacl.name + 'datatype');
+          element = await basicFixture(amf);
+          prefix = element._getAmfKey(element.ns.w3.xmlSchema + '');
+          valueKey = element._getAmfKey(element.ns.raml.vocabularies.data.value);
+          typeKey = element._getAmfKey(element.ns.w3.shacl.datatype);
         });
 
         function constructType(type, value) {
@@ -1680,7 +1674,7 @@ describe('<api-example-generator>', () => {
     });
   });
 
-  describe.skip('Tracked elements (skipped until next AMF release)', () => {
+  describe('Tracked elements (skipped until next AMF release)', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
@@ -1694,8 +1688,7 @@ describe('<api-example-generator>', () => {
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = await basicFixture(amf);
         });
 
         it('Generates example for GET', () => {
@@ -1918,7 +1911,7 @@ describe('<api-example-generator>', () => {
         });
 
         it('Normalizes name', () => {
-          const key = element._getAmfKey(element.ns.w3.shacl.name + 'name');
+          const key = element._getAmfKey(element.ns.w3.shacl.name);
           const range = {};
           range[key] = [{
             '@value': 'gender?'

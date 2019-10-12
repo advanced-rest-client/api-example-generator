@@ -11,64 +11,64 @@
 {
 "@id": "#436",
 "@type": [
-"schema-org:WebAPI",
+"apiContract:WebAPI",
 "doc:RootDomainElement",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Purina-Supplier-PurchaseOrder"
 }
 ],
-"schema-org:version": [
+"core:version": [
 {
 "@value": "v1"
 }
 ],
-"raml-http:endpoint": [
+"apiContract:endpoint": [
 {
 "@id": "#437",
 "@type": [
-"raml-http:EndPoint",
+"apiContract:EndPoint",
 "doc:DomainElement"
 ],
-"raml-http:path": [
+"apiContract:path": [
 {
 "@value": "/purina/b2b/supplier/purchaseOrder"
 }
 ],
-"hydra:supportedOperation": [
+"apiContract:supportedOperation": [
 {
 "@id": "#438",
 "@type": [
-"hydra:Operation",
+"apiContract:Operation",
 "doc:DomainElement"
 ],
-"hydra:method": [
+"apiContract:method": [
 {
 "@value": "post"
 }
 ],
-"hydra:expects": [
+"apiContract:expects": [
 {
 "@id": "#439",
 "@type": [
-"raml-http:Request",
+"apiContract:Request",
 "doc:DomainElement"
 ],
-"raml-http:payload": [
+"apiContract:payload": [
 {
 "@id": "#440",
 "@type": [
-"raml-http:Payload",
+"apiContract:Payload",
 "doc:DomainElement"
 ],
-"raml-http:mediaType": [
+"core:mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#441",
 "@type": [
@@ -718,7 +718,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is an alternate identifier for the PurchaseOrder, requires the use of the typeCode qualifier.  This could be a system level key."
 }
@@ -747,7 +747,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -1459,7 +1459,7 @@
 "@value": "reason"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "additional textual reason for the reason the status code has been applied or the if the effective time period has changed."
 }
@@ -1488,7 +1488,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -3597,7 +3597,7 @@
 "@value": "contact"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the customer representative placing the order, including name, phone and email contact information"
 }
@@ -3626,7 +3626,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -4747,7 +4747,7 @@
 "@value": "directions"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Directions for the location, especially in the case of direct ship"
 }
@@ -4776,7 +4776,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -4924,7 +4924,7 @@
 "@value": "uri"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "URI link to a mapping service showing the exact location on a map"
 }
@@ -4953,7 +4953,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -6634,7 +6634,7 @@
 "@value": "contact"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the key contact at the ShipTo location, in case there are delivery questions."
 }
@@ -6663,7 +6663,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -7372,7 +7372,7 @@
 "@value": "deliveryPointIdentifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "delivery point may be a loading dock, etc."
 }
@@ -7401,7 +7401,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -7578,7 +7578,7 @@
 "@value": "countrySubDivisionCode"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Two character state code in the United States, Province in Canada, etc.  See ISO 3166-2."
 }
@@ -7607,7 +7607,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -7863,7 +7863,7 @@
 "@value": "physicalAddress"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the physical address for the shipment"
 }
@@ -7892,7 +7892,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -8984,7 +8984,7 @@
 "@value": "totalAmount"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the total amount of the purchase order, which is the sum of each purchase order lines, plus calculated tax."
 }
@@ -9013,7 +9013,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -9429,7 +9429,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Identifier for the BillTo party"
 }
@@ -9458,7 +9458,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -9756,7 +9756,7 @@
 "@value": "accountIdentifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Specific Account for the customer BillTo"
 }
@@ -9785,7 +9785,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -9933,7 +9933,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Identifier for the location, if no GLN is used."
 }
@@ -9962,7 +9962,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11247,7 +11247,7 @@
 "@value": "countrySubDivisionCode"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Two character state code in the United States, Province in Canada, etc.  See ISO 3166-2."
 }
@@ -11276,7 +11276,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11532,7 +11532,7 @@
 "@value": "postalAddress"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the mailing address for which invoices should be sent, if not electronically sent."
 }
@@ -11561,7 +11561,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11670,7 +11670,7 @@
 "@value": "note"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Note on the BillTo lcoation\r\nExample:"
 }
@@ -11699,7 +11699,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -12813,7 +12813,7 @@
 "@value": "contact"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the BillTo contact "
 }
@@ -12842,7 +12842,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -13137,7 +13137,7 @@
 "@value": "accountIdentifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "customer's account number with the carrier if the customer is specifying a carrier"
 }
@@ -13166,7 +13166,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -14683,7 +14683,7 @@
 "@value": "code"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "state or province from which the tax applies."
 }
@@ -14712,7 +14712,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -15067,7 +15067,7 @@
 "@value": "basisAmount"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "sum of the individual items without tax"
 }
@@ -15096,7 +15096,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -15386,7 +15386,7 @@
 "@value": "currencyExchangeRate"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "current exchange rate at the time of the transaciton"
 }
@@ -15415,7 +15415,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -15547,7 +15547,7 @@
 "@value": "tax"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "These are various taxes that may be applied.  There may be multiple tax values for VAT, etc."
 }
@@ -15576,7 +15576,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -15918,7 +15918,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Identifier for the buyer"
 }
@@ -15947,7 +15947,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -16184,7 +16184,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is often not known at the time the order is place, but will appear on the AcknowledgePurchaseOrder Callback API or \r\nGET //AcknowledgePurchaseOrder request response service"
 }
@@ -16213,7 +16213,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -18373,7 +18373,7 @@
 "@value": "code"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Code used to classify the item being purchased.\r\nIf code is mapped, the typeCode should also be mapped since this a generic code.  "
 }
@@ -18402,7 +18402,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -19491,7 +19491,7 @@
 "@value": "exportControl"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "If the ShipTo defines an import of the product into the country, the identifiers for customs clearance are required."
 }
@@ -19520,7 +19520,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -26104,7 +26104,7 @@
 "@value": "discountAmount"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Calculated amount based on percentage."
 }
@@ -26133,7 +26133,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -26387,7 +26387,7 @@
 "@value": "amountDiscount"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "If provided, customer service will evaluate for applicability."
 }
@@ -26416,7 +26416,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -26927,7 +26927,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1383,1)]"
+"@value": "[(5,2)-(1383,1)]"
 }
 ]
 }
@@ -26998,7 +26998,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:payload"
+"@value": "apiContract:payload"
 }
 ],
 "sourcemaps:value": [
@@ -27096,7 +27096,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:version"
+"@value": "core:version"
 }
 ],
 "sourcemaps:value": [
@@ -27120,7 +27120,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -27132,6 +27132,11 @@
 ]
 }
 ]
+}
+],
+"doc:version": [
+{
+"@value": "2.0.0"
 }
 ],
 "doc:references": [
@@ -27154,11 +27159,16 @@
 "@value": "{\n  \"$schema\" : \"http://json-schema.org/draft-04/schema#\",\n  \"id\" : \"http://www.openapplications.org/oagis/10\",\n  \"required\" : [ \"purchaseOrder\" ],\n  \"additionalProperties\" : false,\n  \"properties\" : {\n    \"purchaseOrder\" : {\n      \"id\" : \"#purchaseOrder\",\n      \"type\" : \"object\",\n      \"additionalProperties\" : false,\n      \"properties\" : {\n        \"typeCode\" : {\n          \"description\" : \"valid types include DirectShip,  Normal,  TransferOrder (e.g., the PO side of the transfer order)\",\n          \"$ref\" : \"#/definitions/token\"\n        },\n        \"actionCode\" : {\n          \"description\" : \"options include Original, Change, Cancel\",\n          \"$ref\" : \"#/definitions/token\"\n        },\n        \"purchaseOrderHeader\" : {\n          \"type\" : \"object\",\n          \"additionalProperties\" : false,\n          \"properties\" : {\n            \"identifier\" : {\n              \"description\" : \"This is the PurchaseOrder identifier generated by the sender's business application.\",\n              \"$ref\" : \"#/definitions/normalizedString\"\n            },\n            \"documentIdentifierSet\" : {\n              \"type\" : \"array\",\n              \"items\" : {\n                \"type\" : \"object\",\n                \"required\" : [ \"identifier\" ],\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"identifier\" : {\n                    \"description\" : \"This is an alternate identifier for the PurchaseOrder, requires the use of the typeCode qualifier.  This could be a system level key.\",\n                    \"type\" : \"array\",\n                    \"minItems\" : 1,\n                    \"items\" : {\n                      \"type\" : \"object\",\n                      \"required\" : [ \"content\", \"typeCode\" ],\n                      \"additionalProperties\" : false,\n                      \"properties\" : {\n                        \"content\" : {\n                          \"$ref\" : \"#/definitions/normalizedString\"\n                        },\n                        \"typeCode\" : {\n                          \"$ref\" : \"#/definitions/token\"\n                        },\n                        \"schemeAgencyIdentifier\" : {\n                          \"$ref\" : \"#/definitions/token\"\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"lastModificationDateTime\" : {\n              \"description\" : \"ISO 8601 formatted update timestamp for the document, if the action code is changed or deleted. \\r\\nExample - '2018-01-02T10:08:11.000-06:00'\",\n              \"$ref\" : \"#/definitions/token\"\n            },\n            \"description\" : {\n              \"$ref\" : \"#/definitions/string\"\n            },\n            \"note\" : {\n              \"description\" : \"This is a note that may be placed on the purchase order by the sender, such as special packing, messages, or other instructions that cannot normally be mapped into other fields.  This should not be overloaded when existing fields can be mapped.\",\n              \"$ref\" : \"#/definitions/string\"\n            },\n            \"status\" : {\n              \"type\" : \"array\",\n              \"items\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"code\" : {\n                    \"description\" : \"codified value for the status\",\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  },\n                  \"description\" : {\n                    \"description\" : \"Description of the status code sent.\",\n                    \"$ref\" : \"#/definitions/string\"\n                  },\n                  \"reasonCode\" : {\n                    \"description\" : \"codified reason for the reason the status code has been applied or the if the effective time period has changed.\",\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  },\n                  \"reason\" : {\n                    \"description\" : \"additional textual reason for the reason the status code has been applied or the if the effective time period has changed.\",\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"$ref\" : \"#/definitions/string\"\n                    }\n                  },\n                  \"effectiveTimePeriod\" : {\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"startDateTime\" : {\n                        \"description\" : \"Effective start time for which the order should be fulfilled\",\n                        \"$ref\" : \"#/definitions/token\"\n                      },\n                      \"endDateTime\" : {\n                        \"description\" : \"Effective end time for which the order should be fulfilled\",\n                        \"$ref\" : \"#/definitions/token\"\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"customerParty\" : {\n              \"type\" : \"object\",\n              \"additionalProperties\" : false,\n              \"properties\" : {\n                \"identifier\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                },\n                \"accountIdentifier\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                },\n                \"name\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/string\"\n                  }\n                },\n                \"location\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"contact\" : {\n                        \"description\" : \"This is the customer representative placing the order, including name, phone and email contact information\",\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"type\" : \"object\",\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"personName\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"formattedName\" : {\n                                    \"description\" : \"Formatted string; <familyName>, <givenName> <middleName>\\r\\nIf you can populate these fields directly, use givenName, familyName, middleName instead.\",\n                                    \"$ref\" : \"#/definitions/string\"\n                                  },\n                                  \"givenName\" : {\n                                    \"$ref\" : \"#/definitions/string\"\n                                  },\n                                  \"middleName\" : {\n                                    \"type\" : \"array\",\n                                    \"items\" : {\n                                      \"$ref\" : \"#/definitions/string\"\n                                    }\n                                  },\n                                  \"familyName\" : {\n                                    \"type\" : \"array\",\n                                    \"items\" : {\n                                      \"$ref\" : \"#/definitions/string\"\n                                    }\n                                  }\n                                }\n                              }\n                            },\n                            \"telephoneCommunication\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"identifier\" : {\n                                    \"type\" : \"array\",\n                                    \"items\" : {\n                                      \"$ref\" : \"#/definitions/normalizedString\"\n                                    }\n                                  }\n                                }\n                              }\n                            },\n                            \"emailAddressCommunication\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"identifier\" : {\n                                    \"type\" : \"array\",\n                                    \"items\" : {\n                                      \"$ref\" : \"#/definitions/normalizedString\"\n                                    }\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"supplierParty\" : {\n              \"type\" : \"object\",\n              \"additionalProperties\" : false,\n              \"properties\" : {\n                \"identifier\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                },\n                \"accountIdentifier\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                },\n                \"name\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/string\"\n                  }\n                }\n              }\n            },\n            \"shipToParty\" : {\n              \"type\" : \"object\",\n              \"additionalProperties\" : false,\n              \"properties\" : {\n                \"identifier\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                },\n                \"location\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"identifier\" : {\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"$ref\" : \"#/definitions/normalizedString\"\n                        }\n                      },\n                      \"directions\" : {\n                        \"description\" : \"Directions for the location, especially in the case of direct ship\",\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"$ref\" : \"#/definitions/string\"\n                        }\n                      },\n                      \"coordinate\" : {\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"type\" : \"object\",\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"uri\" : {\n                              \"description\" : \"URI link to a mapping service showing the exact location on a map\",\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/normalizedString\"\n                              }\n                            },\n                            \"latitudeMeasure\" : {\n                              \"description\" : \"Lat\",\n                              \"$ref\" : \"#/definitions/decimal\"\n                            },\n                            \"longitudeMeasure\" : {\n                              \"description\" : \"long\",\n                              \"$ref\" : \"#/definitions/decimal\"\n                            }\n                          }\n                        }\n                      },\n                      \"contact\" : {\n                        \"description\" : \"This is the key contact at the ShipTo location, in case there are delivery questions.\",\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"type\" : \"object\",\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"identifier\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/normalizedString\"\n                              }\n                            },\n                            \"personName\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"formattedName\" : {\n                                    \"description\" : \"Formatted string; <familyName>, <givenName> <middleName>\\r\\nIf you can populate these fields directly, use givenName, familyName, middleName instead.\",\n                                    \"$ref\" : \"#/definitions/string\"\n                                  },\n                                  \"givenName\" : {\n                                    \"$ref\" : \"#/definitions/string\"\n                                  },\n                                  \"middleName\" : {\n                                    \"type\" : \"array\",\n                                    \"items\" : {\n                                      \"$ref\" : \"#/definitions/string\"\n                                    }\n                                  },\n                                  \"familyName\" : {\n                                    \"type\" : \"array\",\n                                    \"items\" : {\n                                      \"$ref\" : \"#/definitions/string\"\n                                    }\n                                  }\n                                }\n                              }\n                            },\n                            \"telephoneCommunication\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"identifier\" : {\n                                    \"type\" : \"array\",\n                                    \"items\" : {\n                                      \"$ref\" : \"#/definitions/normalizedString\"\n                                    }\n                                  }\n                                }\n                              }\n                            },\n                            \"emailAddressCommunication\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"identifier\" : {\n                                    \"type\" : \"array\",\n                                    \"items\" : {\n                                      \"$ref\" : \"#/definitions/normalizedString\"\n                                    }\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      },\n                      \"physicalAddress\" : {\n                        \"description\" : \"This is the physical address for the shipment\",\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"type\" : \"object\",\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"identifier\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/normalizedString\"\n                              }\n                            },\n                            \"name\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/string\"\n                              }\n                            },\n                            \"addressLine\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"required\" : [ \"content\" ],\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"content\" : {\n                                    \"$ref\" : \"#/definitions/string\"\n                                  },\n                                  \"sequenceNumberNumber\" : {\n                                    \"$ref\" : \"#/definitions/integer\"\n                                  }\n                                }\n                              }\n                            },\n                            \"deliveryPointIdentifier\" : {\n                              \"description\" : \"delivery point may be a loading dock, etc.\",\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/normalizedString\"\n                              }\n                            },\n                            \"cityName\" : {\n                              \"$ref\" : \"#/definitions/string\"\n                            },\n                            \"countrySubDivisionCode\" : {\n                              \"description\" : \"Two character state code in the United States, Province in Canada, etc.  See ISO 3166-2.\",\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/token\"\n                              }\n                            },\n                            \"countryCode\" : {\n                              \"description\" : \"ISO ALPHA-2 two character country code see countrycode.org\",\n                              \"$ref\" : \"#/definitions/token\"\n                            },\n                            \"postalCode\" : {\n                              \"$ref\" : \"#/definitions/normalizedString\"\n                            }\n                          }\n                        }\n                      },\n                      \"availableTimePeriod\" : {\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"type\" : \"object\",\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"startTime\" : {\n                              \"description\" : \"Start time for shipment window\",\n                              \"$ref\" : \"#/definitions/token\"\n                            },\n                            \"endTime\" : {\n                              \"description\" : \"End time for shipment window\",\n                              \"$ref\" : \"#/definitions/token\"\n                            }\n                          }\n                        }\n                      },\n                      \"glnid\" : {\n                        \"description\" : \"GS1 global location identifier\",\n                        \"$ref\" : \"#/definitions/normalizedString\"\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"contractReference\" : {\n              \"type\" : \"object\",\n              \"additionalProperties\" : false,\n              \"properties\" : {\n                \"identifier\" : {\n                  \"$ref\" : \"#/definitions/normalizedString\"\n                }\n              }\n            },\n            \"totalAmount\" : {\n              \"description\" : \"This is the total amount of the purchase order, which is the sum of each purchase order lines, plus calculated tax.\",\n              \"type\" : \"object\",\n              \"required\" : [ \"content\" ],\n              \"additionalProperties\" : false,\n              \"properties\" : {\n                \"content\" : {\n                  \"$ref\" : \"#/definitions/decimal\"\n                },\n                \"typeCode\" : {\n                  \"$ref\" : \"#/definitions/token\"\n                },\n                \"currencyCode\" : {\n                  \"$ref\" : \"#/definitions/token\"\n                }\n              }\n            },\n            \"billToParty\" : {\n              \"type\" : \"object\",\n              \"additionalProperties\" : false,\n              \"properties\" : {\n                \"identifier\" : {\n                  \"description\" : \"Identifier for the BillTo party\",\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"type\" : \"object\",\n                    \"required\" : [ \"content\" ],\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"content\" : {\n                        \"$ref\" : \"#/definitions/normalizedString\"\n                      },\n                      \"typeCode\" : {\n                        \"$ref\" : \"#/definitions/token\"\n                      },\n                      \"schemeAgencyIdentifier\" : {\n                        \"$ref\" : \"#/definitions/token\"\n                      }\n                    }\n                  }\n                },\n                \"taxIdentifier\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                },\n                \"dunsid\" : {\n                  \"$ref\" : \"#/definitions/normalizedString\"\n                },\n                \"accountIdentifier\" : {\n                  \"description\" : \"Specific Account for the customer BillTo\",\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                },\n                \"location\" : {\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"identifier\" : {\n                        \"description\" : \"Identifier for the location, if no GLN is used.\",\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"$ref\" : \"#/definitions/normalizedString\"\n                        }\n                      },\n                      \"name\" : {\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"$ref\" : \"#/definitions/string\"\n                        }\n                      },\n                      \"postalAddress\" : {\n                        \"description\" : \"This is the mailing address for which invoices should be sent, if not electronically sent.\",\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"type\" : \"object\",\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"identifier\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/normalizedString\"\n                              }\n                            },\n                            \"name\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/string\"\n                              }\n                            },\n                            \"attentionOfName\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/string\"\n                              }\n                            },\n                            \"addressLine\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"required\" : [ \"content\" ],\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"content\" : {\n                                    \"$ref\" : \"#/definitions/string\"\n                                  },\n                                  \"sequenceNumberNumber\" : {\n                                    \"$ref\" : \"#/definitions/integer\"\n                                  }\n                                }\n                              }\n                            },\n                            \"postOfficeBox\" : {\n                              \"$ref\" : \"#/definitions/string\"\n                            },\n                            \"cityName\" : {\n                              \"$ref\" : \"#/definitions/string\"\n                            },\n                            \"countrySubDivisionCode\" : {\n                              \"description\" : \"Two character state code in the United States, Province in Canada, etc.  See ISO 3166-2.\",\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"required\" : [ \"content\" ],\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"content\" : {\n                                    \"$ref\" : \"#/definitions/token\"\n                                  },\n                                  \"listAgencyIdentifier\" : {\n                                    \"$ref\" : \"#/definitions/token\"\n                                  }\n                                }\n                              }\n                            },\n                            \"countryCode\" : {\n                              \"$ref\" : \"#/definitions/token\"\n                            },\n                            \"postalCode\" : {\n                              \"description\" : \"ISO ALPHA-2 two character country code see countrycode.org\",\n                              \"$ref\" : \"#/definitions/normalizedString\"\n                            }\n                          }\n                        }\n                      },\n                      \"note\" : {\n                        \"description\" : \"Note on the BillTo lcoation\\r\\nExample:\",\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"$ref\" : \"#/definitions/string\"\n                        }\n                      }\n                    }\n                  }\n                },\n                \"contact\" : {\n                  \"description\" : \"This is the BillTo contact \",\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"personName\" : {\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"type\" : \"object\",\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"formattedName\" : {\n                              \"$ref\" : \"#/definitions/string\"\n                            }\n                          }\n                        }\n                      },\n                      \"telephoneCommunication\" : {\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"type\" : \"object\",\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"identifier\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/normalizedString\"\n                              }\n                            }\n                          }\n                        }\n                      },\n                      \"emailAddressCommunication\" : {\n                        \"type\" : \"array\",\n                        \"items\" : {\n                          \"type\" : \"object\",\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"identifier\" : {\n                              \"type\" : \"array\",\n                              \"items\" : {\n                                \"$ref\" : \"#/definitions/normalizedString\"\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"carrierParty\" : {\n              \"type\" : \"object\",\n              \"additionalProperties\" : false,\n              \"properties\" : {\n                \"scacid\" : {\n                  \"description\" : \"This is only used if the customer is arranging transportation to pickup the order, or if there is a carrier preference\",\n                  \"$ref\" : \"#/definitions/normalizedString\"\n                },\n                \"accountIdentifier\" : {\n                  \"description\" : \"customer's account number with the carrier if the customer is specifying a carrier\",\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                }\n              }\n            },\n            \"partialShipmentAllowedIndicator\" : {\n              \"$ref\" : \"#/definitions/xbt_BooleanType\"\n            },\n            \"earlyShipmentAllowedIndicator\" : {\n              \"$ref\" : \"#/definitions/xbt_BooleanType\"\n            },\n            \"taxExemptIndicator\" : {\n              \"$ref\" : \"#/definitions/xbt_BooleanType\"\n            },\n            \"transportationTerm\" : {\n              \"type\" : \"array\",\n              \"items\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"identifier\" : {\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"$ref\" : \"#/definitions/normalizedString\"\n                    }\n                  },\n                  \"incotermsCode\" : {\n                    \"$ref\" : \"#/definitions/token\"\n                  },\n                  \"freightTermCode\" : {\n                    \"description\" : \"Freight Handling Code\",\n                    \"$ref\" : \"#/definitions/token\"\n                  },\n                  \"description\" : {\n                    \"$ref\" : \"#/definitions/string\"\n                  }\n                }\n              }\n            },\n            \"transportStep\" : {\n              \"type\" : \"array\",\n              \"items\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"transportationMethodCode\" : {\n                    \"description\" : \"Mode of Transportation\",\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                }\n              }\n            },\n            \"paymentTerm\" : {\n              \"type\" : \"array\",\n              \"items\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"paymentBasisCode\" : {\n                    \"$ref\" : \"#/definitions/token\"\n                  },\n                  \"duration\" : {\n                    \"$ref\" : \"#/definitions/token\"\n                  }\n                }\n              }\n            },\n            \"tax\" : {\n              \"description\" : \"These are various taxes that may be applied.  There may be multiple tax values for VAT, etc.\",\n              \"type\" : \"array\",\n              \"items\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"taxJurisdicationCodes\" : {\n                    \"type\" : \"object\",\n                    \"required\" : [ \"code\" ],\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"code\" : {\n                        \"description\" : \"state or province from which the tax applies.\",\n                        \"type\" : \"array\",\n                        \"minItems\" : 1,\n                        \"items\" : {\n                          \"$ref\" : \"#/definitions/normalizedString\"\n                        }\n                      }\n                    }\n                  },\n                  \"basisAmount\" : {\n                    \"description\" : \"sum of the individual items without tax\",\n                    \"type\" : \"object\",\n                    \"required\" : [ \"content\" ],\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"content\" : {\n                        \"$ref\" : \"#/definitions/decimal\"\n                      },\n                      \"currencyCode\" : {\n                        \"$ref\" : \"#/definitions/token\"\n                      }\n                    }\n                  },\n                  \"calculation\" : {\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : { }\n                  },\n                  \"amount\" : {\n                    \"description\" : \"Total estimated amount of tax for the order\",\n                    \"$ref\" : \"#/definitions/decimal\"\n                  },\n                  \"currencyExchangeRate\" : {\n                    \"description\" : \"current exchange rate at the time of the transaciton\",\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : { }\n                  }\n                }\n              }\n            },\n            \"requestedShipDateTime\" : {\n              \"$ref\" : \"#/definitions/token\"\n            },\n            \"shippingInstructions\" : {\n              \"$ref\" : \"#/definitions/string\"\n            },\n            \"orderDateTime\" : {\n              \"description\" : \"ISO 8601 formatted original date of the Purchase Order as created in the sender's business application.. \\r\\nExample - '2018-01-01T09:08:01.000-06:00'\",\n              \"$ref\" : \"#/definitions/token\"\n            },\n            \"buyerParty\" : {\n              \"type\" : \"object\",\n              \"additionalProperties\" : false,\n              \"properties\" : {\n                \"identifier\" : {\n                  \"description\" : \"Identifier for the buyer\",\n                  \"type\" : \"array\",\n                  \"items\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                }\n              }\n            },\n            \"shipFromParty\" : {\n              \"type\" : \"array\",\n              \"items\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"identifier\" : {\n                    \"description\" : \"This is often not known at the time the order is place, but will appear on the AcknowledgePurchaseOrder Callback API or \\r\\nGET //AcknowledgePurchaseOrder request response service\",\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"$ref\" : \"#/definitions/normalizedString\"\n                    }\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"purchaseOrderLine\" : {\n          \"type\" : \"array\",\n          \"items\" : {\n            \"type\" : \"object\",\n            \"additionalProperties\" : false,\n            \"properties\" : {\n              \"actionCode\" : {\n                \"description\" : \"options include (Add, Change, Cancel)\",\n                \"$ref\" : \"#/definitions/token\"\n              },\n              \"lineNumberIdentifier\" : {\n                \"$ref\" : \"#/definitions/normalizedString\"\n              },\n              \"description\" : {\n                \"$ref\" : \"#/definitions/string\"\n              },\n              \"item\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"identifier\" : {\n                    \"description\" : \"This is the buyer's identifier for the item\",\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  },\n                  \"itemIdentifierSet\" : {\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"type\" : \"object\",\n                      \"required\" : [ \"identifier\" ],\n                      \"additionalProperties\" : false,\n                      \"properties\" : {\n                        \"identifier\" : {\n                          \"type\" : \"array\",\n                          \"minItems\" : 1,\n                          \"items\" : {\n                            \"$ref\" : \"#/definitions/normalizedString\"\n                          }\n                        }\n                      }\n                    }\n                  },\n                  \"customerItemIdentification\" : {\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"identifier\" : {\n                        \"$ref\" : \"#/definitions/normalizedString\"\n                      }\n                    }\n                  },\n                  \"supplierItemIdentification\" : {\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"identifier\" : {\n                        \"$ref\" : \"#/definitions/normalizedString\"\n                      }\n                    }\n                  },\n                  \"upcid\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  },\n                  \"gtinid\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  },\n                  \"description\" : {\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"$ref\" : \"#/definitions/string\"\n                    }\n                  },\n                  \"note\" : {\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"$ref\" : \"#/definitions/string\"\n                    }\n                  },\n                  \"classification\" : {\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"type\" : \"object\",\n                      \"additionalProperties\" : false,\n                      \"properties\" : {\n                        \"unspscCode\" : {\n                          \"description\" : \"Used for international trade\",\n                          \"$ref\" : \"#/definitions/normalizedString\"\n                        },\n                        \"codes\" : {\n                          \"type\" : \"object\",\n                          \"required\" : [ \"code\" ],\n                          \"additionalProperties\" : false,\n                          \"properties\" : {\n                            \"code\" : {\n                              \"description\" : \"Code used to classify the item being purchased.\\r\\nIf code is mapped, the typeCode should also be mapped since this a generic code.  \",\n                              \"type\" : \"array\",\n                              \"minItems\" : 1,\n                              \"items\" : {\n                                \"type\" : \"object\",\n                                \"required\" : [ \"content\", \"typeCode\" ],\n                                \"additionalProperties\" : false,\n                                \"properties\" : {\n                                  \"content\" : {\n                                    \"$ref\" : \"#/definitions/normalizedString\"\n                                  },\n                                  \"typeCode\" : {\n                                    \"$ref\" : \"#/definitions/token\"\n                                  },\n                                  \"listAgencyIdentifier\" : {\n                                    \"$ref\" : \"#/definitions/token\"\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  },\n                  \"hazardousMaterial\" : {\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"type\" : \"object\",\n                      \"additionalProperties\" : false,\n                      \"properties\" : {\n                        \"placardEndorsement\" : {\n                          \"$ref\" : \"#/definitions/string\"\n                        },\n                        \"placardNotation\" : {\n                          \"$ref\" : \"#/definitions/string\"\n                        },\n                        \"temperature\" : {\n                          \"type\" : \"array\",\n                          \"items\" : {\n                            \"$ref\" : \"#/definitions/decimal\"\n                          }\n                        },\n                        \"flashpointTemperature\" : {\n                          \"$ref\" : \"#/definitions/decimal\"\n                        }\n                      }\n                    }\n                  },\n                  \"exportControl\" : {\n                    \"description\" : \"If the ShipTo defines an import of the product into the country, the identifiers for customs clearance are required.\",\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"type\" : \"object\",\n                      \"additionalProperties\" : false,\n                      \"properties\" : {\n                        \"identifier\" : {\n                          \"type\" : \"array\",\n                          \"items\" : {\n                            \"$ref\" : \"#/definitions/normalizedString\"\n                          }\n                        },\n                        \"countryCode\" : {\n                          \"$ref\" : \"#/definitions/token\"\n                        }\n                      }\n                    }\n                  }\n                }\n              },\n              \"quantity\" : {\n                \"type\" : \"array\",\n                \"items\" : {\n                  \"type\" : \"object\",\n                  \"required\" : [ \"content\" ],\n                  \"additionalProperties\" : false,\n                  \"properties\" : {\n                    \"content\" : {\n                      \"$ref\" : \"#/definitions/decimal\"\n                    },\n                    \"unitCode\" : {\n                      \"$ref\" : \"#/definitions/token\"\n                    }\n                  }\n                }\n              },\n              \"unitPrice\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"chargeAmount\" : {\n                    \"type\" : \"object\",\n                    \"required\" : [ \"content\" ],\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"content\" : {\n                        \"$ref\" : \"#/definitions/decimal\"\n                      },\n                      \"currencyCode\" : {\n                        \"$ref\" : \"#/definitions/token\"\n                      }\n                    }\n                  },\n                  \"quantityRange\" : {\n                    \"type\" : \"object\",\n                    \"additionalProperties\" : false,\n                    \"properties\" : {\n                      \"minimumQuantity\" : {\n                        \"type\" : \"object\",\n                        \"required\" : [ \"content\" ],\n                        \"additionalProperties\" : false,\n                        \"properties\" : {\n                          \"content\" : {\n                            \"$ref\" : \"#/definitions/decimal\"\n                          },\n                          \"unitCode\" : {\n                            \"$ref\" : \"#/definitions/token\"\n                          }\n                        }\n                      },\n                      \"maximumQuantity\" : {\n                        \"type\" : \"object\",\n                        \"required\" : [ \"content\" ],\n                        \"additionalProperties\" : false,\n                        \"properties\" : {\n                          \"content\" : {\n                            \"$ref\" : \"#/definitions/decimal\"\n                          },\n                          \"unitCode\" : {\n                            \"$ref\" : \"#/definitions/token\"\n                          }\n                        }\n                      }\n                    }\n                  },\n                  \"unitAmount\" : {\n                    \"$ref\" : \"#/definitions/decimal\"\n                  }\n                }\n              },\n              \"extendedAmount\" : {\n                \"type\" : \"object\",\n                \"required\" : [ \"content\" ],\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"content\" : {\n                    \"$ref\" : \"#/definitions/decimal\"\n                  },\n                  \"currencyCode\" : {\n                    \"$ref\" : \"#/definitions/token\"\n                  }\n                }\n              },\n              \"totalAmount\" : {\n                \"type\" : \"object\",\n                \"required\" : [ \"content\" ],\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"content\" : {\n                    \"$ref\" : \"#/definitions/decimal\"\n                  },\n                  \"currencyCode\" : {\n                    \"$ref\" : \"#/definitions/token\"\n                  }\n                }\n              },\n              \"contractReference\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"identifier\" : {\n                    \"$ref\" : \"#/definitions/normalizedString\"\n                  }\n                }\n              },\n              \"requiredDeliveryDateTime\" : {\n                \"$ref\" : \"#/definitions/token\"\n              },\n              \"shipToParty\" : {\n                \"type\" : \"object\",\n                \"additionalProperties\" : false,\n                \"properties\" : {\n                  \"identifier\" : {\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"$ref\" : \"#/definitions/normalizedString\"\n                    }\n                  },\n                  \"name\" : {\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"$ref\" : \"#/definitions/string\"\n                    }\n                  },\n                  \"location\" : {\n                    \"type\" : \"array\",\n                    \"items\" : {\n                      \"type\" : \"object\",\n                      \"additionalProperties\" : false,\n                      \"properties\" : {\n                        \"contact\" : {\n                          \"type\" : \"array\",\n                          \"items\" : {\n                            \"type\" : \"object\",\n                            \"additionalProperties\" : false,\n                            \"properties\" : {\n                              \"personName\" : {\n                                \"type\" : \"array\",\n                                \"items\" : {\n                                  \"type\" : \"object\",\n                                  \"additionalProperties\" : false,\n                                  \"properties\" : {\n                                    \"formattedName\" : {\n                                      \"$ref\" : \"#/definitions/string\"\n                                    },\n                                    \"givenName\" : {\n                                      \"$ref\" : \"#/definitions/string\"\n                                    },\n                                    \"middleName\" : {\n                                      \"type\" : \"array\",\n                                      \"items\" : {\n                                        \"$ref\" : \"#/definitions/string\"\n                                      }\n                                    },\n                                    \"familyName\" : {\n                                      \"type\" : \"array\",\n                                      \"items\" : {\n                                        \"$ref\" : \"#/definitions/string\"\n                                      }\n                                    }\n                                  }\n                                }\n                              },\n                              \"telephoneCommunication\" : {\n                                \"type\" : \"array\",\n                                \"items\" : {\n                                  \"type\" : \"object\",\n                                  \"additionalProperties\" : false,\n                                  \"properties\" : {\n                                    \"identifier\" : {\n                                      \"type\" : \"array\",\n                                      \"items\" : {\n                                        \"$ref\" : \"#/definitions/normalizedString\"\n                                      }\n                                    }\n                                  }\n                                }\n                              },\n                              \"emailAddressCommunication\" : {\n                                \"type\" : \"array\",\n                                \"items\" : {\n                                  \"type\" : \"object\",\n                                  \"additionalProperties\" : false,\n                                  \"properties\" : {\n                                    \"identifier\" : {\n                                      \"type\" : \"array\",\n                                      \"items\" : {\n                                        \"$ref\" : \"#/definitions/normalizedString\"\n                                      }\n                                    }\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        },\n                        \"physicalAddress\" : {\n                          \"type\" : \"array\",\n                          \"items\" : {\n                            \"type\" : \"object\",\n                            \"additionalProperties\" : false,\n                            \"properties\" : {\n                              \"identifier\" : {\n                                \"type\" : \"array\",\n                                \"items\" : {\n                                  \"$ref\" : \"#/definitions/normalizedString\"\n                                }\n                              },\n                              \"attentionOfName\" : {\n                                \"type\" : \"array\",\n                                \"items\" : {\n                                  \"$ref\" : \"#/definitions/string\"\n                                }\n                              },\n                              \"addressLine\" : {\n                                \"type\" : \"array\",\n                                \"items\" : {\n                                  \"$ref\" : \"#/definitions/string\"\n                                }\n                              },\n                              \"cityName\" : {\n                                \"$ref\" : \"#/definitions/string\"\n                              },\n                              \"countrySubDivisionCode\" : {\n                                \"type\" : \"array\",\n                                \"items\" : {\n                                  \"$ref\" : \"#/definitions/token\"\n                                }\n                              },\n                              \"countryCode\" : {\n                                \"$ref\" : \"#/definitions/token\"\n                              },\n                              \"postalCode\" : {\n                                \"$ref\" : \"#/definitions/normalizedString\"\n                              },\n                              \"geographicalCoordinate\" : {\n                                \"type\" : \"array\",\n                                \"items\" : {\n                                  \"type\" : \"object\",\n                                  \"additionalProperties\" : false,\n                                  \"properties\" : {\n                                    \"verticalMeasure\" : {\n                                      \"$ref\" : \"#/definitions/decimal\"\n                                    },\n                                    \"latitudeMeasure\" : {\n                                      \"$ref\" : \"#/definitions/decimal\"\n                                    },\n                                    \"longitudeMeasure\" : {\n                                      \"$ref\" : \"#/definitions/decimal\"\n                                    }\n                                  }\n                                }\n                              }\n                            }\n                          }\n                        },\n                        \"availableTimePeriod\" : {\n                          \"type\" : \"array\",\n                          \"items\" : {\n                            \"type\" : \"object\",\n                            \"additionalProperties\" : false,\n                            \"properties\" : {\n                              \"startTime\" : {\n                                \"$ref\" : \"#/definitions/token\"\n                              },\n                              \"endTime\" : {\n                                \"$ref\" : \"#/definitions/token\"\n                              }\n                            }\n                          }\n                        },\n                        \"glnid\" : {\n                          \"$ref\" : \"#/definitions/normalizedString\"\n                        }\n                      }\n                    }\n                  }\n                }\n              },\n              \"partialShipmentAllowedIndicator\" : {\n                \"$ref\" : \"#/definitions/xbt_BooleanType\"\n              },\n              \"transportationTerm\" : {\n                \"type\" : \"array\",\n                \"items\" : {\n                  \"type\" : \"object\",\n                  \"additionalProperties\" : false,\n                  \"properties\" : {\n                    \"freightTermCode\" : {\n                      \"$ref\" : \"#/definitions/token\"\n                    }\n                  }\n                }\n              },\n              \"transportStep\" : {\n                \"type\" : \"array\",\n                \"items\" : {\n                  \"type\" : \"object\",\n                  \"additionalProperties\" : false,\n                  \"properties\" : {\n                    \"transportationMethodCode\" : {\n                      \"$ref\" : \"#/definitions/normalizedString\"\n                    }\n                  }\n                }\n              },\n              \"purchaseOrderSubLine\" : {\n                \"type\" : \"array\",\n                \"items\" : {\n                  \"type\" : \"object\",\n                  \"additionalProperties\" : false,\n                  \"properties\" : {\n                    \"amountDiscount\" : {\n                      \"description\" : \"If provided, customer service will evaluate for applicability.\",\n                      \"type\" : \"object\",\n                      \"additionalProperties\" : false,\n                      \"properties\" : {\n                        \"identifier\" : {\n                          \"type\" : \"array\",\n                          \"items\" : {\n                            \"$ref\" : \"#/definitions/normalizedString\"\n                          }\n                        },\n                        \"discountAmount\" : {\n                          \"description\" : \"Calculated amount based on percentage.\",\n                          \"type\" : \"array\",\n                          \"items\" : {\n                            \"$ref\" : \"#/definitions/decimal\"\n                          }\n                        },\n                        \"percentage\" : {\n                          \"$ref\" : \"#/definitions/decimal\"\n                        },\n                        \"description\" : {\n                          \"type\" : \"array\",\n                          \"items\" : {\n                            \"$ref\" : \"#/definitions/string\"\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  },\n  \"definitions\" : {\n    \"token\" : {\n      \"type\" : \"string\"\n    },\n    \"normalizedString\" : {\n      \"type\" : \"string\"\n    },\n    \"string\" : {\n      \"type\" : \"string\"\n    },\n    \"decimal\" : {\n      \"type\" : \"number\"\n    },\n    \"integer\" : {\n      \"type\" : \"number\",\n      \"multipleOf\" : 1\n    },\n    \"xbt_BooleanType\" : {\n      \"type\" : \"boolean\"\n    }\n  }\n}"
 }
 ],
-"raml-http:mediaType": [
+"core:mediaType": [
 {
 "@value": "application/json"
 }
 ]
+}
+],
+"doc:version": [
+{
+"@value": "2.0.0"
 }
 ]
 }
@@ -27287,7 +27297,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -27422,7 +27432,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -27586,7 +27596,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -27799,7 +27809,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -27946,7 +27956,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -28093,7 +28103,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -28215,7 +28225,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is an alternate identifier for the PurchaseOrder, requires the use of the typeCode qualifier.  This could be a system level key."
 }
@@ -28244,7 +28254,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -28538,7 +28548,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -28673,7 +28683,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -28808,7 +28818,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -28982,7 +28992,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -29117,7 +29127,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -29252,7 +29262,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -29397,7 +29407,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -29425,7 +29435,7 @@
 "@value": "reason"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "additional textual reason for the reason the status code has been applied or the if the effective time period has changed."
 }
@@ -29454,7 +29464,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -29621,7 +29631,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -29756,7 +29766,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -30151,7 +30161,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -30339,7 +30349,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -30527,7 +30537,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -30822,7 +30832,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -30957,7 +30967,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -31102,7 +31112,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -31290,7 +31300,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -31649,7 +31659,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -32008,7 +32018,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -32300,7 +32310,7 @@
 "@value": "contact"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the customer representative placing the order, including name, phone and email contact information"
 }
@@ -32329,7 +32339,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -32727,7 +32737,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -32915,7 +32925,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -33103,7 +33113,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -33409,7 +33419,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -33636,7 +33646,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -33824,7 +33834,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -33852,7 +33862,7 @@
 "@value": "directions"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Directions for the location, especially in the case of direct ship"
 }
@@ -33881,7 +33891,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -34068,7 +34078,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -34096,7 +34106,7 @@
 "@value": "uri"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "URI link to a mapping service showing the exact location on a map"
 }
@@ -34125,7 +34135,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -34263,7 +34273,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -34398,7 +34408,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -34714,7 +34724,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -34931,7 +34941,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -35066,7 +35076,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -35211,7 +35221,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -35399,7 +35409,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -35758,7 +35768,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -36117,7 +36127,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -36409,7 +36419,7 @@
 "@value": "contact"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the key contact at the ShipTo location, in case there are delivery questions."
 }
@@ -36438,7 +36448,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -36625,7 +36635,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -36813,7 +36823,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -37030,7 +37040,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -37182,7 +37192,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1378,5)]"
+"@value": "[(1375,16)-(1378,5)]"
 }
 ]
 },
@@ -37471,7 +37481,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -37499,7 +37509,7 @@
 "@value": "deliveryPointIdentifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "delivery point may be a loading dock, etc."
 }
@@ -37528,7 +37538,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -37666,7 +37676,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -37811,7 +37821,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -37839,7 +37849,7 @@
 "@value": "countrySubDivisionCode"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Two character state code in the United States, Province in Canada, etc.  See ISO 3166-2."
 }
@@ -37868,7 +37878,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -38006,7 +38016,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -38141,7 +38151,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -38258,7 +38268,7 @@
 "@value": "physicalAddress"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the physical address for the shipment"
 }
@@ -38287,7 +38297,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -38464,7 +38474,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -38599,7 +38609,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -38866,7 +38876,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -39251,7 +39261,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -39504,7 +39514,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -39651,7 +39661,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -39786,7 +39796,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -39848,7 +39858,7 @@
 "@value": "totalAmount"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the total amount of the purchase order, which is the sum of each purchase order lines, plus calculated tax."
 }
@@ -39877,7 +39887,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -40095,7 +40105,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -40242,7 +40252,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -40377,7 +40387,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -40494,7 +40504,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Identifier for the BillTo party"
 }
@@ -40523,7 +40533,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -40671,7 +40681,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -40849,7 +40859,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -40994,7 +41004,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -41022,7 +41032,7 @@
 "@value": "accountIdentifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Specific Account for the customer BillTo"
 }
@@ -41051,7 +41061,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -41238,7 +41248,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -41266,7 +41276,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Identifier for the location, if no GLN is used."
 }
@@ -41295,7 +41305,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -41443,7 +41453,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -41670,7 +41680,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -41858,7 +41868,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -42046,7 +42056,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -42263,7 +42273,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -42415,7 +42425,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1378,5)]"
+"@value": "[(1375,16)-(1378,5)]"
 }
 ]
 },
@@ -42694,7 +42704,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -42829,7 +42839,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -43003,7 +43013,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -43150,7 +43160,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -43267,7 +43277,7 @@
 "@value": "countrySubDivisionCode"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Two character state code in the United States, Province in Canada, etc.  See ISO 3166-2."
 }
@@ -43296,7 +43306,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -43434,7 +43444,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -43569,7 +43579,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -43686,7 +43696,7 @@
 "@value": "postalAddress"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the mailing address for which invoices should be sent, if not electronically sent."
 }
@@ -43715,7 +43725,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -43863,7 +43873,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -43891,7 +43901,7 @@
 "@value": "note"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Note on the BillTo lcoation\r\nExample:"
 }
@@ -43920,7 +43930,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -44268,7 +44278,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -44584,7 +44594,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -44943,7 +44953,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -45235,7 +45245,7 @@
 "@value": "contact"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is the BillTo contact "
 }
@@ -45264,7 +45274,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -45520,7 +45530,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -45665,7 +45675,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -45693,7 +45703,7 @@
 "@value": "accountIdentifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "customer's account number with the carrier if the customer is specifying a carrier"
 }
@@ -45722,7 +45732,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -45949,7 +45959,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1381,5)]"
+"@value": "[(1379,24)-(1381,5)]"
 }
 ]
 }
@@ -46084,7 +46094,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1381,5)]"
+"@value": "[(1379,24)-(1381,5)]"
 }
 ]
 }
@@ -46219,7 +46229,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1381,5)]"
+"@value": "[(1379,24)-(1381,5)]"
 }
 ]
 }
@@ -46403,7 +46413,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -46581,7 +46591,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -46716,7 +46726,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -46851,7 +46861,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -47157,7 +47167,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -47463,7 +47473,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -47598,7 +47608,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -47943,7 +47953,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -47976,7 +47986,7 @@
 "@value": "code"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "state or province from which the tax applies."
 }
@@ -48005,7 +48015,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -48285,7 +48295,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -48432,7 +48442,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -48494,7 +48504,7 @@
 "@value": "basisAmount"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "sum of the individual items without tax"
 }
@@ -48523,7 +48533,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -48790,7 +48800,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -48880,7 +48890,7 @@
 "@value": "currencyExchangeRate"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "current exchange rate at the time of the transaciton"
 }
@@ -48909,7 +48919,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -49041,7 +49051,7 @@
 "@value": "tax"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "These are various taxes that may be applied.  There may be multiple tax values for VAT, etc."
 }
@@ -49070,7 +49080,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -49208,7 +49218,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -49343,7 +49353,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -49478,7 +49488,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -49652,7 +49662,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -49680,7 +49690,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Identifier for the buyer"
 }
@@ -49709,7 +49719,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -49985,7 +49995,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -50013,7 +50023,7 @@
 "@value": "identifier"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "This is often not known at the time the order is place, but will appear on the AcknowledgePurchaseOrder Callback API or \r\nGET //AcknowledgePurchaseOrder request response service"
 }
@@ -50042,7 +50052,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -50440,7 +50450,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -50575,7 +50585,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -50710,7 +50720,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -50874,7 +50884,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -51058,7 +51068,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -51426,7 +51436,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -51679,7 +51689,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -51903,7 +51913,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -52038,7 +52048,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -52183,7 +52193,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -52371,7 +52381,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -52588,7 +52598,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -52791,7 +52801,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -52938,7 +52948,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -53085,7 +53095,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -53207,7 +53217,7 @@
 "@value": "code"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Code used to classify the item being purchased.\r\nIf code is mapped, the typeCode should also be mapped since this a generic code.  "
 }
@@ -53236,7 +53246,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -53658,7 +53668,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -53793,7 +53803,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -53938,7 +53948,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -54116,7 +54126,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -54432,7 +54442,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -54610,7 +54620,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -54727,7 +54737,7 @@
 "@value": "exportControl"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "If the ShipTo defines an import of the product into the country, the identifiers for customs clearance are required."
 }
@@ -54756,7 +54766,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -55022,7 +55032,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -55169,7 +55179,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -55494,7 +55504,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -55641,7 +55651,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -55923,7 +55933,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -56070,7 +56080,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -56323,7 +56333,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -56470,7 +56480,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -56783,7 +56793,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -57036,7 +57046,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -57183,7 +57193,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -57436,7 +57446,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -57583,7 +57593,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -57836,7 +57846,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -58060,7 +58070,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -58234,7 +58244,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -58422,7 +58432,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -58717,7 +58727,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -58852,7 +58862,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -58997,7 +59007,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -59185,7 +59195,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -59544,7 +59554,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -59903,7 +59913,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -60394,7 +60404,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -60582,7 +60592,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -60770,7 +60780,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -60948,7 +60958,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -61093,7 +61103,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -61271,7 +61281,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -61406,7 +61416,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -61580,7 +61590,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -61715,7 +61725,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -61850,7 +61860,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -62288,7 +62298,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -62423,7 +62433,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -62690,7 +62700,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -63046,7 +63056,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1381,5)]"
+"@value": "[(1379,24)-(1381,5)]"
 }
 ]
 }
@@ -63220,7 +63230,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -63526,7 +63536,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -63871,7 +63881,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -64059,7 +64069,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -64087,7 +64097,7 @@
 "@value": "discountAmount"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Calculated amount based on percentage."
 }
@@ -64116,7 +64126,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -64254,7 +64264,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -64399,7 +64409,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -64504,7 +64514,7 @@
 "@value": "amountDiscount"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "If provided, customer service will evaluate for applicability."
 }
@@ -64533,7 +64543,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -65030,7 +65040,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1383,1)]"
+"@value": "[(5,2)-(1383,1)]"
 }
 ]
 },
@@ -65143,7 +65153,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1365,5)]"
+"@value": "[(1363,14)-(1365,5)]"
 }
 ]
 }
@@ -65230,7 +65240,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1368,5)]"
+"@value": "[(1366,25)-(1368,5)]"
 }
 ]
 }
@@ -65317,7 +65327,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1371,5)]"
+"@value": "[(1369,15)-(1371,5)]"
 }
 ]
 }
@@ -65404,7 +65414,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1374,5)]"
+"@value": "[(1372,16)-(1374,5)]"
 }
 ]
 }
@@ -65496,7 +65506,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1378,5)]"
+"@value": "[(1375,16)-(1378,5)]"
 }
 ]
 },
@@ -65595,7 +65605,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(1381,5)]"
+"@value": "[(1379,24)-(1381,5)]"
 }
 ]
 }
@@ -65620,13 +65630,12 @@
 ],
 "@context": {
 "@base": "amf://id",
-"raml-http": "http://a.ml/vocabularies/http#",
-"raml-shapes": "http://a.ml/vocabularies/shapes#",
 "shacl": "http://www.w3.org/ns/shacl#",
+"raml-shapes": "http://a.ml/vocabularies/shapes#",
 "doc": "http://a.ml/vocabularies/document#",
-"sourcemaps": "http://a.ml/vocabularies/document-source-maps#",
-"schema-org": "http://schema.org/",
-"hydra": "http://www.w3.org/ns/hydra/core#"
+"apiContract": "http://a.ml/vocabularies/apiContract#",
+"core": "http://a.ml/vocabularies/core#",
+"sourcemaps": "http://a.ml/vocabularies/document-source-maps#"
 }
 }
 ]

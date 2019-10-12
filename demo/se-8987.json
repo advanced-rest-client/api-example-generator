@@ -11,59 +11,59 @@
 {
 "@id": "amf://id#14",
 "@type": [
-"http://schema.org/WebAPI",
+"http://a.ml/vocabularies/apiContract#WebAPI",
 "http://a.ml/vocabularies/document#RootDomainElement",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "se-8987-reopen2"
 }
 ],
-"http://a.ml/vocabularies/http#endpoint": [
+"http://a.ml/vocabularies/apiContract#endpoint": [
 {
 "@id": "amf://id#15",
 "@type": [
-"http://a.ml/vocabularies/http#EndPoint",
+"http://a.ml/vocabularies/apiContract#EndPoint",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#path": [
+"http://a.ml/vocabularies/apiContract#path": [
 {
 "@value": "/example1"
 }
 ],
-"http://www.w3.org/ns/hydra/core#supportedOperation": [
+"http://a.ml/vocabularies/apiContract#supportedOperation": [
 {
 "@id": "amf://id#16",
 "@type": [
-"http://www.w3.org/ns/hydra/core#Operation",
+"http://a.ml/vocabularies/apiContract#Operation",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://www.w3.org/ns/hydra/core#method": [
+"http://a.ml/vocabularies/apiContract#method": [
 {
 "@value": "post"
 }
 ],
-"http://www.w3.org/ns/hydra/core#expects": [
+"http://a.ml/vocabularies/apiContract#expects": [
 {
 "@id": "amf://id#17",
 "@type": [
-"http://a.ml/vocabularies/http#Request",
+"http://a.ml/vocabularies/apiContract#Request",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#payload": [
+"http://a.ml/vocabularies/apiContract#payload": [
 {
 "@id": "amf://id#18",
 "@type": [
-"http://a.ml/vocabularies/http#Payload",
+"http://a.ml/vocabularies/apiContract#Payload",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#mediaType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#19/linked_1",
 "@type": [
@@ -119,7 +119,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#payload"
+"@value": "http://a.ml/vocabularies/apiContract#payload"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -145,19 +145,19 @@
 ]
 }
 ],
-"http://www.w3.org/ns/hydra/core#returns": [
+"http://a.ml/vocabularies/apiContract#returns": [
 {
 "@id": "amf://id#20",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "200"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "200"
 }
@@ -196,7 +196,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/hydra/core#returns"
+"@value": "http://a.ml/vocabularies/apiContract#returns"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -248,46 +248,46 @@
 {
 "@id": "amf://id#21",
 "@type": [
-"http://a.ml/vocabularies/http#EndPoint",
+"http://a.ml/vocabularies/apiContract#EndPoint",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#path": [
+"http://a.ml/vocabularies/apiContract#path": [
 {
 "@value": "/example2"
 }
 ],
-"http://www.w3.org/ns/hydra/core#supportedOperation": [
+"http://a.ml/vocabularies/apiContract#supportedOperation": [
 {
 "@id": "amf://id#22",
 "@type": [
-"http://www.w3.org/ns/hydra/core#Operation",
+"http://a.ml/vocabularies/apiContract#Operation",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://www.w3.org/ns/hydra/core#method": [
+"http://a.ml/vocabularies/apiContract#method": [
 {
 "@value": "post"
 }
 ],
-"http://www.w3.org/ns/hydra/core#expects": [
+"http://a.ml/vocabularies/apiContract#expects": [
 {
 "@id": "amf://id#23",
 "@type": [
-"http://a.ml/vocabularies/http#Request",
+"http://a.ml/vocabularies/apiContract#Request",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#payload": [
+"http://a.ml/vocabularies/apiContract#payload": [
 {
 "@id": "amf://id#24",
 "@type": [
-"http://a.ml/vocabularies/http#Payload",
+"http://a.ml/vocabularies/apiContract#Payload",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#mediaType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#1/linked_1",
 "@type": [
@@ -343,7 +343,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#payload"
+"@value": "http://a.ml/vocabularies/apiContract#payload"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -369,19 +369,19 @@
 ]
 }
 ],
-"http://www.w3.org/ns/hydra/core#returns": [
+"http://a.ml/vocabularies/apiContract#returns": [
 {
 "@id": "amf://id#25",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "200"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "200"
 }
@@ -420,7 +420,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/hydra/core#returns"
+"@value": "http://a.ml/vocabularies/apiContract#returns"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -494,7 +494,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -518,6 +518,11 @@
 ]
 }
 ]
+}
+],
+"http://a.ml/vocabularies/document#version": [
+{
+"@value": "2.0.0"
 }
 ],
 "http://a.ml/vocabularies/document#declares": [
@@ -913,14 +918,14 @@
 "@value": "UnionType"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#2",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "example_0"
 }
@@ -956,7 +961,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -985,7 +990,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -1026,7 +1031,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "\n      name: Pepe\n"
 }
@@ -1055,7 +1060,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1095,10 +1100,10 @@
 {
 "@id": "amf://id#4",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "example_1"
 }
@@ -1134,7 +1139,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -1163,7 +1168,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -1204,7 +1209,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "\n      age: 45\n\n"
 }
@@ -1233,7 +1238,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1443,14 +1448,14 @@
 "@value": "Dog"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#2",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "example_0"
 }
@@ -1486,7 +1491,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -1515,7 +1520,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -1556,7 +1561,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "\n      name: Pepe\n"
 }
@@ -1585,7 +1590,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1823,14 +1828,14 @@
 "@value": "Cat"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#4",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "example_1"
 }
@@ -1866,7 +1871,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -1895,7 +1900,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -1936,7 +1941,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "\n      age: 45\n\n"
 }
@@ -1965,7 +1970,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2156,6 +2161,20 @@
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
 "@value": "[(26,8)-(27,0)]"
+}
+]
+}
+],
+"http://a.ml/vocabularies/document-source-maps#auto-generated-name": [
+{
+"http://a.ml/vocabularies/document-source-maps#element": [
+{
+"@value": "amf://id#19"
+}
+],
+"http://a.ml/vocabularies/document-source-maps#value": [
+{
+"@value": ""
 }
 ]
 }
