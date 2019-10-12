@@ -234,9 +234,9 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
    * @return {String|undefined} JSON schema if exists.
    */
   _readJsonSchema(schema) {
-    const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources');
-    const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'parsed-json-schema');
-    const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'value');
+    const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.sources);
+    const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.parsedJsonSchema);
+    const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.value);
     let sm = schema[sourceKey];
     if (!sm) {
       return;
@@ -314,9 +314,9 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       return examples;
     }
     const result = [];
-    const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources');
-    const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'tracked-element');
-    const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'value');
+    const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.sources);
+    const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.trackedElement);
+    const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.value);
     const longId = typeId.indexOf('amf') === -1 ? ('amf://id' + typeId) : typeId;
     for (let i = 0, len = examples.length; i < len; i++) {
       let example = examples[i];
