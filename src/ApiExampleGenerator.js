@@ -377,6 +377,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     if (opts.rawOnly) {
       result.hasRaw = false;
       result.value = raw;
+      result.isScalar = false;
       return result;
     }
     const isJson = mime.indexOf('json') !== -1;
@@ -391,6 +392,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
           }
           result.hasRaw = false;
           result.value = raw;
+          result.isScalar = false;
           return result;
         } catch (_) {
           // ...
@@ -400,6 +402,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
         if (raw.trim()[0] === '<') {
           result.hasRaw = false;
           result.value = raw;
+          result.isScalar = false;
           return result;
         }
       }
@@ -414,6 +417,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       } else {
         result.value = '';
       }
+      result.isScalar = false;
       return result;
     }
     if (structure instanceof Array) {
@@ -426,6 +430,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       return result;
     }
 
+    result.isScalar = false;
     if (isJson) {
       let data = this._jsonFromStructure(structure);
       if (data) {
