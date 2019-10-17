@@ -374,6 +374,9 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     if (result.hasTitle) {
       result.title = title;
     }
+    if (opts.rawOnly && !raw) {
+      return;
+    }
     if (opts.rawOnly) {
       result.hasRaw = false;
       result.value = raw;
