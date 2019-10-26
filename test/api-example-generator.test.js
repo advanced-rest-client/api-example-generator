@@ -354,7 +354,7 @@ describe('<api-example-generator>', () => {
           assert.isFalse(result[0].hasTitle);
           assert.isFalse(result[0].hasUnion);
           assert.equal(result[0].value, xmlPrefix +
-            '\r\n<Image>\r\n  <url> </url>\r\n  <thumb> </thumb>\r\n</Image>');
+            '\n<ArrayType>\n  <Image>\n    <url></url>\n    <thumb></thumb>\n  </Image>\n</ArrayType>\n');
         });
 
         it('Computes example for a PropertyShape', () => {
@@ -377,7 +377,7 @@ describe('<api-example-generator>', () => {
           assert.isFalse(result[0].hasTitle);
           assert.isFalse(result[0].hasUnion);
           assert.equal(result[0].value, xmlPrefix +
-            '\r\n<Image>\r\n  <url> </url>\r\n  <thumb> </thumb>\r\n</Image>');
+            '\n<Image>\n  <url></url>\n  <thumb></thumb>\n</Image>\n');
         });
 
         it('Computes example for a UnionShape', () => {
@@ -699,10 +699,11 @@ describe('<api-example-generator>', () => {
           const result = element.generatePayloadsExamples(payloads, 'application/xml');
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
-          const value = xmlPrefix + '\r\n<PropertyExamples xtra="string">\r\n  <firstName>Pawel</firstName>\r\n  ' +
-          '<lastName>Psztyc</lastName>\r\n  <Address> <street> </street>\r\n  <zip>94100</zip>\r\n  ' +
-          '<house>1</house>\r\n</Address>\r\n<num> </num>\r\n<int> </int>\r\n<bool> </bool>\r\n<defVal>1</defVal>' +
-          '\r\n</PropertyExamples>';
+          const value = xmlPrefix + '\n<PropertyExamples xtra="string">\n  ' +
+          '<firstName>Pawel</firstName>\n  <lastName>Psztyc</lastName>\n  ' +
+          '<Address>\n    <street></street>\n    <zip>94100</zip>\n    <house>1</house>\n  ' +
+          '</Address>\n  <num></num>\n  <int></int>\n  <bool></bool>\n  <defVal>1</defVal>' +
+          '\n</PropertyExamples>\n';
           assert.equal(result[0].value, value);
         });
       });
@@ -1501,7 +1502,7 @@ describe('<api-example-generator>', () => {
           const result = element._computeExampleArraySchape(schema, 'application/xml');
           assert.typeOf(result, 'array');
           assert.equal(result[0].value, xmlPrefix +
-            '\r\n<items>\r\n  <test> </test>\r\n  <other> </other>\r\n</items>');
+            '\n<items>\n  <test></test>\n  <other></other>\n</items>\n');
         });
 
         it('Prohibits generation with noAuto', () => {
@@ -1755,7 +1756,7 @@ describe('<api-example-generator>', () => {
             '\n  id: 1\n  name: "Jhon"',
             'Example\'s raw is set');
           assert.equal(example.value,
-            '<?xml version="1.0" encoding="UTF-8"?>\r\n<model>\r\n  <id>1</id>\r\n  <name>Jhon</name>\r\n</model>',
+            '<?xml version="1.0" encoding="UTF-8"?>\n<Employee>\n  <id>1</id>\n  <name>Jhon</name>\n</Employee>\n',
             'Example\'s value is set');
         });
       });

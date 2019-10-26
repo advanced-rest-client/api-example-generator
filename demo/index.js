@@ -2,7 +2,8 @@
 import { LitElement, html } from 'lit-element';
 import { render } from 'lit-html';
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-
+import { ApiDemoPageBase } from '@advanced-rest-client/arc-demo-helper/ApiDemoPage.js';
+import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-listbox/paper-listbox.js';
@@ -14,18 +15,23 @@ import './examples-render.js';
 class DemoElement extends AmfHelperMixin(LitElement) {}
 window.customElements.define('demo-element', DemoElement);
 
-export class DemoPage {
+class DemoPage extends ApiDemoPageBase {
   constructor() {
-    this._apiChanged = this._apiChanged.bind(this);
-    this._navChanged = this._navChanged.bind(this);
-    this._mediaTypeChanged = this._mediaTypeChanged.bind(this);
-    this._noAutoChanged = this._noAutoChanged.bind(this);
-    this._rawOnlyChanged = this._rawOnlyChanged.bind(this);
+    super();
+    this._componentName = 'api-body-document';
+    this.demoStates = ['Normal state'];
 
-    window.addEventListener('api-navigation-selection-changed', this._navChanged);
-    setTimeout(() => {
-      document.getElementById('apiList').selected = 0;
-    });
+    this.initObservableProperties([
+      'noAuto',
+      'rawOnly',
+      'hasData',
+      'examples',
+      'demoStates',
+      'darkThemeActive',
+    ]);
+
+    this._mediaTypeChanged = this._mediaTypeChanged.bind(this);
+    this._toggleMainOption = this._toggleMainOption.bind(this);
   }
 
   get generator() {
@@ -36,66 +42,9 @@ export class DemoPage {
     return document.getElementById('helper');
   }
 
-  get amf() {
-    return this._amf;
-  }
-
-  set amf(value) {
-    this._setObservableProperty('amf', value);
-  }
-
-  get noAuto() {
-    return this._noAuto;
-  }
-
-  set noAuto(value) {
-    this._setObservableProperty('noAuto', value);
-  }
-
-  get rawOnly() {
-    return this._rawOnly;
-  }
-
-  set rawOnly(value) {
-    this._setObservableProperty('rawOnly', value);
-  }
-
-  get hasData() {
-    return this._hasData;
-  }
-
-  set hasData(value) {
-    this._setObservableProperty('hasData', value);
-  }
-
-  get examples() {
-    return this._examples;
-  }
-
-  set examples(value) {
-    this._setObservableProperty('examples', value);
-  }
-
-  _setObservableProperty(prop, value) {
-    const key = '_' + prop;
-    if (this[key] === value) {
-      return;
-    }
-    this[key] = value;
-    this.render();
-  }
-
-  _apiChanged(e) {
-    const file = e.target.selectedItem.dataset.src;
-    this._loadFile(file);
-  }
-
-  _loadFile(file) {
-    fetch('./' + file)
-    .then((response) => response.json())
-    .then((data) => {
-      this.amf = data;
-    });
+  _toggleMainOption(e) {
+    const { name, checked } = e.target;
+    this[name] = checked;
   }
 
   _navChanged(e) {
@@ -130,7 +79,10 @@ export class DemoPage {
   }
 
   setData(id) {
-    document.getElementById('mediaList').selected = undefined;
+    const ml = document.getElementById('mediaList');
+    if (ml) {
+      ml.selected = undefined;
+    }
     this.payloads = undefined;
     this.unionTypes = undefined;
     const helper = this.helper;
@@ -157,11 +109,10 @@ export class DemoPage {
 
   setupMediaTypes(payloads) {
     this.mediaTypes = this.generator.listMedia(payloads);
-    const dropdown = document.getElementById('mediaDropdown');
-    if (dropdown.hasAttribute('disabled')) {
-      dropdown.removeAttribute('disabled');
+    const ml = document.getElementById('mediaList');
+    if (ml) {
+      ml.selected = 0;
     }
-    document.getElementById('mediaList').selected = 0;
   }
 
   _rawOnlyChanged(e) {
@@ -172,66 +123,95 @@ export class DemoPage {
     this.noAuto = e.detail.value;
   }
 
-  apiListTemplate() {
+  _apiListTemplate() {
+    return [
+      ['demo-api', 'Demo API'],
+      ['tracked-to-linked', 'Tracked elements'],
+      ['se-8987', 'SE-8987'],
+      ['SE-10469', 'SE-10469'],
+      ['SE-13092', 'SE-13092'],
+      ['APIC-188', 'APIC-188'],
+      ['APIC-187', 'APIC-187'],
+    ].map(([file, label]) => html`
+      <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
+      <paper-item data-src="${file}.json">${label}</paper-item>
+      `);
+  }
+
+  _dataDemoContainer() {
+    const {
+      darkThemeActive
+    } = this;
+    const examples = this.examples || [];
+    return html`<paper-dropdown-menu label="Select media type">
+      <paper-listbox slot="dropdown-content" id="mediaList" selected="0" @selected-changed="${this._mediaTypeChanged}">
+      ${this.mediaTypes ?
+        this.mediaTypes.map((item) => html`<paper-item data-type="${item}">${item}</paper-item>`) :
+        undefined}
+      </paper-listbox>
+    </paper-dropdown-menu>
+
+    <arc-interactive-demo
+      ?dark="${darkThemeActive}"
+    >
+      <div slot="content">
+        ${examples.map((item) => html`<examples-render .example="${item}"></examples-render>`)}
+      </div>
+      <label slot="options" id="mainOptionsLabel">Options</label>
+      <paper-checkbox
+        aria-describedby="mainOptionsLabel"
+        slot="options"
+        name="noAuto"
+        @change="${this._toggleMainOption}"
+        title="Don't generate examples if missing in API definition"
+      >
+        No auto
+      </paper-checkbox>
+      <paper-checkbox
+        aria-describedby="mainOptionsLabel"
+        slot="options"
+        name="rawOnly"
+        @change="${this._toggleMainOption}"
+        title="Return examples as they were defined in API spec file without automation."
+      >
+        Raw only
+      </paper-checkbox>
+    </arc-interactive-demo>`;
+  }
+
+  _demoTemplate() {
+    const {
+      hasData,
+      amf
+    } = this;
     return html`
-    <paper-item data-src="demo-api.json">Demo api</paper-item>
-    <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
-    <paper-item data-src="amf-3-models/demo-api.json">Demo api (AMF 3)</paper-item>
-    <paper-item data-src="se-8987.json">SE-8987</paper-item>
-    <paper-item data-src="SE-10469.json">SE-10469</paper-item>
-    <paper-item data-src="SE-10469-compact.json">SE-10469 - compact model</paper-item>
-    <paper-item data-src="tracked-to-linked.json">Tracked elements</paper-item>
-    <paper-item data-src="tracked-to-linked-compact.json">Tracked elements - compact model</paper-item>
-    <paper-item data-src="APIC-188.json">APIC-188</paper-item>
-    <paper-item data-src="APIC-188-compact.json">APIC-188 - compact model</paper-item>
-    <paper-item data-src="APIC-187.json">APIC-187</paper-item>
-    <paper-item data-src="APIC-187-compact.json">APIC-187 - compact model</paper-item>
-    `;
-  }
-
-  headerTemplate() {
-    return html`<raml-aware .api="${this.amf}" scope="api-demo"></raml-aware>
-    <header>
-      <paper-dropdown-menu label="Select demo API">
-        <paper-listbox slot="dropdown-content" id="apiList" @selected-changed="${this._apiChanged}">
-        ${this.apiListTemplate()}
-        </paper-listbox>
-      </paper-dropdown-menu>
-
-      <paper-checkbox .checked="${this.noAuto}"
-        @checked-changed="${this._noAutoChanged}"
-        title="Don't generate examples if missing in API definition">No auto</paper-checkbox>
-      <paper-checkbox .checked="${this.rawOnly}"
-        @checked-changed="${this._rawOnlyChanged}"
-        title="Return examples as they were defined in API spec file without translating them to selected mime type.">
-        Raw only</paper-checkbox>
-    </header>`;
-  }
-
-  render() {
-    render(html`
-    ${this.headerTemplate()}
-    <div class="container" role="main">
-      <api-navigation .amf="${this.amf}" endpoints-opened=""></api-navigation>
-
-      <section class="demo">
-        <paper-dropdown-menu label="Select media type" disabled="" id="mediaDropdown">
-          <paper-listbox slot="dropdown-content" id="mediaList" @selected-changed="${this._mediaTypeChanged}">
-          ${this.mediaTypes ?
-            this.mediaTypes.map((item) => html`<paper-item data-type="${item}">${item}</paper-item>`) :
-            undefined}
-          </paper-listbox>
-        </paper-dropdown-menu>
-
-        <api-example-generator .amf="${this.amf}" id="generator"></api-example-generator>
-
-        ${this.hasData && this.examples ?
-          this.examples.map((item) => html`<examples-render .example="${item}"></examples-render>`) :
-          html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
+    <section class="documentation-section">
+      <h3>Interactive demo</h3>
+      <p>
+        This demo lets you preview the API example generator element with various
+        configuration options.
+      </p>
+      <api-example-generator .amf="${amf}" id="generator"></api-example-generator>
+      <section class="horizontal-section-container centered main">
+        ${this._apiNavigationTemplate()}
+        <div class="demo-container">
+          ${hasData ? this._dataDemoContainer() : html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
+        </div>
       </section>
-    </div>
+    </section>`;
+  }
 
-    <demo-element id="helper" .amf="${this.amf}"></demo-element>`, document.querySelector('#demo'));
+  _render() {
+    const { amf } = this;
+    render(html`
+      ${this.headerTemplate()}
+      <demo-element id="helper" .amf="${amf}"></demo-element>
+
+      <div role="main">
+        <h2 class="centered main">API example generator</h2>
+        ${this._demoTemplate()}
+      </div>
+      `, document.querySelector('#demo'));
   }
 }
 

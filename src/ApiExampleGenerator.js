@@ -1,5 +1,7 @@
 import { LitElement } from 'lit-element';
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+
+const UNKNOWN_TYPE = 'unknown-type';
 /**
  * `api-example-generator`
  *
@@ -173,6 +175,12 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       return;
     }
     this._resolve(schema);
+    if (!opts.typeName) {
+      const typeName = this._getValue(schema, this.ns.w3.shacl.name);
+      if (typeName && typeName.indexOf('amf_inline_type') !== 0) {
+        opts.typeName = typeName;
+      }
+    }
     const eKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     const examples = this._ensureArray(schema[eKey]);
     if (examples) {
@@ -221,8 +229,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     const pKey = this._getAmfKey(this.ns.w3.shacl.property);
     const properties = this._ensureArray(schema[pKey]);
     if (properties && properties.length) {
-      const typeName = this._getValue(schema, this.ns.w3.shacl.name);
-      const value = this._exampleFromProperties(properties, mime, typeName);
+      const value = this._exampleFromProperties(properties, mime, opts.typeName, opts.parentName);
       if (value) {
         return [value];
       }
@@ -464,6 +471,9 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
       return;
     }
     const isJson = mime.indexOf('json') !== -1;
+    opts = opts || {};
+    opts.parentName = opts.typeName;
+    delete opts.typeName;
     // We need only first type here as arras can have different types
     for (let i = 0, len = items.length; i < len; i++) {
       const item = items[i];
@@ -633,7 +643,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
   }
 
   _xmlFromStructure(structure, opts) {
-    let typeName = opts && opts.typeName || 'model';
+    let typeName = opts && opts.typeName || UNKNOWN_TYPE;
     typeName = this._normalizeXmlTagName(typeName);
     const doc = document.implementation.createDocument('', typeName, null);
     const main = doc.documentElement;
@@ -656,26 +666,65 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     value = '<?xml version="1.0" encoding="UTF-8"?>' + value;
     return this.formatXml(value);
   }
-
+  /**
+   * Formats XML string into pretty printed value.
+   * https://stackoverflow.com/a/2893259/1127848
+   * @param {String} xml The XML to process
+   * @return {String} Formatted XML
+   */
   formatXml(xml) {
-    const PADDING = ' '.repeat(2);
-    const reg = /(>)(<)(\/*)/g;
-    let pad = 0;
-    xml = xml.replace(reg, '$1\r\n$2$3');
-    return xml.split('\r\n').map((node) => {
-      let indent = 0;
-      if (node.match(/.+<\/\w[^>]*>$/)) {
-        indent = 0;
-      } else if (node.match(/^<\/\w/) && pad > 0) {
-        pad -= 1;
-      } else if (node.match(/^<\w[^>]*[^/]>.*$/)) {
-        indent = 1;
-      } else {
-        indent = 0;
+    const reg = /(>)\s*(<)(\/*)/g; // updated Mar 30, 2015
+    const wsexp = / *(.*) +\n/g;
+    const contexp = /(<.+>)(.+\n)/g;
+    xml = xml.replace(reg, '$1\n$2$3').replace(wsexp, '$1\n').replace(contexp, '$1\n$2');
+    let formatted = '';
+    const lines = xml.split('\n');
+    let indent = 0;
+    let lastType = 'other';
+    // 4 types of tags - single, closing, opening, other (text, doctype, comment) - 4*4 = 16 transitions
+    const transitions = {
+      'single->single': 0,
+      'single->closing': -2,
+      'single->opening': 0,
+      'single->other': 0,
+      'closing->single': 0,
+      'closing->closing': -2,
+      'closing->opening': 0,
+      'closing->other': 0,
+      'opening->single': 2,
+      'opening->closing': 0,
+      'opening->opening': 2,
+      'opening->other': 2,
+      'other->single': 0,
+      'other->closing': -2,
+      'other->opening': 0,
+      'other->other': 0
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const ln = lines[i];
+      if (ln.match(/\s*<\?xml/)) {
+        formatted += ln + '\n';
+        continue;
       }
-      pad += indent;
-      return PADDING.repeat(pad - indent) + node;
-    }).join('\r\n');
+      const single = Boolean(ln.match(/<.+\/>/));
+      const closing = Boolean(ln.match(/<\/.+>/));
+      const opening = Boolean(ln.match(/<[^!].*>/));
+      const type = single ? 'single' : closing ? 'closing' : opening ? 'opening' : 'other';
+      const fromTo = lastType + '->' + type;
+      lastType = type;
+      let padding = '';
+      indent += transitions[fromTo];
+      for (let j = 0; j < indent; j++) {
+        padding += ' ';
+      }
+      if (fromTo == 'opening->closing') {
+        formatted = formatted.substr(0, formatted.length - 1) + ln + '\n';
+      } else {
+        formatted += padding + ln + '\n';
+      }
+    }
+    return formatted;
   }
 
   _getTypedValue(structure) {
@@ -719,7 +768,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     const properties = this._ensureArray(schema[pKey]);
     let example;
     if (properties && properties.length) {
-      const typeName = this._getValue(schema, this.ns.w3.shacl.name);
+      const typeName = this._getValue(schema, this.ns.w3.shacl.name) || UNKNOWN_TYPE;
       example = this._exampleFromProperties(properties, 'application/json', typeName);
     }
     if (example) {
@@ -740,21 +789,19 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
    * @param {Array} properties
    * @param {String} mime Media type
    * @param {?String} typeName Name of the RAML type.
-   * @param {?Boolean} isArray if true the result should be an array
+   * @param {?String} parentType For XML processing, parent type name in case of Array type.
    * @return {String|undefined}
    */
-  _exampleFromProperties(properties, mime, typeName, isArray) {
+  _exampleFromProperties(properties, mime, typeName, parentType) {
+    typeName = typeName || UNKNOWN_TYPE;
     let result;
     if (mime.indexOf('json') !== -1) {
       const value = this._jsonExampleFromProperties(properties);
       if (value) {
         result = JSON.stringify(value, null, 2);
-        if (isArray && result[0] !== '[') {
-          result = '[' + result + ']';
-        }
       }
     } else if (mime.indexOf('xml') !== -1) {
-      result = this._xmlExampleFromProperties(properties, typeName);
+      result = this._xmlExampleFromProperties(properties, typeName, parentType);
       if (result) {
         result = '<?xml version="1.0" encoding="UTF-8"?>' + result;
         result = this.formatXml(result);
@@ -1023,12 +1070,21 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
    * Computes example from RAML type for XML media type.
    * @param {Array<Object>} properties
    * @param {?String} typeName RAML type name
+   * @param {?String} parentType When the XML is an array type it is the parent type
    * @return {String}
    */
-  _xmlExampleFromProperties(properties, typeName) {
+  _xmlExampleFromProperties(properties, typeName, parentType) {
     typeName = this._normalizeXmlTagName(typeName);
-    const doc = document.implementation.createDocument('', typeName, null);
-    const main = doc.documentElement;
+    if (parentType) {
+      parentType = this._normalizeXmlTagName(parentType);
+    }
+    const doc = document.implementation.createDocument('', parentType || typeName, null);
+    let main = doc.documentElement;
+    if (parentType) {
+      const element = doc.createElement(typeName);
+      main.appendChild(element);
+      main = element;
+    }
     for (let i = 0, len = properties.length; i < len; i++) {
       this._xmlProcessProperty(doc, main, properties[i]);
     }
