@@ -955,3 +955,22 @@
 
 
 
+## 4.0.4 (2019-10-26)
+
+
+### Bug Fixes
+
+* fixes APIC-223 - examples serialization from object's examples ([4e73633](https://github.com/advanced-rest-client/api-example-generator/commit/4e73633b49fea77e0e8a5a77493cea31508dc87f))
+* fixes APIC-233 - rendering of non-latic caracters in exampels ([f6cd0ae](https://github.com/advanced-rest-client/api-example-generator/commit/f6cd0ae6ed4f0d4c966c9c08a951b4ce7df23cf9))
+* fixing errors after AMF model change ([6676631](https://github.com/advanced-rest-client/api-example-generator/commit/66766311e9c32ab50c6725bddc851d24e6802b48))
+* fixing SE-13092 - XML types processing ([d817217](https://github.com/advanced-rest-client/api-example-generator/commit/d8172174d1fa38aa25ac1d3fb800e8fe0bb2c192))
+* fixing XML node creating from different cases of a name ([fead615](https://github.com/advanced-rest-client/api-example-generator/commit/fead6156805d5c1ef7cb968d9e9b2ca2f5f89ac6))
+* ignoreing examples that has no "raw" value ([4b39f4e](https://github.com/advanced-rest-client/api-example-generator/commit/4b39f4e89c594d0719ceafae76460ca1ab9f37ee))
+
+
+### Features
+
+* adding `isScalar` property to scalar generated value ([f577259](https://github.com/advanced-rest-client/api-example-generator/commit/f577259518128edc5d996d437616d7c9cc25ab63))
+
+
+
