@@ -736,7 +736,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     if (shape instanceof Array) {
       shape = shape[0];
     }
-    const value = shape['@value'];
+    const value = typeof shape === 'object' ? shape['@value'] : shape;
     if (!value) {
       return value;
     }
