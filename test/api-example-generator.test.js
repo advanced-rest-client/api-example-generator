@@ -267,7 +267,7 @@ describe('<api-example-generator>', () => {
           });
           assert.typeOf(result, 'array', 'Returns an array');
           assert.lengthOf(result, 1, 'Array is size of 1');
-          assert.equal(result[0].value.indexOf('\n      error: false'), 0, 'Value is set');
+          assert.equal(result[0].value.indexOf('error: false'), 0, 'Value is set');
         });
 
         it('Returns undefined when "rawOnly" and no raw values', () => {
@@ -328,10 +328,10 @@ describe('<api-example-generator>', () => {
           const result = element.computeExamples(shape, 'application/json');
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
-          assert.isFalse(result[0].hasRaw);
+          assert.isTrue(result[0].hasRaw);
           assert.isFalse(result[0].hasTitle);
           assert.isFalse(result[0].hasUnion);
-          assert.equal(result[0].value, '[1, 5]');
+          assert.equal(result[0].value, '[\n  1,\n  5\n]');
         });
 
         it('Computes example for na ArrayShape', () => {
@@ -422,10 +422,10 @@ describe('<api-example-generator>', () => {
           const result = element.computeExamples(shape, 'application/json');
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
-          assert.isFalse(result[0].hasRaw);
+          assert.isTrue(result[0].hasRaw);
           assert.isFalse(result[0].hasTitle);
           assert.isFalse(result[0].hasUnion);
-          assert.equal(result[0].value, '[1, 5]');
+          assert.equal(result[0].value, '[\n  1,\n  5\n]');
         });
 
         it('Computes example from type example', () => {
@@ -459,10 +459,10 @@ describe('<api-example-generator>', () => {
           assert.isTrue(ex2.hasRaw);
           assert.isFalse(ex2.hasTitle);
           assert.isFalse(ex2.hasUnion);
-          const raw = '\n      error: false\n      id: 1234\n      name: Pawel Psztyc\n      ' +
-            'birthday: 20-10-1983\n      tagline: Test example\n      url: https://domain.com\n      ' +
-            'language: PL\n      etag: test\n      image:\n        url: https://image.com\n        ' +
-            'thumb: https://image.com/thumb\n';
+          const raw = 'error: false\nid: 1234\nname: Pawel Psztyc\n' +
+            'birthday: 20-10-1983\ntagline: Test example\nurl: https://domain.com\n' +
+            'language: PL\netag: test\nimage:\n  url: https://image.com\n  ' +
+            'thumb: https://image.com/thumb';
           assert.equal(ex2.raw, raw);
 
           const parsedExample2 = JSON.parse(ex2.value);
@@ -526,7 +526,7 @@ describe('<api-example-generator>', () => {
           assert.isTrue(result[0].hasRaw);
           assert.isFalse(result[0].hasTitle);
           assert.isFalse(result[0].hasUnion);
-          assert.equal(result[0].raw, '\n      testProperty: true\n');
+          assert.equal(result[0].raw, 'testProperty: true');
           assert.equal(result[0].value, '{\n  "testProperty": true\n}');
         });
 
@@ -537,7 +537,7 @@ describe('<api-example-generator>', () => {
           });
           assert.typeOf(result, 'array', 'Returns an array');
           assert.lengthOf(result, 2, 'Array is size of 2');
-          assert.equal(result[0].value.indexOf('\n      error: false'), 0, 'Value is set');
+          assert.equal(result[0].value.indexOf('error: false'), 0, 'Value is set');
         });
 
         it('Returns undefined when "rawOnly" and no raw values', () => {
@@ -669,7 +669,7 @@ describe('<api-example-generator>', () => {
           const result = element.generatePayloadsExamples(payloads, 'application/json');
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
-          assert.equal(result[0].value, '[1, 2, 3]');
+          assert.equal(result[0].value, '[\n  1,\n  2,\n  3\n]');
         });
 
         it('JSON array property defined inline', () => {
@@ -757,7 +757,7 @@ describe('<api-example-generator>', () => {
             url: 'https://domain.com'
           };
           assert.deepEqual(parsedExample1, cmp1, 'Example 1 value is set');
-          assert.equal(ex1.raw.indexOf('\n      error: false'), 0, 'Example 1 raw is set');
+          assert.equal(ex1.raw.indexOf('error: false'), 0, 'Example 1 raw is set');
           const ex2 = result[0].values[1];
           assert.isFalse(ex2.hasRaw, 'Example 2 hasRaw is false');
           assert.isTrue(ex2.hasTitle, 'Example 2 hasTitle is true');
@@ -1702,7 +1702,7 @@ describe('<api-example-generator>', () => {
           assert.isFalse(example.hasUnion, 'Example\'s hasUnion is set');
           assert.equal(example.title, 'employees', 'Example\'s title is set');
           assert.equal(example.raw,
-            '\n  -\n    id: 1\n    name: Jhon\n  -\n    id: 2\n    name: Sam',
+            '-\n  id: 1\n  name: Jhon\n-\n  id: 2\n  name: Sam',
             'Example\'s raw is set');
           assert.equal(example.value,
             '[\n  {\n    "id": 1,\n    "name": "Jhon"\n  },\n  {\n    "id": 2,\n    "name": "Sam"\n  }\n]',
@@ -1719,7 +1719,7 @@ describe('<api-example-generator>', () => {
           assert.isFalse(example.hasUnion, 'Example\'s hasUnion is set');
           assert.equal(example.title, 'employee', 'Example\'s title is set');
           assert.equal(example.raw,
-            '\n  id: 1\n  name: "Jhon"',
+            'id: 1\nname: "Jhon"',
             'Example\'s raw is set');
           assert.equal(example.value,
             '{\n  "id": 1,\n  "name": "Jhon"\n}',
@@ -1736,7 +1736,7 @@ describe('<api-example-generator>', () => {
           assert.isFalse(example.hasUnion, 'Example\'s hasUnion is set');
           assert.equal(example.title, 'employee', 'Example\'s title is set');
           assert.equal(example.raw,
-            '\n  id: 1\n  name: "Jhon"',
+            'id: 1\nname: "Jhon"',
             'Example\'s raw is set');
           assert.equal(example.value,
             '{\n  "id": 1,\n  "name": "Jhon"\n}',
@@ -1753,7 +1753,7 @@ describe('<api-example-generator>', () => {
           assert.isFalse(example.hasUnion, 'Example\'s hasUnion is set');
           assert.equal(example.title, 'employee', 'Example\'s title is set');
           assert.equal(example.raw,
-            '\n  id: 1\n  name: "Jhon"',
+            'id: 1\nname: "Jhon"',
             'Example\'s raw is set');
           assert.equal(example.value,
             '<?xml version="1.0" encoding="UTF-8"?>\n<Employee>\n  <id>1</id>\n  <name>Jhon</name>\n</Employee>\n',

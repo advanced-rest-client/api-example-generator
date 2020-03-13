@@ -54,7 +54,13 @@
 "@id": "#4",
 "@type": [
 "apiContract:Response",
+"apiContract:Message",
 "doc:DomainElement"
+],
+"apiContract:statusCode": [
+{
+"@value": "200"
+}
 ],
 "core:name": [
 {
@@ -64,11 +70,6 @@
 "core:description": [
 {
 "@value": "\u0628\u064A\u0646\u063A"
-}
-],
-"apiContract:statusCode": [
-{
-"@value": "200"
 }
 ],
 "apiContract:payload": [
@@ -148,6 +149,7 @@
 ],
 "sourcemaps:lexical": [
 {
+"@id": "#9/source-map/lexical/element_0",
 "sourcemaps:element": [
 {
 "@value": "amf://id#9"
@@ -195,6 +197,7 @@
 ],
 "sourcemaps:lexical": [
 {
+"@id": "#10/source-map/lexical/element_0",
 "sourcemaps:element": [
 {
 "@value": "amf://id#10"
@@ -224,6 +227,20 @@
 ],
 "sourcemaps:lexical": [
 {
+"@id": "#8/source-map/lexical/element_2",
+"sourcemaps:element": [
+{
+"@value": "data:%D8%A7%D9%84%D8%AD%D8%A7%D9%84%D8%A9"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(14,14)-(15,0)]"
+}
+]
+},
+{
+"@id": "#8/source-map/lexical/element_0",
 "sourcemaps:element": [
 {
 "@value": "data:message"
@@ -236,6 +253,7 @@
 ]
 },
 {
+"@id": "#8/source-map/lexical/element_1",
 "sourcemaps:element": [
 {
 "@value": "amf://id#8"
@@ -246,18 +264,6 @@
 "@value": "[(14,0)-(16,0)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "data:%D8%A7%D9%84%D8%AD%D8%A7%D9%84%D8%A9"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(14,14)-(15,0)]"
-}
-]
 }
 ]
 }
@@ -266,7 +272,7 @@
 ],
 "doc:raw": [
 {
-"@value": "\n              \u0627\u0644\u062D\u0627\u0644\u0629: \u062D\u0633\u0646\u0627\n              message: Shop in \u0627\u0644\u0645\u0645\u0644\n"
+"@value": "\u0627\u0644\u062D\u0627\u0644\u0629: \u062D\u0633\u0646\u0627\nmessage: Shop in \u0627\u0644\u0645\u0645\u0644"
 }
 ],
 "sourcemaps:sources": [
@@ -277,6 +283,7 @@
 ],
 "sourcemaps:synthesized-field": [
 {
+"@id": "#7/source-map/synthesized-field/element_0",
 "sourcemaps:element": [
 {
 "@value": "doc:strict"
@@ -291,6 +298,20 @@
 ],
 "sourcemaps:lexical": [
 {
+"@id": "#7/source-map/lexical/element_2",
+"sourcemaps:element": [
+{
+"@value": "doc:structuredValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(13,20)-(16,0)]"
+}
+]
+},
+{
+"@id": "#7/source-map/lexical/element_0",
 "sourcemaps:element": [
 {
 "@value": "doc:raw"
@@ -303,6 +324,7 @@
 ]
 },
 {
+"@id": "#7/source-map/lexical/element_1",
 "sourcemaps:element": [
 {
 "@value": "amf://id#7"
@@ -313,22 +335,11 @@
 "@value": "[(13,12)-(16,0)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "doc:structuredValue"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(13,20)-(16,0)]"
-}
-]
 }
 ],
 "sourcemaps:tracked-element": [
 {
+"@id": "#7/source-map/tracked-element/element_0",
 "sourcemaps:element": [
 {
 "@value": "amf://id#7"
@@ -353,6 +364,7 @@
 ],
 "sourcemaps:lexical": [
 {
+"@id": "#6/source-map/lexical/element_0",
 "sourcemaps:element": [
 {
 "@value": "amf://id#6"
@@ -377,6 +389,7 @@
 ],
 "sourcemaps:lexical": [
 {
+"@id": "#5/source-map/lexical/element_0",
 "sourcemaps:element": [
 {
 "@value": "amf://id#5"
@@ -401,6 +414,20 @@
 ],
 "sourcemaps:lexical": [
 {
+"@id": "#4/source-map/lexical/element_2",
+"sourcemaps:element": [
+{
+"@value": "core:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(10,8)-(11,0)]"
+}
+]
+},
+{
+"@id": "#4/source-map/lexical/element_0",
 "sourcemaps:element": [
 {
 "@value": "apiContract:payload"
@@ -413,6 +440,7 @@
 ]
 },
 {
+"@id": "#4/source-map/lexical/element_1",
 "sourcemaps:element": [
 {
 "@value": "amf://id#4"
@@ -421,18 +449,6 @@
 "sourcemaps:value": [
 {
 "@value": "[(9,6)-(16,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "core:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(10,8)-(11,0)]"
 }
 ]
 }
@@ -449,18 +465,7 @@
 ],
 "sourcemaps:lexical": [
 {
-"sourcemaps:element": [
-{
-"@value": "apiContract:returns"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(8,4)-(16,0)]"
-}
-]
-},
-{
+"@id": "#3/source-map/lexical/element_1",
 "sourcemaps:element": [
 {
 "@value": "amf://id#3"
@@ -469,6 +474,19 @@
 "sourcemaps:value": [
 {
 "@value": "[(7,2)-(16,0)]"
+}
+]
+},
+{
+"@id": "#3/source-map/lexical/element_0",
+"sourcemaps:element": [
+{
+"@value": "apiContract:returns"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(8,4)-(16,0)]"
 }
 ]
 }
@@ -485,6 +503,7 @@
 ],
 "sourcemaps:lexical": [
 {
+"@id": "#2/source-map/lexical/element_0",
 "sourcemaps:element": [
 {
 "@value": "amf://id#2"
@@ -509,6 +528,7 @@
 ],
 "sourcemaps:source-vendor": [
 {
+"@id": "#1/source-map/source-vendor/element_0",
 "sourcemaps:element": [
 {
 "@value": "amf://id#1"
@@ -523,6 +543,20 @@
 ],
 "sourcemaps:lexical": [
 {
+"@id": "#1/source-map/lexical/element_2",
+"sourcemaps:element": [
+{
+"@value": "core:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(2,0)-(4,0)]"
+}
+]
+},
+{
+"@id": "#1/source-map/lexical/element_0",
 "sourcemaps:element": [
 {
 "@value": "core:version"
@@ -535,6 +569,7 @@
 ]
 },
 {
+"@id": "#1/source-map/lexical/element_1",
 "sourcemaps:element": [
 {
 "@value": "amf://id#1"
@@ -545,18 +580,6 @@
 "@value": "[(2,0)-(16,0)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "core:name"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(2,0)-(4,0)]"
-}
-]
 }
 ]
 }
@@ -565,7 +588,12 @@
 ],
 "doc:version": [
 {
-"@value": "2.0.0"
+"@value": "2.0.1"
+}
+],
+"doc:root": [
+{
+"@value": true
 }
 ],
 "@context": {
