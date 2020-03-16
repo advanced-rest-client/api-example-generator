@@ -1,3 +1,41 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## 4.1.0 (2020-03-16)
+
+
+### Features
+
+* adding `isScalar` property to scalar generated value ([f577259](https://github.com/advanced-rest-client/api-example-generator/commit/f577259518128edc5d996d437616d7c9cc25ab63))
+
+
+### Bug Fixes
+
+* fix tests and update models with AMF 4.0.6 ([3693973](https://github.com/advanced-rest-client/api-example-generator/commit/3693973de85a8fd4a5fede48b53475418fa86423))
+* **get-typed-value:** if shape is value, return shape ([e14ad8c](https://github.com/advanced-rest-client/api-example-generator/commit/e14ad8c4e967669c52db573f00a58a2719b56609))
+* Adding check if array items exists before trying to access it. ([bc3f2a2](https://github.com/advanced-rest-client/api-example-generator/commit/bc3f2a2bf97dd0f8e6bef6a79b876d96ba0c2036))
+* Fixes [#1](https://github.com/advanced-rest-client/api-example-generator/issues/1) - nil value type ([81208f3](https://github.com/advanced-rest-client/api-example-generator/commit/81208f35733bf54d0f9bf567e589497e55ae6334))
+* Fixes [#1](https://github.com/advanced-rest-client/api-example-generator/issues/1) - nil value type ([da27605](https://github.com/advanced-rest-client/api-example-generator/commit/da276050b2d91ca07dabe30c7ae4b67cc4970846))
+* Fixes and issue when rendering example with falsy values. ([098625f](https://github.com/advanced-rest-client/api-example-generator/commit/098625f2f6207b78f5bc856cca1e644e188fa4b3))
+* fixes APIC-223 - examples serialization from object's examples ([4e73633](https://github.com/advanced-rest-client/api-example-generator/commit/4e73633b49fea77e0e8a5a77493cea31508dc87f))
+* fixes APIC-233 - rendering of non-latic caracters in exampels ([f6cd0ae](https://github.com/advanced-rest-client/api-example-generator/commit/f6cd0ae6ed4f0d4c966c9c08a951b4ce7df23cf9))
+* Fixes https://github.com/mulesoft/api-console/issues/597 ([c8ecb38](https://github.com/advanced-rest-client/api-example-generator/commit/c8ecb384ac92c8e7a07de3ecadbe7e6d14c263cd))
+* Fixiing a test for Edge ([0b476b5](https://github.com/advanced-rest-client/api-example-generator/commit/0b476b5e590a600796c2360926ea35553209b168))
+* Fixiing a test for Edge ([4ebaeac](https://github.com/advanced-rest-client/api-example-generator/commit/4ebaeac16ad78ab5bf85c0495f5c22ed5afea4f3))
+* Fixing an issue with producing data types ([e56e505](https://github.com/advanced-rest-client/api-example-generator/commit/e56e505fdfdc200e68073ee575bdd9847d9f1e58))
+* Fixing array value computation for union types ([895ba39](https://github.com/advanced-rest-client/api-example-generator/commit/895ba393b01f7ebfe6d31e5ac054c66a1a2e4422))
+* fixing errors after AMF model change ([6676631](https://github.com/advanced-rest-client/api-example-generator/commit/66766311e9c32ab50c6725bddc851d24e6802b48))
+* Fixing model computation after AMF data change ([f94b513](https://github.com/advanced-rest-client/api-example-generator/commit/f94b51332034aa610269644ecf592a6cc3d3c396))
+* fixing SE-13092 - XML types processing ([d817217](https://github.com/advanced-rest-client/api-example-generator/commit/d8172174d1fa38aa25ac1d3fb800e8fe0bb2c192))
+* Fixing similar to previous issue with typed examples ([97f6e75](https://github.com/advanced-rest-client/api-example-generator/commit/97f6e75b2f94800b1db20afe3456bf1afb09b4f4))
+* Fixing support for Edge ([be5eed8](https://github.com/advanced-rest-client/api-example-generator/commit/be5eed8f9c987af82d763c49563c3b1d3b82edca))
+* Fixing value assignment ([069d157](https://github.com/advanced-rest-client/api-example-generator/commit/069d1573726a794905aa413481283be41d3d4205))
+* Fixing XML element name when creating XML tag ([f701405](https://github.com/advanced-rest-client/api-example-generator/commit/f701405e70e86708b25bd2de06e0ac7eeab0526b))
+* Fixing XML element name when creating XML tag ([9e03fcc](https://github.com/advanced-rest-client/api-example-generator/commit/9e03fcc584b584eb370adef10de8c86c8c3f1a69))
+* fixing XML node creating from different cases of a name ([fead615](https://github.com/advanced-rest-client/api-example-generator/commit/fead6156805d5c1ef7cb968d9e9b2ca2f5f89ac6))
+* ignoreing examples that has no "raw" value ([4b39f4e](https://github.com/advanced-rest-client/api-example-generator/commit/4b39f4e89c594d0719ceafae76460ca1ab9f37ee))
+
 <a name="2.0.7"></a>
 ## 2.0.7 (2019-01-20)
 
@@ -1104,5 +1142,3 @@
  [eff1c8a](https://github.com/advanced-rest-client/api-example-generator/commit/eff1c8ac485da5d54a3f83c184f4afd6e3978801) by Pawel Psztyc
 * Docs: Adding docs
  [e16d50a](https://github.com/advanced-rest-client/api-example-generator/commit/e16d50ac98cd1dab1888be25742a4da2da73bde4) by Pawel Psztyc
-
-
