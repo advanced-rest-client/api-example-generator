@@ -44,8 +44,8 @@ describe('SE-13092', () => {
         assert.typeOf(result, 'array');
         const item = result[0];
         const { value } = item;
-        assert.include(value, '<Person>', 'generates type name (opening tag)');
-        assert.include(value, '</Person>', 'generates type name (closing tag)');
+        assert.include(value, '<type>', 'generates type name (opening tag)');
+        assert.include(value, '</type>', 'generates type name (closing tag)');
       });
 
       it('uses default name for data type not fragment included into types map', () => {
@@ -54,8 +54,8 @@ describe('SE-13092', () => {
         assert.typeOf(result, 'array');
         const item = result[0];
         const { value } = item;
-        assert.include(value, '<unknown-type>', 'uses unkown type name (opening tag)');
-        assert.include(value, '</unknown-type>', 'uses unkown type name (closing tag)');
+        assert.include(value, '<type>', 'uses type name (opening tag)');
+        assert.include(value, '</type>', 'uses type name (closing tag)');
       });
     });
   });
