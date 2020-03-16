@@ -1142,3 +1142,26 @@ All notable changes to this project will be documented in this file. See [standa
  [eff1c8a](https://github.com/advanced-rest-client/api-example-generator/commit/eff1c8ac485da5d54a3f83c184f4afd6e3978801) by Pawel Psztyc
 * Docs: Adding docs
  [e16d50a](https://github.com/advanced-rest-client/api-example-generator/commit/e16d50ac98cd1dab1888be25742a4da2da73bde4) by Pawel Psztyc
+
+
+<a name="4.1.0"></a>
+## [4.1.0](https://github.com/advanced-rest-client/api-example-generator/compare/4.0.5...4.1.0) (2020-03-16)
+
+### Update
+
+* removing git add cmd from lint staged config [016483a](https://github.com/advanced-rest-client/api-example-generator/commit/016483aedf8669cae19eba3ec6ddec8b3b5230cb) by Pawel Psztyc
+* updating dependencies [71f4a5d](https://github.com/advanced-rest-client/api-example-generator/commit/71f4a5d87b560b5572042b282a5d83902c3ca4e9) by Pawel Psztyc
+* fix tests [a18a5f4](https://github.com/advanced-rest-client/api-example-generator/commit/a18a5f439bd0f348d9ff5ae0d24bcf35e3dd794a) by Leandro Bauret
+* [ci skip] automated merge master->stage. syncing main branches [d309d78](https://github.com/advanced-rest-client/api-example-generator/commit/d309d7883d62aa427a96c2fae4d81d6b0aa28987) by Ci agent
+
+
+### Bug Fixes
+
+* fix tests and update models with AMF 4.0.6 [3693973](https://github.com/advanced-rest-client/api-example-generator/commit/3693973de85a8fd4a5fede48b53475418fa86423) by Leandro Bauret
+
+
+### Refactor
+
+* removing unused dev dependencies [e139d96](https://github.com/advanced-rest-client/api-example-generator/commit/e139d9696dfdd9d80d04cf8289e0380c94d69b24) by Pawel Psztyc
+
+
