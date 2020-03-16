@@ -91,7 +91,7 @@ describe('XML processing', () => {
           const result = element.generatePayloadsExamples(payload, 'application/xml');
           const { value } = result[0];
           assert.include(value, '<schema>\n', 'has defualt name');
-          assert.include(value, 'amf_inline_type', 'has invalid properties');
+          assert.match(value, /<amf_inline_type_\d+>/, 'has invalid properties');
         });
 
         it('renders default name forn inline included types', () => {
