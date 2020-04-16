@@ -1127,7 +1127,7 @@ export class ApiExampleGenerator extends AmfHelperMixin(LitElement) {
     }
     const eKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     const examples = this._ensureArray(range[eKey]);
-    if (examples) {
+    if (examples && examples.length) {
       let name = this._getValue(serialization, this.ns.aml.vocabularies.shapes.xmlName);
       if (!name) {
         name = this._getValue(range, this.ns.w3.shacl.name);
