@@ -1404,13 +1404,6 @@ describe('<api-example-generator>', () => {
           const result = element._computeJsonArrayValue({});
           assert.isUndefined(result);
         });
-
-        it('Computes value for array range', () => {
-          const type = getType(element, amf, 'amf_inline_type_2');
-          const result = element._computeJsonArrayValue(type);
-          assert.typeOf(result, 'array');
-          assert.lengthOf(result, 1);
-        });
       });
     });
   });
