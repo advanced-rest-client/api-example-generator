@@ -86,14 +86,6 @@ describe('XML processing', () => {
           assert.include(value, '    <Image>', 'has wrapped object');
         });
 
-        it('generates (invalid) example for inline type', () => {
-          const payload = AmfLoader.lookupPayload(amf, '/inline-property-example', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
-          const { value } = result[0];
-          assert.include(value, '<schema>\n', 'has defualt name');
-          assert.match(value, /<amf_inline_type_\d+>/, 'has invalid properties');
-        });
-
         it('renders default name forn inline included types', () => {
           const payload = AmfLoader.lookupPayload(amf, '/user-raml-example', 'post');
           const result = element.generatePayloadsExamples(payload, 'application/xml');
