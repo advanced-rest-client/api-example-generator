@@ -1,56 +1,73 @@
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-import { LitElement } from 'lit-element';
-
 export const AmfLoader = {};
 
-class HelperElement extends AmfHelperMixin(LitElement) {}
-window.customElements.define('helper-element', HelperElement);
-
+class HelperElement extends AmfHelperMixin(Object) {}
 const helper = new HelperElement();
 
-AmfLoader.load = async function(compact, fileName) {
-  compact = compact ? '-compact' : '';
-  fileName = fileName || 'demo-api';
-  const file = `${fileName}${compact}.json`;
-  const url = location.protocol + '//' + location.host + '/base/demo/'+ file;
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', (e) => {
-      let data;
-      try {
-        data = JSON.parse(e.target.response);
-      } catch (e) {
-        reject(e);
-        return;
-      }
-      resolve(data);
-    });
-    xhr.addEventListener('error',
-      () => reject(new Error('Unable to load model file')));
-    xhr.open('GET', url);
-    xhr.send();
-  });
+/**
+ * Loads API model data
+ * @param {Boolean} [compact=false] Whether to download compact model
+ * @param {String=} [file='demo-api'] API model file name
+ * @return {Promise<Object>}
+ */
+AmfLoader.load = async function(compact=false, file='demo-api') {
+  const suffix = compact ? '-compact' : '';
+  const fullfile = `${file}${suffix}.json`;
+  const url = location.protocol + '//' + location.host + '/base/demo/'+ fullfile;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Unable to download API model from ${url}`);
+  }
+  return await response.json();
 };
 
+/**
+ * Looks for an endpoint
+ * @param {Array<Object>|Object} model
+ * @param {string} endpoint Endpoint's path
+ * @return {Object}
+ */
 AmfLoader.lookupEndpoint = function(model, endpoint) {
   helper.amf = model;
   const webApi = helper._computeWebApi(model);
   return helper._computeEndpointByPath(webApi, endpoint);
 };
 
+/**
+ * Looks for an operation
+ * @param {Array<Object>|Object} model
+ * @param {string} endpoint Endpoint's path
+ * @param {string} operation Operation name (lowercase)
+ * @return {Object}
+ */
 AmfLoader.lookupOperation = function(model, endpoint, operation) {
-  const endPoint = AmfLoader.lookupEndpoint(model, endpoint, operation);
+  const endPoint = AmfLoader.lookupEndpoint(model, endpoint);
   const opKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.supportedOperation);
   const ops = helper._ensureArray(endPoint[opKey]);
   return ops.find((item) => helper._getValue(item, helper.ns.aml.vocabularies.apiContract.method) === operation);
 };
 
+/**
+ * Looks for a payload in an operation
+ * @param {Array<Object>|Object} model
+ * @param {string} endpoint Endpoint's path
+ * @param {string} operation Operation name (lowercase)
+ * @return {Array<Object>}
+ */
 AmfLoader.lookupPayload = function(model, endpoint, operation) {
   const op = AmfLoader.lookupOperation(model, endpoint, operation);
   const expects = helper._computeExpects(op);
   return helper._ensureArray(helper._computePayload(expects));
 };
 
+/**
+ * Looks for a payload in the responses list of an operation
+ * @param {Array<Object>|Object} model
+ * @param {string} endpoint Endpoint's path
+ * @param {string} operation Operation name (lowercase)
+ * @param {Number} code Status code of the response
+ * @return {Array<Object>}
+ */
 AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
   helper.amf = model;
   const op = AmfLoader.lookupOperation(model, endpoint, operation);
@@ -64,9 +81,15 @@ AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
   });
   const pKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.payload);
   const payload = response[pKey];
-  return payload instanceof Array ? payload : [payload];
+  return Array.isArray(payload) ? payload : [payload];
 };
 
+/**
+ * Looks for a type in the model
+ * @param {Array<Object>|Object} amf AMF model
+ * @param {string} name Name of the type
+ * @return {Object}
+ */
 AmfLoader.lookupType = function(amf, name) {
   if (amf instanceof Array) {
     amf = amf[0];
@@ -84,6 +107,12 @@ AmfLoader.lookupType = function(amf, name) {
   return type;
 };
 
+/**
+ * Looks for the `structuredValue` in an example model in the model
+ * @param {Object} model AMF shape for example
+ * @param {string} type Name of the type
+ * @return {Object}
+ */
 AmfLoader.lookupStructuredValue = function(model, type) {
   helper.amf = model;
   const key = helper._getAmfKey(helper.ns.raml.vocabularies.apiContract.examples);
@@ -99,8 +128,46 @@ AmfLoader.lookupStructuredValue = function(model, type) {
   return helper._ensureArray(example[svKey])[0];
 };
 
+/**
+ * Looks for a type in the model
+ * @param {Array<Object>|Object} model
+ * @param {string} typeName Name of the type
+ * @return {Object}
+ */
 AmfLoader.lookupTypeProperties = function(model, typeName) {
   const type = AmfLoader.lookupType(model, typeName);
   const pKey = helper._getAmfKey(helper.ns.w3.shacl.property);
   return helper._ensureArray(type[pKey]);
+};
+
+/**
+ * Looks for a property range in a type
+ * @param {Array<Object>|Object} model
+ * @param {string} typeName Name of the type
+ * @param {Number} index
+ * @return {Object}
+ */
+AmfLoader.lookupTypePropertyRange = function(model, typeName, index) {
+  const props = AmfLoader.lookupTypeProperties(model, typeName);
+  const prop = props[index];
+  const rKey = helper._getAmfKey(helper.ns.raml.vocabularies.shapes.range);
+  let range = prop[rKey];
+  if (range instanceof Array) {
+    range = range[0];
+  }
+  return range;
+};
+
+/**
+ * Looks for a schema of a payload in the AMF model
+ * @param {Array<Object>|Object} model
+ * @param {string} endpoint Endpoint's path
+ * @param {string} method Operation name (lowercase)
+ * @param {Number} [payloadIndex=0] Index of the payload
+ * @return {Array<Object>}
+ */
+AmfLoader.lookupPayloadSchema = function(model, endpoint, method, payloadIndex=0) {
+  const payload = AmfLoader.lookupPayload(model, endpoint, method)[payloadIndex];
+  const sKey = helper._getAmfKey(helper.ns.aml.vocabularies.shapes.schema);
+  return helper._ensureArray(payload[sKey]);
 };

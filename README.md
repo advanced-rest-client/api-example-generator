@@ -1,17 +1,22 @@
 [![Published on NPM](https://img.shields.io/npm/v/@api-components/api-example-generator.svg)](https://www.npmjs.com/package/@api-components/api-example-generator)
 
-[![Build Status](https://travis-ci.org/advanced-rest-client/api-example-generator.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/api-example-generator)
+[![Build Status](https://travis-ci.com/advanced-rest-client/api-example-generator.svg)](https://travis-ci.org/advanced-rest-client/api-example-generator)
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/advanced-rest-client/api-example-generator)
 
-## &lt;api-example-generator&gt;
+## ExampleGenerator
 
-API examples generator from the AMF model.
+Generates examples from the AMF model.
 
 ## Version compatibility
 
 This version only works with AMF model version 2 (AMF parser >= 4.0.0).
 For compatibility with previous model version use `3.x.x` version of the component.
+
+## Breaking
+
+The `api-example-generator` custom element is deprecated and will be removed with the next major release.
+The element was creates when the AmfHelperMixin needed a HTMLElement constructor. Now there is no such requirement and the not this works as a JS library.
 
 ## Usage
 
@@ -20,10 +25,22 @@ For compatibility with previous model version use `3.x.x` version of the compone
 npm install --save @api-components/api-example-generator
 ```
 
-### API components
+### API
 
-This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
+See [src/ExampleGenerator](src/ExampleGenerator.js) for the public API.
+
+
+```javascript
+import { ExampleGenerator } '@api-components/api-example-generator';
+const gen = new ExampleGenerator(amfModel);
+
+const examples = new gen.computeExamples(schema, 'application/json', {...});
+```
+
+
 ### In an html file
+
+> This is deprecated
 
 ```html
 <html>
@@ -39,6 +56,8 @@ This components is a part of [API components ecosystem](https://elements.advance
 ```
 
 ### In a LitElement element
+
+> This is deprecated
 
 ```js
 import { LitElement, html } from 'lit-element';
@@ -89,7 +108,3 @@ npm start
 ```sh
 npm test
 ```
-
-### API components
-
-This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)

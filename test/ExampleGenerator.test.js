@@ -1,29 +1,25 @@
-import { fixture, assert, html } from '@open-wc/testing';
+import { assert } from '@open-wc/testing';
 import { AmfLoader } from './amf-loader.js';
-import '../api-example-generator.js';
+import { ExampleGenerator } from '../index.js';
 
-describe('<api-example-generator>', () => {
-  async function basicFixture(amf) {
-    return (await fixture(html`<api-example-generator .amf="${amf}"></api-example-generator>`));
-  }
-
+describe('ExampleGenerator', () => {
   const xmlPrefix = '<?xml version="1.0" encoding="UTF-8"?>';
 
   describe('listMedia()', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
-        beforeEach(async () => {
-          element = await basicFixture(amf);
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
         });
 
         it('Returns list of media types', () => {
@@ -56,18 +52,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
-        beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
         });
 
         it('Returns array', () => {
@@ -172,18 +167,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
-        beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
         });
 
         it('Returns array', () => {
@@ -228,18 +222,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('Computes example from a Payload', () => {
@@ -461,7 +454,7 @@ describe('<api-example-generator>', () => {
 
         it('Computes example for an Example shape', () => {
           const shape = AmfLoader.lookupType(amf, 'SimpleInlineExample');
-          const key = element._getAmfKey(element.ns.raml.vocabularies.apiContract.examples);
+          const key = element._getAmfKey(element.ns.aml.vocabularies.apiContract.examples);
           const example = element._ensureArray(shape[key])[0];
           const result = element.computeExamples(example, 'application/json');
           assert.typeOf(result, 'array');
@@ -510,18 +503,17 @@ describe('<api-example-generator>', () => {
     [
       ['DemoAPI: json+ld data model', false],
       ['DemoAPI: Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('Returns list of examples defined inline in body', () => {
@@ -557,18 +549,17 @@ describe('<api-example-generator>', () => {
     [
       ['SE-10469: json+ld data model', false, 'SE-10469'],
       ['SE-10469: Compact data model', true, 'SE-10469']
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact, file]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1], setupItem[2]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact), /** @type String */ (file));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('Generates example from schema', () => {
@@ -585,18 +576,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('JSON from scalar array', () => {
@@ -657,18 +647,17 @@ describe('<api-example-generator>', () => {
     [
       ['DemoApi: json+ld data model', false],
       ['DemoApi: Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('JSON from union type declared inline', () => {
@@ -738,18 +727,17 @@ describe('<api-example-generator>', () => {
     [
       ['se-8987: json+ld data model', false, 'se-8987'],
       ['se-8987: Compact data model', true, 'se-8987']
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact, file]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1], setupItem[2]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact), /** @type String */ (file));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         function testExample1(v1) {
@@ -810,18 +798,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('JSON has inherited examples', () => {
@@ -845,18 +832,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('JSON has type examples', () => {
@@ -880,18 +866,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('JSON has type examples', () => {
@@ -908,18 +893,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('JSON has type examples', () => {
@@ -936,18 +920,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
-        beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
         });
 
         it('JSON has type examples', () => {
@@ -971,18 +954,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
-        beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
         });
 
         it('JSON has type examples', () => {
@@ -1005,18 +987,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
-        beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
         });
 
         [
@@ -1029,7 +1010,7 @@ describe('<api-example-generator>', () => {
         .forEach((item) => {
           it(`Returns ${item[0]} type`, () => {
             const shape = {};
-            if (setupItem[1]) {
+            if (compact) {
               shape['shacl:datatype'] = item[1];
             } else {
               shape['http://www.w3.org/ns/shacl#datatype'] = item[1];
@@ -1046,17 +1027,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
-        beforeEach(async () => {
-          element = await basicFixture(amf);
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
         });
 
         it('Returns default value of range', () => {
@@ -1084,18 +1065,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('Returns object', () => {
@@ -1118,18 +1098,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('Returns undefined when no structure', () => {
@@ -1180,20 +1159,20 @@ describe('<api-example-generator>', () => {
     [
       // ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         let prefix;
         let valueKey;
         let typeKey;
         beforeEach(async () => {
-          element = await basicFixture(amf);
+          element = new ExampleGenerator(amf);
           prefix = element._getAmfKey(element.ns.w3.xmlSchema + '');
           valueKey = element._getAmfKey(element.ns.raml.vocabularies.data.value);
           typeKey = element._getAmfKey(element.ns.w3.shacl.datatype);
@@ -1324,19 +1303,18 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         let prefix;
-        beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
           prefix = element._getAmfKey(element.ns.w3.xmlSchema);
           if (prefix !== element.ns.w3.xmlSchema) {
             prefix += ':';
@@ -1362,19 +1340,18 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         let prefix;
-        beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
           prefix = element._getAmfKey(element.ns.w3.xmlSchema);
           if (prefix !== element.ns.w3.xmlSchema) {
             prefix += ':';
@@ -1467,8 +1444,8 @@ describe('<api-example-generator>', () => {
 
   describe('_processJsonArrayExamples()', () => {
     let element;
-    beforeEach(async () => {
-      element = await basicFixture();
+    beforeEach(() => {
+      element = new ExampleGenerator({});
     });
 
     it('Adds brackets to the "value" property', () => {
@@ -1518,19 +1495,18 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         let prefix;
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
           prefix = element._getAmfKey(element.ns.w3.xmlSchema);
           if (prefix !== element.ns.w3.xmlSchema) {
             prefix += ':';
@@ -1580,18 +1556,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1], 'SE-10469');
+          amf = await AmfLoader.load(/** @type Boolean */ (compact), 'SE-10469');
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('Generates example from JSON schema', () => {
@@ -1622,17 +1597,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1], 'tracked-to-linked');
+          amf = await AmfLoader.load(/** @type Boolean */ (compact), 'tracked-to-linked');
         });
 
-        beforeEach(async () => {
-          element = await basicFixture(amf);
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
         });
 
         it('Generates example for GET', () => {
@@ -1710,18 +1685,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         [
@@ -1743,11 +1717,15 @@ describe('<api-example-generator>', () => {
           ['typeNumFormatInt16', 'number', 2]
         ].forEach((item) => {
           it(`Returns ${item[1]} type (${item[0]})`, () => {
+            const type = /** @type string */ (item[0]);
+            const datatype = /** @type string */ (item[1]);
+
             const shape = AmfLoader.lookupType(amf, 'DataTypesExample');
             const result = element.computeExamples(shape, 'application/json');
             const data = JSON.parse(result[0].value);
-            assert.typeOf(data[item[0]], item[1], 'Data type matches');
-            assert.equal(data[item[0]], item[2], 'Value matches');
+
+            assert.typeOf(data[type], datatype, 'Data type matches');
+            assert.equal(data[type], item[2], 'Value matches');
           });
         });
       });
@@ -1758,18 +1736,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1], 'APIC-187');
+          amf = await AmfLoader.load(/** @type Boolean */ (compact), 'APIC-187');
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         [
@@ -1784,10 +1761,12 @@ describe('<api-example-generator>', () => {
 
         ].forEach((item) => {
           it(`Returns ${item[1]} type (${item[0]})`, () => {
+            const datatype = /** @type string */ (item[1]);
             const shape = AmfLoader.lookupPayloadSchema(amf, '/record', 'post', 0);
             const result = element.computeExamples(shape[0], 'application/json');
             const data = JSON.parse(result[0].value);
-            assert.typeOf(data.records[0][item[0]], item[1], 'Data type matches');
+
+            assert.typeOf(data.records[0][item[0]], datatype, 'Data type matches');
             assert.equal(data.records[0][item[0]], item[2], 'Value matches');
           });
         });
@@ -1799,18 +1778,17 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1], 'APIC-188');
+          amf = await AmfLoader.load(/** @type Boolean */ (compact), 'APIC-188');
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
         });
 
         it('False example is computed', () => {
@@ -1828,20 +1806,19 @@ describe('<api-example-generator>', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true]
-    ].forEach((setupItem) => {
-      describe(setupItem[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
         let element;
         let amf;
         let doc;
         let main;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(/** @type Boolean */ (compact));
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
+          element = new ExampleGenerator(amf);
 
           doc = document.implementation.createDocument('', 'test', null);
           main = doc.documentElement;
@@ -1878,8 +1855,7 @@ describe('<api-example-generator>', () => {
     });
 
     beforeEach(async () => {
-      element = await basicFixture();
-      element.amf = model;
+      element = new ExampleGenerator(model);
       const typeKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'Scalar');
       valueKey = element._getAmfKey(element.ns.raml.vocabularies.data + 'value');
       baseObj = {};
@@ -1967,8 +1943,7 @@ describe('<api-example-generator>', () => {
     });
 
     beforeEach(async () => {
-      element = await basicFixture();
-      element.amf = model;
+      element = new ExampleGenerator(model);
     });
 
     function createProperty(type, value) {
