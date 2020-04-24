@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.com/advanced-rest-client/api-example-generator.svg)](https://travis-ci.org/advanced-rest-client/api-example-generator)
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/advanced-rest-client/api-example-generator)
-
 ## ExampleGenerator
 
 Generates examples from the AMF model.
