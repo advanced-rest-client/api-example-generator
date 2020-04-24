@@ -1348,7 +1348,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {String} Normalized name
    */
   _normalizeXmlTagName(name) {
-    return name.replace(/[^a-zA-Z0-9-_]/g, '');
+    return name.replace(/[^a-zA-Z0-9-_.]/g, '');
   }
   /**
    * Processes XML property from a data shape.

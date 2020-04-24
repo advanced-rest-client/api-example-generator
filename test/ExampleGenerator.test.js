@@ -1993,4 +1993,36 @@ describe('ExampleGenerator', () => {
       assert.deepEqual(result, { test: 'test' });
     });
   });
+
+  describe('_normalizeXmlTagName()', () => {
+    let instance;
+
+    beforeEach(async () => {
+      instance = new ExampleGenerator();
+    });
+
+    it('removes prohibited characters', () => {
+      const name = 'a & b = c?';
+      const result = instance._normalizeXmlTagName(name);
+      assert.equal(result, 'abc');
+    });
+
+    it('keeps hyphen characters', () => {
+      const name = 'a-&-b =-c?';
+      const result = instance._normalizeXmlTagName(name);
+      assert.equal(result, 'a--b-c');
+    });
+
+    it('keeps underscoer characters', () => {
+      const name = 'a_&_b =_c?';
+      const result = instance._normalizeXmlTagName(name);
+      assert.equal(result, 'a__b_c');
+    });
+
+    it('keeps dot characters', () => {
+      const name = 'a.&.b =.c?';
+      const result = instance._normalizeXmlTagName(name);
+      assert.equal(result, 'a..b.c');
+    });
+  });
 });
