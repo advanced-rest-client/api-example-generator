@@ -24,20 +24,20 @@
     "email": "arc@mulesoft.com"
   },
   "dependencies": {
-    "@api-components/amf-helper-mixin": "^4.0.21",
-    "lit-element": "^2.2.1"
+    "@api-components/amf-helper-mixin": "^4.1.0",
+    "lit-element": "^2.3.1"
   },
   "devDependencies": {
     "@advanced-rest-client/arc-demo-helper": "^1.0.17",
     "@advanced-rest-client/eslint-config": "^1.1.5",
     "@advanced-rest-client/prettier-config": "^0.1.0",
     "@advanced-rest-client/testing-karma-sl": "^1.2.0",
-    "@api-components/api-model-generator": "^0.2.7",
-    "@api-components/api-navigation": "^4.0.4",
+    "@api-components/api-model-generator": "^0.2.8",
+    "@api-components/api-navigation": "^4.1.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@open-wc/testing": "^2.5.6",
-    "@open-wc/testing-karma": "^3.3.7",
+    "@open-wc/testing": "^2.5.13",
+    "@open-wc/testing-karma": "^3.3.15",
     "@polymer/gen-typescript-declarations": "^1.6.2",
     "@polymer/iron-test-helpers": "^3.0.1",
     "@polymer/paper-checkbox": "^3.0.0",
@@ -45,12 +45,10 @@
     "@polymer/paper-item": "^3.0.0",
     "@polymer/paper-listbox": "^3.0.0",
     "deepmerge": "^4.2.2",
-    "es-dev-server": "^1.45.1",
-    "husky": "^4.2.3",
-    "karma": "^4.4.1",
-    "lint-staged": "^10.0.8",
-    "sinon": "^9.0.1",
-    "web-animations-js": "^2.3.2"
+    "es-dev-server": "^1.46.5",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.7",
+    "sinon": "^9.0.2"
   },
   "scripts": {
     "update-types": "gen-typescript-declarations --deleteExisting --outDir .",
