@@ -1165,3 +1165,35 @@ All notable changes to this project will be documented in this file. See [standa
 * removing unused dev dependencies [e139d96](https://github.com/advanced-rest-client/api-example-generator/commit/e139d9696dfdd9d80d04cf8289e0380c94d69b24) by Pawel Psztyc
 
 
+<a name="4.2.0"></a>
+## [4.2.0](https://github.com/advanced-rest-client/api-example-generator/compare/4.1.0...4.2.0) (2020-04-24)
+
+### Continuous integration
+
+* removing required from travis config [c802bb7](https://github.com/advanced-rest-client/api-example-generator/commit/c802bb7b9cce14def78fc2f5a52cb15b51caedf5) by Pawel
+* updating SL config [ab86744](https://github.com/advanced-rest-client/api-example-generator/commit/ab867447c0fe934b15111feaffa143518042e176) by Pawel
+
+
+### Update
+
+* updating project meta [3829011](https://github.com/advanced-rest-client/api-example-generator/commit/3829011d73f7bac82994332a7d60af5760fac558) by Pawel
+* adding types config [68a43d8](https://github.com/advanced-rest-client/api-example-generator/commit/68a43d8f6c4a44ba153f0d46d1729144e1803791) by Pawel
+* upgrading dependencies [076993b](https://github.com/advanced-rest-client/api-example-generator/commit/076993b3a1e6d55b32683d78c1b46e1afcb67b98) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [d91d458](https://github.com/advanced-rest-client/api-example-generator/commit/d91d458584d3b3d46a860c84c8747d70d30e84c5) by Ci agent
+
+
+### Documentation
+
+* removing wc.org badge [4c31d7a](https://github.com/advanced-rest-client/api-example-generator/commit/4c31d7adf9907154439f8bbac7510dfe39f07034) by Pawel
+
+
+### Bug Fixes
+
+* fixes #6 - allowed character in XML name [e874e61](https://github.com/advanced-rest-client/api-example-generator/commit/e874e615f82fa841425074c18bca4db965af6257) by Pawel
+
+
+### Refactor
+
+* deprecating custom element and creating a JS library [ed43942](https://github.com/advanced-rest-client/api-example-generator/commit/ed439421a4a07f59d54c158710ee79d556fdd564) by Pawel
+
+
