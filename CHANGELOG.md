@@ -1197,3 +1197,22 @@ All notable changes to this project will be documented in this file. See [standa
 * deprecating custom element and creating a JS library [ed43942](https://github.com/advanced-rest-client/api-example-generator/commit/ed439421a4a07f59d54c158710ee79d556fdd564) by Pawel
 
 
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/advanced-rest-client/api-example-generator/compare/4.2.0...4.2.1) (2020-04-25)
+
+### Build
+
+* bumping version [c20d029](https://github.com/advanced-rest-client/api-example-generator/commit/c20d029c79f3a4e6921961ea27c81c7c46fd747c) by Pawel
+
+
+### Continuous integration
+
+* increaing timeout correctly [8170570](https://github.com/advanced-rest-client/api-example-generator/commit/8170570915df3cdb96b85b3ee109430fcfb7be7a) by Pawel
+
+
+### Update
+
+* moving to manually defined types [88f42e5](https://github.com/advanced-rest-client/api-example-generator/commit/88f42e5ccb58edefb8a3045c03f521ad909724cd) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [52df92e](https://github.com/advanced-rest-client/api-example-generator/commit/52df92e34b12b917cddcfb89d18d248638a63162) by Ci agent
+
+
