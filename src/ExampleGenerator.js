@@ -1257,7 +1257,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {Element} Newly created element
    */
   _appendXmlElement(doc, node, range) {
-    let name = /** @type {string} */ (this._getValue(range, this.ns.w3.shacl.name));
+    const name = this._getXmlNormalizedName(range);
     if (!name) {
       return;
     }
@@ -1275,7 +1275,6 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       // Mocking service would mark is as an error.
       // this._readDataType(range);
     }
-    name = name.replace(/[^a-zA-Z0-9-]*/g, '');
     const element = doc.createElement(name);
     if (nodeValue) {
       const vn = doc.createTextNode(String(nodeValue));
@@ -1303,6 +1302,26 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
   }
 
+  /**
+   * Reads `w3.shacl.name` from passed object and normalizes it as XML element name.
+   * @param {Object} property A property to read the name from. Usually range.
+   * @return {String|undefined} Normalized name or undefined if name is not defined.
+   */
+  _getXmlNormalizedName(property) {
+    const name = /** @type string */ (this._getValue(property, this.ns.w3.shacl.name));
+    if (name) {
+      return this._normalizeXmlTagName(name);
+    }
+  }
+
+  /**
+   * Adds elements to the node which are an array.
+   *
+   * @param {Document} doc Main document
+   * @param {Element} node Current node
+   * @param {Object} range AMF range
+   * @param {Boolean} isWrapped Whether RAML's `wrapped` property is set.
+   */
   _appendXmlArray(doc, node, range, isWrapped) {
     if (isWrapped) {
       const element = this._appendXmlElement(doc, node, range);
@@ -1317,7 +1336,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     for (let i = 0, len = properties.length; i < len; i++) {
       const prop = properties[i];
       if (isWrapped) {
-        const name = this._getValue(prop, this.ns.w3.shacl.name);
+        const name = this._getXmlNormalizedName(prop);
         if (!name) {
           continue;
         }
@@ -1336,7 +1355,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {Object} shape AMF shape of a property in the union
    */
   _xmlProcessUnionScalarProperty(doc, property, shape) {
-    const name = /** @type string */ (this._getValue(property, this.ns.w3.shacl.name)) || 'unknown';
+    const name = this._getXmlNormalizedName(property) || 'unknown';
     const type = this._readDataType(shape);
     const element = doc.createElement(name);
     element.appendChild(doc.createTextNode(type));
