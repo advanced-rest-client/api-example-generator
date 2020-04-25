@@ -23,6 +23,8 @@ declare interface ExampleOptions {
    * the `@id` of the Payload shape.
    */
   typeId?: string;
+
+  parentName?: string;
 }
 
 declare interface Example {
@@ -169,7 +171,7 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * Besides that, `opts.typeId` is required to compute examples for a payload.
    * The `typeId` is a value of `@id` of the Payload shape.
    */
-  computeExamples(schema: object, mime: String, opts: object): Array<object>|undefined;
+  computeExamples(schema: object, mime: String, opts: ExampleOptions): Array<Example>|undefined;
 
   /**
    * Reads a raw value of JSON schema if available.
@@ -202,7 +204,7 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param examples Examples model.
    * @returns List of examples to process.
    */
-  _processExamples(examples: any[]|object): any[]|undefined;
+  _processExamples(examples: object[]|object): any[]|undefined;
 
   /**
    * Uses Example shape's source maps to determine which examples should be rendered.
@@ -219,8 +221,15 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param mime Example content type.
    * @param opts Processing options.
    */
-  _generateFromExample(example: object, mime: String, opts: object): Example|null|undefined;
-  _computeExampleArraySchape(schema: any, mime: any, opts: any): any;
+  _generateFromExample(example: object, mime: String, opts?: ExampleOptions): Example|undefined;
+
+  /**
+   * Computes list of examples for an array shape.
+   * @param schema The AMF's array shape
+   * @param mime Current mime type
+   * @param [opts={}]
+   */
+  _computeExampleArraySchape(schema: object, mime: string, opts: ExampleOptions): Array<Example>|undefined;
 
   /**
    * Processes JSON examples that should be an arrays and adds brackets
@@ -229,7 +238,13 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * It does the same for unions which has array of values.
    */
   _processJsonArrayExamples(examples: Array<Example>): void;
-  _computeUnionExamples(schema: any, mime: any, opts: any): any;
+  /**
+   * Computes example for an union shape.
+   * @param schema The AMF's array shape
+   * @param mime Current mime type
+   * @param [opts={}]
+   */
+  _computeUnionExamples(schema: object, mime: string, opts: ExampleOptions): Array<Example>|undefined;
 
   /**
    * Computes value from defined `datatype` property.
@@ -243,9 +258,25 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * Creates a JSON example representation from AMF example's structure
    * definition.
    */
-  _jsonFromStructure(structure: object): any;
-  _jsonFromStructureValue(value: any, obj: any, isArray: any, key: any, resolvedPrefix: any): void;
-  _xmlFromStructure(structure: any, opts: any): any;
+  _jsonFromStructure(structure: object): Array<Object>|Object|String|Number|Boolean|null|undefined;
+  /**
+   * Creates a JSON object structure from an example.
+   * This object is later on serialized to the example string value.
+   *
+   * @param value Value to process
+   * @param obj The target object
+   * @param isArray When set the `obj` is an array.
+   * @param key Processed object's key
+   * @param resolvedPrefix AMF's `data:` prefix
+   */
+  _jsonFromStructureValue(value: Object|Array<any>|number|string, obj: Object|Array<any>, isArray: boolean, key?: string, resolvedPrefix?: string): void;
+
+  /**
+   * Generates XML example string value from AMF's structured value definition.
+   * @param structure Value of the `structuredValue` property of AMF's example object.
+   * @param opts Examples processing options
+   */
+  _xmlFromStructure(structure: Object, opts: ExampleOptions): String;
 
   /**
    * Formats XML string into pretty printed value.
@@ -255,7 +286,13 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @returns Formatted XML
    */
   formatXml(xml: String): String;
-  _getTypedValue(structure: any): any;
+
+  /**
+   * Reads the value of the `structuredValue` and casts it to the corresponding type.
+   * @param structure Value of the `structuredValue` property of AMF's example object.
+   * @return Value casted to a type
+   */
+  _getTypedValue(structure: object): string|number|boolean|null;
 
   /**
    * Creates a example structure for the JSON schema.
@@ -265,16 +302,17 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param jsonSchema Raw JSON schema value
    * @returns Generated example model.
    */
-  _exampleFromJsonSchema(schema: object, jsonSchema: String): Array<object>;
+  _exampleFromJsonSchema(schema: object, jsonSchema: String): Array<Example>;
 
   /**
    * Creates an example from RAML type properties.
    *
+   * @param properties List of AMF type properties to process.
    * @param mime Media type
    * @param typeName Name of the RAML type.
    * @param parentType For XML processing, parent type name in case of Array type.
    */
-  _exampleFromProperties(properties: any[], mime: string, typeName?: string, parentType?: string): Example|undefined;
+  _exampleFromProperties(properties: object[], mime: string, typeName?: string, parentType?: string): Example|undefined;
 
   /**
    * Generates a JSON example from RAML's type properties.
@@ -289,8 +327,30 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param range AMF's range model.
    * @param typeName Optional, type name to use in Union type. By default first NodeShape.
    */
-  _computeJsonProperyValue(range: object, typeName?: string): any|null;
-  _computeJsonScalarValue(range: any): any;
+  _computeJsonProperyValue(range: object, typeName?: string): string|number|boolean|null|Array<any>|object|undefined;
+
+  /**
+   * Computes scalar value for AMF's range and casts it to the corresponding type.
+   * When the value is not defined then it creates a default value.
+   * This is for the mocking service to work with generated example.
+   *
+   * @param range AMF's range definition for a shape.
+   * @returns Value casted to the corresponding type
+   */
+  _computeJsonScalarValue(range: object): string|number|boolean|null;
+
+  /**
+   * Computes default value for given range.
+   *
+   * This is to work with mocking services when the user just want to send an
+   * example value to the server. This ensures valid input from the client
+   * even of this alters the `default` value for the API (when one does not
+   * exist)
+   *
+   * @param range AMF's range definition for a shape.
+   * @returns Value casted to the corresponding type
+   */
+  _computeDefaultRangleValue(range: object): string|number|boolean|null;
 
   /**
    * Casts the value to given data type represented in AMF notation.
@@ -299,7 +359,7 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param type AMF data type
    * @returns Casted value.
    */
-  _typeToValue(value: string, type: string): String|Number|Boolean|null;
+  _typeToValue(value: string, type: string): string|number|boolean|null;
 
   /**
    * Computes JSON example from UnionShape
@@ -308,22 +368,43 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param typeName Optional, type name to use. By default first NodeShape.
    */
   _computeJsonUnionValue(range: object, typeName?: String): object|undefined;
-  _computeJsonObjectValue(range: any): any;
-  _computeJsonArrayValue(range: any): any;
-  _extractExampleRawValue(example: any): any;
+
+  /**
+   * Computes JSON object as an example from a range that is an object.
+   *
+   * @param range AMF's range definition for a shape.
+   * @returns A JavaScript object computed from the properties.
+   */
+  _computeJsonObjectValue(range: object): object|undefined;
+
+  /**
+   * Computes JSON object as an example from a range that is an array.
+   *
+   * @param range AMF's range definition for a shape.
+   * @return A JavaScript array computed from the items.
+   */
+  _computeJsonArrayValue(range: object): object[]|undefined;
+
+  /**
+   * Reads raw value of the example.
+   * @param example AMF's example definition.
+   * @return Raw example value.
+   */
+  _extractExampleRawValue(example: Array<Object>|Object): String|undefined;
 
   /**
    * Gets a value from a Range shape for a scalar value.
    *
    * @param range AMF's range model.
    */
-  _getTypeScalarValue(range: object): any;
+  _getTypeScalarValue(range: object): string|undefined;
 
   /**
-   * Computes example from RAML type for XML media type.
+   * Computes example from a range's properties for XML media type.
    *
-   * @param typeName RAML type name
-   * @param parentType When the XML is an array type it is the parent type
+   * @param properties Properies read from the range object that represents an object
+   * @param typeName Object name in API specification
+   * @param parentType When the XML is an array then the type is the parent type
    */
   _xmlExampleFromProperties(properties: Array<object>, typeName?: String, parentType?: String): String;
 
@@ -346,7 +427,7 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param example AMF's example definition.
    * @param propertyName Name of the property being processed
    */
-  _xmlFromExamples(doc: Document, node: Element, example: object, propertyName: String): void;
+  _xmlFromExamples(doc: Document, node: Element, example: object, propertyName: string): void;
 
   /**
    * Reads property data type.
@@ -382,7 +463,22 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param range AMF range
    */
   _appendXmlElements(doc: Document, node: Element, range: object): void;
-  _appendXmlArray(doc: Document, node: Element, range: object, isWrapped: any): void;
+
+  /**
+   * Reads `w3.shacl.name` from passed object and normalizes it as XML element name.
+   * @param property A property to read the name from. Usually range.
+   * @return Normalized name or undefined if name is not defined.
+   */
+  _getXmlNormalizedName(property: object): string|undefined;
+  /**
+   * Adds elements to the node which are an array.
+   *
+   * @param doc Main document
+   * @param node Current node
+   * @param range AMF range
+   * @param isWrapped Whether RAML's `wrapped` property is set.
+   */
+  _appendXmlArray(doc: Document, node: Element, range: object, isWrapped: boolean): void;
 
   /**
    * Processes scalara property that is an union in an XML example.
@@ -418,16 +514,43 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param model `structuredValue` item model.
    * @returns Javascript object or array with structured value.
    */
-  _computeExampleFromStructuredValue(model: object): object|any[]|null;
+  _computeExampleFromStructuredValue(model: object): object|object[]|null;
 
   /**
    * Computes value with propert data type for a structured example.
    *
    * @param model Structured example item model.
    * @returns Value for the example.
+   * @deprecated Use `amf-example-generator` for examples generation.
    */
   _computeStructuredExampleValue(model: object): string|boolean|number;
+
+  /**
+   * Adds to the node an XML element which is an array item.
+   *
+   * @param doc Main document
+   * @param node Current node
+   * @param property Array item
+   * @param name Array property name. Must be already normalized.
+   */
   _processDataArrayProperties(doc: Document, node: Element, property: object, name: string): void;
+
+  /**
+   * Adds to the node an XML element which is an object property.
+   *
+   * @param doc Main document
+   * @param node Current node
+   * @param property Array item
+   */
   _processDataObjectProperties(doc: Document, node: Element, property: object): void;
+
+  /**
+   * Reads property name from AMF's "data" item. The key is an object key
+   * that has a form of "data uri#property name" or "data:property name".
+   * This depends on whether the model is compact or not.
+   *
+   * @param key Key name to process
+   * @return Name of the data property
+   */
   _dataNameFromKey(key: string): string;
 }

@@ -22,6 +22,7 @@ const UNKNOWN_TYPE = 'unknown-type';
   * @property {String=} typeName Processed type name, used for XML types to use right XML element wrapper name.
   * @property {String=} typeId It is required to compute examples for a payload. The value of
   * the `@id` of the Payload shape.
+  * @property {String=} parentName
   */
 
 /**
@@ -382,7 +383,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    *
    * @param {Object} example Resolved example.
    * @param {String} mime Example content type.
-   * @param {?Object} opts Processing options.
+   * @param {ExampleOptions=} opts Processing options.
    * @return {Example|undefined}
    */
   _generateFromExample(example, mime, opts) {
@@ -484,14 +485,20 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
   }
 
-  _computeExampleArraySchape(schema, mime, opts) {
+  /**
+   * Computes list of examples for an array shape.
+   * @param {Object} schema The AMF's array shape
+   * @param {String} mime Current mime type
+   * @param {ExampleOptions} [opts={}]
+   * @return {Array<Example>|undefined}
+   */
+  _computeExampleArraySchape(schema, mime, opts={}) {
     const iKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.items);
     const items = this._ensureArray(schema[iKey]);
     if (!items) {
       return;
     }
     const isJson = mime.indexOf('json') !== -1;
-    opts = opts || {};
     opts.parentName = opts.typeName;
     delete opts.typeName;
     // We need only first type here as arras can have different types
@@ -532,6 +539,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
   }
 
+  /**
+   * Computes example for an union shape.
+   * @param {Object} schema The AMF's array shape
+   * @param {String} mime Current mime type
+   * @param {ExampleOptions} [opts={}]
+   * @return {Array<Example>|undefined}
+   */
   _computeUnionExamples(schema, mime, opts) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.anyOf);
     const anyOf = this._ensureArray(schema[key]);
@@ -565,6 +579,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return result.values.length ? [result] : undefined;
   }
+
   /**
    * Computes value from defined `datatype` property.
    * @param {Object} shape A shape with `datatype` property.
@@ -594,11 +609,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return id[0].toUpperCase() + id.substr(1);
   }
+
   /**
    * Creates a JSON example representation from AMF example's structure
    * definition.
    * @param {Object} structure
-   * @return {any}
+   * @return {Array<Object>|Object|String|Number|Boolean|null|undefined}
    */
   _jsonFromStructure(structure) {
     if (!structure) {
@@ -637,6 +653,16 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     return obj;
   }
 
+  /**
+   * Creates a JSON object structure from an example.
+   * This object is later on serialized to the example string value.
+   *
+   * @param {Object|Array<any>|number|string} value Value to process
+   * @param {Object|Array<any>} obj The target object
+   * @param {Boolean} isArray When set the `obj` is an array.
+   * @param {String=} key Processed object's key
+   * @param {String=} resolvedPrefix AMF's `data:` prefix
+   */
   _jsonFromStructureValue(value, obj, isArray, key, resolvedPrefix) {
     if (value instanceof Array) {
       value = value[0];
@@ -662,6 +688,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
   }
 
+  /**
+   * Generates XML example string value from AMF's structured value definition.
+   * @param {Object} structure Value of the `structuredValue` property of AMF's example object.
+   * @param {ExampleOptions} opts Examples processing options
+   * @return {String}
+   */
   _xmlFromStructure(structure, opts) {
     let typeName = opts && opts.typeName || UNKNOWN_TYPE;
     typeName = this._normalizeXmlTagName(typeName);
@@ -747,6 +779,11 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     return formatted;
   }
 
+  /**
+   * Reads the value of the `structuredValue` and casts it to the corresponding type.
+   * @param {Object} structure Value of the `structuredValue` property of AMF's example object.
+   * @return {string|number|boolean|null} Value casted to a type
+   */
   _getTypedValue(structure) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.data.value);
     let shape = structure[key];
@@ -776,12 +813,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return this._typeToValue(value, dt);
   }
+
   /**
    * Creates a example structure for the JSON schema.
    * Old but still in use.
    * @param {Object} schema AMF schema schape
    * @param {String} jsonSchema Raw JSON schema value
-   * @return {Array<Object>} Generated example model.
+   * @return {Array<Example>} Generated example model.
    */
   _exampleFromJsonSchema(schema, jsonSchema) {
     const pKey = this._getAmfKey(this.ns.w3.shacl.property);
@@ -806,7 +844,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   }
   /**
    * Creates an example from RAML type properties.
-   * @param {Array} properties
+   * @param {Array<Object>} properties List of AMF type properties to process.
    * @param {string} mime Media type
    * @param {string=} typeName Name of the RAML type.
    * @param {string=} parentType For XML processing, parent type name in case of Array type.
@@ -885,11 +923,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return result;
   }
+
   /**
    * Computes JSON value from a range shape.
    * @param {Object} range AMF's range model.
    * @param {string=} typeName Optional, type name to use in Union type. By default first NodeShape.
-   * @return {any}
+   * @return {string|number|boolean|null|Array<any>|object|undefined}
    */
   _computeJsonProperyValue(range, typeName) {
     if (this._hasType(range, this.ns.aml.vocabularies.shapes.ScalarShape)) {
@@ -908,25 +947,19 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       return null;
     }
   }
+
+  /**
+   * Computes scalar value for AMF's range and casts it to the corresponding type.
+   * When the value is not defined then it creates a default value.
+   * This is for the mocking service to work with generated example.
+   *
+   * @param {Object} range AMF's range definition for a shape.
+   * @return {string|number|boolean|null} Value casted to the corresponding type
+   */
   _computeJsonScalarValue(range) {
     const value = this._getTypeScalarValue(range);
     if (!value) {
-      // This is to work with mocking services when the user just want to send an
-      // example value to the server. This ensures valid input from the client
-      // even of this alters the `default` value for the API (when one does not
-      // exist)
-      const type = this._computeScalarType(range);
-      switch (type) {
-        case 'Number':
-        case 'Integer':
-        case 'Long':
-        case 'Float':
-        case 'Double': return 0;
-        case 'Boolean': return false;
-        case 'Nil':
-        case 'Null': return null;
-        default: return '';
-      }
+      return this._computeDefaultRangleValue(range);
     }
     const dtKey = this._getAmfKey(this.ns.w3.shacl.datatype);
     let dt = range[dtKey];
@@ -938,11 +971,38 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return this._typeToValue(value, dt['@id']);
   }
+
+  /**
+   * Computes default value for given range.
+   *
+   * This is to work with mocking services when the user just want to send an
+   * example value to the server. This ensures valid input from the client
+   * even of this alters the `default` value for the API (when one does not
+   * exist)
+   *
+   * @param {Object} range AMF's range definition for a shape.
+   * @return {string|number|boolean|null} Value casted to the corresponding type
+   */
+  _computeDefaultRangleValue(range) {
+    const type = this._computeScalarType(range);
+    switch (type) {
+      case 'Number':
+      case 'Integer':
+      case 'Long':
+      case 'Float':
+      case 'Double': return 0;
+      case 'Boolean': return false;
+      case 'Nil':
+      case 'Null': return null;
+      default: return '';
+    }
+  }
+
   /**
    * Casts the value to given data type represented in AMF notation.
    * @param {string} value Value encoded in AMF
    * @param {string} type AMF data type
-   * @return {String|Number|Boolean} Casted value.
+   * @return {String|Number|Boolean|Null} Casted value.
    */
   _typeToValue(value, type) {
     switch (type) {
@@ -989,6 +1049,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       default: return value || '';
     }
   }
+
   /**
    * Computes JSON example from UnionShape
    * @param {Object} range Type definition
@@ -1024,6 +1085,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
   }
 
+  /**
+   * Computes JSON object as an example from a range that is an object.
+   *
+   * @param {Object} range AMF's range definition for a shape.
+   * @return {Object|undefined} A JavaScript object computed from the properties.
+   */
   _computeJsonObjectValue(range) {
     const pKey = this._getAmfKey(this.ns.w3.shacl.property);
     const properties = this._ensureArray(range[pKey]);
@@ -1032,6 +1099,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
   }
 
+  /**
+   * Computes JSON object as an example from a range that is an array.
+   *
+   * @param {Object} range AMF's range definition for a shape.
+   * @return {Array<Object>|undefined} A JavaScript array computed from the items.
+   */
   _computeJsonArrayValue(range) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.items);
     const items = this._ensureArray(range[key]);
@@ -1053,6 +1126,11 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     return result;
   }
 
+  /**
+   * Reads raw value of the example.
+   * @param {Array<Object>|Object} example AMF's example definition.
+   * @return {String|undefined} Raw example value.
+   */
   _extractExampleRawValue(example) {
     if (example instanceof Array) {
       example = example[0];
@@ -1064,12 +1142,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         example = example[0];
       }
     }
-    return this._getValue(example, this.ns.aml.vocabularies.document.raw);
+    return /** @type string */ (this._getValue(example, this.ns.aml.vocabularies.document.raw));
   }
+
   /**
-   * Gets a value from a Range shape for a scalar value.
+   * Reads a value from a Range shape for a scalar value.
+   *
    * @param {Object} range AMF's range model.
-   * @return {any}
+   * @return {string|undefined}
    */
   _getTypeScalarValue(range) {
     const dvKey = this._getAmfKey(this.ns.w3.shacl.defaultValue);
@@ -1078,7 +1158,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       if (dv instanceof Array) {
         dv = dv[0];
       }
-      return this._getValue(dv, this.ns.aml.vocabularies.data.value);
+      return /** @type string */ (this._getValue(dv, this.ns.aml.vocabularies.data.value));
     }
     const rKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     const ex = range[rKey];
@@ -1086,11 +1166,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       return this._extractExampleRawValue(ex);
     }
   }
+
   /**
-   * Computes example from RAML type for XML media type.
-   * @param {Array<Object>} properties
-   * @param {String=} typeName RAML type name
-   * @param {String=} parentType When the XML is an array type it is the parent type
+   * Computes example from a range's properties for XML media type.
+   *
+   * @param {Array<Object>} properties Properies read from the range object that represents an object
+   * @param {String=} typeName Object name in API specification
+   * @param {String=} parentType When the XML is an array then the type is the parent type
    * @return {String}
    */
   _xmlExampleFromProperties(properties, typeName, parentType) {
@@ -1194,7 +1276,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * but uses object's example.
    *
    * @param {Document} doc XML document
-   * @param {Node} node A node to which append values
+   * @param {Element} node A node to which append values
    * @param {Object} example AMF's example definition.
    * @param {String} propertyName Name of the property being processed
    */
@@ -1209,6 +1291,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     this._xmlProcessDataProperty(doc, node, structure, propertyName);
   }
+
   /**
    * Reads property data type.
    * @param {Object} shape
@@ -1360,6 +1443,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const element = doc.createElement(name);
     element.appendChild(doc.createTextNode(type));
   }
+
   /**
    * Normalizes given name to a value that can be accepted by `createElement`
    * function on a document object.
@@ -1369,6 +1453,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   _normalizeXmlTagName(name) {
     return name.replace(/[^a-zA-Z0-9-_.]/g, '');
   }
+
   /**
    * Processes XML property from a data shape.
    * @param {Document} doc Main document
@@ -1400,11 +1485,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     node.appendChild(element);
   }
+
   /**
    * Computes an example from example structured value.
    *
    * @param {Object} model `structuredValue` item model.
-   * @return {Object|Array} Javascript object or array with structured value.
+   * @return {Object|Array<Object>} Javascript object or array with structured value.
    * @deprecated Use `amf-excample-generator` for examples generation.
    */
   _computeExampleFromStructuredValue(model) {
@@ -1428,11 +1514,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     });
     return result;
   }
+
   /**
    * Computes value with propert data type for a structured example.
    * @param {Object} model Structured example item model.
    * @return {string|boolean|number} Value for the example.
-   * @deprecated Use `amf-excample-generator` for examples generation.
+   * @deprecated Use `amf-example-generator` for examples generation.
    */
   _computeStructuredExampleValue(model) {
     if (!model) {
@@ -1469,6 +1556,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     return this._computeExampleFromStructuredValue(model);
   }
 
+  /**
+   * Adds to the node an XML element which is an array item.
+   *
+   * @param {Document} doc Main document
+   * @param {Element} node Current node
+   * @param {Object} property Array item
+   * @param {String} name Array property name. Must be already normalized.
+   */
   _processDataArrayProperties(doc, node, property, name) {
     let childName;
     if (name.substr(-2) === 'es') {
@@ -1489,9 +1584,15 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
   }
 
+  /**
+   * Adds to the node an XML element which is an object property.
+   *
+   * @param {Document} doc Main document
+   * @param {Element} node Current node
+   * @param {Object} property Array item
+   */
   _processDataObjectProperties(doc, node, property) {
-    const prefix = this.ns.aml.vocabularies.data;
-    const resolvedPrefix = this._getAmfKey(prefix);
+    const resolvedPrefix = this._getAmfKey(this.ns.aml.vocabularies.data);
     Object.keys(property).forEach((key) => {
       if (key.indexOf(resolvedPrefix) !== 0) {
         return;
@@ -1505,6 +1606,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     });
   }
 
+  /**
+   * Reads property name from AMF's "data" item. The key is an object key
+   * that has a form of "data uri#property name" or "data:property name".
+   * This depends on whether the model is compact or not.
+   *
+   * @param {String} key Key name to process
+   * @return {String} Name of the data property
+   */
   _dataNameFromKey(key) {
     let index = key.indexOf('#');
     if (index !== -1) {
