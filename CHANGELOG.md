@@ -1216,3 +1216,26 @@ All notable changes to this project will be documented in this file. See [standa
 * [ci skip] automated merge master->stage. syncing main branches [52df92e](https://github.com/advanced-rest-client/api-example-generator/commit/52df92e34b12b917cddcfb89d18d248638a63162) by Ci agent
 
 
+<a name="4.2.2"></a>
+## [4.2.2](https://github.com/advanced-rest-client/api-example-generator/compare/4.2.1...4.2.2) (2020-04-25)
+
+### Build
+
+* bumping version [e6bf1c7](https://github.com/advanced-rest-client/api-example-generator/commit/e6bf1c7d177f18a755af01a31365d04430bbb433) by Pawel
+
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [361fe46](https://github.com/advanced-rest-client/api-example-generator/commit/361fe469c5673ed25fa154d6786c4cf93ad07112) by Ci agent
+
+
+### Documentation
+
+* updating documentation and types [60ea5ba](https://github.com/advanced-rest-client/api-example-generator/commit/60ea5baec3494abb4246468b62fdbfb0413f140c) by Pawel
+
+
+### Bug Fixes
+
+* fixing setting XML name [44377a1](https://github.com/advanced-rest-client/api-example-generator/commit/44377a198c967c0ce0791308c18ea2b164b65750) by Pawel
+
+
