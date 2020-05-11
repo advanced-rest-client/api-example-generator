@@ -1,5 +1,12 @@
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-continue */
+/* eslint-disable prefer-template */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-param-reassign */
+
 const UNKNOWN_TYPE = 'unknown-type';
 
 /**
@@ -14,16 +21,147 @@ const UNKNOWN_TYPE = 'unknown-type';
  * @property {Array<Example>=} values Only when `hasUnion` is set.
  */
 
- /**
-  * @typedef {Object} ExampleOptions
-  * @property {Boolean=} rawOnly Lists "raw" examples only.
-  * @property {Boolean=} noAuto Don't generate an example from object properties if the example is
-  * not defined in the API file.
-  * @property {String=} typeName Processed type name, used for XML types to use right XML element wrapper name.
-  * @property {String=} typeId It is required to compute examples for a payload. The value of
-  * the `@id` of the Payload shape.
-  * @property {String=} parentName
-  */
+/**
+ * @typedef {Object} ExampleOptions
+ * @property {Boolean=} rawOnly Lists "raw" examples only.
+ * @property {Boolean=} noAuto Don't generate an example from object properties if the example is
+ * not defined in the API file.
+ * @property {String=} typeName Processed type name, used for XML types to use right XML element wrapper name.
+ * @property {String=} typeId It is required to compute examples for a payload. The value of
+ * the `@id` of the Payload shape.
+ * @property {String=} parentName
+ */
+
+/**
+ * Reads property name from AMF's "data" item. The key is an object key
+ * that has a form of "data uri#property name" or "data:property name".
+ * This depends on whether the model is compact or not.
+ *
+ * @param {string} key Key name to process
+ * @return {string} Name of the data property
+ */
+export const dataNameFromKey = key => {
+  let value = String(key);
+  let index = value.indexOf('#');
+  if (index !== -1) {
+    value = value.substr(index + 1);
+  } else {
+    index = value.indexOf(':');
+    if (index !== -1) {
+      value = value.substr(index + 1);
+    }
+  }
+  return value;
+};
+
+/**
+ * Normalizes given name to a value that can be accepted by `createElement`
+ * function on a document object.
+ * @param {String} name A name to process
+ * @return {String} Normalized name
+ */
+export const normalizeXmlTagName = name => {
+  return name.replace(/[^a-zA-Z0-9-_.]/g, '');
+};
+
+/**
+ * Formats XML string into pretty printed value.
+ * https://stackoverflow.com/a/2893259/1127848
+ * @param {String} xml The XML to process
+ * @return {String} Formatted XML
+ */
+export const formatXml = xml => {
+  const reg = /(>)\s*(<)(\/*)/g; // updated Mar 30, 2015
+  const wsexp = / *(.*) +\n/g;
+  const contexp = /(<.+>)(.+\n)/g;
+  xml = xml
+    .replace(reg, '$1\n$2$3')
+    .replace(wsexp, '$1\n')
+    .replace(contexp, '$1\n$2');
+  let formatted = '';
+  const lines = xml.split('\n');
+  let indent = 0;
+  let lastType = 'other';
+  // 4 types of tags - single, closing, opening, other (text, doctype, comment) - 4*4 = 16 transitions
+  const transitions = {
+    'single->single': 0,
+    'single->closing': -2,
+    'single->opening': 0,
+    'single->other': 0,
+    'closing->single': 0,
+    'closing->closing': -2,
+    'closing->opening': 0,
+    'closing->other': 0,
+    'opening->single': 2,
+    'opening->closing': 0,
+    'opening->opening': 2,
+    'opening->other': 2,
+    'other->single': 0,
+    'other->closing': -2,
+    'other->opening': 0,
+    'other->other': 0,
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const ln = lines[i];
+    if (ln.match(/\s*<\?xml/)) {
+      formatted += ln + '\n';
+      continue;
+    }
+    const single = Boolean(ln.match(/<.+\/>/));
+    const closing = Boolean(ln.match(/<\/.+>/));
+    const opening = Boolean(ln.match(/<[^!].*>/));
+    const type = single
+      ? 'single'
+      : closing
+      ? 'closing'
+      : opening
+      ? 'opening'
+      : 'other';
+    const fromTo = lastType + '->' + type;
+    lastType = type;
+    let padding = '';
+    indent += transitions[fromTo];
+    for (let j = 0; j < indent; j++) {
+      padding += ' ';
+    }
+    if (fromTo === 'opening->closing') {
+      formatted = formatted.substr(0, formatted.length - 1) + ln + '\n';
+    } else {
+      formatted += padding + ln + '\n';
+    }
+  }
+  return formatted;
+};
+
+/**
+ * Processes JSON examples that should be an arrays and adds brackets
+ * if nescesary. When the example is empty string it adds empty string literal
+ * to the example value.
+ * It does the same for unions which has array of values.
+ * @param {Example[]} examples
+ */
+export const processJsonArrayExamples = examples => {
+  for (let i = 0; i < examples.length; i++) {
+    const item = examples[i];
+    if (item.values) {
+      if (
+        item.values[0].value !== undefined &&
+        item.values[0].value[0] !== '['
+      ) {
+        if (item.values[0].value === '') {
+          item.values[0].value = '""';
+        }
+        item.values[0].value = `[${item.values[0].value}]`;
+      }
+    } else if (item.value !== undefined && item.value[0] !== '[') {
+      if (item.value === '') {
+        item.value = '""';
+      }
+      item.value = '[' + item.value + ']';
+    }
+  }
+};
 
 /**
  * Examples generator from AMF model.
@@ -93,6 +231,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
      */
     this.amf = amf;
   }
+
   /**
    * Lists media types names for payloads.
    * The `payloads` is an array of AMF Payload shape. It can be single Payload
@@ -104,22 +243,33 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    */
   listMedia(payloads) {
     if (!payloads) {
-      return;
+      return undefined;
     }
     if (!(payloads instanceof Array)) {
-      if (!this._hasType(payloads, this.ns.aml.vocabularies.apiContract.Payload)) {
-        return;
+      if (
+        !this._hasType(payloads, this.ns.aml.vocabularies.apiContract.Payload)
+      ) {
+        return undefined;
       }
-      return [/** @type {string} */ (this._getValue(payloads, this.ns.aml.vocabularies.core.mediaType))];
+      return [
+        /** @type {string} */ (this._getValue(
+          payloads,
+          this.ns.aml.vocabularies.core.mediaType
+        )),
+      ];
     }
     const result = [];
     for (let i = 0; i < payloads.length; i++) {
       const payload = this._resolve(payloads[i]);
-      const mime = /** @type {string} */ (this._getValue(payload, this.ns.aml.vocabularies.core.mediaType));
+      const mime = /** @type {string} */ (this._getValue(
+        payload,
+        this.ns.aml.vocabularies.core.mediaType
+      ));
       result[result.length] = mime;
     }
     return result;
   }
+
   /**
    * Generates a list of examples from an AMF Payloads array for a given media type.
    * The shape can be an Example in which case it will return the example value.
@@ -132,17 +282,21 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {ExampleOptions=} opts
    * @return {Array<Example>|undefined} Example value.
    */
-  generatePayloadsExamples(payloads, media, opts={}) {
-    if (!payloads || !media && !opts.rawOnly) {
-      return;
+  generatePayloadsExamples(payloads, media, opts = {}) {
+    let data = payloads;
+    if (!data || (!media && !opts.rawOnly)) {
+      return undefined;
     }
-    if (!(payloads instanceof Array)) {
-      payloads = [payloads];
+    if (!Array.isArray(data)) {
+      data = [data];
     }
     let result;
-    for (let i = 0, len = payloads.length; i < len; i++) {
-      const payload = payloads[i];
-      const payloadMedia = this._getValue(payload, this.ns.aml.vocabularies.core.mediaType);
+    for (let i = 0, len = data.length; i < len; i++) {
+      const payload = data[i];
+      const payloadMedia = this._getValue(
+        payload,
+        this.ns.aml.vocabularies.core.mediaType
+      );
       if (media && payloadMedia !== media) {
         continue;
       }
@@ -151,6 +305,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return result;
   }
+
   /**
    * Generates a list of examples for a single AMF Payload shape.
    * @param {Object} payload AMF Payload shape.
@@ -158,22 +313,23 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {ExampleOptions=} opts
    * @return {Array<Example>|undefined} List of examples.
    */
-  generatePayloadExamples(payload, mime, opts={}) {
+  generatePayloadExamples(payload, mime, opts = {}) {
     if (!this._hasType(payload, this.ns.aml.vocabularies.apiContract.Payload)) {
-      return;
+      return undefined;
     }
     this._resolve(payload);
     const sKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.schema);
     let schema = payload[sKey];
     if (!schema) {
-      return;
+      return undefined;
     }
     if (schema instanceof Array) {
       schema = schema[0];
     }
-    opts.typeId = payload['@id'];
-    return this.computeExamples(schema, mime, opts);
+    const options = { ...opts, typeId: payload['@id'] };
+    return this.computeExamples(schema, mime, options);
   }
+
   /**
    * Computes examples from an AMF shape.
    * It returns examples defined in API spec file. If examples are not defined
@@ -181,108 +337,125 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * object properties (if an object represents scalar, object, union, or an array).
    *
    * @param {Object} schema Any AMF schema.
-   * @param {String} mime Examples media type. Currently `application/json` and
+   * @param {string} mime Examples media type. Currently `application/json` and
    * `application/xml` are supported.
-   * @param {Object} opts Generation options. See `generatePayloadsExamples()`.
+   * @param {Object=} [opts={}] Generation options. See `generatePayloadsExamples()`.
    * Besides that, `opts.typeId` is required to compute examples for a payload.
    * The `typeId` is a value of `@id` of the Payload shape.
    * @return {Array<Object>|undefined}
    */
-  computeExamples(schema, mime, opts) {
-    if (!opts) {
-      opts = {};
-    }
-    if (!schema || !mime && !opts.rawOnly) {
-      return;
+  computeExamples(schema, mime, opts = {}) {
+    const options = { ...opts };
+    if (!schema || (!mime && !opts.rawOnly)) {
+      return undefined;
     }
     this._resolve(schema);
-    if (!opts.typeName) {
-      const typeName = /** @type string */ (this._getValue(schema, this.ns.w3.shacl.name));
+    if (!options.typeName) {
+      const typeName = /** @type string */ (this._getValue(
+        schema,
+        this.ns.w3.shacl.name
+      ));
       if (typeName && typeName.indexOf('amf_inline_type') !== 0) {
-        opts.typeName = typeName;
+        options.typeName = typeName;
       }
     }
     const eKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     const examples = this._ensureArray(schema[eKey]);
     if (examples) {
-      return this._computeFromExamples(examples, mime, opts);
+      return this._computeFromExamples(examples, mime, options);
     }
     const jsonSchema = this._readJsonSchema(schema);
     if (jsonSchema) {
       return this._exampleFromJsonSchema(schema, jsonSchema);
     }
 
-    if (opts.rawOnly) {
-      return;
+    if (options.rawOnly) {
+      return undefined;
     }
     if (this._hasType(schema, this.ns.aml.vocabularies.shapes.ArrayShape)) {
-      const value = this._computeExampleArraySchape(schema, mime, opts);
+      const value = this._computeExampleArraySchape(schema, mime, options);
       if (value) {
         return value;
       }
     }
     if (this._hasType(schema, this.ns.aml.vocabularies.apiContract.Example)) {
-      const value = this._generateFromExample(schema, mime, opts);
+      const value = this._generateFromExample(schema, mime, options);
       if (value) {
         return [value];
       }
     }
 
     if (this._hasType(schema, this.ns.aml.vocabularies.shapes.UnionShape)) {
-      return this._computeUnionExamples(schema, mime, opts);
+      return this._computeUnionExamples(schema, mime, options);
     }
 
-    if (opts.noAuto) {
-      return;
+    if (options.noAuto) {
+      return undefined;
     }
 
     if (this._hasType(schema, this.ns.aml.vocabularies.shapes.ScalarShape)) {
       const result = this._computeJsonScalarValue(schema);
-      return [{
-        hasRaw: false,
-        hasTitle: false,
-        hasUnion: false,
-        value: result,
-        isScalar: true
-      }];
+      return [
+        {
+          hasRaw: false,
+          hasTitle: false,
+          hasUnion: false,
+          value: result,
+          isScalar: true,
+        },
+      ];
     }
 
     const pKey = this._getAmfKey(this.ns.w3.shacl.property);
     const properties = this._ensureArray(schema[pKey]);
     if (properties && properties.length) {
-      const value = this._exampleFromProperties(properties, mime, opts.typeName, opts.parentName);
+      const value = this._exampleFromProperties(
+        properties,
+        mime,
+        options.typeName,
+        options.parentName
+      );
       if (value) {
         return [value];
       }
     }
+    return undefined;
   }
+
   /**
    * Reads a raw value of JSON schema if available.
    * @param {Object} schema Schema shape of a type.
    * @return {String|undefined} JSON schema if exists.
    */
   _readJsonSchema(schema) {
-    const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.sources);
-    const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.parsedJsonSchema);
-    const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.value);
+    const sourceKey = this._getAmfKey(
+      this.ns.raml.vocabularies.docSourceMaps.sources
+    );
+    const trackedKey = this._getAmfKey(
+      this.ns.raml.vocabularies.docSourceMaps.parsedJsonSchema
+    );
+    const valueKey = this._getAmfKey(
+      this.ns.raml.vocabularies.docSourceMaps.value
+    );
     let sm = schema[sourceKey];
     if (!sm) {
-      return;
+      return undefined;
     }
     if (sm instanceof Array) {
       sm = sm[0];
     }
     let tracked = sm[trackedKey];
     if (!tracked) {
-      return;
+      return undefined;
     }
     if (tracked instanceof Array) {
       tracked = tracked[0];
     }
     return /** @type {string} */ (this._getValue(tracked, valueKey));
   }
+
   /**
-  * Computes examples value from a list of examples.
+   * Computes examples value from a list of examples.
    * @param {Array<Object>} examples List of AMF Example schapes.
    * @param {String} mime Examples media type. Currently `application/json` and
    * `application/xml` are supported.
@@ -292,14 +465,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {Array<Object>|undefined}
    */
   _computeFromExamples(examples, mime, opts) {
-    examples = this._processExamples(examples);
-    examples = this._listTypeExamples(examples, opts.typeId);
-    if (!examples) {
-      return;
+    let data = this._processExamples(examples);
+    data = this._listTypeExamples(data, opts.typeId);
+    if (!data) {
+      return undefined;
     }
     const result = [];
-    for (let i = 0; i < examples.length; i++) {
-      const shape = examples[i];
+    for (let i = 0; i < data.length; i++) {
+      const shape = data[i];
       const value = this._generateFromExample(shape, mime, opts);
       if (value) {
         result[result.length] = value;
@@ -307,6 +480,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return result;
   }
+
   /**
    * In AMF 4 the examples model changes from being an array of examples
    * to an object that contains an array of examples.
@@ -321,16 +495,25 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     // @TODO: should it be `document.examples` or `apiContract.examples`
     const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     if (!(examples instanceof Array)) {
-      if (this._hasType(examples, this.ns.aml.vocabularies.document.NamedExamples)) {
+      if (
+        this._hasType(examples, this.ns.aml.vocabularies.document.NamedExamples)
+      ) {
         return this._ensureArray(examples[key]);
       }
-      return;
+      return undefined;
     }
-    if (examples.length === 1 && this._hasType(examples[0], this.ns.aml.vocabularies.document.NamedExamples)) {
+    if (
+      examples.length === 1 &&
+      this._hasType(
+        examples[0],
+        this.ns.aml.vocabularies.document.NamedExamples
+      )
+    ) {
       return this._ensureArray(examples[0][key]);
     }
     return examples;
   }
+
   /**
    * Uses Example shape's source maps to determine which examples should be rendered.
    * @param {Array<Object>} examples List of AMF Example schapes.
@@ -342,10 +525,16 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       return examples;
     }
     const result = [];
-    const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.sources);
-    const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.trackedElement);
-    const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps.value);
-    const longId = typeId.indexOf('amf') === -1 ? ('amf://id' + typeId) : typeId;
+    const sourceKey = this._getAmfKey(
+      this.ns.raml.vocabularies.docSourceMaps.sources
+    );
+    const trackedKey = this._getAmfKey(
+      this.ns.raml.vocabularies.docSourceMaps.trackedElement
+    );
+    const valueKey = this._getAmfKey(
+      this.ns.raml.vocabularies.docSourceMaps.value
+    );
+    const longId = typeId.indexOf('amf') === -1 ? 'amf://id' + typeId : typeId;
     for (let i = 0, len = examples.length; i < len; i++) {
       let example = examples[i];
       if (example instanceof Array) {
@@ -378,6 +567,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return result.length ? result : undefined;
   }
+
   /**
    * Generate an example from an example shape.
    *
@@ -387,11 +577,20 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {Example|undefined}
    */
   _generateFromExample(example, mime, opts) {
-    let raw = /** @type {string} */ (this._getValue(example, this.ns.aml.vocabularies.document.raw));
+    let raw = /** @type {string} */ (this._getValue(
+      example,
+      this.ns.aml.vocabularies.document.raw
+    ));
     if (!raw) {
-      raw = /** @type {string} */ (this._getValue(example, this.ns.w3.shacl.raw));
+      raw = /** @type {string} */ (this._getValue(
+        example,
+        this.ns.w3.shacl.raw
+      ));
     }
-    let title = /** @type {string} */ (this._getValue(example, this.ns.aml.vocabularies.core.name));
+    let title = /** @type {string} */ (this._getValue(
+      example,
+      this.ns.aml.vocabularies.core.name
+    ));
     if (title && title.indexOf('example_') === 0) {
       title = undefined;
     }
@@ -403,7 +602,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       result.title = title;
     }
     if (opts.rawOnly && !raw) {
-      return;
+      return undefined;
     }
     if (opts.rawOnly) {
       result.hasRaw = false;
@@ -440,7 +639,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       result.hasRaw = true;
       result.raw = raw;
     }
-    const sKey = this._getAmfKey(this.ns.aml.vocabularies.document.structuredValue);
+    const sKey = this._getAmfKey(
+      this.ns.aml.vocabularies.document.structuredValue
+    );
     let structure = example[sKey];
     if (!structure) {
       if (result.raw) {
@@ -483,6 +684,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       }
       return result;
     }
+    return undefined;
   }
 
   /**
@@ -492,51 +694,28 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {ExampleOptions} [opts={}]
    * @return {Array<Example>|undefined}
    */
-  _computeExampleArraySchape(schema, mime, opts={}) {
+  _computeExampleArraySchape(schema, mime, opts = {}) {
+    const options = { ...opts };
     const iKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.items);
     const items = this._ensureArray(schema[iKey]);
     if (!items) {
-      return;
+      return undefined;
     }
     const isJson = mime.indexOf('json') !== -1;
-    opts.parentName = opts.typeName;
-    delete opts.typeName;
+    options.parentName = options.typeName;
+    delete options.typeName;
     // We need only first type here as arras can have different types
     for (let i = 0, len = items.length; i < len; i++) {
       const item = items[i];
-      const result = this.computeExamples(item, mime, opts);
+      const result = this.computeExamples(item, mime, options);
       if (result) {
         if (isJson) {
-          this._processJsonArrayExamples(result);
+          processJsonArrayExamples(result);
         }
         return result;
       }
     }
-  }
-  /**
-   * Processes JSON examples that should be an arrays and adds brackets
-   * if nescesary. When the example is empty string it adds empty string literal
-   * to the example value.
-   * It does the same for unions which has array of values.
-   * @param {Array<Example>} examples
-   */
-  _processJsonArrayExamples(examples) {
-    for (let i = 0; i < examples.length; i++) {
-      const item = examples[i];
-      if (item.values) {
-        if (item.values[0].value !== undefined && item.values[0].value[0] !== '[') {
-          if (item.values[0].value === '') {
-            item.values[0].value = '""';
-          }
-          item.values[0].value = `[${item.values[0].value}]`;
-        }
-      } else if (item.value !== undefined && item.value[0] !== '[') {
-        if (item.value === '') {
-          item.value = '""';
-        }
-        item.value = '[' + item.value + ']';
-      }
-    }
+    return undefined;
   }
 
   /**
@@ -550,13 +729,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.anyOf);
     const anyOf = this._ensureArray(schema[key]);
     if (!anyOf) {
-      return;
+      return undefined;
     }
     const result = {
       hasTitle: false,
       hasRaw: false,
       hasUnion: true,
-      values: []
+      values: [],
     };
     for (let i = 0, len = anyOf.length; i < len; i++) {
       let unionSchape = anyOf[i];
@@ -589,9 +768,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const dtKey = this._getAmfKey(this.ns.w3.shacl.datatype);
     let dt = shape[dtKey];
     if (!dt) {
-      return;
+      return undefined;
     }
-    if (dt instanceof Array) {
+    if (Array.isArray(dt)) {
       dt = dt[0];
     }
     let id = dt['@id'] ? dt['@id'] : dt;
@@ -618,7 +797,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    */
   _jsonFromStructure(structure) {
     if (!structure) {
-      return;
+      return undefined;
     }
     if (this._hasType(structure, this.ns.aml.vocabularies.data.Scalar)) {
       return this._getTypedValue(structure);
@@ -631,7 +810,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       obj = [];
       isArray = true;
     } else {
-      return;
+      return undefined;
     }
     if (isArray && this._hasProperty(structure, this.ns.w3.rdfSchema.member)) {
       const key = this._getAmfKey(this.ns.w3.rdfSchema.member);
@@ -642,7 +821,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       }
     } else {
       const resolvedPrefix = this._getAmfKey(this.ns.aml.vocabularies.data);
-      Object.keys(structure).forEach((key) => {
+      Object.keys(structure).forEach(key => {
         if (key.indexOf(resolvedPrefix) !== 0) {
           return;
         }
@@ -664,7 +843,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {String=} resolvedPrefix AMF's `data:` prefix
    */
   _jsonFromStructureValue(value, obj, isArray, key, resolvedPrefix) {
-    if (value instanceof Array) {
+    if (Array.isArray(value)) {
       value = value[0];
     }
     const tmp = this._jsonFromStructure(value);
@@ -695,8 +874,8 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {String}
    */
   _xmlFromStructure(structure, opts) {
-    let typeName = opts && opts.typeName || UNKNOWN_TYPE;
-    typeName = this._normalizeXmlTagName(typeName);
+    let typeName = (opts && opts.typeName) || UNKNOWN_TYPE;
+    typeName = normalizeXmlTagName(typeName);
     const doc = document.implementation.createDocument('', typeName, null);
     const main = doc.documentElement;
     const keys = Object.keys(structure);
@@ -710,73 +889,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       if (item instanceof Array) {
         item = item[0];
       }
-      const name = this._dataNameFromKey(key);
+      const name = dataNameFromKey(key);
       this._xmlProcessDataProperty(doc, main, item, name);
     }
     const s = new XMLSerializer();
     let value = s.serializeToString(doc);
-    value = '<?xml version="1.0" encoding="UTF-8"?>' + value;
-    return this.formatXml(value);
-  }
-  /**
-   * Formats XML string into pretty printed value.
-   * https://stackoverflow.com/a/2893259/1127848
-   * @param {String} xml The XML to process
-   * @return {String} Formatted XML
-   */
-  formatXml(xml) {
-    const reg = /(>)\s*(<)(\/*)/g; // updated Mar 30, 2015
-    const wsexp = / *(.*) +\n/g;
-    const contexp = /(<.+>)(.+\n)/g;
-    xml = xml.replace(reg, '$1\n$2$3').replace(wsexp, '$1\n').replace(contexp, '$1\n$2');
-    let formatted = '';
-    const lines = xml.split('\n');
-    let indent = 0;
-    let lastType = 'other';
-    // 4 types of tags - single, closing, opening, other (text, doctype, comment) - 4*4 = 16 transitions
-    const transitions = {
-      'single->single': 0,
-      'single->closing': -2,
-      'single->opening': 0,
-      'single->other': 0,
-      'closing->single': 0,
-      'closing->closing': -2,
-      'closing->opening': 0,
-      'closing->other': 0,
-      'opening->single': 2,
-      'opening->closing': 0,
-      'opening->opening': 2,
-      'opening->other': 2,
-      'other->single': 0,
-      'other->closing': -2,
-      'other->opening': 0,
-      'other->other': 0
-    };
-
-    for (let i = 0; i < lines.length; i++) {
-      const ln = lines[i];
-      if (ln.match(/\s*<\?xml/)) {
-        formatted += ln + '\n';
-        continue;
-      }
-      const single = Boolean(ln.match(/<.+\/>/));
-      const closing = Boolean(ln.match(/<\/.+>/));
-      const opening = Boolean(ln.match(/<[^!].*>/));
-      const type = single ? 'single' : closing ? 'closing' : opening ? 'opening' : 'other';
-      const fromTo = lastType + '->' + type;
-      lastType = type;
-      let padding = '';
-      indent += transitions[fromTo];
-      for (let j = 0; j < indent; j++) {
-        padding += ' ';
-      }
-      if (fromTo == 'opening->closing') {
-        formatted = formatted.substr(0, formatted.length - 1) + ln + '\n';
-      } else {
-        formatted += padding + ln + '\n';
-      }
-    }
-    return formatted;
+    value = `<?xml version="1.0" encoding="UTF-8"?>${value}`;
+    return formatXml(value);
   }
 
   /**
@@ -788,9 +907,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.data.value);
     let shape = structure[key];
     if (!shape) {
-      return;
+      return undefined;
     }
-    if (shape instanceof Array) {
+    if (Array.isArray(shape)) {
       shape = shape[0];
     }
     const value = typeof shape === 'object' ? shape['@value'] : shape;
@@ -826,8 +945,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const properties = this._ensureArray(schema[pKey]);
     let example;
     if (properties && properties.length) {
-      const typeName = /** @type string */ (this._getValue(schema, this.ns.w3.shacl.name)) || UNKNOWN_TYPE;
-      example = this._exampleFromProperties(properties, 'application/json', typeName);
+      const typeName =
+        /** @type string */ (this._getValue(schema, this.ns.w3.shacl.name)) ||
+        UNKNOWN_TYPE;
+      example = this._exampleFromProperties(
+        properties,
+        'application/json',
+        typeName
+      );
     }
     if (example) {
       example.hasRaw = true;
@@ -837,11 +962,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         hasRaw: false,
         hasTitle: false,
         hasUnion: false,
-        value: jsonSchema
+        value: jsonSchema,
       };
     }
     return [example];
   }
+
   /**
    * Creates an example from RAML type properties.
    * @param {Array<Object>} properties List of AMF type properties to process.
@@ -851,7 +977,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {Example|undefined}
    */
   _exampleFromProperties(properties, mime, typeName, parentType) {
-    typeName = typeName || UNKNOWN_TYPE;
+    const name = typeName || UNKNOWN_TYPE;
     let result;
     if (mime.indexOf('json') !== -1) {
       const value = this._jsonExampleFromProperties(properties);
@@ -859,10 +985,10 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         result = JSON.stringify(value, null, 2);
       }
     } else if (mime.indexOf('xml') !== -1) {
-      result = this._xmlExampleFromProperties(properties, typeName, parentType);
+      result = this._xmlExampleFromProperties(properties, name, parentType);
       if (result) {
-        result = '<?xml version="1.0" encoding="UTF-8"?>' + result;
-        result = this.formatXml(result);
+        result = `<?xml version="1.0" encoding="UTF-8"?>${result}`;
+        result = formatXml(result);
       }
     }
     if (result) {
@@ -870,10 +996,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         hasRaw: false,
         hasTitle: false,
         hasUnion: false,
-        value: result
+        value: result,
       };
     }
+    return undefined;
   }
+
   /**
    * Generates a JSON example from RAML's type properties.
    * @param {Array<Object>} properties List of type properties
@@ -895,11 +1023,15 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       if (range instanceof Array) {
         range = range[0];
       }
-      const eKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
+      const eKey = this._getAmfKey(
+        this.ns.aml.vocabularies.apiContract.examples
+      );
       const examples = this._ensureArray(range[eKey]);
       if (examples) {
-        const sKey = this._getAmfKey(this.ns.aml.vocabularies.document.structuredValue);
-        examples.forEach((example) => {
+        const sKey = this._getAmfKey(
+          this.ns.aml.vocabularies.document.structuredValue
+        );
+        examples.forEach(example => {
           let structure = example[sKey];
           if (!structure) {
             result[name] = '';
@@ -946,6 +1078,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (this._hasType(range, this.ns.aml.vocabularies.shapes.NilShape)) {
       return null;
     }
+    return undefined;
   }
 
   /**
@@ -990,11 +1123,15 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       case 'Integer':
       case 'Long':
       case 'Float':
-      case 'Double': return 0;
-      case 'Boolean': return false;
+      case 'Double':
+        return 0;
+      case 'Boolean':
+        return false;
       case 'Nil':
-      case 'Null': return null;
-      default: return '';
+      case 'Null':
+        return null;
+      default:
+        return '';
     }
   }
 
@@ -1011,7 +1148,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       case this.ns.w3.xmlSchema.boolean:
       case this.ns.aml.vocabularies.shapes.boolean:
         if (value !== undefined) {
-          return value === 'true' ? true : false;
+          return value === 'true';
         }
         return value;
 
@@ -1040,13 +1177,15 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       case this._getAmfKey(this.ns.aml.vocabularies.shapes.float):
       case this.ns.aml.vocabularies.shapes.float:
         if (value) {
-          if (isNaN(/** @type any */ (value))) {
+          const nValue = Number(value);
+          if (Number.isNaN(nValue)) {
             return 0;
           }
           return Number(value);
         }
         return 0;
-      default: return value || '';
+      default:
+        return value || '';
     }
   }
 
@@ -1060,12 +1199,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.anyOf);
     const list = this._ensureArray(range[key]);
     if (!list) {
-      return;
+      return undefined;
     }
     const pKey = this._getAmfKey(this.ns.w3.shacl.property);
     for (let i = 0, len = list.length; i < len; i++) {
       let item = list[i];
-      if (item instanceof Array) {
+      if (Array.isArray(item)) {
         item = item[0];
       }
       this._resolve(item);
@@ -1083,6 +1222,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         }
       }
     }
+    return undefined;
   }
 
   /**
@@ -1097,6 +1237,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (properties && properties.length) {
       return this._jsonExampleFromProperties(properties);
     }
+    return undefined;
   }
 
   /**
@@ -1109,7 +1250,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.items);
     const items = this._ensureArray(range[key]);
     if (!items) {
-      return;
+      return undefined;
     }
     const result = [];
     for (let i = 0, len = items.length; i < len; i++) {
@@ -1132,17 +1273,23 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {String|undefined} Raw example value.
    */
   _extractExampleRawValue(example) {
-    if (example instanceof Array) {
-      example = example[0];
+    let data = example;
+    if (Array.isArray(data)) {
+      data = data[0];
     }
-    if (this._hasType(example, this.ns.aml.vocabularies.document.NamedExamples)) {
-      const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
-      example = example[key];
-      if (example instanceof Array) {
-        example = example[0];
+    if (this._hasType(data, this.ns.aml.vocabularies.document.NamedExamples)) {
+      const key = this._getAmfKey(
+        this.ns.aml.vocabularies.apiContract.examples
+      );
+      data = data[key];
+      if (Array.isArray(data)) {
+        data = data[0];
       }
     }
-    return /** @type string */ (this._getValue(example, this.ns.aml.vocabularies.document.raw));
+    return /** @type string */ (this._getValue(
+      data,
+      this.ns.aml.vocabularies.document.raw
+    ));
   }
 
   /**
@@ -1158,13 +1305,17 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       if (dv instanceof Array) {
         dv = dv[0];
       }
-      return /** @type string */ (this._getValue(dv, this.ns.aml.vocabularies.data.value));
+      return /** @type string */ (this._getValue(
+        dv,
+        this.ns.aml.vocabularies.data.value
+      ));
     }
     const rKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     const ex = range[rKey];
     if (ex) {
       return this._extractExampleRawValue(ex);
     }
+    return undefined;
   }
 
   /**
@@ -1176,14 +1327,19 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {String}
    */
   _xmlExampleFromProperties(properties, typeName, parentType) {
-    typeName = this._normalizeXmlTagName(typeName);
-    if (parentType) {
-      parentType = this._normalizeXmlTagName(parentType);
+    const type = normalizeXmlTagName(typeName);
+    let parent = parentType;
+    if (parent) {
+      parent = normalizeXmlTagName(parent);
     }
-    const doc = document.implementation.createDocument('', parentType || typeName, null);
+    const doc = document.implementation.createDocument(
+      '',
+      parent || type,
+      null
+    );
     let main = doc.documentElement;
-    if (parentType) {
-      const element = doc.createElement(typeName);
+    if (parent) {
+      const element = doc.createElement(type);
       main.appendChild(element);
       main = element;
     }
@@ -1193,6 +1349,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const s = new XMLSerializer();
     return s.serializeToString(doc);
   }
+
   /**
    * Processes an XML property
    * @param {Document} doc Main document
@@ -1222,7 +1379,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (range instanceof Array) {
       range = range[0];
     }
-    const sKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.xmlSerialization);
+    const sKey = this._getAmfKey(
+      this.ns.aml.vocabularies.shapes.xmlSerialization
+    );
     let serialization = range[sKey];
     if (serialization instanceof Array) {
       serialization = serialization[0];
@@ -1230,9 +1389,15 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const eKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     const examples = this._ensureArray(range[eKey]);
     if (examples) {
-      let name = /** @type {string} */ (this._getValue(serialization, this.ns.aml.vocabularies.shapes.xmlName));
+      let name = /** @type {string} */ (this._getValue(
+        serialization,
+        this.ns.aml.vocabularies.shapes.xmlName
+      ));
       if (!name) {
-        name = /** @type {string} */ (this._getValue(range, this.ns.w3.shacl.name));
+        name = /** @type {string} */ (this._getValue(
+          range,
+          this.ns.w3.shacl.name
+        ));
       }
       this._xmlFromExamples(doc, node, examples[0], name);
       return;
@@ -1253,12 +1418,18 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     let isWrapped = false;
     if (serialization) {
-      const isAtribute = this._getValue(serialization, this.ns.aml.vocabularies.shapes.xmlAttribute);
+      const isAtribute = this._getValue(
+        serialization,
+        this.ns.aml.vocabularies.shapes.xmlAttribute
+      );
       if (isAtribute) {
         this._appendXmlAttribute(node, range, serialization);
         return;
       }
-      isWrapped = /** @type {boolean} */ (this._getValue(serialization, this.ns.aml.vocabularies.shapes.xmlWrapped));
+      isWrapped = /** @type {boolean} */ (this._getValue(
+        serialization,
+        this.ns.aml.vocabularies.shapes.xmlWrapped
+      ));
     }
     if (this._hasType(range, this.ns.w3.shacl.NodeShape)) {
       this._appendXmlElements(doc, node, range);
@@ -1270,6 +1441,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     this._appendXmlElement(doc, node, range);
   }
+
   /**
    * Appends XML example data to a node from an example defined on a "range"
    * property. This way it does not generate example values from type values
@@ -1281,7 +1453,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {String} propertyName Name of the property being processed
    */
   _xmlFromExamples(doc, node, example, propertyName) {
-    const sKey = this._getAmfKey(this.ns.aml.vocabularies.document.structuredValue);
+    const sKey = this._getAmfKey(
+      this.ns.aml.vocabularies.document.structuredValue
+    );
     let structure = example[sKey];
     if (structure instanceof Array) {
       structure = structure[0];
@@ -1295,20 +1469,21 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   /**
    * Reads property data type.
    * @param {Object} shape
-   * @return {String} Data type
+   * @return {string|null} Data type
    */
   _readDataType(shape) {
     const dtKey = this._getAmfKey(this.ns.w3.shacl.datatype);
     let dataType = shape[dtKey];
     if (!dataType) {
-      return;
+      return null;
     }
     if (dataType instanceof Array) {
       dataType = dataType[0];
     }
     dataType = dataType['@id'];
-    return this._dataNameFromKey(dataType);
+    return dataNameFromKey(dataType);
   }
+
   /**
    * Appends an attribute to the node from AMF property
    * @param {Element} node Current node
@@ -1316,9 +1491,15 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {Object} serialization Serialization info
    */
   _appendXmlAttribute(node, range, serialization) {
-    let name = /** @type {string} */ (this._getValue(serialization, this.ns.aml.vocabularies.shapes.xmlName));
+    let name = /** @type {string} */ (this._getValue(
+      serialization,
+      this.ns.aml.vocabularies.shapes.xmlName
+    ));
     if (!name) {
-      name = /** @type {string} */ (this._getValue(range, this.ns.w3.shacl.name));
+      name = /** @type {string} */ (this._getValue(
+        range,
+        this.ns.w3.shacl.name
+      ));
     }
     if (!name) {
       return;
@@ -1332,21 +1513,24 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     node.setAttribute(name, value);
   }
+
   /**
    * Appends an element to the node tree from a type
    * @param {Document} doc Main document
    * @param {Element} node Current node
    * @param {Object} range AMF range
-   * @return {Element} Newly created element
+   * @return {Element|null} Newly created element
    */
   _appendXmlElement(doc, node, range) {
     const name = this._getXmlNormalizedName(range);
     if (!name) {
-      return;
+      return null;
     }
     let nodeValue = this._getValue(range, this.ns.w3.shacl.defaultValueStr);
     if (!nodeValue) {
-      const eKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
+      const eKey = this._getAmfKey(
+        this.ns.aml.vocabularies.apiContract.examples
+      );
       const example = range[eKey];
       if (example) {
         nodeValue = this._extractExampleRawValue(example);
@@ -1388,13 +1572,17 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   /**
    * Reads `w3.shacl.name` from passed object and normalizes it as XML element name.
    * @param {Object} property A property to read the name from. Usually range.
-   * @return {String|undefined} Normalized name or undefined if name is not defined.
+   * @return {String|null} Normalized name or undefined if name is not defined.
    */
   _getXmlNormalizedName(property) {
-    const name = /** @type string */ (this._getValue(property, this.ns.w3.shacl.name));
+    const name = /** @type string */ (this._getValue(
+      property,
+      this.ns.w3.shacl.name
+    ));
     if (name) {
-      return this._normalizeXmlTagName(name);
+      return normalizeXmlTagName(name);
     }
+    return null;
   }
 
   /**
@@ -1406,10 +1594,11 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {Boolean} isWrapped Whether RAML's `wrapped` property is set.
    */
   _appendXmlArray(doc, node, range, isWrapped) {
+    let processNode = node;
     if (isWrapped) {
-      const element = this._appendXmlElement(doc, node, range);
-      node.appendChild(element);
-      node = element;
+      const element = this._appendXmlElement(doc, processNode, range);
+      processNode.appendChild(element);
+      processNode = element;
     }
     const pKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.items);
     const properties = this._ensureArray(range[pKey]);
@@ -1424,10 +1613,10 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
           continue;
         }
         const element = doc.createElement(name);
-        node.appendChild(element);
-        node = element;
+        processNode.appendChild(element);
+        processNode = element;
       }
-      this._xmlProcessProperty(doc, node, properties[i]);
+      this._xmlProcessProperty(doc, processNode, properties[i]);
     }
   }
 
@@ -1445,16 +1634,6 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   }
 
   /**
-   * Normalizes given name to a value that can be accepted by `createElement`
-   * function on a document object.
-   * @param {String} name A name to process
-   * @return {String} Normalized name
-   */
-  _normalizeXmlTagName(name) {
-    return name.replace(/[^a-zA-Z0-9-_.]/g, '');
-  }
-
-  /**
    * Processes XML property from a data shape.
    * @param {Document} doc Main document
    * @param {Node} node Current node
@@ -1465,8 +1644,8 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (!property || !name) {
       return;
     }
-    name = this._normalizeXmlTagName(name);
-    const element = doc.createElement(name);
+    const tagName = normalizeXmlTagName(name);
+    const element = doc.createElement(tagName);
     if (this._hasType(property, this.ns.aml.vocabularies.data.Scalar)) {
       const value = this._computeStructuredExampleValue(property);
       if (value !== undefined) {
@@ -1474,7 +1653,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         element.appendChild(vn);
       }
     } else if (this._hasType(property, this.ns.aml.vocabularies.data.Array)) {
-      this._processDataArrayProperties(doc, element, property, name);
+      this._processDataArrayProperties(doc, element, property, tagName);
     } else if (this._hasType(property, this.ns.aml.vocabularies.data.Object)) {
       this._processDataObjectProperties(doc, element, property);
     } else if (property['@value']) {
@@ -1495,12 +1674,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    */
   _computeExampleFromStructuredValue(model) {
     if (this._hasType(model, this.ns.aml.vocabularies.data.Scalar)) {
-      return this._computeStructuredExampleValue(this._getValue(model, this.ns.aml.vocabularies.data.value));
+      return this._computeStructuredExampleValue(
+        this._getValue(model, this.ns.aml.vocabularies.data.value)
+      );
     }
     const isObject = this._hasType(model, this.ns.aml.vocabularies.data.Object);
     const result = isObject ? {} : [];
     const modelKeys = ['@id', '@type'];
-    Object.keys(model).forEach((key) => {
+    Object.keys(model).forEach(key => {
       if (modelKeys.indexOf(key) !== -1) {
         return;
       }
@@ -1518,12 +1699,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   /**
    * Computes value with propert data type for a structured example.
    * @param {Object} model Structured example item model.
-   * @return {string|boolean|number} Value for the example.
+   * @return {string|boolean|number|null} Value for the example.
    * @deprecated Use `amf-example-generator` for examples generation.
    */
   _computeStructuredExampleValue(model) {
     if (!model) {
-      return;
+      return null;
     }
     if (typeof model === 'string') {
       return model;
@@ -1542,7 +1723,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       }
       switch (type) {
         case this.ns.w3.xmlSchema.boolean:
-          return value === 'true' ? true : false;
+          return value === 'true';
         case this.ns.w3.xmlSchema.integer:
         case this.ns.w3.xmlSchema.long:
         case this.ns.w3.xmlSchema.double:
@@ -1593,7 +1774,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    */
   _processDataObjectProperties(doc, node, property) {
     const resolvedPrefix = this._getAmfKey(this.ns.aml.vocabularies.data);
-    Object.keys(property).forEach((key) => {
+    Object.keys(property).forEach(key => {
       if (key.indexOf(resolvedPrefix) !== 0) {
         return;
       }
@@ -1601,29 +1782,8 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       if (item instanceof Array) {
         item = item[0];
       }
-      const name = this._dataNameFromKey(key);
+      const name = dataNameFromKey(key);
       this._xmlProcessDataProperty(doc, node, item, name);
     });
-  }
-
-  /**
-   * Reads property name from AMF's "data" item. The key is an object key
-   * that has a form of "data uri#property name" or "data:property name".
-   * This depends on whether the model is compact or not.
-   *
-   * @param {String} key Key name to process
-   * @return {String} Name of the data property
-   */
-  _dataNameFromKey(key) {
-    let index = key.indexOf('#');
-    if (index !== -1) {
-      key = key.substr(index + 1);
-    } else {
-      index = key.indexOf(':');
-      if (index !== -1) {
-        key = key.substr(index + 1);
-      }
-    }
-    return key;
   }
 }

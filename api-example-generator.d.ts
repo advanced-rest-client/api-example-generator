@@ -12,3 +12,8 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 
 import {ApiExampleGenerator} from './src/ApiExampleGenerator.js';
+declare global {
+  interface HTMLElementTagNameMap {
+    "api-example-generator": ApiExampleGenerator;
+  }
+}

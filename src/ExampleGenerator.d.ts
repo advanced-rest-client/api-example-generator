@@ -60,6 +60,42 @@ declare interface Example {
 }
 
 /**
+ * Reads property name from AMF's "data" item. The key is an object key
+ * that has a form of "data uri#property name" or "data:property name".
+ * This depends on whether the model is compact or not.
+ *
+ * @param key Key name to process
+ * @return Name of the data property
+ */
+export declare function dataNameFromKey(key: string): string;
+
+/**
+ * Normalizes given name to a value that can be accepted by `createElement`
+ * function on a document object.
+ *
+ * @param name A name to process
+ * @returns Normalized name
+ */
+export declare function normalizeXmlTagName(name: String): String|null;
+
+/**
+ * Formats XML string into pretty printed value.
+ * https://stackoverflow.com/a/2893259/1127848
+ *
+ * @param xml The XML to process
+ * @returns Formatted XML
+ */
+export declare function formatXml(xml: String): String;
+
+/**
+ * Processes JSON examples that should be an arrays and adds brackets
+ * if nescesary. When the example is empty string it adds empty string literal
+ * to the example value.
+ * It does the same for unions which has array of values.
+ */
+export declare function processJsonArrayExamples(examples: Array<Example>): void;
+
+/**
  * Examples generator from AMF model.
  *
  * ## Data model
@@ -232,13 +268,6 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
   _computeExampleArraySchape(schema: object, mime: string, opts: ExampleOptions): Array<Example>|undefined;
 
   /**
-   * Processes JSON examples that should be an arrays and adds brackets
-   * if nescesary. When the example is empty string it adds empty string literal
-   * to the example value.
-   * It does the same for unions which has array of values.
-   */
-  _processJsonArrayExamples(examples: Array<Example>): void;
-  /**
    * Computes example for an union shape.
    * @param schema The AMF's array shape
    * @param mime Current mime type
@@ -277,15 +306,6 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param opts Examples processing options
    */
   _xmlFromStructure(structure: Object, opts: ExampleOptions): String;
-
-  /**
-   * Formats XML string into pretty printed value.
-   * https://stackoverflow.com/a/2893259/1127848
-   *
-   * @param xml The XML to process
-   * @returns Formatted XML
-   */
-  formatXml(xml: String): String;
 
   /**
    * Reads the value of the `structuredValue` and casts it to the corresponding type.
@@ -490,15 +510,6 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
   _xmlProcessUnionScalarProperty(doc: Document, property: object, shape: object): void;
 
   /**
-   * Normalizes given name to a value that can be accepted by `createElement`
-   * function on a document object.
-   *
-   * @param name A name to process
-   * @returns Normalized name
-   */
-  _normalizeXmlTagName(name: String): String|null;
-
-  /**
    * Processes XML property from a data shape.
    *
    * @param doc Main document
@@ -543,14 +554,4 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param property Array item
    */
   _processDataObjectProperties(doc: Document, node: Element, property: object): void;
-
-  /**
-   * Reads property name from AMF's "data" item. The key is an object key
-   * that has a form of "data uri#property name" or "data:property name".
-   * This depends on whether the model is compact or not.
-   *
-   * @param key Key name to process
-   * @return Name of the data property
-   */
-  _dataNameFromKey(key: string): string;
 }
