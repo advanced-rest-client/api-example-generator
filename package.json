@@ -59,7 +59,8 @@
     "format": "npm run format:eslint && npm run format:prettier",
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
-    "test:sl": "karma start karma.sl.config.js --compatibility auto --coverage"
+    "test:sl": "karma start karma.sl.config.js --compatibility auto --coverage",
+    "prepare": "node demo/model.js"
   },
   "eslintConfig": {
     "extends": [
