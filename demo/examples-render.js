@@ -5,46 +5,42 @@ import { LitElement, html, css } from 'lit-element';
  */
 class ExamplesRender extends LitElement {
   static get styles() {
-    return css`:host {
-      display: block;
-    };
+    return css`
+      :host {
+        display: block;
+      }
 
-    .output {
-      padding: 8px;
-      background-color: #FFF3E0;
-    }
+      .output {
+        padding: 8px;
+        background-color: #fff3e0;
+      }
 
-    .output-raw {
-      padding: 8px;
-      background-color: #F1F8E9;
-    }
+      .output-raw {
+        padding: 8px;
+        background-color: #f1f8e9;
+      }
 
-    .raw-toggle {
-      text-decoration: underline;
-      color: blue;
-      cursor: pointer;
-    }`;
+      .raw-toggle {
+        text-decoration: underline;
+        color: blue;
+        cursor: pointer;
+      }
+    `;
   }
 
   static get properties() {
     return {
-      example: Object,
+      example: { type: Object },
 
-      isUnion: {
-        type: Boolean
-      },
+      isUnion: { type: Boolean },
 
-      rawOpened: Boolean,
+      rawOpened: { type: Boolean },
 
-      unions: {
-        type: Array,
-      },
+      unions: { type: Array },
 
-      selectedUnion: Number,
+      selectedUnion: { type: Number },
 
-      unionExample: {
-        type: Object
-      }
+      unionExample: { type: Object },
     };
   }
 
@@ -84,17 +80,17 @@ class ExamplesRender extends LitElement {
 
   _computeUnions(example) {
     if (!example.values) {
-      return;
+      return undefined;
     }
-    return example.values.map((item) => item.title);
+    return example.values.map(item => item.title);
   }
 
   _computeUnionExamples(selectedUnion, example) {
     if (selectedUnion === undefined || selectedUnion < 0) {
-      return;
+      return undefined;
     }
     if (!example || !example.values) {
-      return;
+      return undefined;
     }
     return example.values[selectedUnion];
   }
@@ -104,34 +100,49 @@ class ExamplesRender extends LitElement {
   }
 
   _unionTemplate() {
-    const unions = this.unions;
+    const { unions } = this;
     if (!unions) {
       return html`<p>Unions not set</p>`;
     }
     return html`
-    <paper-dropdown-menu label="Select union type">
-      <paper-listbox slot="dropdown-content"
-        .selected="${this.selectedUnion}" @selected-changed="${this._unionChangeHandler}">
-      ${unions.map((item) => html`<paper-item data-type="${item}">${item}</paper-item>`)}
-      </paper-listbox>
-    </paper-dropdown-menu>
-    ${this.unionExample ? html`<examples-render .example="${this.unionExample}"></examples-render>` : undefined}
+      <paper-dropdown-menu label="Select union type">
+        <paper-listbox
+          slot="dropdown-content"
+          .selected="${this.selectedUnion}"
+          @selected-changed="${this._unionChangeHandler}"
+        >
+          ${unions.map(
+            item => html`<paper-item data-type="${item}">${item}</paper-item>`
+          )}
+        </paper-listbox>
+      </paper-dropdown-menu>
+      ${this.unionExample
+        ? html`<examples-render
+            .example="${this.unionExample}"
+          ></examples-render>`
+        : undefined}
     `;
   }
 
   _exampleTemplate() {
-    const example = this.example;
+    const { example } = this;
     if (!example) {
       return html`<p>Example not set</p>`;
     }
     return html`
-    ${example.hasTitle ? html`<h3>${example.title}</h3>`: undefined}
-    <pre class="output">${example.value}</pre>
-    ${example.hasRaw ?
-      html`
-      <p>Example has raw value. <span class="raw-toggle" role="button" @click="${this.toggleRaw}">Toggle raw.</span></p>
-      ${this.rawOpened ? html`<pre class="output-raw">${example.raw}</pre>`: undefined}` :
-      undefined}
+      ${example.hasTitle ? html`<h3>${example.title}</h3>` : undefined}
+      <pre class="output">${example.value}</pre>
+      ${example.hasRaw
+        ? html` <p>
+              Example has raw value.
+              <span class="raw-toggle" role="button" @click="${this.toggleRaw}"
+                >Toggle raw.</span
+              >
+            </p>
+            ${this.rawOpened
+              ? html`<pre class="output-raw">${example.raw}</pre>`
+              : undefined}`
+        : undefined}
     `;
   }
 
