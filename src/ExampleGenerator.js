@@ -361,8 +361,11 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     const eKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     const examples = this._ensureArray(schema[eKey]);
-    if (examples) {
-      return this._computeFromExamples(examples, mime, options);
+    if (examples && examples.length) {
+      const result = this._computeFromExamples(examples, mime, options);
+      if (result) {
+        return result;
+      }
     }
     const jsonSchema = this._readJsonSchema(schema);
     if (jsonSchema) {
@@ -441,14 +444,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (!sm) {
       return undefined;
     }
-    if (sm instanceof Array) {
+    if (Array.isArray(sm)) {
       sm = sm[0];
     }
     let tracked = sm[trackedKey];
     if (!tracked) {
       return undefined;
     }
-    if (tracked instanceof Array) {
+    if (Array.isArray(tracked)) {
       tracked = tracked[0];
     }
     return /** @type {string} */ (this._getValue(tracked, valueKey));
@@ -494,7 +497,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   _processExamples(examples) {
     // @TODO: should it be `document.examples` or `apiContract.examples`
     const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
-    if (!(examples instanceof Array)) {
+    if (!Array.isArray(examples)) {
       if (
         this._hasType(examples, this.ns.aml.vocabularies.document.NamedExamples)
       ) {
@@ -537,7 +540,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const longId = typeId.indexOf('amf') === -1 ? 'amf://id' + typeId : typeId;
     for (let i = 0, len = examples.length; i < len; i++) {
       let example = examples[i];
-      if (example instanceof Array) {
+      if (Array.isArray(example)) {
         example = example[0];
       }
       let sm = example[sourceKey];
@@ -545,7 +548,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         result[result.length] = example;
         continue;
       }
-      if (sm instanceof Array) {
+      if (Array.isArray(sm)) {
         sm = sm[0];
       }
       let tracked = sm[trackedKey];
@@ -553,7 +556,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         result[result.length] = example;
         continue;
       }
-      if (tracked instanceof Array) {
+      if (Array.isArray(tracked)) {
         tracked = tracked[0];
       }
       const value = /** @type {string} */ (this._getValue(tracked, valueKey));
@@ -1027,7 +1030,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         this.ns.aml.vocabularies.apiContract.examples
       );
       const examples = this._ensureArray(range[eKey]);
-      if (examples) {
+      if (examples && examples.length) {
         const sKey = this._getAmfKey(
           this.ns.aml.vocabularies.document.structuredValue
         );
@@ -1388,7 +1391,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     const eKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     const examples = this._ensureArray(range[eKey]);
-    if (examples) {
+    if (examples && examples.length) {
       let name = /** @type {string} */ (this._getValue(
         serialization,
         this.ns.aml.vocabularies.shapes.xmlName

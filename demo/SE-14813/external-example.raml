@@ -1,0 +1,33 @@
+#%RAML 1.0 NamedExample
+external-example:
+  {
+  "string": "External Example",
+  "shortDescription": "This is an example that can be defined on multiple lines.",
+  "longDescription": "This is a multi line description example.",
+  "enabled": true,
+  "referencedType": "Model",
+  "array": [
+    {
+      "Key": "bar123",
+      "NonNegativeNumber": 4
+    }
+  ],
+  "arrayWithExamples": [
+    {
+      "Key": "ABC",
+      "NonNegativeNumber": 123
+    },
+    {
+      "Key": "XYZ",
+      "NonNegativeNumber": 456
+    }
+  ],
+  "unionOfTypes": {
+    "Key": "bar124",
+    "NonNegativeNumber": 3
+  },
+  "unionOfTypesAlternate": {
+    "Key": "bar123",
+    "NonNegativeNumber": 4
+  }
+}

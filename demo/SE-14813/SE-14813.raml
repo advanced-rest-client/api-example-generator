@@ -1,0 +1,162 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/b3342193-c2c1-4bba-b34a-eb19663c27cd/
+title: Example API with types and resources to showcase how examples look.
+version: v0
+mediaType:
+  - application/json
+
+types:
+  SubType:
+    description: A simple 'struct' type.
+    properties:
+      Key:
+        type: string
+        description: A simple string.
+        required: true
+        example:
+          bar123
+      NonNegativeNumber:
+        type: number
+        description: a non-negative number.
+        format: int32
+        minimum: 0
+        example:
+          4
+    example:
+      Key: bar124
+      NonNegativeNumber: 3
+  CommonType:
+    description: A simple 'wrapper' type.
+    type: string
+    enum:
+      - Model
+      - View
+      - Controller
+    example: Model
+  ExampleRoot:
+    description: A complex type.
+    properties:
+      string:
+        description: A basic string test data type.
+        type: string
+        required: false
+        default: unknown-id
+        example: Internal Exmple
+      shortDescription:
+        description: A short summary about the object.
+        required: false
+        example: >-
+          This is an example that can be defined on multiple
+          lines.
+      longDescription:
+        description: A long summary about the object.
+        required: false
+        example:  |-
+            This is a multi line description example.
+
+      enabled:
+        type: boolean
+        description: a simple boolean test type.
+        example:
+          true
+      referencedType?: CommonType #description and example inherited
+      array:
+        type: SubType[] #description and example inherited
+      arrayWithExamples:
+        description: an array of SubTypes
+        type: SubType[]
+        examples:
+          SingleExample:
+          - Key: LMNOP
+            NonNegativeNumber: 10000
+          MultiExample:
+          - Key: ABC
+            NonNegativeNumber: 123
+          - Key: XYZ
+            NonNegativeNumber: 456
+      unionOfTypes:
+        description: A union type that inherits its examples.
+        type: SubType | CommonType
+  ErrorResponse:
+    description: copied from api-standards.
+    properties:
+      type:
+        description: |
+          A URI reference [RFC3986] that identifies the
+          problem type.  This specification encourages that, when
+          dereferenced, it provide human-readable documentation for the
+          problem type (e.g., using HTML [W3C.REC-html5-20141028]).  When
+          this member is not present, its value is assumed to be
+          "about:blank". It accepts relative URIs; this means
+          that they must be resolved relative to the document's base URI, as
+          per [RFC3986], Section 5.
+        type: string
+        required: true
+        example: https://example.com/probs/out-of-credit
+      title:
+        description: |
+          A short, human-readable summary of the problem
+          type.  It will not change from occurrence to occurrence of the
+          problem, except for purposes of localization.
+        type: string
+        required: false
+        example: You do not have enough credit.
+      detail:
+        description: |
+          A human-readable explanation specific to this
+          occurrence of the problem.
+        type: string
+        required: false
+        example: Your current balance is 30, but that costs 50.
+
+/foo/{fooId}/bar/{barId}:
+  description: shows example in the documentation.
+  get:
+    responses:
+      200:
+        body:
+          type: ExampleRoot
+          examples: !include external-example.raml
+      404:
+        description: |-
+          **NOTE:** these error responses should be in separate `Trait` files. Kept in line for the sake of the example.
+        body:
+          type: ErrorResponse
+          examples:
+            FooNotFound:
+              type: https://example.com/probs/not-found
+              title: Resource not found
+              detail: Resource fuzz of type foo was not found.
+            BarNotFound:
+              type: https://example.com/probs/not-found
+              title: Resource not found
+              detail: Resource bizz of type bar was not found.
+  uriParameters:
+    fooId:
+      description: the identifier for your foo object
+      example:
+        fizz
+    barId:
+      description: the identifier for your bar object
+      example:
+        buzz
+  # Bug! If there is an additional path, like below, the inherited example doesn't show.
+
+  /example:
+    description: shows external example in json format.
+    get:
+      responses:
+        200:
+          body:
+            type: ExampleRoot
+            #examples: !include external-example.raml
+
+
+/tmp:
+  description: shows example in the documentation that is inherited - there's apparently a bug that only shows if there's a subsequent path added on.
+  get:
+    responses:
+      200:
+        body:
+          type: ExampleRoot
+          #examples: !include external-example.raml

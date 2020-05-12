@@ -889,14 +889,23 @@ describe('<api-example-generator>', () => {
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
-          const value =
-            xmlPrefix +
-            '\n<PropertyExamples xtra="string">\n  ' +
-            '<firstName>Pawel</firstName>\n  <lastName>Psztyc</lastName>\n  ' +
-            '<Address>\n    <street></street>\n    <zip>94100</zip>\n    <house>1</house>\n  ' +
-            '</Address>\n  <num></num>\n  <int></int>\n  <bool></bool>\n  <defVal>1</defVal>' +
-            '\n</PropertyExamples>\n';
-          assert.equal(result[0].value, value);
+          const value = `<?xml version="1.0" encoding="UTF-8"?>
+<schema>
+  <PropertyExamples xtra="string">
+    <firstName>Pawel</firstName>
+    <lastName>Psztyc</lastName>
+    <Address>
+      <street></street>
+      <zip>94100</zip>
+      <house>1</house>
+    </Address>
+    <num></num>
+    <int></int>
+    <bool></bool>
+    <defVal>1</defVal>
+  </PropertyExamples>
+</schema>`;
+          assert.equal(result[0].value.trim(), value);
         });
       });
     });
@@ -1748,7 +1757,7 @@ describe('<api-example-generator>', () => {
         });
 
         it('Computes value for array range', () => {
-          const type = AmfLoader.lookupType(amf, 'amf_inline_type_2');
+          const type = AmfLoader.lookupType(amf, 'ScalarArray');
           const result = element._computeJsonArrayValue(type);
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
@@ -2210,7 +2219,7 @@ describe('<api-example-generator>', () => {
           ['typeInt', 'number', 1234546],
           ['typeDecimal', 'number', 10.67],
           ['typeBool', 'boolean', true],
-          ['typeNull', 'null', null],
+          // ['typeNull', 'null', null], <-- AMF does not produce example value for this.
           ['typeNegativeInt', 'number', -12],
           ['typeNumberFormatInt64', 'number', 8],
           ['typeIntFormatInt8', 'number', 12],

@@ -2,21 +2,25 @@ import { fixture, assert } from '@open-wc/testing';
 import { AmfLoader } from './amf-loader.js';
 import '../api-example-generator.js';
 
+/* eslint-disable no-shadow */
+
 describe('XML processing', () => {
   async function basicFixture() {
-    return (await fixture(`<api-example-generator></api-example-generator>`));
+    return fixture(`<api-example-generator></api-example-generator>`);
   }
 
   describe('General processing', () => {
     [
       ['json+ld data model', false],
-      ['Compact data model', true]
+      ['Compact data model', true],
     ].forEach(([label, compact]) => {
+      // @ts-ignore
       describe(label, () => {
         let element;
         let amf;
 
         before(async () => {
+          // @ts-ignore
           amf = await AmfLoader.load(compact);
         });
 
@@ -26,50 +30,104 @@ describe('XML processing', () => {
         });
 
         it('basic formatting and type name', () => {
-          const payload = AmfLoader.lookupPayload(amf, '/IncludedInType', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const payload = AmfLoader.lookupPayload(
+            amf,
+            '/IncludedInType',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
           assert.include(value, '<Person>', 'Type name is set');
           assert.include(value, ' <error>false</error>', 'XML is formatted');
-          assert.include(value, ' <image>\n', 'Complex type is formatted is formatted');
-          assert.include(value, ' </image>\n', 'Complex type is formatted at the end');
+          assert.include(
+            value,
+            ' <image>\n',
+            'Complex type is formatted is formatted'
+          );
+          assert.include(
+            value,
+            ' </image>\n',
+            'Complex type is formatted at the end'
+          );
         });
 
         it('adds attribute to parent type', () => {
-          const payload = AmfLoader.lookupPayload(amf, '/IncludedInline', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const payload = AmfLoader.lookupPayload(
+            amf,
+            '/IncludedInline',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
-          assert.include(value, '<Person error="false">', 'Type has attributes');
+          assert.include(
+            value,
+            '<Person error="false">',
+            'Type has attributes'
+          );
         });
 
         it('uses example from RAML example', () => {
           const payload = AmfLoader.lookupPayload(amf, '/typeExamples', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
-          assert.include(value, '<firstName>Pawel</firstName>', 'has example value');
+          assert.include(
+            value,
+            '<firstName>Pawel</firstName>',
+            'has example value'
+          );
           assert.include(value, '  <firstName>', 'example is formatted');
         });
 
         it('uses example from property example', () => {
-          const payload = AmfLoader.lookupPayload(amf, '/propertyExamples', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const payload = AmfLoader.lookupPayload(
+            amf,
+            '/propertyExamples',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
           assert.include(value, '<zip>94100</zip>', 'has example value');
           assert.include(value, '<street></street>', 'has default empty value');
-          assert.include(value, '    <street></street>', 'example value is formatted');
+          assert.include(
+            value,
+            '    <street></street>',
+            'example value is formatted'
+          );
         });
 
         it('renders array types', () => {
           const payload = AmfLoader.lookupPayload(amf, '/ArrayType', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
           assert.include(value, '<ArrayType>\n', 'has parent type name');
           assert.include(value, '  <Image>', 'has item type name');
         });
 
         it('generates examples for array type (inline included)', () => {
-          const payload = AmfLoader.lookupPayload(amf, '/arrayPropertyGeneratedExamples', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const payload = AmfLoader.lookupPayload(
+            amf,
+            '/arrayPropertyGeneratedExamples',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
           assert.include(value, '<schema>\n', 'has parent type name');
           assert.include(value, '  <items>', 'has item type name');
@@ -78,70 +136,157 @@ describe('XML processing', () => {
 
         it('generates examples for wrapped annotation', () => {
           const payload = AmfLoader.lookupPayload(amf, '/wrappedXml', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
           assert.include(value, '<Imgs>\n', 'has parent type name');
-          assert.include(value, '  <something></something>', 'has parent properties');
+          assert.include(
+            value,
+            '  <something></something>',
+            'has parent properties'
+          );
           assert.include(value, '  <images>', 'has wrapped outer element');
           assert.include(value, '    <Image>', 'has wrapped object');
         });
 
-        it('generates (invalid) example for inline type', () => {
-          const payload = AmfLoader.lookupPayload(amf, '/inline-property-example', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
-          const { value } = result[0];
-          assert.include(value, '<schema>\n', 'has defualt name');
-          assert.match(value, /<amf_inline_type_\d+>/, 'has invalid properties');
-        });
-
         it('renders default name forn inline included types', () => {
-          const payload = AmfLoader.lookupPayload(amf, '/user-raml-example', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const payload = AmfLoader.lookupPayload(
+            amf,
+            '/user-raml-example',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
           assert.include(value, '<type>\n', 'has defualt name');
           assert.include(value, '  <id>uid1</id>', 'has properties');
         });
 
         it('renders RAML named example', () => {
-          const payload = AmfLoader.lookupPayload(amf, '/named-example', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const payload = AmfLoader.lookupPayload(
+            amf,
+            '/named-example',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
           assert.include(value, '<schema>\n', 'has AMF defualt name');
-          assert.include(value, '  <countryCode>BE</countryCode>', 'has properties');
+          assert.include(
+            value,
+            '  <countryCode>BE</countryCode>',
+            'has properties'
+          );
         });
 
         it('renders RAML linked named example', () => {
-          const payload = AmfLoader.lookupPayload(amf, '/named-linked-example', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const payload = AmfLoader.lookupPayload(
+            amf,
+            '/named-linked-example',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
           assert.include(value, '<schema>\n', 'has AMF defualt name');
           assert.include(value, '  <company>\n', 'has properties');
-          assert.include(value, '      <countryCode>BE</countryCode>\n', 'has deep properties');
+          assert.include(
+            value,
+            '      <countryCode>BE</countryCode>\n',
+            'has deep properties'
+          );
         });
 
         it('renders typed valued', () => {
           const payload = AmfLoader.lookupPayload(amf, '/data-types', 'post');
-          const result = element.generatePayloadsExamples(payload, 'application/xml');
+          const result = element.generatePayloadsExamples(
+            payload,
+            'application/xml'
+          );
           const { value } = result[0];
-          assert.include(value, '<typeString>String example</typeString>', 'has string value');
-          assert.include(value, '<typeNumber>123456</typeNumber>', 'has number value');
+          assert.include(
+            value,
+            '<typeString>String example</typeString>',
+            'has string value'
+          );
+          assert.include(
+            value,
+            '<typeNumber>123456</typeNumber>',
+            'has number value'
+          );
           assert.include(value, '<typeInt>1234546</typeInt>', 'has int value');
-          assert.include(value, '<typeDecimal>10.67</typeDecimal>', 'has decimal value');
-          assert.include(value, '<typeBool>true</typeBool>', 'has boolean value');
+          assert.include(
+            value,
+            '<typeDecimal>10.67</typeDecimal>',
+            'has decimal value'
+          );
+          assert.include(
+            value,
+            '<typeBool>true</typeBool>',
+            'has boolean value'
+          );
           assert.include(value, '<typeNull></typeNull>', 'has null value');
-          assert.include(value, '<typeNegativeInt>-12</typeNegativeInt>', 'has negative int value');
-          assert.include(value, '<typeNumberFormatInt64>8</typeNumberFormatInt64>', 'has Int64 value');
-          assert.include(value, '<typeNumFormatInt32>109298</typeNumFormatInt32>', 'has Num32 value');
-          assert.include(value, '<typeNumFormatInt16>2</typeNumFormatInt16>', 'has Num16 value');
-          assert.include(value, '<typeNumFormatInt8>1</typeNumFormatInt8>', 'has Num8 value');
-          assert.include(value, '<typeIntFormatInt8>12</typeIntFormatInt8>', 'has Int8 value');
-          assert.include(value, '<typeNumFormatInt>11</typeNumFormatInt>', 'has Num value');
-          assert.include(value, '<typeNumFormatLong>123456789</typeNumFormatLong>', 'has long value');
-          assert.include(value, '<typeNumFormatFloat>1234567.89</typeNumFormatFloat>', 'has float value');
-          assert.include(value, '<typeNumFormatDouble>1234.56789</typeNumFormatDouble>', 'has double value');
+          assert.include(
+            value,
+            '<typeNegativeInt>-12</typeNegativeInt>',
+            'has negative int value'
+          );
+          assert.include(
+            value,
+            '<typeNumberFormatInt64>8</typeNumberFormatInt64>',
+            'has Int64 value'
+          );
+          assert.include(
+            value,
+            '<typeNumFormatInt32>109298</typeNumFormatInt32>',
+            'has Num32 value'
+          );
+          assert.include(
+            value,
+            '<typeNumFormatInt16>2</typeNumFormatInt16>',
+            'has Num16 value'
+          );
+          assert.include(
+            value,
+            '<typeNumFormatInt8>1</typeNumFormatInt8>',
+            'has Num8 value'
+          );
+          assert.include(
+            value,
+            '<typeIntFormatInt8>12</typeIntFormatInt8>',
+            'has Int8 value'
+          );
+          assert.include(
+            value,
+            '<typeNumFormatInt>11</typeNumFormatInt>',
+            'has Num value'
+          );
+          assert.include(
+            value,
+            '<typeNumFormatLong>123456789</typeNumFormatLong>',
+            'has long value'
+          );
+          assert.include(
+            value,
+            '<typeNumFormatFloat>1234567.89</typeNumFormatFloat>',
+            'has float value'
+          );
+          assert.include(
+            value,
+            '<typeNumFormatDouble>1234.56789</typeNumFormatDouble>',
+            'has double value'
+          );
         });
       });
-    })
+    });
   });
 
   describe('_xmlProcessDataProperty()', () => {
@@ -155,7 +300,7 @@ describe('XML processing', () => {
         doc = document.implementation.createDocument('', 'test', null);
         node = doc.documentElement;
         shape = {
-          '@value': 'test'
+          '@value': 'test',
         };
       });
 
@@ -195,13 +340,15 @@ describe('XML processing', () => {
   describe('_xmlFromStructure()', () => {
     [
       ['json+ld data model', false],
-      ['Compact data model', true]
+      ['Compact data model', true],
     ].forEach(([label, compact]) => {
+      // @ts-ignore
       describe(label, () => {
         let element;
         let amf;
 
         before(async () => {
+          // @ts-ignore
           amf = await AmfLoader.load(compact);
         });
 
@@ -235,7 +382,7 @@ describe('XML processing', () => {
           const type = AmfLoader.lookupType(amf, 'Person');
           const shape = AmfLoader.lookupStructuredValue(amf, type);
           const result = element._xmlFromStructure(shape, {
-            typeName: 'TypeName'
+            typeName: 'TypeName',
           });
           assert.include(result, '<TypeName>');
         });
@@ -244,7 +391,7 @@ describe('XML processing', () => {
           const type = AmfLoader.lookupType(amf, 'Person');
           const shape = AmfLoader.lookupStructuredValue(amf, type);
           const result = element._xmlFromStructure(shape, {
-            typeName: 'T e*s?t'
+            typeName: 'T e*s?t',
           });
           assert.include(result, '<Test>');
         });
@@ -255,14 +402,16 @@ describe('XML processing', () => {
   describe('_xmlExampleFromProperties()', () => {
     [
       ['json+ld data model', false],
-      ['Compact data model', true]
+      ['Compact data model', true],
     ].forEach(([label, compact]) => {
+      // @ts-ignore
       describe(label, () => {
         let element;
         let amf;
         const typeName = 'TestType';
 
         before(async () => {
+          // @ts-ignore
           amf = await AmfLoader.load(compact);
         });
 
