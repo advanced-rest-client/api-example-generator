@@ -1,6 +1,6 @@
 [![Published on NPM](https://img.shields.io/npm/v/@api-components/api-example-generator.svg)](https://www.npmjs.com/package/@api-components/api-example-generator)
 
-[![Build Status](https://travis-ci.com/advanced-rest-client/api-example-generator.svg)](https://travis-ci.org/advanced-rest-client/api-example-generator)
+[![Build Status](https://travis-ci.com/advanced-rest-client/api-example-generator.svg)](https://travis-ci.com/advanced-rest-client/api-example-generator)
 
 ## ExampleGenerator
 
