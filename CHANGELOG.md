@@ -1239,3 +1239,30 @@ All notable changes to this project will be documented in this file. See [standa
 * fixing setting XML name [44377a1](https://github.com/advanced-rest-client/api-example-generator/commit/44377a198c967c0ce0791308c18ea2b164b65750) by Pawel
 
 
+<a name="4.3.0"></a>
+## [4.3.0](https://github.com/advanced-rest-client/api-example-generator/compare/4.2.2...4.3.0) (2020-05-12)
+
+### Build
+
+* bumping version [c453b18](https://github.com/advanced-rest-client/api-example-generator/commit/c453b189fd74a8cc53761fbcf71feb28f55add32) by Pawel Psztyc
+
+
+### Update
+
+* removing old type gen file [986b56d](https://github.com/advanced-rest-client/api-example-generator/commit/986b56dba6ac7c0caf629e59586e437f66478690) by Pawel Psztyc
+* removing generated models [e97e6ff](https://github.com/advanced-rest-client/api-example-generator/commit/e97e6ff4932f5efbe76173fe315f18aff9345f7f) by Pawel Psztyc
+* updating demo page [46e262d](https://github.com/advanced-rest-client/api-example-generator/commit/46e262d5fb0dd177aecd60b0cb8ef2aaf067a002) by Pawel Psztyc
+* upgrading package to open-wc standards [f5c30c2](https://github.com/advanced-rest-client/api-example-generator/commit/f5c30c2cb00dfca9736d740af3e34d4ade4261ff) by Pawel Psztyc
+* [ci skip] automated merge master->stage. syncing main branches [6e5e8ae](https://github.com/advanced-rest-client/api-example-generator/commit/6e5e8ae8963968b3988e772e1df8a1ad6ae247d3) by Ci agent
+
+
+### Documentation
+
+* updating npm badge [21ee499](https://github.com/advanced-rest-client/api-example-generator/commit/21ee499e2cc7cafe24d06177cf2f33deb48c91b3) by Pawel Psztyc
+
+
+### Bug Fixes
+
+* fixes SE-14813 [e7f2237](https://github.com/advanced-rest-client/api-example-generator/commit/e7f2237b5101509590d267a332321b114204b303) by Pawel Psztyc
+
+
