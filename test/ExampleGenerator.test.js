@@ -2569,4 +2569,54 @@ describe('ExampleGenerator', () => {
       assert.equal(result, 'a..b.c');
     });
   });
+
+  describe('APIC-391', () => {
+    let element;
+    let amf;
+
+    [
+      ['APIC-391: json+ld data model', false, 'APIC-391'],
+      ['APIC-391: json+ld data model', true, 'APIC-391'],
+    ].forEach(([label, compact, file]) => {
+      describe(String(label), () => {
+        before(async () => {
+          amf = await AmfLoader.load(
+            /** @type Boolean */ (compact),
+            /** @type String */ (file)
+          );
+        });
+
+        beforeEach(async () => {
+          element = new ExampleGenerator(amf);
+        });
+
+        it('Should generate XML tags correctly for payloads examples', () => {
+          const payloads = AmfLoader.lookupPayload(
+            amf,
+            '/shipment-requests',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payloads,
+            'application/xml'
+          );
+          assert.typeOf(result, 'array');
+          assert.equal(
+            result[0].value,
+            '<?xml version="1.0" encoding="UTF-8"?>\n' +
+              '<unknown-type>\n' +
+              '  <address>250 HIDEOUT LN</address>\n' +
+              '  <comments>Orgin comments entered here.</comments>\n' +
+              '  <references>\n' +
+              '    <reference>\n' +
+              '      <referenceType>Delivery Note</referenceType>\n' +
+              '      <referenceValue>7328</referenceValue>\n' +
+              '    </reference>\n' +
+              '  </references>\n' +
+              '</unknown-type>\n'
+          );
+        });
+      });
+    });
+  });
 });
