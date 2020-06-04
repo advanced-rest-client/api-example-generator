@@ -7,5 +7,6 @@
   "APIC-187/APIC-187.raml": "RAML 1.0",
   "APIC-233/APIC-233.raml": "RAML 0.8",
   "SE-13092/SE-13092.raml": "RAML 1.0",
-  "SE-14813/SE-14813.raml": "RAML 1.0"
+  "SE-14813/SE-14813.raml": "RAML 1.0",
+  "APIC-391/APIC-391.raml": "RAML 1.0"
 }
