@@ -2569,4 +2569,44 @@ describe('ExampleGenerator', () => {
       assert.equal(result, 'a..b.c');
     });
   });
+
+  describe('APIC-391', () => {
+    let element;
+    let amf;
+
+    before(async () => {
+      amf = await AmfLoader.load(false, 'APIC-391');
+    });
+
+    beforeEach(async () => {
+      element = new ExampleGenerator(amf);
+    });
+
+    it('Should generate XML tags correctly for payloads examples', () => {
+      const payloads = AmfLoader.lookupPayload(
+        amf,
+        '/shipment-requests',
+        'post'
+      );
+      const result = element.generatePayloadsExamples(
+        payloads,
+        'application/xml'
+      );
+      assert.typeOf(result, 'array');
+      assert.equal(
+        result[0].value,
+        '<?xml version="1.0" encoding="UTF-8"?>\n' +
+          '<unknown-type>\n' +
+          '  <address>250 HIDEOUT LN</address>\n' +
+          '  <comments>Orgin comments entered here.</comments>\n' +
+          '  <references>\n' +
+          '    <reference>\n' +
+          '      <referenceType>Delivery Note</referenceType>\n' +
+          '      <referenceValue>7328</referenceValue>\n' +
+          '    </reference>\n' +
+          '  </references>\n' +
+          '</unknown-type>\n'
+      );
+    });
+  });
 });
