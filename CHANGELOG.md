@@ -1266,3 +1266,16 @@ All notable changes to this project will be documented in this file. See [standa
 * fixes SE-14813 [e7f2237](https://github.com/advanced-rest-client/api-example-generator/commit/e7f2237b5101509590d267a332321b114204b303) by Pawel Psztyc
 
 
+<a name="4.3.0"></a>
+## [4.3.0](https://github.com/advanced-rest-client/api-example-generator/compare/4.3.0...4.3.0) (2020-06-04)
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [0fb8455](https://github.com/advanced-rest-client/api-example-generator/commit/0fb8455cc5ba806b86b1e68a78e7caa437f8efa7) by Ci agent
+
+
+### Bug Fixes
+
+* APIC-391 "es" truncate [bump version] [a8b7675](https://github.com/advanced-rest-client/api-example-generator/commit/a8b76751bc6ed2a91a9546ac1f222fafe3c9395f) by Carolina Wright
+
+
