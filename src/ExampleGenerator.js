@@ -1240,7 +1240,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (properties && properties.length) {
       return this._jsonExampleFromProperties(properties);
     }
-    return undefined;
+    return {};
   }
 
   /**
