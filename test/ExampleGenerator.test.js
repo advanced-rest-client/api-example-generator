@@ -1440,6 +1440,12 @@ describe('ExampleGenerator', () => {
           assert.equal(result.street, '');
           assert.equal(result.zip, '94100');
         });
+
+        it('Returns empty object when no properties in type', () => {
+          const result = element._computeJsonObjectValue({});
+          assert.typeOf(result, 'object');
+          assert.deepEqual(result, {});
+        });
       });
     });
   });
