@@ -1753,9 +1753,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    */
   _processDataArrayProperties(doc, node, property, name) {
     let childName;
-    if (name.substr(-2) === 'es') {
-      childName = name.substr(0, name.length - 2);
-    } else if (name.substr(-1) === 's') {
+    if (name.endsWith('s')) {
       childName = name.substr(0, name.length - 1);
     } else {
       childName = name;
