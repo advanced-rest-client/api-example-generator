@@ -1298,3 +1298,11 @@ All notable changes to this project will be documented in this file. See [standa
 * APIC-391 "es" truncate [bump version] [a8b7675](https://github.com/advanced-rest-client/api-example-generator/commit/a8b76751bc6ed2a91a9546ac1f222fafe3c9395f) by Carolina Wright
 
 
+<a name="4.3.2"></a>
+## [4.3.2](https://github.com/advanced-rest-client/api-example-generator/compare/4.3.1...4.3.2) (2020-06-19)
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [5a11e88](https://github.com/advanced-rest-client/api-example-generator/commit/5a11e880a2439074ea04a572e3ab327643e4cfa0) by Ci agent
+
+
