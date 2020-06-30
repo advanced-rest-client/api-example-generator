@@ -410,8 +410,11 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
 
     const pKey = this._getAmfKey(this.ns.w3.shacl.property);
-    const properties = this._ensureArray(schema[pKey]);
+    let properties = this._ensureArray(schema[pKey]);
     if (properties && properties.length) {
+      if (!opts.renderReadOnly) {
+        properties = this._filterReadOnlyProperties(properties);
+      }
       const value = this._exampleFromProperties(
         properties,
         mime,
@@ -1786,5 +1789,32 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       const name = dataNameFromKey(key);
       this._xmlProcessDataProperty(doc, node, item, name);
     });
+  }
+
+  _filterReadOnlyProperties(properties) {
+    if (!properties) {
+      return undefined;
+    }
+    return properties.filter(p => !this._isPropertyReadOnly(p));
+  }
+
+  _isPropertyReadOnly(property) {
+    if (Array.isArray(property)) {
+      property = property[0];
+    }
+    const rKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.range);
+    const range = property[rKey];
+    return this._isReadOnly(range);
+  }
+
+  _isReadOnly(node) {
+    if (Array.isArray(node)) {
+      node = node[0];
+    }
+    if (!node) {
+      return false;
+    }
+    const roKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.readOnly);
+    return this._getValue(node, roKey);
   }
 }

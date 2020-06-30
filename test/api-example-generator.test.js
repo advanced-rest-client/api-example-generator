@@ -682,6 +682,24 @@ describe('<api-example-generator>', () => {
           const result = element.computeExamples(shape, 'application/json');
           assert.isTrue(result[0].isScalar);
         });
+
+        it("doesn't render readOnly properties by default", async () => {
+          // @ts-ignore
+          amf = await AmfLoader.load(setupItem[1], 'oas-3-api');
+          const shape = AmfLoader.lookupType(amf, 'Article');
+          const result = element.computeExamples(shape, 'application/json');
+          assert.isTrue(result[0].value.indexOf('"id":') === -1);
+        });
+
+        it('renders readOnly properties with option', async () => {
+          // @ts-ignore
+          amf = await AmfLoader.load(setupItem[1], 'oas-3-api');
+          const shape = AmfLoader.lookupType(amf, 'Article');
+          const result = element.computeExamples(shape, 'application/json', {
+            renderReadOnly: true,
+          });
+          assert.isTrue(result[0].value.indexOf('"id":') !== -1);
+        });
       });
     });
   });
