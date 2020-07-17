@@ -820,7 +820,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     if (isArray && this._hasProperty(structure, this.ns.w3.rdfSchema.member)) {
       const key = this._getAmfKey(this.ns.w3.rdfSchema.member);
-      const items = structure[key];
+      const items = this._ensureArray(structure[key]);
       for (let i = 0, len = items.length; i < len; i++) {
         const item = items[i];
         this._jsonFromStructureValue(item, obj, isArray);
