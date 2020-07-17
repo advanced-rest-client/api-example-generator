@@ -1580,6 +1580,16 @@ describe('<api-example-generator>', () => {
           assert.typeOf(result, 'array');
           assert.deepEqual(result, [{ thumb: 'thumb 1', url: 'url 1' }]);
         });
+
+        it('Creates example for array structure when only one item is present', () => {
+          const type = AmfLoader.lookupType(amf, 'ArrayTypeWithExample');
+          const value = getStructuredValue(element, type);
+          const key = element._getAmfKey(element.ns.w3.rdfSchema.member);
+          value[key] = value[key][0];
+          const result = element._jsonFromStructure(value);
+          assert.typeOf(result, 'array');
+          assert.deepEqual(result, [{ thumb: 'thumb 1', url: 'url 1' }]);
+        });
       });
     });
   });
