@@ -392,6 +392,10 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       return this._computeUnionExamples(schema, mime, options);
     }
 
+    if (this._hasProperty(schema, this.ns.w3.shacl.and)) {
+      return this._computeAndExamples(schema, mime, options);
+    }
+
     if (options.noAuto) {
       return undefined;
     }
@@ -722,6 +726,44 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       }
     }
     return undefined;
+  }
+
+  /**
+   * Computes example for an `and` shape.
+   * @param {Object} schema The AMF's array shape
+   * @param {String} mime Current mime type
+   * @param {ExampleOptions} [opts={}]
+   * @return {Array<Example>|undefined}
+   */
+  _computeAndExamples(schema, mime, opts) {
+    const andKey = this._getAmfKey(this.ns.w3.shacl.and);
+    const and = this._ensureArray(schema[andKey]);
+    if (!and) {
+      return undefined;
+    }
+    const mergedSchema = this._mergeSchemaWithProperties(schema, and);
+    // Remove the shacl:and property to avoid infinite recursion
+    delete mergedSchema[andKey];
+    return this.computeExamples(mergedSchema, mime, opts);
+  }
+
+  /**
+   * Merges a schema's properties with all the properties in a list of shapes
+   * Returns a new object to avoid changing the original schema object
+   * @param {Object} schema AMF schema object
+   * @param {Array<Object>} shapes List of shapes whose properties we want to merge
+   * @private
+   */
+  _mergeSchemaWithProperties(schema, shapes) {
+    const newSchema = { ...schema };
+    const propertyKey = this._getAmfKey(this.ns.w3.shacl.property);
+    for (let i = 0; i < shapes.length; i++) {
+      const shape = shapes[i];
+      this._resolve(shape);
+      const properties = shape[propertyKey];
+      newSchema[propertyKey] = [...newSchema[propertyKey], ...properties];
+    }
+    return newSchema;
   }
 
   /**
