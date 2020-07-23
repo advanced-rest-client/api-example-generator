@@ -669,6 +669,18 @@ describe('ExampleGenerator', () => {
           const result = element.computeExamples(shape, 'application/json');
           assert.isTrue(result[0].isScalar);
         });
+
+        it('computes consolidated example for and type', async () => {
+          const amf = await AmfLoader.load(
+            /** @type Boolean */ (compact),
+            'allof-types'
+          );
+          const element = new ExampleGenerator(amf);
+          const shape = AmfLoader.lookupType(amf, 'HttpError');
+          const result = element.computeExamples(shape, 'application/json', {});
+          const example = JSON.parse(result[0].value);
+          assert.lengthOf(Object.keys(example), 4);
+        });
       });
     });
   });

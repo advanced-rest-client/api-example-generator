@@ -1,0 +1,58 @@
+openapi: '3.0.2'
+info:
+  title: Allof types example API
+  version: '1.0'
+
+components:
+  schemas:
+    HttpResponse:
+      description: An HTTP response object
+      type: object
+      properties:
+        statusCode:
+          type: number
+          description: Number of the HTTP response
+        statusText:
+          type: string
+          description: A description of the HTTP response
+    Error:
+      description: Error object caused by an error
+      type: object
+      properties:
+        error:
+          type: string
+          description: The error message
+    HttpError:
+      description: An HTTP response that is an error
+      allOf:
+        - $ref: "components/schemas/HttpResponse"
+        - $ref: "components/schemas/Error"
+      properties:
+        extraProp:
+          type: string
+
+paths:
+  /error:
+    get:
+      responses:
+        200:
+          content:
+            appliication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /httpResponse:
+    get:
+      responses:
+        200:
+          content:
+            appliication/json:
+              schema:
+                $ref: "#/components/schemas/HttpResponse"
+  /httpError:
+    get:
+      responses:
+        200:
+          content:
+            appliication/json:
+              schema:
+                $ref: "#/components/schemas/HttpError"
