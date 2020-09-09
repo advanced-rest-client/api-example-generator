@@ -1643,11 +1643,10 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    */
   _appendXmlArray(doc, node, range, isWrapped) {
     let processNode = node;
-    if (isWrapped) {
-      const element = this._appendXmlElement(doc, processNode, range);
-      processNode.appendChild(element);
-      processNode = element;
-    }
+    const element = this._appendXmlElement(doc, processNode, range);
+    processNode.appendChild(element);
+    processNode = element;
+
     const pKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.items);
     const properties = this._ensureArray(range[pKey]);
     if (!properties) {
@@ -1660,9 +1659,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         if (!name) {
           continue;
         }
-        const element = doc.createElement(name);
-        processNode.appendChild(element);
-        processNode = element;
+        const propElement = doc.createElement(name);
+        processNode.appendChild(propElement);
+        processNode = propElement;
       }
       this._xmlProcessProperty(doc, processNode, properties[i]);
     }
