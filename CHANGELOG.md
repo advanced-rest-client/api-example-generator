@@ -1330,3 +1330,26 @@ All notable changes to this project will be documented in this file. See [standa
 * [ci skip] automated merge master->stage. syncing main branches [841d9e5](https://github.com/advanced-rest-client/api-example-generator/commit/841d9e5189e006f733debe30fe6a883ddeee8728) by Ci agent
 
 
+<a name="4.4.3"></a>
+## [4.4.3](https://github.com/advanced-rest-client/api-example-generator/compare/4.4.2...4.4.3) (2020-09-09)
+
+### Build
+
+* bump version [5ce3c21](https://github.com/advanced-rest-client/api-example-generator/commit/5ce3c218a75ef11688e3dde31ee2039862330cce) by Carolina Wright
+
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [fc41f57](https://github.com/advanced-rest-client/api-example-generator/commit/fc41f57466992b54196e209437b5cb27bfd65710) by Ci agent
+
+
+### Bug Fixes
+
+* apic-487 xml example generation for array type [57631f4](https://github.com/advanced-rest-client/api-example-generator/commit/57631f48f1c871896ac50ee7367ca2ac1550b041) by Carolina Wright
+
+
+### Testing
+
+* generated example when properties are whether or not are wrapped [259768b](https://github.com/advanced-rest-client/api-example-generator/commit/259768b2d347a4cab32a4b2aa1e851a63f061199) by Carolina Wright
+
+
