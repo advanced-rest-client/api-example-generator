@@ -1372,3 +1372,28 @@ All notable changes to this project will be documented in this file. See [standa
 * adding type check when merging properties [1e54a5d](https://github.com/advanced-rest-client/api-example-generator/commit/1e54a5d51c5369ed0e783049a4f1e60476a7d38a) by Pawel Psztyc
 
 
+<a name="4.4.4"></a>
+## [4.4.4](https://github.com/advanced-rest-client/api-example-generator/compare/4.4.3...4.4.4) (2020-09-21)
+
+### Build
+
+* bumping version [b0cad1b](https://github.com/advanced-rest-client/api-example-generator/commit/b0cad1b230e717287a8fe3197be6f8ab369867b7) by Pawel Psztyc
+
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [4923402](https://github.com/advanced-rest-client/api-example-generator/commit/4923402789217411eaf949ec4b8fb6d0957987b5) by Ci agent
+* upgrading dependencies [e050398](https://github.com/advanced-rest-client/api-example-generator/commit/e050398afabbac37e10ff578d1b2b4437225d0e3) by Pawel Psztyc
+* [ci skip] automated merge master->stage. syncing main branches [f9d43bc](https://github.com/advanced-rest-client/api-example-generator/commit/f9d43bc44c443e606c941c643341e6c2da203a62) by Ci agent
+
+
+### Documentation
+
+* adding missing types [37007c1](https://github.com/advanced-rest-client/api-example-generator/commit/37007c192a1ee06fd39402954de63627d3b7daff) by Pawel Psztyc
+
+
+### Bug Fixes
+
+* adding type check when merging properties [1e54a5d](https://github.com/advanced-rest-client/api-example-generator/commit/1e54a5d51c5369ed0e783049a4f1e60476a7d38a) by Pawel Psztyc
+
+
