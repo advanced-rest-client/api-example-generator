@@ -1353,3 +1353,22 @@ All notable changes to this project will be documented in this file. See [standa
 * generated example when properties are whether or not are wrapped [259768b](https://github.com/advanced-rest-client/api-example-generator/commit/259768b2d347a4cab32a4b2aa1e851a63f061199) by Carolina Wright
 
 
+<a name="4.4.3"></a>
+## [4.4.3](https://github.com/advanced-rest-client/api-example-generator/compare/4.4.3...4.4.3) (2020-09-21)
+
+### Update
+
+* upgrading dependencies [e050398](https://github.com/advanced-rest-client/api-example-generator/commit/e050398afabbac37e10ff578d1b2b4437225d0e3) by Pawel Psztyc
+* [ci skip] automated merge master->stage. syncing main branches [f9d43bc](https://github.com/advanced-rest-client/api-example-generator/commit/f9d43bc44c443e606c941c643341e6c2da203a62) by Ci agent
+
+
+### Documentation
+
+* adding missing types [37007c1](https://github.com/advanced-rest-client/api-example-generator/commit/37007c192a1ee06fd39402954de63627d3b7daff) by Pawel Psztyc
+
+
+### Bug Fixes
+
+* adding type check when merging properties [1e54a5d](https://github.com/advanced-rest-client/api-example-generator/commit/1e54a5d51c5369ed0e783049a4f1e60476a7d38a) by Pawel Psztyc
+
+
