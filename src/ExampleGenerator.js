@@ -732,7 +732,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * Computes example for an `and` shape.
    * @param {Object} schema The AMF's array shape
    * @param {String} mime Current mime type
-   * @param {ExampleOptions} [opts={}]
+   * @param {ExampleOptions=} [opts={}]
    * @return {Array<Example>|undefined}
    */
   _computeAndExamples(schema, mime, opts) {
@@ -760,8 +760,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     for (let i = 0; i < shapes.length; i++) {
       const shape = shapes[i];
       this._resolve(shape);
-      const properties = shape[propertyKey];
-      newSchema[propertyKey] = [...newSchema[propertyKey], ...properties];
+      if (!shape[propertyKey] && !newSchema[propertyKey]) {
+        continue;
+      }
+      const properties = shape[propertyKey] || [];
+      const currentProps = newSchema[propertyKey] || [];
+      newSchema[propertyKey] = [...currentProps, ...properties];
     }
     return newSchema;
   }
@@ -868,7 +872,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         this._jsonFromStructureValue(item, obj, isArray);
       }
     } else {
-      const resolvedPrefix = this._getAmfKey(this.ns.aml.vocabularies.data);
+      const resolvedPrefix = this._getAmfKey(
+        this.ns.aml.vocabularies.data.toString()
+      );
       Object.keys(structure).forEach(key => {
         if (key.indexOf(resolvedPrefix) !== 0) {
           return;
@@ -927,7 +933,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const doc = document.implementation.createDocument('', typeName, null);
     const main = doc.documentElement;
     const keys = Object.keys(structure);
-    const dataPrefix = this._getAmfKey(this.ns.aml.vocabularies.data);
+    const dataPrefix = this._getAmfKey(
+      this.ns.aml.vocabularies.data.toString()
+    );
     for (let i = 0, len = keys.length; i < len; i++) {
       const key = keys[i];
       if (key.indexOf(dataPrefix) !== 0) {
@@ -1818,7 +1826,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {Object} property Array item
    */
   _processDataObjectProperties(doc, node, property) {
-    const resolvedPrefix = this._getAmfKey(this.ns.aml.vocabularies.data);
+    const resolvedPrefix = this._getAmfKey(
+      this.ns.aml.vocabularies.data.toString()
+    );
     Object.keys(property).forEach(key => {
       if (key.indexOf(resolvedPrefix) !== 0) {
         return;
