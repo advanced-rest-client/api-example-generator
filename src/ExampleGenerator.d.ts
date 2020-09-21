@@ -268,6 +268,24 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
   _computeExampleArraySchape(schema: object, mime: string, opts: ExampleOptions): Array<Example>|undefined;
 
   /**
+   * Computes example for an `and` shape.
+   * @param {Object} schema The AMF's array shape
+   * @param {String} mime Current mime type
+   * @param {ExampleOptions} [opts={}]
+   * @return {Array<Example>|undefined}
+   */
+  _computeAndExamples(schema: object, mime: string, opts?: ExampleOptions): Example[];
+
+  /**
+   * Merges a schema's properties with all the properties in a list of shapes
+   * Returns a new object to avoid changing the original schema object
+   * @param {Object} schema AMF schema object
+   * @param {Array<Object>} shapes List of shapes whose properties we want to merge
+   * @private
+   */
+  _mergeSchemaWithProperties(schema: object, shapes: object[]): object;
+
+  /**
    * Computes example for an union shape.
    * @param schema The AMF's array shape
    * @param mime Current mime type
