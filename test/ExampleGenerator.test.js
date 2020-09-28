@@ -1573,6 +1573,13 @@ describe('ExampleGenerator', () => {
           return obj;
         }
 
+        function constructShortenedType(type, value) {
+          const obj = {};
+          obj[valueKey] = value;
+          obj[typeKey] = type;
+          return obj;
+        }
+
         it('Returns undefined when no @value', () => {
           const result = element._getTypedValue({});
           assert.isUndefined(result);
@@ -1686,6 +1693,12 @@ describe('ExampleGenerator', () => {
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'string');
           assert.equal(result, '10');
+        });
+
+        it('Returns empty string value instead of undefined', () => {
+          const obj = constructShortenedType(`${prefix}string`, '');
+          const result = element._getTypedValue(obj);
+          assert.equal(result, '');
         });
       });
     });

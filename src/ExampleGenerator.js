@@ -962,7 +962,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   _getTypedValue(structure) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.data.value);
     let shape = structure[key];
-    if (!shape) {
+    if (shape === null || shape === undefined) {
       return undefined;
     }
     if (Array.isArray(shape)) {
