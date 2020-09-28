@@ -1397,3 +1397,11 @@ All notable changes to this project will be documented in this file. See [standa
 * adding type check when merging properties [1e54a5d](https://github.com/advanced-rest-client/api-example-generator/commit/1e54a5d51c5369ed0e783049a4f1e60476a7d38a) by Pawel Psztyc
 
 
+<a name="4.4.5"></a>
+## [4.4.5](https://github.com/advanced-rest-client/api-example-generator/compare/4.4.4...4.4.5) (2020-09-28)
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [443d90d](https://github.com/advanced-rest-client/api-example-generator/commit/443d90d9eb762bf7ad4734dc5fc257c6ef33a5df) by Ci agent
+
+
