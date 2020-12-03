@@ -836,7 +836,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     const index = id.indexOf(':');
     if (index !== -1) {
-      id = id.substr(index);
+      id = id.substr(index + 1);
     }
     return id[0].toUpperCase() + id.substr(1);
   }

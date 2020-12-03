@@ -2650,4 +2650,23 @@ describe('ExampleGenerator', () => {
       });
     });
   });
+
+  describe('Compact number', () => {
+    it('should call _computeScalarType() and return "Number"', () => {
+      const amf = {
+        '@context': {
+          shacl: 'http://www.w3.org/ns/shacl#',
+          shapes: 'http://a.ml/vocabularies/shapes#',
+        },
+      };
+      const type = {
+        'shacl:datatype': {
+          '@id': 'shapes:number',
+        },
+      };
+
+      const element = new ExampleGenerator(amf);
+      assert.equal(element._computeScalarType(type), 'Number');
+    });
+  });
 });
