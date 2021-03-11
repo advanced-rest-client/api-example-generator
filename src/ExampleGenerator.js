@@ -444,9 +444,6 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const trackedKey = this._getAmfKey(
       this.ns.raml.vocabularies.docSourceMaps.parsedJsonSchema
     );
-    const valueKey = this._getAmfKey(
-      this.ns.raml.vocabularies.docSourceMaps.value
-    );
     let sm = schema[sourceKey];
     if (!sm) {
       return undefined;
@@ -461,7 +458,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (Array.isArray(tracked)) {
       tracked = tracked[0];
     }
-    return /** @type {string} */ (this._getValue(tracked, valueKey));
+    return this._getTrackedValue(tracked);
   }
 
   /**
@@ -541,9 +538,6 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const trackedKey = this._getAmfKey(
       this.ns.raml.vocabularies.docSourceMaps.trackedElement
     );
-    const valueKey = this._getAmfKey(
-      this.ns.raml.vocabularies.docSourceMaps.value
-    );
     const longId = typeId.indexOf('amf') === -1 ? 'amf://id' + typeId : typeId;
     for (let i = 0, len = examples.length; i < len; i++) {
       let example = examples[i];
@@ -566,7 +560,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       if (Array.isArray(tracked)) {
         tracked = tracked[0];
       }
-      const value = /** @type {string} */ (this._getValue(tracked, valueKey));
+      const value = this._getTrackedValue(tracked);
       if (!value) {
         continue;
       }
@@ -1867,5 +1861,18 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     const roKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.readOnly);
     return this._getValue(node, roKey);
+  }
+
+  _getTrackedValue(tracked) {
+    const valueKey = this._getAmfKey(
+      this.ns.raml.vocabularies.docSourceMaps.value
+    );
+    if (typeof tracked === 'string') {
+      return tracked;
+    }
+    return (
+      /** @type {string} */ (this._getValue(tracked, valueKey)) ||
+      tracked['@value']
+    );
   }
 }
