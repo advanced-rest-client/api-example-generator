@@ -2669,4 +2669,40 @@ describe('ExampleGenerator', () => {
       assert.equal(element._computeScalarType(type), 'Number');
     });
   });
+
+  describe('_getTrackedValue()', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true],
+    ].forEach(([label, compact]) => {
+      let element;
+      let amf;
+
+      beforeEach(async () => {
+        amf = await AmfLoader.load(/** @type Boolean */ (compact));
+        element = new ExampleGenerator(amf);
+      });
+
+      it(`${label} - returns tracked element if it is a string`, () => {
+        assert.equal(element._getTrackedValue('amf://#1'), 'amf://#1');
+      });
+
+      it(`${label} - returns tracked element value if value is stored in "@value"`, () => {
+        const tracked = {
+          '@value': 'amf://#1',
+        };
+        assert.equal(element._getTrackedValue(tracked), 'amf://#1');
+      });
+
+      it(`${label} - returns tracked element value if value is stored in sources value key`, () => {
+        const sourcesValueKey = element._getAmfKey(
+          element.ns.raml.vocabularies.docSourceMaps.value
+        );
+        const tracked = {
+          [sourcesValueKey]: 'amf://#1',
+        };
+        assert.equal(element._getTrackedValue(tracked), 'amf://#1');
+      });
+    });
+  });
 });
