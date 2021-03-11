@@ -461,7 +461,10 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (Array.isArray(tracked)) {
       tracked = tracked[0];
     }
-    return /** @type {string} */ (this._getValue(tracked, valueKey));
+    return (
+      /** @type {string} */ (this._getValue(tracked, valueKey)) ||
+      tracked['@value']
+    );
   }
 
   /**
@@ -566,7 +569,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       if (Array.isArray(tracked)) {
         tracked = tracked[0];
       }
-      const value = /** @type {string} */ (this._getValue(tracked, valueKey));
+      const value =
+        /** @type {string} */ (this._getValue(tracked, valueKey)) ||
+        tracked['@value'];
       if (!value) {
         continue;
       }
