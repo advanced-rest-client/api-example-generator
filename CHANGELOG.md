@@ -1413,3 +1413,11 @@ All notable changes to this project will be documented in this file. See [standa
 * [ci skip] automated merge master->stage. syncing main branches [a2a681c](https://github.com/advanced-rest-client/api-example-generator/commit/a2a681c2bec2549208d35e35bf34a2726ffe002f) by Ci agent
 
 
+<a name="4.4.7"></a>
+## [4.4.7](https://github.com/advanced-rest-client/api-example-generator/compare/4.4.6...4.4.7) (2021-03-11)
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [b20c19a](https://github.com/advanced-rest-client/api-example-generator/commit/b20c19aa2eba5fdfdba2a700db5b9efe03d9d226) by Ci agent
+
+
