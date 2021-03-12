@@ -1867,7 +1867,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const valueKey = this._getAmfKey(
       this.ns.raml.vocabularies.docSourceMaps.value
     );
-    if (typeof tracked === 'string') {
+    if (typeof tracked === 'string' || !tracked) {
       return tracked;
     }
     return (
