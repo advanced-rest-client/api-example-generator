@@ -2703,6 +2703,16 @@ describe('ExampleGenerator', () => {
         };
         assert.equal(element._getTrackedValue(tracked), 'amf://#1');
       });
+
+      it(`${label} - returns undefined for undefined tracked element`, () => {
+        const tracked = undefined;
+        assert.isUndefined(element._getTrackedValue(tracked));
+      });
+
+      it(`${label} - returns null for null tracked element`, () => {
+        const tracked = null;
+        assert.isNull(element._getTrackedValue(tracked));
+      });
     });
   });
 });
