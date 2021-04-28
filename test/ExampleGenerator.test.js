@@ -1906,6 +1906,27 @@ describe('ExampleGenerator', () => {
           );
           assert.isUndefined(result);
         });
+
+        it('Returns example for union arrays', () => {
+          let schema = AmfLoader.lookupPayloadSchema(
+            amf,
+            '/myEndpoint',
+            'post'
+          )[0];
+          schema = element._resolve(schema);
+          const result = element._computeExampleArraySchape(
+            schema,
+            'application/json'
+          );
+          assert.typeOf(result, 'array');
+
+          const values = result[0].values;
+          assert.typeOf(values, 'array');
+          assert.lengthOf(values, 3);
+          assert.equal(values[0].value, '[{\n  "id": ""\n}]');
+          assert.equal(values[1].value, '[{\n  "id": ""\n}]');
+          assert.equal(values[2].value, '[{\n  "id": ""\n}]');
+        });
       });
     });
   });
