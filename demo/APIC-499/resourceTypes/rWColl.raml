@@ -1,0 +1,13 @@
+#%RAML 1.0 ResourceType
+usage: Use this resourceType to represent Write operations on any collection of item
+description: Read or Write a collection of <<resourcePathName>>
+uses:
+  traitDef: ../traits/lib.raml
+post:
+  description: Create <<resourcePathName>> in the target system.
+  is: [traitDef.httpMethodResponse:
+        {200responseBodyType: any}
+      ]
+  body:
+    application/json:
+      type: <<requestBodyType>>
