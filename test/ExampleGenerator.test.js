@@ -1906,8 +1906,26 @@ describe('ExampleGenerator', () => {
           );
           assert.isUndefined(result);
         });
+      });
+    });
 
-        it('Returns example for union arrays', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true],
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
+        let element;
+        let amf;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'APIC-499');
+        });
+
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
+        });
+
+        it.skip('Returns example for union arrays', () => {
           let schema = AmfLoader.lookupPayloadSchema(
             amf,
             '/myEndpoint',

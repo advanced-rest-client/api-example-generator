@@ -151,7 +151,7 @@ export const processValuesArrayExample = values => {
 
 /**
  * Processes JSON examples that should be an arrays and adds brackets
- * if nescesary. When the example is empty string it adds empty string literal
+ * if necessary. When the example is empty string it adds empty string literal
  * to the example value.
  * It does the same for unions which has array of values.
  * @param {Example[]} examples
@@ -285,7 +285,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * object properties (if object).
    *
    * @param {Array<Object>|Object} payloads List of payloads to process.
-   * @param {String} media A media to for which to generate the examles.
+   * @param {String} media A media to for which to generate the examples.
    * @param {ExampleOptions=} opts
    * @return {Array<Example>|undefined} Example value.
    */
