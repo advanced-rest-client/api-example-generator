@@ -1,0 +1,19 @@
+#%RAML 1.0
+version: 1.0
+title: Union Check
+
+uses:
+  resourceTypeDef: resourceTypes/lib.raml
+
+types:
+  A: !include data-types/A.raml
+  B: !include data-types/B.raml
+  C: !include data-types/C.raml
+  MyType:
+    type: A | B | C
+
+/myEndpoint:
+  type:
+    resourceTypeDef.write-collection: 
+      requestBodyType: MyType[]
+      200responseBodyType: MyType[]

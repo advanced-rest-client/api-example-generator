@@ -1908,6 +1908,45 @@ describe('ExampleGenerator', () => {
         });
       });
     });
+
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true],
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
+        let element;
+        let amf;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'APIC-499');
+        });
+
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
+        });
+
+        it.skip('Returns example for union arrays', () => {
+          let schema = AmfLoader.lookupPayloadSchema(
+            amf,
+            '/myEndpoint',
+            'post'
+          )[0];
+          schema = element._resolve(schema);
+          const result = element._computeExampleArraySchape(
+            schema,
+            'application/json'
+          );
+          assert.typeOf(result, 'array');
+
+          const values = result[0].values;
+          assert.typeOf(values, 'array');
+          assert.lengthOf(values, 3);
+          assert.equal(values[0].value, '[{\n  "id": ""\n}]');
+          assert.equal(values[1].value, '[{\n  "id": ""\n}]');
+          assert.equal(values[2].value, '[{\n  "id": ""\n}]');
+        });
+      });
+    });
   });
 
   describe('processJsonArrayExamples()', () => {

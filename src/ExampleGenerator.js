@@ -135,8 +135,23 @@ export const formatXml = xml => {
 };
 
 /**
+ * Processes example for unions which has array of values.
+ * @param {Example[]} values
+ */
+export const processValuesArrayExample = values => {
+  for (let i = 0; i < values.length; i++) {
+    if (values[i].value !== undefined && values[i].value[0] !== '[') {
+      if (values[i].value === '') {
+        values[i].value = '""';
+      }
+      values[i].value = `[${values[i].value}]`;
+    }
+  }
+};
+
+/**
  * Processes JSON examples that should be an arrays and adds brackets
- * if nescesary. When the example is empty string it adds empty string literal
+ * if necessary. When the example is empty string it adds empty string literal
  * to the example value.
  * It does the same for unions which has array of values.
  * @param {Example[]} examples
@@ -145,15 +160,7 @@ export const processJsonArrayExamples = examples => {
   for (let i = 0; i < examples.length; i++) {
     const item = examples[i];
     if (item.values) {
-      if (
-        item.values[0].value !== undefined &&
-        item.values[0].value[0] !== '['
-      ) {
-        if (item.values[0].value === '') {
-          item.values[0].value = '""';
-        }
-        item.values[0].value = `[${item.values[0].value}]`;
-      }
+      processValuesArrayExample(item.values);
     } else if (item.value !== undefined && item.value[0] !== '[') {
       if (item.value === '') {
         item.value = '""';
@@ -278,7 +285,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * object properties (if object).
    *
    * @param {Array<Object>|Object} payloads List of payloads to process.
-   * @param {String} media A media to for which to generate the examles.
+   * @param {String} media A media to for which to generate the examples.
    * @param {ExampleOptions=} opts
    * @return {Array<Example>|undefined} Example value.
    */
