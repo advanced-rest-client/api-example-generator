@@ -119,6 +119,8 @@ class ComponentDemo extends ApiDemoPage {
       ['SE-14813', 'SE-14813'],
       ['allof-types', 'Allof Types API'],
       ['APIC-487', 'APIC-487'],
+      ['APIC-391', 'APIC-391'],
+      ['APIC-655', 'APIC-655'],
     ].map(
       ([file, label]) => html`
         <anypoint-item data-src="${file}-compact.json"

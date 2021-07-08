@@ -2688,6 +2688,48 @@ describe('ExampleGenerator', () => {
         });
       });
     });
+
+    [
+      ['APIC-655: json+ld data model', false, 'APIC-655'],
+      ['APIC-655: json+ld data model', true, 'APIC-655'],
+    ].forEach(([label, compact, file]) => {
+      describe(String(label), () => {
+        before(async () => {
+          amf = await AmfLoader.load(
+            /** @type Boolean */ (compact),
+            /** @type String */ (file)
+          );
+        });
+
+        beforeEach(async () => {
+          element = new ExampleGenerator(amf);
+        });
+
+        it('Should generate XML tags correctly for payloads examples', () => {
+          const payloads = AmfLoader.lookupPayload(amf, '/delivery', 'post');
+          const result = element.generatePayloadsExamples(
+            payloads,
+            'application/xml'
+          );
+          assert.typeOf(result, 'array');
+          assert.equal(
+            result[0].value,
+            '<?xml version="1.0" encoding="UTF-8"?>\n' +
+              '<Delivery>\n' +
+              '  <orderId>732482783718</orderId>\n' +
+              '  <lineItems>\n' +
+              '    <lineItemId>9738187235</lineItemId>\n' +
+              '    <qty>10</qty>\n' +
+              '  </lineItems>\n' +
+              '  <lineItems>\n' +
+              '    <lineItemId>9832837238</lineItemId>\n' +
+              '    <qty>70</qty>\n' +
+              '  </lineItems>\n' +
+              '</Delivery>\n'
+          );
+        });
+      });
+    });
   });
 
   describe('Compact number', () => {
