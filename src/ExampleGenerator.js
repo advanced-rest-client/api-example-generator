@@ -969,7 +969,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @property {Array<Object>} properties Value of the `property` property of AMF's object.
    * @return {Boolean}
    */
-  _wrappedProperty(property, name, properties) {
+  _computeIsWrapped(property, name, properties) {
     const arrayProperty = this._hasType(
       property,
       this.ns.aml.vocabularies.data.Array
@@ -1032,7 +1032,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         item = item[0];
       }
       const name = dataNameFromKey(key);
-      const isWrapped = this._wrappedProperty(item, name, opts.properties);
+      const isWrapped = this._computeIsWrapped(item, name, opts.properties);
       this._xmlProcessDataProperty(doc, main, item, name, isWrapped);
     }
     const s = new XMLSerializer();
