@@ -1364,6 +1364,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
           return this._jsonExampleFromProperties(data);
         }
       }
+      if (this._hasType(item, this.ns.aml.vocabularies.shapes.ScalarShape)) {
+        return this._computeJsonScalarValue(item);
+      }
     }
     return undefined;
   }

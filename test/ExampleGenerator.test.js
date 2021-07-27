@@ -2082,6 +2082,51 @@ describe('ExampleGenerator', () => {
     });
   });
 
+  describe('APIC-679', () => {
+    describe('_computeJsonProperyValue()', () => {
+      [
+        ['json+ld data model', false],
+        ['Compact data model', true],
+      ].forEach(([label, compact]) => {
+        describe(String(label), () => {
+          let element;
+          let amf;
+
+          before(async () => {
+            amf = await AmfLoader.load(
+              /** @type Boolean */ (compact),
+              'APIC-679'
+            );
+          });
+
+          beforeEach(async () => {
+            element = new ExampleGenerator(amf);
+          });
+
+          it('Returns value for scalar type nullable property', () => {
+            const props = AmfLoader.lookupTypePropertyRange(
+              amf,
+              'claimSummaryResponse',
+              0
+            );
+            const result = element._computeJsonProperyValue(props);
+            assert.equal(result, '2021-10-1');
+          });
+
+          it('Returns value for node type property', () => {
+            const props = AmfLoader.lookupTypePropertyRange(
+              amf,
+              'claimSummaryResponse',
+              1
+            );
+            const result = element._computeJsonProperyValue(props);
+            assert.equal(result, '2021-10-21');
+          });
+        });
+      });
+    });
+  });
+
   describe('JSON schema processing', () => {
     [
       ['json+ld data model', false],

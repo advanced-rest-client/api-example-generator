@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: pedestal-internal-xapi
+  version: 1.0.2
+
+paths:
+  /claims:
+    get:
+      summary: Pet Insurance Claim Summary
+      tags:
+        - Claims
+      responses:
+        '200':
+          description: Pet Insurance Claim Summary
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/claimSummaryResponse"
+        '400':
+          $ref: "#/components/responses/badRequest400"
+        '401':
+          $ref: "#/components/responses/unauthorised401"
+        '404':
+          $ref: "#/components/responses/notFound404"
+        '5XX':
+          $ref: "#/components/responses/serverError5XX"
+
+components:
+  schemas:
+    claimSummaryResponse:
+      type: object
+      properties:
+        receivedDate:
+          type: string
+          format: date
+          nullable: true
+          example: "2021-10-1"
+        closedDate:
+          type: string
+          format: date
+          example: "2021-10-21"
+
+  responses:
+    badRequest400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+          examples:
+            badRequest400:
+              $ref: "#/components/examples/badRequest400"
+    unauthorised401:
+      description: Unauthorised
+      content:
+        application/json:
+          schema:
+            type: object
+          examples:
+            unauthorised401:
+              $ref: "#/components/examples/unauthorised401"
+    serverError5XX:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+          examples:
+            serverError5xx:
+              $ref: "#/components/examples/serverError5XX"
+    notFound404:
+      description: Resource Notfound
+      content:
+        application/json:
+          schema:
+            type: object
+          examples:
+            notFound404:
+              $ref: "#/components/examples/notFound404"
+  examples:
+    badRequest400:
+      value:
+        success: false
+        code: 400
+        reasonCode: Bad Request
+        message: Required header Authorization not specified
+    unauthorised401:
+      value:
+        success: false
+        code: 401
+        reasonCode: Unauthorised
+        message: unauthorised request
+    notFound404:
+      value:
+        success: false
+        code: 404
+        reasonCode: Resource Not found
+        message: requested resource not found or does not exist
+    serverError5XX:
+      value:
+        success: false
+        code: 500
+        reasonCode: Internal Server Error
+        message: Internal Server Error
