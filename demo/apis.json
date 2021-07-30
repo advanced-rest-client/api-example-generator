@@ -12,6 +12,7 @@
   "APIC-487/APIC-487.raml": "RAML 1.0",
   "APIC-499/APIC-499.raml": "RAML 1.0",
   "APIC-655/APIC-655.raml": "RAML 1.0",
+  "SE-22063/SE-22063.raml": "RAML 1.0",
   "oas-3-api/oas-3-api.yaml": { "type": "OAS 3.0", "mime": "application/yaml" },
   "allof-types/allof-types.yaml": { "type": "OAS 3.0", "mime": "application/yaml" },
   "APIC-679/APIC-679.yaml": { "type": "OAS 3.0", "mime": "application/yaml" }
