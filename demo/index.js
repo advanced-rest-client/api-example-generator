@@ -109,6 +109,7 @@ class ComponentDemo extends ApiDemoPage {
 
   _apiListTemplate() {
     return [
+      ['SE-22063', 'SE-22063'],
       ['demo-api', 'Demo API'],
       ['tracked-to-linked', 'Tracked elements'],
       ['se-8987', 'SE-8987'],
