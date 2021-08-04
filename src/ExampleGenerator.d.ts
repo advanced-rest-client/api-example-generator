@@ -57,6 +57,10 @@ declare interface Example {
    * Only when `hasUnion` is set.
    */
   values?: Array<Example>;
+  /**
+   * Example description
+   */
+  description?: string;
 }
 
 /**

@@ -274,6 +274,69 @@ describe('ExampleGenerator', () => {
         });
       });
     });
+
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true],
+    ].forEach(([label, compact]) => {
+      describe('APIC-332 ' + String(label), () => {
+        let element;
+        let amf;
+
+        before(async () => {
+          amf = await AmfLoader.load(
+            /** @type Boolean */ (compact),
+            'APIC-332'
+          );
+        });
+
+        beforeEach(() => {
+          element = new ExampleGenerator(amf);
+        });
+
+        it('Returns array', () => {
+          const payloads = AmfLoader.lookupPayload(
+            amf,
+            '/organization',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payloads,
+            'application/json'
+          );
+          assert.typeOf(result, 'array');
+        });
+
+        it('Array has 1 example', () => {
+          const payloads = AmfLoader.lookupPayload(
+            amf,
+            '/organization',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payloads,
+            'application/json'
+          );
+          assert.lengthOf(result, 1);
+        });
+
+        it('Example has description property', () => {
+          const payloads = AmfLoader.lookupPayload(
+            amf,
+            '/organization',
+            'post'
+          );
+          const result = element.generatePayloadsExamples(
+            payloads,
+            'application/json'
+          );
+          assert.equal(
+            result[0].description,
+            'This description for the example is never shown'
+          );
+        });
+      });
+    });
   });
 
   describe('generatePayloadExamples()', () => {
