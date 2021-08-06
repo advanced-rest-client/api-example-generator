@@ -17,6 +17,7 @@ const UNKNOWN_TYPE = 'unknown-type';
  * @property {String=} value The example to render
  * @property {String=} title Example title, only when `hasTitle` is set.
  * @property {String=} raw Raw value of RAML example. This value is a YAML or JSON
+ * @property {String=} description Example description
  * schema value. This is only set when raw value is available in the model and it is not JSON/XML.
  * @property {Array<Example>=} values Only when `hasUnion` is set.
  */
@@ -652,10 +653,17 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (title && title.indexOf('example_') === 0) {
       title = undefined;
     }
+    const description = /** @type {string} */ (this._getValue(
+      example,
+      this.ns.aml.vocabularies.core.description
+    ));
     const hasRaw = !!raw;
     const result = {};
     result.hasTitle = !!title;
     result.hasUnion = false;
+    if (description) {
+      result.description = description;
+    }
     if (result.hasTitle) {
       result.title = title;
     }
