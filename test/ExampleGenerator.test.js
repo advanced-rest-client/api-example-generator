@@ -10,6 +10,8 @@ import {
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-shadow */
 
+const xmlMime = 'application/xml';
+
 describe('ExampleGenerator', () => {
   const xmlPrefix = '<?xml version="1.0" encoding="UTF-8"?>';
 
@@ -41,7 +43,7 @@ describe('ExampleGenerator', () => {
             'post'
           );
           const result = element.listMedia(payloads);
-          assert.deepEqual(result, ['application/json', 'application/xml']);
+          assert.deepEqual(result, ['application/json', xmlMime]);
         });
 
         it('returns list of media types when single Payload is passed', () => {
@@ -215,7 +217,7 @@ describe('ExampleGenerator', () => {
           );
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.equal(
             String(result[0].value).indexOf('<?xml version="1.0" encoding="UTF-8"?>'),
@@ -511,7 +513,7 @@ describe('ExampleGenerator', () => {
 
         it('Computes XML example for na ArrayShape', () => {
           const shape = AmfLoader.lookupType(amf, 'ArrayType');
-          const result = element.computeExamples(shape, 'application/xml');
+          const result = element.computeExamples(shape, xmlMime);
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
           assert.isFalse(result[0].hasRaw);
@@ -537,7 +539,7 @@ describe('ExampleGenerator', () => {
 
         it('Computes XML example for a PropertyShape', () => {
           const shape = AmfLoader.lookupType(amf, 'Image');
-          const result = element.computeExamples(shape, 'application/xml');
+          const result = element.computeExamples(shape, xmlMime);
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
           assert.isFalse(result[0].hasRaw);
@@ -659,38 +661,39 @@ describe('ExampleGenerator', () => {
 
         it('Computes example from XML type example', () => {
           const shape = AmfLoader.lookupType(amf, 'XmlExampleInclude');
-          const result = element.computeExamples(shape, 'application/xml');
+          const result = element.computeExamples(shape, xmlMime);
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 2);
-          const ex1 = result[0];
-          assert.isFalse(ex1.hasRaw);
-          assert.isFalse(ex1.hasTitle);
-          assert.isFalse(ex1.hasUnion);
-          const str =
-            xmlPrefix +
-            '\n<Person error="false">\n  ' +
-            '<id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\n' +
-            '  <name>John Smith</name>\n  <birthday>1990-10-12</birthday>\n  <gender>male</gender>\n  ' +
-            '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s</url>\n  <image>\n    ' +
-            '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image</url>\n    ' +
-            '<thumb>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb</thumb>\n  ' +
-            "</image>\n  <tagline>Hi, I'm John!</tagline>\n  <language>en_US</language>\n  " +
-            '<etag>W\\\\244m4n5kj3gbn2nj4k4n4</etag>\n</Person>\n';
-          assert.equal(ex1.value, str);
-          const ex2 = result[0];
-          assert.isFalse(ex2.hasRaw);
-          assert.isFalse(ex2.hasTitle);
-          assert.isFalse(ex2.hasUnion);
-          const str2 =
-            '<?xml version="1.0" encoding="UTF-8"?>\n<Person error="false">\n  ' +
-            '<id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\n  <name>John Smith</name>\n  ' +
-            '<birthday>1990-10-12</birthday>\n  <gender>male</gender>\n  ' +
-            '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s</url>\n  <image>\n    ' +
-            '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image</url>\n    ' +
-            '<thumb>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb</thumb>\n  ' +
-            "</image>\n  <tagline>Hi, I'm John!</tagline>\n  <language>en_US</language>\n  " +
-            '<etag>W\\\\244m4n5kj3gbn2nj4k4n4</etag>\n</Person>\n';
-          assert.equal(ex2.value, str2);
+          const [ex1, ex2] = result;
+          assert.isFalse(ex1.hasRaw, 'example 1 has the hasRaw value');
+          assert.isTrue(ex2.hasRaw, 'example 2 has the hasRaw value');
+          assert.isFalse(ex1.hasTitle, 'example 1 has the hasTitle value');
+          assert.isFalse(ex2.hasTitle, 'example 2 has the hasTitle value');
+          assert.isFalse(ex1.hasUnion, 'example 1 has the hasUnion value');
+          assert.isFalse(ex2.hasUnion, 'example 2 has the hasUnion value');
+
+          const parser = new DOMParser();
+          const schema = parser.parseFromString(ex1.value.toString(), xmlMime);
+
+          const root = schema.querySelector('Person');
+          assert.ok(root, 'has the Person root schema');
+          assert.isTrue(root.hasAttribute('error'), 'the Person element has the error attribute');
+          assert.equal(root.getAttribute('error'), 'false', 'the error has the value');
+          assert.equal(root.querySelector('id').textContent.trim(), 'Qawer63J73HJ6khjswuqyq62382jG21s', 'the id value');
+          assert.equal(root.querySelector('name').textContent.trim(), 'John Smith', 'the name value');
+          assert.equal(root.querySelector('birthday').textContent.trim(), '1990-10-12', 'the birthday value');
+          assert.equal(root.querySelector('gender').textContent.trim(), 'male', 'the gender value');
+          assert.equal(root.querySelector('url').textContent.trim(), 'https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s', 'the url value');
+          assert.equal(root.querySelector('tagline').textContent.trim(), 'Hi, I\'m John!', 'the tagline value');
+          assert.equal(root.querySelector('etag').textContent.trim(), 'W\\\\244m4n5kj3gbn2nj4k4n4', 'the etag value');
+
+          const image = root.querySelector('image');
+          
+          assert.ok(image, 'has the image node');
+          assert.equal(image.querySelector('url').textContent.trim(), 'https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image', 'the image.url value');
+          assert.equal(image.querySelector('thumb').textContent.trim(), 'https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb', 'the image.thumb value');
+          
+          assert.typeOf(ex2.raw, 'string', 'example 2 has the raw value');
         });
 
         it('Computes example for an Example shape', () => {
@@ -811,7 +814,7 @@ describe('ExampleGenerator', () => {
           );
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 2);
@@ -839,7 +842,7 @@ describe('ExampleGenerator', () => {
           );
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
@@ -970,7 +973,7 @@ describe('ExampleGenerator', () => {
           );
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
@@ -1069,7 +1072,7 @@ describe('ExampleGenerator', () => {
           const payloads = AmfLoader.lookupPayload(amf, '/union', 'post');
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
@@ -1225,7 +1228,7 @@ describe('ExampleGenerator', () => {
           );
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 2);
@@ -1277,7 +1280,7 @@ describe('ExampleGenerator', () => {
           );
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 2);
@@ -1405,7 +1408,7 @@ describe('ExampleGenerator', () => {
           );
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
@@ -1457,7 +1460,7 @@ describe('ExampleGenerator', () => {
           );
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
@@ -1938,7 +1941,7 @@ describe('ExampleGenerator', () => {
           schema = element._resolve(schema);
           const result = element._computeExampleArrayShape(
             schema,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.equal(result[0].value[0], '<');
@@ -2020,7 +2023,7 @@ describe('ExampleGenerator', () => {
           schema = element._resolve(schema);
           const result = element._computeExampleArrayShape(
             schema,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.equal(
@@ -2459,7 +2462,7 @@ describe('ExampleGenerator', () => {
           const payloads = AmfLoader.lookupPayload(amf, '/employees', 'head');
           const result = element.generatePayloadsExamples(
             payloads[0],
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           const example = result[0];
@@ -2907,7 +2910,7 @@ describe('ExampleGenerator', () => {
           );
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.equal(
@@ -2948,7 +2951,7 @@ describe('ExampleGenerator', () => {
           const payloads = AmfLoader.lookupPayload(amf, '/delivery', 'post');
           const result = element.generatePayloadsExamples(
             payloads,
-            'application/xml'
+            xmlMime
           );
           assert.typeOf(result, 'array');
           assert.equal(

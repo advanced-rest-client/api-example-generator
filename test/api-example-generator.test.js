@@ -593,42 +593,6 @@ describe('<api-example-generator>', () => {
           assert.deepEqual(parsedExample2, cmp2);
         });
 
-        it('Computes example from XML type example', () => {
-          const shape = AmfLoader.lookupType(amf, 'XmlExampleInclude');
-          const result = element.computeExamples(shape, 'application/xml');
-          assert.typeOf(result, 'array');
-          assert.lengthOf(result, 2);
-          const ex1 = result[0];
-          assert.isFalse(ex1.hasRaw);
-          assert.isFalse(ex1.hasTitle);
-          assert.isFalse(ex1.hasUnion);
-          const str =
-            xmlPrefix +
-            '\n<Person error="false">\n  ' +
-            '<id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\n' +
-            '  <name>John Smith</name>\n  <birthday>1990-10-12</birthday>\n  <gender>male</gender>\n  ' +
-            '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s</url>\n  <image>\n    ' +
-            '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image</url>\n    ' +
-            '<thumb>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb</thumb>\n  ' +
-            "</image>\n  <tagline>Hi, I'm John!</tagline>\n  <language>en_US</language>\n  " +
-            '<etag>W\\\\244m4n5kj3gbn2nj4k4n4</etag>\n</Person>\n';
-          assert.equal(ex1.value, str);
-          const ex2 = result[0];
-          assert.isFalse(ex2.hasRaw);
-          assert.isFalse(ex2.hasTitle);
-          assert.isFalse(ex2.hasUnion);
-          const str2 =
-            '<?xml version="1.0" encoding="UTF-8"?>\n<Person error="false">\n  ' +
-            '<id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\n  <name>John Smith</name>\n  ' +
-            '<birthday>1990-10-12</birthday>\n  <gender>male</gender>\n  ' +
-            '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s</url>\n  <image>\n    ' +
-            '<url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image</url>\n    ' +
-            '<thumb>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb</thumb>\n  ' +
-            "</image>\n  <tagline>Hi, I'm John!</tagline>\n  <language>en_US</language>\n  " +
-            '<etag>W\\\\244m4n5kj3gbn2nj4k4n4</etag>\n</Person>\n';
-          assert.equal(ex2.value, str2);
-        });
-
         it('Computes example for an Example shape', () => {
           const shape = AmfLoader.lookupType(amf, 'SimpleInlineExample');
           const key = element._getAmfKey(
