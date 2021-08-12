@@ -1,10 +1,10 @@
-[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-example-generator.svg)](https://www.npmjs.com/package/@api-components/api-example-generator)
-
-[![Build Status](https://travis-ci.com/advanced-rest-client/api-example-generator.svg)](https://travis-ci.com/advanced-rest-client/api-example-generator)
-
-## ExampleGenerator
+# ExampleGenerator
 
 Generates examples from the AMF model.
+
+[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-example-generator.svg)](https://www.npmjs.com/package/@api-components/api-example-generator)
+
+[![Tests and publishing](https://github.com/advanced-rest-client/api-example-generator/actions/workflows/deployment.yml/badge.svg)](https://github.com/advanced-rest-client/api-example-generator/actions/workflows/deployment.yml)
 
 ## Version compatibility
 
@@ -19,7 +19,8 @@ The element was creates when the AmfHelperMixin needed a HTMLElement constructor
 ## Usage
 
 ### Installation
-```
+
+```sh
 npm install --save @api-components/api-example-generator
 ```
 
@@ -27,14 +28,12 @@ npm install --save @api-components/api-example-generator
 
 See [src/ExampleGenerator](src/ExampleGenerator.js) for the public API.
 
-
 ```javascript
 import { ExampleGenerator } '@api-components/api-example-generator';
 const gen = new ExampleGenerator(amfModel);
 
 const examples = new gen.computeExamples(schema, 'application/json', {...});
 ```
-
 
 ### In an html file
 
@@ -73,11 +72,11 @@ customElements.define('sample-element', SampleElement);
 
 ### Listing media types for payloads
 
-Use `listMedia()` which accespts list of payloads or a single payload definition.
+Use `listMedia()` which accepts list of payloads or a single payload definition.
 
 ### Example for Payload(s)
 
-Use `generatePayloadsExamples()` to genmerate a list of examples for payload(s).
+Use `generatePayloadsExamples()` to generate a list of examples for payload(s).
 Provide second argument which is a media type that should be used to generate an example.
 Currently only `application/json` and `application/xml` is supported.
 Feel free to send a PR to add support for more media types.
