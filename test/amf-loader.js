@@ -1,4 +1,7 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable func-names */
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+
 export const AmfLoader = {};
 
 class HelperElement extends AmfHelperMixin(Object) {}
@@ -12,18 +15,18 @@ const helper = new HelperElement();
  */
 AmfLoader.load = async function(compact=false, file='demo-api') {
   const suffix = compact ? '-compact' : '';
-  const fullfile = `${file}${suffix}.json`;
-  const url = location.protocol + '//' + location.host + '/base/demo/'+ fullfile;
+  const fullFile = `${file}${suffix}.json`;
+  const url = `${window.location.protocol}//${window.location.host}/base/demo/${fullFile}`;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Unable to download API model from ${url}`);
   }
-  return await response.json();
+  return response.json();
 };
 
 /**
  * Looks for an endpoint
- * @param {Array<Object>|Object} model
+ * @param {any} model
  * @param {string} endpoint Endpoint's path
  * @return {Object}
  */
@@ -35,7 +38,7 @@ AmfLoader.lookupEndpoint = function(model, endpoint) {
 
 /**
  * Looks for an operation
- * @param {Array<Object>|Object} model
+ * @param {any} model
  * @param {string} endpoint Endpoint's path
  * @param {string} operation Operation name (lowercase)
  * @return {Object}
@@ -49,7 +52,7 @@ AmfLoader.lookupOperation = function(model, endpoint, operation) {
 
 /**
  * Looks for a payload in an operation
- * @param {Array<Object>|Object} model
+ * @param {any} model
  * @param {string} endpoint Endpoint's path
  * @param {string} operation Operation name (lowercase)
  * @return {Array<Object>}
@@ -57,15 +60,18 @@ AmfLoader.lookupOperation = function(model, endpoint, operation) {
 AmfLoader.lookupPayload = function(model, endpoint, operation) {
   const op = AmfLoader.lookupOperation(model, endpoint, operation);
   const expects = helper._computeExpects(op);
+  if (!expects) {
+    throw new Error(`The ${operation.toUpperCase()} ${endpoint} operation has no request definition.`);
+  }
   return helper._ensureArray(helper._computePayload(expects));
 };
 
 /**
  * Looks for a payload in the responses list of an operation
- * @param {Array<Object>|Object} model
+ * @param {any} model
  * @param {string} endpoint Endpoint's path
  * @param {string} operation Operation name (lowercase)
- * @param {Number} code Status code of the response
+ * @param {number} code Status code of the response
  * @return {Array<Object>}
  */
 AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
@@ -86,13 +92,13 @@ AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
 
 /**
  * Looks for a type in the model
- * @param {Array<Object>|Object} amf AMF model
+ * @param {any} amf AMF model
  * @param {string} name Name of the type
  * @return {Object}
  */
 AmfLoader.lookupType = function(amf, name) {
-  if (amf instanceof Array) {
-    amf = amf[0];
+  if (Array.isArray(amf)) {
+    [amf] = amf;
   }
   helper.amf = amf;
   const dKey = helper._getAmfKey(helper.ns.raml.vocabularies.document.declares);
@@ -118,10 +124,10 @@ AmfLoader.lookupStructuredValue = function(model, type) {
   const key = helper._getAmfKey(helper.ns.raml.vocabularies.apiContract.examples);
   let example = helper._ensureArray(type[key])[0];
   if (helper._hasType(example, helper.ns.raml.vocabularies.document.NamedExamples)) {
-    const key = helper._getAmfKey(helper.ns.raml.vocabularies.document.examples);
-    example = example[key];
-    if (example instanceof Array) {
-      example = example[0];
+    const k = helper._getAmfKey(helper.ns.raml.vocabularies.document.examples);
+    example = example[k];
+    if (Array.isArray(example)) {
+      [example] = example;
     }
   }
   const svKey = helper._getAmfKey(helper.ns.raml.vocabularies.document.structuredValue);
@@ -130,7 +136,7 @@ AmfLoader.lookupStructuredValue = function(model, type) {
 
 /**
  * Looks for a type in the model
- * @param {Array<Object>|Object} model
+ * @param {any} model
  * @param {string} typeName Name of the type
  * @return {Object}
  */
@@ -142,7 +148,7 @@ AmfLoader.lookupTypeProperties = function(model, typeName) {
 
 /**
  * Looks for a property range in a type
- * @param {Array<Object>|Object} model
+ * @param {any} model
  * @param {string} typeName Name of the type
  * @param {Number} index
  * @return {Object}
@@ -152,15 +158,15 @@ AmfLoader.lookupTypePropertyRange = function(model, typeName, index) {
   const prop = props[index];
   const rKey = helper._getAmfKey(helper.ns.raml.vocabularies.shapes.range);
   let range = prop[rKey];
-  if (range instanceof Array) {
-    range = range[0];
+  if (Array.isArray(range)) {
+    [range] = range;
   }
   return range;
 };
 
 /**
  * Looks for a schema of a payload in the AMF model
- * @param {Array<Object>|Object} model
+ * @param {any} model
  * @param {string} endpoint Endpoint's path
  * @param {string} method Operation name (lowercase)
  * @param {Number} [payloadIndex=0] Index of the payload

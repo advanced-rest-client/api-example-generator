@@ -2,11 +2,17 @@ import { fixture, assert, html } from '@open-wc/testing';
 import { AmfLoader } from './amf-loader.js';
 import '../api-example-generator.js';
 
+/** @typedef {import('../').ApiExampleGenerator} ApiExampleGenerator */
+
 /* eslint-disable prefer-template */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-shadow */
 
 describe('<api-example-generator>', () => {
+  /**
+   * @param {any} amf 
+   * @returns {Promise<ApiExampleGenerator>}
+   */
   async function basicFixture(amf) {
     return fixture(
       html`<api-example-generator .amf="${amf}"></api-example-generator>`
@@ -1794,7 +1800,7 @@ describe('<api-example-generator>', () => {
     });
   });
 
-  describe('_computeExampleArraySchape()', () => {
+  describe('_computeExampleArrayShape()', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
@@ -1826,7 +1832,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
@@ -1844,7 +1850,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/xml'
           );
@@ -1859,7 +1865,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
@@ -1877,7 +1883,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
@@ -1895,7 +1901,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
@@ -1909,7 +1915,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
@@ -1926,7 +1932,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/xml'
           );
@@ -1945,7 +1951,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json',
             { noAuto: true }
@@ -1956,7 +1962,7 @@ describe('<api-example-generator>', () => {
         it('Returns undefined when array does not have items', () => {
           let shape = AmfLoader.lookupType(amf, 'ArrayWithoutItems');
           shape = element._resolve(shape);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             shape,
             'application/json'
           );
@@ -1966,7 +1972,7 @@ describe('<api-example-generator>', () => {
     });
   });
 
-  describe('_computeJsonProperyValue()', () => {
+  describe('_computeJsonPropertyValue()', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
@@ -1994,21 +2000,21 @@ describe('<api-example-generator>', () => {
         it('Returns value for scalar type', () => {
           let schema = AmfLoader.lookupPayloadSchema(amf, '/scalar', 'post')[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(schema);
+          const result = element._computeJsonPropertyValue(schema);
           assert.equal(result, '');
         });
 
         it('Returns value for union type', () => {
           let schema = AmfLoader.lookupPayloadSchema(amf, '/union', 'post')[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(schema);
+          const result = element._computeJsonPropertyValue(schema);
           assert.typeOf(result.birthday, 'string');
         });
 
         it('Returns value for selected type in union', () => {
           let schema = AmfLoader.lookupPayloadSchema(amf, '/union', 'post')[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(
+          const result = element._computeJsonPropertyValue(
             schema,
             'PropertyExamples'
           );
@@ -2022,7 +2028,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(schema);
+          const result = element._computeJsonPropertyValue(schema);
           assert.typeOf(result.birthday, 'string');
         });
 
@@ -2033,7 +2039,7 @@ describe('<api-example-generator>', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(schema);
+          const result = element._computeJsonPropertyValue(schema);
           assert.typeOf(result, 'array');
           assert.deepEqual(result[0], { firstName: '', lastName: '' });
         });
@@ -2041,69 +2047,7 @@ describe('<api-example-generator>', () => {
     });
   });
 
-  describe('JSON schema processing', () => {
-    [
-      ['json+ld data model', false],
-      ['Compact data model', true],
-    ].forEach(setupItem => {
-      // @ts-ignore
-      describe(setupItem[0], () => {
-        let element;
-        let amf;
-
-        before(async () => {
-          // @ts-ignore
-          amf = await AmfLoader.load(setupItem[1], 'SE-10469');
-        });
-
-        beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
-        });
-
-        it('Generates example from JSON schema', () => {
-          const payloads = AmfLoader.lookupPayload(
-            amf,
-            '/purina/b2b/supplier/purchaseOrder',
-            'post'
-          );
-          const result = element.generatePayloadsExamples(payloads[0], null, {
-            rawOnly: true,
-          });
-          assert.typeOf(result, 'array');
-        });
-
-        it('Example has "raw" property', () => {
-          const payloads = AmfLoader.lookupPayload(
-            amf,
-            '/purina/b2b/supplier/purchaseOrder',
-            'post'
-          );
-          const result = element.generatePayloadsExamples(payloads[0], null, {
-            rawOnly: true,
-          });
-          const example = result[0];
-          assert.typeOf(example.raw, 'string');
-          assert.isTrue(example.hasRaw);
-        });
-
-        it('Example has "value" property', () => {
-          const payloads = AmfLoader.lookupPayload(
-            amf,
-            '/purina/b2b/supplier/purchaseOrder',
-            'post'
-          );
-          const result = element.generatePayloadsExamples(payloads[0], null, {
-            rawOnly: true,
-          });
-          const example = result[0];
-          assert.typeOf(example.value, 'string');
-        });
-      });
-    });
-  });
-
-  describe('Tracked elements (skipped until next AMF release)', () => {
+  describe('Tracked elements', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
@@ -2136,12 +2080,12 @@ describe('<api-example-generator>', () => {
           assert.equal(example.title, 'employees', "Example's title is set");
           assert.equal(
             example.raw,
-            '-\n  id: 1\n  name: Jhon\n-\n  id: 2\n  name: Sam',
+            '-\n  id: 1\n  name: John\n-\n  id: 2\n  name: Sam',
             "Example's raw is set"
           );
           assert.equal(
             example.value,
-            '[\n  {\n    "id": 1,\n    "name": "Jhon"\n  },\n  {\n    "id": 2,\n    "name": "Sam"\n  }\n]',
+            '[\n  {\n    "id": 1,\n    "name": "John"\n  },\n  {\n    "id": 2,\n    "name": "Sam"\n  }\n]',
             "Example's value is set"
           );
         });
@@ -2160,12 +2104,12 @@ describe('<api-example-generator>', () => {
           assert.equal(example.title, 'employee', "Example's title is set");
           assert.equal(
             example.raw,
-            'id: 1\nname: "Jhon"',
+            'id: 1\nname: "John"',
             "Example's raw is set"
           );
           assert.equal(
             example.value,
-            '{\n  "id": 1,\n  "name": "Jhon"\n}',
+            '{\n  "id": 1,\n  "name": "John"\n}',
             "Example's value is set"
           );
         });
@@ -2184,12 +2128,12 @@ describe('<api-example-generator>', () => {
           assert.equal(example.title, 'employee', "Example's title is set");
           assert.equal(
             example.raw,
-            'id: 1\nname: "Jhon"',
+            'id: 1\nname: "John"',
             "Example's raw is set"
           );
           assert.equal(
             example.value,
-            '{\n  "id": 1,\n  "name": "Jhon"\n}',
+            '{\n  "id": 1,\n  "name": "John"\n}',
             "Example's value is set"
           );
         });
@@ -2208,12 +2152,12 @@ describe('<api-example-generator>', () => {
           assert.equal(example.title, 'employee', "Example's title is set");
           assert.equal(
             example.raw,
-            'id: 1\nname: "Jhon"',
+            'id: 1\nname: "John"',
             "Example's raw is set"
           );
           assert.equal(
             example.value,
-            '<?xml version="1.0" encoding="UTF-8"?>\n<Employee>\n  <id>1</id>\n  <name>Jhon</name>\n</Employee>\n',
+            '<?xml version="1.0" encoding="UTF-8"?>\n<Employee>\n  <id>1</id>\n  <name>John</name>\n</Employee>\n',
             "Example's value is set"
           );
         });
@@ -2316,11 +2260,7 @@ describe('<api-example-generator>', () => {
             );
             const data = JSON.parse(result[0].value);
             // @ts-ignore
-            assert.typeOf(
-              data.records[0][item[0]],
-              item[1],
-              'Data type matches'
-            );
+            assert.typeOf( data.records[0][item[0]], item[1], 'Data type matches');
             // @ts-ignore
             assert.equal(data.records[0][item[0]], item[2], 'Value matches');
           });

@@ -24,7 +24,7 @@ paths:
     get:
       summary: "A get method"
       responses:
-        200:
+        '200':
           description: Successful response
     post:
       summary: Add something
@@ -34,9 +34,9 @@ paths:
             schema:
               $ref: "#/components/schemas/Article"
       responses:
-        201:
+        '201':
           description: Successful creation
           content:
-            appliication/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/Article"

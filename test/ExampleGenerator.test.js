@@ -17,8 +17,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -30,7 +34,7 @@ describe('ExampleGenerator', () => {
           element = new ExampleGenerator(amf);
         });
 
-        it('Returns list of media types', () => {
+        it('returns list of media types', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/IncludedInType',
@@ -40,7 +44,7 @@ describe('ExampleGenerator', () => {
           assert.deepEqual(result, ['application/json', 'application/xml']);
         });
 
-        it('Returns list of media types when single Payload is passed', () => {
+        it('returns list of media types when single Payload is passed', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/IncludedInType',
@@ -50,12 +54,12 @@ describe('ExampleGenerator', () => {
           assert.deepEqual(result, ['application/json']);
         });
 
-        it('Returns undefined when no argument', () => {
-          const result = element.listMedia();
+        it('returns undefined when no argument', () => {
+          const result = element.listMedia(undefined);
           assert.isUndefined(result);
         });
 
-        it('Returns undefined when single Payload is not a payload', () => {
+        it('returns undefined when single Payload is not a payload', () => {
           const shape = AmfLoader.lookupType(amf, 'PropertyExamples');
           const result = element.listMedia(shape);
           assert.isUndefined(result);
@@ -68,8 +72,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -81,7 +89,7 @@ describe('ExampleGenerator', () => {
           element = new ExampleGenerator(amf);
         });
 
-        it('Returns array', () => {
+        it('returns array', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/IncludedInType',
@@ -94,7 +102,7 @@ describe('ExampleGenerator', () => {
           assert.typeOf(result, 'array');
         });
 
-        it('Returns when single payload has been passed as argument', () => {
+        it('returns when single payload has been passed as argument', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/IncludedInType',
@@ -210,7 +218,7 @@ describe('ExampleGenerator', () => {
             'application/xml'
           );
           assert.equal(
-            result[0].value.indexOf('<?xml version="1.0" encoding="UTF-8"?>'),
+            String(result[0].value).indexOf('<?xml version="1.0" encoding="UTF-8"?>'),
             0
           );
         });
@@ -225,7 +233,7 @@ describe('ExampleGenerator', () => {
             payloads,
             'application/json'
           );
-          assert.equal(result[0].value.indexOf('{'), 0);
+          assert.equal(String(result[0].value).indexOf('{'), 0);
         });
 
         it('Skips generating examples from properties when noAuto is set', () => {
@@ -242,7 +250,7 @@ describe('ExampleGenerator', () => {
           assert.isUndefined(result);
         });
 
-        it('Returns undefined when when no payload', () => {
+        it('returns undefined when when no payload', () => {
           const result = element.generatePayloadsExamples(
             undefined,
             'application/json'
@@ -250,17 +258,17 @@ describe('ExampleGenerator', () => {
           assert.isUndefined(result);
         });
 
-        it('Returns undefined when when no media type', () => {
+        it('returns undefined when when no media type', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/propertyExamples',
             'post'
           );
-          const result = element.generatePayloadsExamples(payloads);
+          const result = element.generatePayloadsExamples(payloads, undefined);
           assert.isUndefined(result);
         });
 
-        it('Returns undefined when media type not supported', () => {
+        it('returns undefined when media type not supported', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/propertyExamples',
@@ -278,8 +286,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe('APIC-332 ' + String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -294,7 +306,7 @@ describe('ExampleGenerator', () => {
           element = new ExampleGenerator(amf);
         });
 
-        it('Returns array', () => {
+        it('returns array', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/organization',
@@ -343,8 +355,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -356,7 +372,7 @@ describe('ExampleGenerator', () => {
           element = new ExampleGenerator(amf);
         });
 
-        it('Returns array', () => {
+        it('returns array', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/IncludedInType',
@@ -369,7 +385,7 @@ describe('ExampleGenerator', () => {
           assert.typeOf(result, 'array');
         });
 
-        it('Returns undefined when argument is not set', () => {
+        it('returns undefined when argument is not set', () => {
           const result = element.generatePayloadsExamples(
             undefined,
             'application/json'
@@ -377,7 +393,7 @@ describe('ExampleGenerator', () => {
           assert.isUndefined(result);
         });
 
-        it('Returns undefined when argument is a Payload', () => {
+        it('returns undefined when argument is a Payload', () => {
           const shape = AmfLoader.lookupType(amf, 'PropertyExamples');
           const result = element.generatePayloadsExamples(
             shape,
@@ -395,16 +411,16 @@ describe('ExampleGenerator', () => {
           const result = element.generatePayloadsExamples(payloads[0], null, {
             rawOnly: true,
           });
-          assert.typeOf(result, 'array', 'Returns an array');
+          assert.typeOf(result, 'array', 'returns an array');
           assert.lengthOf(result, 1, 'Array is size of 1');
           assert.equal(
-            result[0].value.indexOf('error: false'),
+            String(result[0].value).indexOf('error: false'),
             0,
             'Value is set'
           );
         });
 
-        it('Returns undefined when "rawOnly" and no raw values', () => {
+        it('returns undefined when "rawOnly" and no raw values', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/arrayTypeExample',
@@ -423,8 +439,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -449,7 +469,7 @@ describe('ExampleGenerator', () => {
           assert.typeOf(result, 'array');
         });
 
-        it('Returns example from a Type', () => {
+        it('returns example from a Type', () => {
           const shape = AmfLoader.lookupType(amf, 'PropertyExamples');
           const result = element.computeExamples(shape, 'application/json');
           assert.typeOf(result, 'array');
@@ -592,7 +612,7 @@ describe('ExampleGenerator', () => {
           assert.isFalse(ex1.hasRaw);
           assert.isFalse(ex1.hasTitle);
           assert.isFalse(ex1.hasUnion);
-          const parsed1 = JSON.parse(ex1.value);
+          const parsed1 = JSON.parse(String(ex1.value));
           const cmp1 = {
             id: 'R34fg663H9KW9MMSKISI',
             name: 'Pawel Psztyc',
@@ -619,7 +639,7 @@ describe('ExampleGenerator', () => {
             'thumb: https://image.com/thumb';
           assert.equal(ex2.raw, raw);
 
-          const parsedExample2 = JSON.parse(ex2.value);
+          const parsedExample2 = JSON.parse(String(ex2.value));
           const cmp2 = {
             birthday: '20-10-1983',
             error: false,
@@ -699,16 +719,16 @@ describe('ExampleGenerator', () => {
           const result = element.computeExamples(payloads[0], null, {
             rawOnly: true,
           });
-          assert.typeOf(result, 'array', 'Returns an array');
+          assert.typeOf(result, 'array', 'returns an array');
           assert.lengthOf(result, 2, 'Array is size of 2');
           assert.equal(
-            result[0].value.indexOf('error: false'),
+            String(result[0].value).indexOf('error: false'),
             0,
             'Value is set'
           );
         });
 
-        it('Returns undefined when "rawOnly" and no raw values', () => {
+        it('returns undefined when "rawOnly" and no raw values', () => {
           const payloads = AmfLoader.lookupPayloadSchema(
             amf,
             '/propertyExamples',
@@ -741,7 +761,7 @@ describe('ExampleGenerator', () => {
           const element = new ExampleGenerator(amf);
           const shape = AmfLoader.lookupType(amf, 'HttpError');
           const result = element.computeExamples(shape, 'application/json', {});
-          const example = JSON.parse(result[0].value);
+          const example = JSON.parse(String(result[0].value));
           assert.lengthOf(Object.keys(example), 4);
         });
       });
@@ -752,8 +772,12 @@ describe('ExampleGenerator', () => {
     [
       ['DemoAPI: json+ld data model', false],
       ['DemoAPI: Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -765,7 +789,7 @@ describe('ExampleGenerator', () => {
           element = new ExampleGenerator(amf);
         });
 
-        it('Returns list of examples defined inline in body', () => {
+        it('returns list of examples defined inline in body', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/IncludedInlineJson',
@@ -779,7 +803,7 @@ describe('ExampleGenerator', () => {
           assert.lengthOf(result, 1);
         });
 
-        it('Returns list of XML examples defined inline in body', () => {
+        it('returns list of XML examples defined inline in body', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/user-raml-example',
@@ -828,6 +852,7 @@ describe('ExampleGenerator', () => {
       ['SE-10469: Compact data model', true, 'SE-10469'],
     ].forEach(([label, compact, file]) => {
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -863,8 +888,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -887,7 +916,7 @@ describe('ExampleGenerator', () => {
           assert.equal(result[0].value, '[0]');
         });
 
-        it('JSON from scalar array with exampels', () => {
+        it('JSON from scalar array with examples', () => {
           const payloads = AmfLoader.lookupPayload(
             amf,
             '/arrayScalarWithExample',
@@ -914,7 +943,7 @@ describe('ExampleGenerator', () => {
           );
           assert.typeOf(result, 'array');
           assert.lengthOf(result, 1);
-          const parsed = JSON.parse(result[0].value);
+          const parsed = JSON.parse(String(result[0].value));
           assert.deepEqual(parsed, [
             {
               xtra: '',
@@ -961,7 +990,7 @@ describe('ExampleGenerator', () => {
     <defVal>1</defVal>
   </PropertyExamples>
 </schema>`;
-          assert.equal(result[0].value.trim(), value);
+          assert.equal(String(result[0].value).trim(), value);
         });
       });
     });
@@ -971,7 +1000,10 @@ describe('ExampleGenerator', () => {
     [
       ['DemoApi: json+ld data model', false],
       ['DemoApi: Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
         let element;
         let amf;
@@ -1078,6 +1110,7 @@ describe('ExampleGenerator', () => {
       ['se-8987: Compact data model', true, 'se-8987'],
     ].forEach(([label, compact, file]) => {
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1153,8 +1186,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1201,8 +1238,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1249,8 +1290,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1283,8 +1328,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1317,8 +1366,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1365,8 +1418,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1412,8 +1469,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1432,7 +1493,7 @@ describe('ExampleGenerator', () => {
           ['Boolean', 'http://www.w3.org/2001/XMLSchema#boolean'],
           ['Date', 'http://www.w3.org/2001/XMLSchema#date'],
         ].forEach(item => {
-          it(`Returns ${item[0]} type`, () => {
+          it(`returns ${item[0]} type`, () => {
             const shape = {};
             if (compact) {
               shape['shacl:datatype'] = item[1];
@@ -1451,8 +1512,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1464,19 +1529,19 @@ describe('ExampleGenerator', () => {
           element = new ExampleGenerator(amf);
         });
 
-        it('Returns default value of range', () => {
+        it('returns default value of range', () => {
           const range = AmfLoader.lookupTypePropertyRange(amf, 'Address', 1);
           const result = element._getTypeScalarValue(range);
           assert.equal(result, '00000');
         });
 
-        it('Returns example value when no default value', () => {
+        it('returns example value when no default value', () => {
           const range = AmfLoader.lookupTypePropertyRange(amf, 'Address', 2);
           const result = element._getTypeScalarValue(range);
           assert.equal(result, 1);
         });
 
-        it('Returns undefined otherwise', () => {
+        it('returns undefined otherwise', () => {
           const range = AmfLoader.lookupTypePropertyRange(amf, 'Address', 0);
           const result = element._getTypeScalarValue(range);
           assert.isUndefined(result);
@@ -1489,8 +1554,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1502,7 +1571,7 @@ describe('ExampleGenerator', () => {
           element = new ExampleGenerator(amf);
         });
 
-        it('Returns object', () => {
+        it('returns object', () => {
           const type = AmfLoader.lookupType(amf, 'Address');
           const result = element._computeJsonObjectValue(type);
           assert.typeOf(result, 'object');
@@ -1516,7 +1585,7 @@ describe('ExampleGenerator', () => {
           assert.equal(result.zip, '94100');
         });
 
-        it('Returns empty object when no properties in type', () => {
+        it('returns empty object when no properties in type', () => {
           const result = element._computeJsonObjectValue({});
           assert.typeOf(result, 'object');
           assert.deepEqual(result, {});
@@ -1528,8 +1597,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1541,8 +1614,8 @@ describe('ExampleGenerator', () => {
           element = new ExampleGenerator(amf);
         });
 
-        it('Returns undefined when no structure', () => {
-          const result = element._jsonFromStructure();
+        it('returns undefined when no structure', () => {
+          const result = element._jsonFromStructure(undefined);
           assert.isUndefined(result);
         });
 
@@ -1578,7 +1651,7 @@ describe('ExampleGenerator', () => {
           assert.typeOf(result, 'object');
         });
 
-        it('Creates complext structures', () => {
+        it('Creates complex structures', () => {
           const type = AmfLoader.lookupType(amf, 'JsonExampleInclude');
           const value = getStructuredValue(element, type);
           const result = element._jsonFromStructure(value);
@@ -1598,10 +1671,14 @@ describe('ExampleGenerator', () => {
 
   describe('_getTypedValue()', () => {
     [
-      // ['json+ld data model', false],
+      ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1643,19 +1720,19 @@ describe('ExampleGenerator', () => {
           return obj;
         }
 
-        it('Returns undefined when no @value', () => {
+        it('returns undefined when no @value', () => {
           const result = element._getTypedValue({});
           assert.isUndefined(result);
         });
 
-        it('Returns type for "boolean" (true) - compact', () => {
+        it('returns type for "boolean" (true) - compact', () => {
           const obj = constructType(prefix + 'boolean', 'true');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'boolean');
           assert.isTrue(result);
         });
 
-        it('Returns type for "boolean" (true) - compact - old model', () => {
+        it('returns type for "boolean" (true) - compact - old model', () => {
           const obj = {};
           obj[valueKey] = [
             {
@@ -1668,7 +1745,7 @@ describe('ExampleGenerator', () => {
           assert.isTrue(result);
         });
 
-        it('Returns type for "boolean" (true) - full', () => {
+        it('returns type for "boolean" (true) - full', () => {
           const obj = constructType(
             element.ns.w3.xmlSchema + 'boolean',
             'true'
@@ -1678,14 +1755,14 @@ describe('ExampleGenerator', () => {
           assert.isTrue(result);
         });
 
-        it('Returns type for "boolean" (false) - compact', () => {
+        it('returns type for "boolean" (false) - compact', () => {
           const obj = constructType(prefix + 'boolean', 'false');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'boolean');
           assert.isFalse(result);
         });
 
-        it('Returns type for "boolean" (false) - full', () => {
+        it('returns type for "boolean" (false) - full', () => {
           const obj = constructType(
             element.ns.w3.xmlSchema + 'boolean',
             'false'
@@ -1695,70 +1772,70 @@ describe('ExampleGenerator', () => {
           assert.isFalse(result);
         });
 
-        it('Returns type for "nil" - compact', () => {
+        it('returns type for "nil" - compact', () => {
           const obj = constructType(prefix + 'nil', 'null');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'null');
           assert.equal(result, null);
         });
 
-        it('Returns type for "nil" - full', () => {
+        it('returns type for "nil" - full', () => {
           const obj = constructType(element.ns.w3.xmlSchema + 'nil', 'null');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'null');
           assert.equal(result, null);
         });
 
-        it('Returns type for "integer" - compact', () => {
+        it('returns type for "integer" - compact', () => {
           const obj = constructType(`${prefix}integer`, '10');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 10);
         });
 
-        it('Returns type for "integer" (false) - full', () => {
+        it('returns type for "integer" (false) - full', () => {
           const obj = constructType(`${element.ns.w3.xmlSchema}integer`, '10');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 10);
         });
 
-        it('Returns type for "number" - compact', () => {
+        it('returns type for "number" - compact', () => {
           const obj = constructType(`${prefix}number`, '10');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 10);
         });
 
-        it('Returns type for "number" (false) - full', () => {
+        it('returns type for "number" (false) - full', () => {
           const obj = constructType(`${element.ns.w3.xmlSchema}number`, '10');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 10);
         });
 
-        it('Returns 0 when expected number is NaN', () => {
+        it('returns 0 when expected number is NaN', () => {
           const obj = constructType(`${prefix}number`, 'test');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'number');
           assert.equal(result, 0);
         });
 
-        it('Returns passed value for anything else', () => {
+        it('returns passed value for anything else', () => {
           const obj = constructType(`${prefix}string`, 'test');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'string');
           assert.equal(result, 'test');
         });
 
-        it('Returns value when type is missing', () => {
+        it('returns value when type is missing', () => {
           const obj = constructType(undefined, '10');
           const result = element._getTypedValue(obj);
           assert.typeOf(result, 'string');
           assert.equal(result, '10');
         });
 
-        it('Returns empty string value instead of undefined', () => {
+        it('returns empty string value instead of undefined', () => {
           const obj = constructShortenedType(`${prefix}string`, '');
           const result = element._getTypedValue(obj);
           assert.equal(result, '');
@@ -1771,8 +1848,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1783,13 +1864,13 @@ describe('ExampleGenerator', () => {
         let prefix;
         beforeEach(() => {
           element = new ExampleGenerator(amf);
-          prefix = element._getAmfKey(element.ns.w3.xmlSchema);
-          if (prefix !== element.ns.w3.xmlSchema) {
+          prefix = element._getAmfKey(element.ns.w3.xmlSchema.key);
+          if (prefix !== element.ns.w3.xmlSchema.key) {
             prefix += ':';
           }
         });
 
-        it('Returns undefined when no items', () => {
+        it('returns undefined when no items', () => {
           const result = element._computeJsonArrayValue({});
           assert.isUndefined(result);
         });
@@ -1804,12 +1885,16 @@ describe('ExampleGenerator', () => {
     });
   });
 
-  describe('_computeExampleArraySchape()', () => {
+  describe('_computeExampleArrayShape()', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1820,38 +1905,38 @@ describe('ExampleGenerator', () => {
         let prefix;
         beforeEach(() => {
           element = new ExampleGenerator(amf);
-          prefix = element._getAmfKey(element.ns.w3.xmlSchema);
-          if (prefix !== element.ns.w3.xmlSchema) {
+          prefix = element._getAmfKey(element.ns.w3.xmlSchema.key);
+          if (prefix !== element.ns.w3.xmlSchema.key) {
             prefix += ':';
           }
         });
 
-        it('Returns items example as array (JSON)', () => {
+        it('returns items example as array (JSON)', () => {
           let schema = AmfLoader.lookupPayloadSchema(
             amf,
             '/arrayTypeExample',
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
           assert.typeOf(result, 'array');
-          const decoded = JSON.parse(result[0].value);
+          const decoded = JSON.parse(String(result[0].value));
           assert.typeOf(decoded, 'array');
           const item = decoded[0];
           assert.equal(item.firstName, 'Pawel');
         });
 
-        it('Returns items example (XML)', () => {
+        it('returns items example (XML)', () => {
           let schema = AmfLoader.lookupPayloadSchema(
             amf,
             '/arrayTypeExample',
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/xml'
           );
@@ -1859,19 +1944,19 @@ describe('ExampleGenerator', () => {
           assert.equal(result[0].value[0], '<');
         });
 
-        it('Returns example from properties (JSON)', () => {
+        it('returns example from properties (JSON)', () => {
           let schema = AmfLoader.lookupPayloadSchema(
             amf,
             '/arrayPropertyExamples',
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
           assert.typeOf(result, 'array');
-          const decoded = JSON.parse(result[0].value);
+          const decoded = JSON.parse(String(result[0].value));
           assert.typeOf(decoded, 'array');
           const item = decoded[0];
           assert.equal(item.firstName, 'Pawel');
@@ -1884,12 +1969,12 @@ describe('ExampleGenerator', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
           assert.typeOf(result, 'array');
-          const decoded = JSON.parse(result[0].value);
+          const decoded = JSON.parse(String(result[0].value));
           assert.typeOf(decoded, 'array');
           const item = decoded[0];
           assert.equal(item.address.zip, '94100');
@@ -1902,7 +1987,7 @@ describe('ExampleGenerator', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
@@ -1916,12 +2001,12 @@ describe('ExampleGenerator', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
           assert.typeOf(result, 'array');
-          const decoded = JSON.parse(result[0].value);
+          const decoded = JSON.parse(String(result[0].value));
           assert.typeOf(decoded, 'array');
           assert.deepEqual(decoded, [{ test: false, other: '' }]);
         });
@@ -1933,7 +2018,7 @@ describe('ExampleGenerator', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/xml'
           );
@@ -1952,7 +2037,7 @@ describe('ExampleGenerator', () => {
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json',
             { noAuto: true }
@@ -1960,10 +2045,10 @@ describe('ExampleGenerator', () => {
           assert.isUndefined(result, 'array');
         });
 
-        it('Returns undefined when array does not have items', () => {
+        it('returns undefined when array does not have items', () => {
           let shape = AmfLoader.lookupType(amf, 'ArrayWithoutItems');
           shape = element._resolve(shape);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             shape,
             'application/json'
           );
@@ -1975,8 +2060,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -1988,14 +2077,14 @@ describe('ExampleGenerator', () => {
           element = new ExampleGenerator(amf);
         });
 
-        it.skip('Returns example for union arrays', () => {
+        it.skip('returns example for union arrays', () => {
           let schema = AmfLoader.lookupPayloadSchema(
             amf,
             '/myEndpoint',
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeExampleArraySchape(
+          const result = element._computeExampleArrayShape(
             schema,
             'application/json'
           );
@@ -2073,71 +2162,75 @@ describe('ExampleGenerator', () => {
     });
   });
 
-  describe('_computeJsonProperyValue()', () => {
+  describe('_computeJsonPropertyValue()', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(/** @type Boolean */ (compact));
+          amf = await AmfLoader.load(compact);
         });
 
         let prefix;
         beforeEach(async () => {
           element = new ExampleGenerator(amf);
-          prefix = element._getAmfKey(element.ns.w3.xmlSchema);
-          if (prefix !== element.ns.w3.xmlSchema) {
+          prefix = element._getAmfKey(element.ns.w3.xmlSchema.key);
+          if (prefix !== element.ns.w3.xmlSchema.key) {
             prefix += ':';
           }
         });
 
-        it('Returns value for scalar type', () => {
+        it('returns value for scalar type', () => {
           let schema = AmfLoader.lookupPayloadSchema(amf, '/scalar', 'post')[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(schema);
+          const result = element._computeJsonPropertyValue(schema);
           assert.equal(result, '');
         });
 
-        it('Returns value for union type', () => {
+        it('returns value for union type', () => {
           let schema = AmfLoader.lookupPayloadSchema(amf, '/union', 'post')[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(schema);
+          const result = element._computeJsonPropertyValue(schema);
           assert.typeOf(result.birthday, 'string');
         });
 
-        it('Returns value for selected type in union', () => {
+        it('returns value for selected type in union', () => {
           let schema = AmfLoader.lookupPayloadSchema(amf, '/union', 'post')[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(
+          const result = element._computeJsonPropertyValue(
             schema,
             'PropertyExamples'
           );
           assert.typeOf(result.address, 'object');
         });
 
-        it('Returns value for NodeShape', () => {
+        it('returns value for NodeShape', () => {
           let schema = AmfLoader.lookupPayloadSchema(
             amf,
             '/IncludedInType',
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(schema);
+          const result = element._computeJsonPropertyValue(schema);
           assert.typeOf(result.birthday, 'string');
         });
 
-        it('Returns value for ArrayShape', () => {
+        it('returns value for ArrayShape', () => {
           let schema = AmfLoader.lookupPayloadSchema(
             amf,
             '/arrayTypeExample',
             'post'
           )[0];
           schema = element._resolve(schema);
-          const result = element._computeJsonProperyValue(schema);
+          const result = element._computeJsonPropertyValue(schema);
           assert.typeOf(result, 'array');
           assert.deepEqual(result[0], { firstName: '', lastName: '' });
         });
@@ -2146,12 +2239,16 @@ describe('ExampleGenerator', () => {
   });
 
   describe('APIC-679', () => {
-    describe('_computeJsonProperyValue()', () => {
+    describe('_computeJsonPropertyValue()', () => {
       [
         ['json+ld data model', false],
         ['Compact data model', true],
-      ].forEach(([label, compact]) => {
+      ].forEach((args) => {
+        const label = args[0];
+        const compact = /** @type boolean */ (args[1]);
+
         describe(String(label), () => {
+          /** @type ExampleGenerator */
           let element;
           let amf;
 
@@ -2166,23 +2263,23 @@ describe('ExampleGenerator', () => {
             element = new ExampleGenerator(amf);
           });
 
-          it('Returns value for scalar type nullable property', () => {
+          it('returns value for scalar type nullable property', () => {
             const props = AmfLoader.lookupTypePropertyRange(
               amf,
               'claimSummaryResponse',
               0
             );
-            const result = element._computeJsonProperyValue(props);
+            const result = element._computeJsonPropertyValue(props);
             assert.equal(result, '2021-10-1');
           });
 
-          it('Returns value for node type property', () => {
+          it('returns value for node type property', () => {
             const props = AmfLoader.lookupTypePropertyRange(
               amf,
               'claimSummaryResponse',
               1
             );
-            const result = element._computeJsonProperyValue(props);
+            const result = element._computeJsonPropertyValue(props);
             assert.equal(result, '2021-10-21');
           });
         });
@@ -2190,12 +2287,17 @@ describe('ExampleGenerator', () => {
     });
   });
 
-  describe('JSON schema processing', () => {
+  // until APIMF-3327 and APIC-695 are resolved.
+  describe.skip('JSON schema processing', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -2256,8 +2358,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -2286,14 +2392,19 @@ describe('ExampleGenerator', () => {
           assert.equal(example.title, 'employees', "Example's title is set");
           assert.equal(
             example.raw,
-            '-\n  id: 1\n  name: Jhon\n-\n  id: 2\n  name: Sam',
+            '-\n  id: 1\n  name: John\n-\n  id: 2\n  name: Sam',
             "Example's raw is set"
           );
-          assert.equal(
-            example.value,
-            '[\n  {\n    "id": 1,\n    "name": "Jhon"\n  },\n  {\n    "id": 2,\n    "name": "Sam"\n  }\n]',
-            "Example's value is set"
-          );
+          assert.typeOf(example.value, 'string', 'value is a string');
+          const parsed = JSON.parse(String(example.value));
+          assert.typeOf(parsed, 'array', 'represents an array');
+          assert.lengthOf(parsed, 2, 'has 2 items');
+          const [e1, e2] = parsed;
+          
+          assert.equal(e1.id, 1, 'has the example1.id');
+          assert.equal(e1.name, 'John', 'has the example1.name');
+          assert.equal(e2.id, 2, 'has the example2.id');
+          assert.equal(e2.name, 'Sam', 'has the example2.name');
         });
 
         it('Generates example for POST', () => {
@@ -2310,12 +2421,12 @@ describe('ExampleGenerator', () => {
           assert.equal(example.title, 'employee', "Example's title is set");
           assert.equal(
             example.raw,
-            'id: 1\nname: "Jhon"',
+            'id: 1\nname: "John"',
             "Example's raw is set"
           );
           assert.equal(
             example.value,
-            '{\n  "id": 1,\n  "name": "Jhon"\n}',
+            '{\n  "id": 1,\n  "name": "John"\n}',
             "Example's value is set"
           );
         });
@@ -2334,12 +2445,12 @@ describe('ExampleGenerator', () => {
           assert.equal(example.title, 'employee', "Example's title is set");
           assert.equal(
             example.raw,
-            'id: 1\nname: "Jhon"',
+            'id: 1\nname: "John"',
             "Example's raw is set"
           );
           assert.equal(
             example.value,
-            '{\n  "id": 1,\n  "name": "Jhon"\n}',
+            '{\n  "id": 1,\n  "name": "John"\n}',
             "Example's value is set"
           );
         });
@@ -2358,12 +2469,12 @@ describe('ExampleGenerator', () => {
           assert.equal(example.title, 'employee', "Example's title is set");
           assert.equal(
             example.raw,
-            'id: 1\nname: "Jhon"',
+            'id: 1\nname: "John"',
             "Example's raw is set"
           );
           assert.equal(
             example.value,
-            '<?xml version="1.0" encoding="UTF-8"?>\n<Employee>\n  <id>1</id>\n  <name>Jhon</name>\n</Employee>\n',
+            '<?xml version="1.0" encoding="UTF-8"?>\n<Employee>\n  <id>1</id>\n  <name>John</name>\n</Employee>\n',
             "Example's value is set"
           );
         });
@@ -2375,8 +2486,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -2406,13 +2521,13 @@ describe('ExampleGenerator', () => {
           ['typeNumFormatInt8', 'number', 1],
           ['typeNumFormatInt16', 'number', 2],
         ].forEach(item => {
-          it(`Returns ${item[1]} type (${item[0]})`, () => {
+          it(`returns ${item[1]} type (${item[0]})`, () => {
             const type = /** @type string */ (item[0]);
             const datatype = /** @type string */ (item[1]);
 
             const shape = AmfLoader.lookupType(amf, 'DataTypesExample');
             const result = element.computeExamples(shape, 'application/json');
-            const data = JSON.parse(result[0].value);
+            const data = JSON.parse(String(result[0].value));
 
             assert.typeOf(data[type], datatype, 'Data type matches');
             assert.equal(data[type], item[2], 'Value matches');
@@ -2426,8 +2541,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -2452,7 +2571,7 @@ describe('ExampleGenerator', () => {
           ['Weight', 'number', 9300],
           ['Year', 'string', '2016'],
         ].forEach(item => {
-          it(`Returns ${item[1]} type (${item[0]})`, () => {
+          it(`returns ${item[1]} type (${item[0]})`, () => {
             const datatype = /** @type string */ (item[1]);
             const shape = AmfLoader.lookupPayloadSchema(
               amf,
@@ -2464,7 +2583,7 @@ describe('ExampleGenerator', () => {
               shape[0],
               'application/json'
             );
-            const data = JSON.parse(result[0].value);
+            const data = JSON.parse(String(result[0].value));
 
             assert.typeOf(
               data.records[0][item[0]],
@@ -2482,8 +2601,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
 
@@ -2504,7 +2627,7 @@ describe('ExampleGenerator', () => {
             payloads,
             'application/json'
           );
-          const data = JSON.parse(result[0].value);
+          const data = JSON.parse(String(result[0].value));
           assert.isFalse(data.allOrNone);
           assert.typeOf(data.records, 'array');
         });
@@ -2516,8 +2639,12 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
       describe(String(label), () => {
+        /** @type ExampleGenerator */
         let element;
         let amf;
         let doc;
@@ -2560,6 +2687,7 @@ describe('ExampleGenerator', () => {
   describe('_computeStructuredExampleValue()', () => {
     let baseObj;
     let valueKey;
+    /** @type ExampleGenerator */
     let element;
     let model;
     before(async () => {
@@ -2584,17 +2712,18 @@ describe('ExampleGenerator', () => {
       ];
     });
 
-    it('Returns null when no argument', () => {
-      const result = element._computeStructuredExampleValue();
+    it('returns null when no argument', () => {
+      const result = element._computeStructuredExampleValue(undefined);
       assert.equal(result, null);
     });
 
-    it('Returns the same value as argument when string', () => {
+    it('returns the same value as argument when string', () => {
+      // @ts-ignore
       const result = element._computeStructuredExampleValue('test');
       assert.equal(result, 'test');
     });
 
-    it('Returns boolean value - true (full key)', () => {
+    it('returns boolean value - true (full key)', () => {
       baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'boolean';
       baseObj[valueKey][0]['@value'] = 'true';
       const result = element._computeStructuredExampleValue(baseObj);
@@ -2602,7 +2731,7 @@ describe('ExampleGenerator', () => {
       assert.isTrue(result);
     });
 
-    it('Returns boolean value - false (full key)', () => {
+    it('returns boolean value - false (full key)', () => {
       baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'boolean';
       baseObj[valueKey][0]['@value'] = 'false';
       const result = element._computeStructuredExampleValue(baseObj);
@@ -2610,7 +2739,7 @@ describe('ExampleGenerator', () => {
       assert.isFalse(result);
     });
 
-    it('Returns numeric value for integer (full key)', () => {
+    it('returns numeric value for integer (full key)', () => {
       baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'integer';
       baseObj[valueKey][0]['@value'] = '10';
       const result = element._computeStructuredExampleValue(baseObj);
@@ -2618,7 +2747,7 @@ describe('ExampleGenerator', () => {
       assert.equal(result, 10);
     });
 
-    it('Returns numeric value for long (full key)', () => {
+    it('returns numeric value for long (full key)', () => {
       baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'long';
       baseObj[valueKey][0]['@value'] = '1000000000';
       const result = element._computeStructuredExampleValue(baseObj);
@@ -2626,7 +2755,7 @@ describe('ExampleGenerator', () => {
       assert.equal(result, 1000000000);
     });
 
-    it('Returns numeric value for double (full key)', () => {
+    it('returns numeric value for double (full key)', () => {
       baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'double';
       baseObj[valueKey][0]['@value'] = '12.1234';
       const result = element._computeStructuredExampleValue(baseObj);
@@ -2634,7 +2763,7 @@ describe('ExampleGenerator', () => {
       assert.equal(result, 12.1234);
     });
 
-    it('Returns numeric value for float (full key)', () => {
+    it('returns numeric value for float (full key)', () => {
       baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'float';
       baseObj[valueKey][0]['@value'] = '12.1234';
       const result = element._computeStructuredExampleValue(baseObj);
@@ -2642,7 +2771,7 @@ describe('ExampleGenerator', () => {
       assert.equal(result, 12.1234);
     });
 
-    it('Returns string otherwise', () => {
+    it('returns string otherwise', () => {
       baseObj[valueKey][0]['@type'] = element.ns.w3.xmlSchema + 'string';
       baseObj[valueKey][0]['@value'] = 'test';
       const result = element._computeStructuredExampleValue(baseObj);
@@ -2652,6 +2781,7 @@ describe('ExampleGenerator', () => {
   });
 
   describe('_computeExampleFromStructuredValue()', () => {
+    /** @type ExampleGenerator */
     let element;
     let model;
     before(async () => {
@@ -2735,7 +2865,7 @@ describe('ExampleGenerator', () => {
       assert.equal(result, 'a--b-c');
     });
 
-    it('keeps underscoer characters', () => {
+    it('keeps underscore characters', () => {
       const name = 'a_&_b =_c?';
       const result = normalizeXmlTagName(name);
       assert.equal(result, 'a__b_c');
@@ -2749,6 +2879,7 @@ describe('ExampleGenerator', () => {
   });
 
   describe('APIC-391', () => {
+    /** @type ExampleGenerator */
     let element;
     let amf;
 
@@ -2863,7 +2994,10 @@ describe('ExampleGenerator', () => {
     [
       ['json+ld data model', false],
       ['Compact data model', true],
-    ].forEach(([label, compact]) => {
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+      /** @type ExampleGenerator */
       let element;
       let amf;
 

@@ -25,8 +25,8 @@ components:
     HttpError:
       description: An HTTP response that is an error
       allOf:
-        - $ref: "components/schemas/HttpResponse"
-        - $ref: "components/schemas/Error"
+        - $ref: "#/components/schemas/HttpResponse"
+        - $ref: "#/components/schemas/Error"
       properties:
         extraProp:
           type: string
@@ -35,24 +35,27 @@ paths:
   /error:
     get:
       responses:
-        200:
+        '200':
+          description: test
           content:
-            appliication/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/Error"
   /httpResponse:
     get:
       responses:
-        200:
+        '200':
+          description: test
           content:
-            appliication/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/HttpResponse"
   /httpError:
     get:
       responses:
-        200:
+        '200':
+          description: test
           content:
-            appliication/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/HttpError"

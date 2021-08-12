@@ -1,5 +1,6 @@
+/* eslint-disable class-methods-use-this */
 import { LitElement } from 'lit-element';
-import { ExampleGenerator } from './ExampleGenerator.js';
+import { dataNameFromKey, ExampleGenerator, formatXml, normalizeXmlTagName, processJsonArrayExamples } from './ExampleGenerator.js';
 
 /**
  * @deprecated This custom element is deprecated. Use `ExampleGenerator` instead
@@ -74,12 +75,12 @@ export class ApiExampleGenerator extends LitElement {
     return this._generator._generateFromExample(example, mime, opts);
   }
 
-  _computeExampleArraySchape(schema, mime, opts) {
-    return this._generator._computeExampleArraySchape(schema, mime, opts);
+  _computeExampleArrayShape(schema, mime, opts) {
+    return this._generator._computeExampleArrayShape(schema, mime, opts);
   }
 
   _processJsonArrayExamples(examples) {
-    return this._generator._processJsonArrayExamples(examples);
+    return processJsonArrayExamples(examples);
   }
 
   _computeUnionExamples(schema, mime, opts) {
@@ -103,7 +104,7 @@ export class ApiExampleGenerator extends LitElement {
   }
 
   formatXml(xml) {
-    return this._generator.formatXml(xml);
+    return formatXml(xml);
   }
 
   _getTypedValue(structure) {
@@ -122,8 +123,8 @@ export class ApiExampleGenerator extends LitElement {
     return this._generator._jsonExampleFromProperties(properties);
   }
 
-  _computeJsonProperyValue(range, typeName) {
-    return this._generator._computeJsonProperyValue(range, typeName);
+  _computeJsonPropertyValue(range, typeName) {
+    return this._generator._computeJsonPropertyValue(range, typeName);
   }
 
   _typeToValue(value, type) {
@@ -187,7 +188,7 @@ export class ApiExampleGenerator extends LitElement {
   }
 
   _normalizeXmlTagName(name) {
-    return this._generator._normalizeXmlTagName(name);
+    return normalizeXmlTagName(name);
   }
 
   _xmlProcessDataProperty(doc, node, property, name) {
@@ -211,6 +212,6 @@ export class ApiExampleGenerator extends LitElement {
   }
 
   _dataNameFromKey(key) {
-    return this._generator._dataNameFromKey(key);
+    return dataNameFromKey(key);
   }
 }
