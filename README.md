@@ -1,4 +1,10 @@
-# ExampleGenerator
+# DEPRECATED
+
+This component is being deprecated. The code base has been moved to [api-documentation](https://github.com/advanced-rest-client/api-documentation) module. This module will be archived when [PR 37](https://github.com/advanced-rest-client/api-documentation/pull/37) is merged.
+
+The tests and the logic were migrated to the `@api-components/api-schema` module.
+
+-----
 
 Generates examples from the AMF model.
 
