@@ -1253,6 +1253,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (this._hasType(range, this.ns.aml.vocabularies.shapes.UnionShape)) {
       return this._computeJsonUnionValue(range, typeName);
     }
+    if (this._hasProperty(range, this.ns.w3.shacl.and)) {
+      return this._computeJsonAndValue(range, typeName);
+    }
     if (this._hasType(range, this.ns.w3.shacl.NodeShape)) {
       return this._computeJsonObjectValue(range);
     }
@@ -1410,6 +1413,40 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       }
     }
     return undefined;
+  }
+
+  _computeJsonAndValue(range, typeName) {
+    const key = this._getAmfKey(this.ns.w3.shacl.and);
+    const list = this._ensureArray(range[key]);
+    if (!list) {
+      return undefined;
+    }
+    const pKey = this._getAmfKey(this.ns.w3.shacl.property);
+    const examples = [];
+    for (let i = 0, len = list.length; i < len; i++) {
+      let item = list[i];
+      if (Array.isArray(item)) {
+        item = item[0];
+      }
+      this._resolve(item);
+      if (typeName) {
+        const name = this._getValue(item, this.ns.w3.shacl.name);
+        if (typeName !== name) {
+          continue;
+        }
+      }
+      if (this._hasType(item, this.ns.w3.shacl.NodeShape)) {
+        item = this._resolve(item);
+        const data = this._ensureArray(item[pKey]);
+        if (data) {
+          const example = this._jsonExampleFromProperties(data);
+          if (example && typeof example === 'object') {
+            examples.push(example);
+          }
+        }
+      }
+    }
+    return examples.reduce((acc, value) => ({...acc, ...value}), {});
   }
 
   /**
