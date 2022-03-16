@@ -346,6 +346,35 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     return undefined;
   }
 
+  computeTypeName(schema) {
+    const typeName = /** @type string */ (this._getValue(
+      schema,
+      this.ns.w3.shacl.name
+    ));
+
+    const sKey = this._getAmfKey(
+      this.ns.aml.vocabularies.shapes.xmlSerialization
+    );
+    let xmlSerialization = schema[sKey];
+    if (Array.isArray(xmlSerialization)) {
+      xmlSerialization = xmlSerialization[0];
+    }
+
+    const xmlName = this._getValue(
+      xmlSerialization,
+      this.ns.aml.vocabularies.shapes.xmlName
+    );
+
+    if (xmlName) {
+      return xmlName;
+    }
+    if (typeName && typeName.indexOf('amf_inline_type') !== 0) {
+      return typeName;
+    }
+
+    return undefined;
+  }
+
   /**
    * Computes examples from an AMF shape.
    * It returns examples defined in API spec file. If examples are not defined
@@ -367,11 +396,8 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     this._resolve(schema);
     if (!options.typeName) {
-      const typeName = /** @type string */ (this._getValue(
-        schema,
-        this.ns.w3.shacl.name
-      ));
-      if (typeName && typeName.indexOf('amf_inline_type') !== 0) {
+      const typeName = this.computeTypeName(schema);
+      if (typeName) {
         options.typeName = typeName;
       }
     }
