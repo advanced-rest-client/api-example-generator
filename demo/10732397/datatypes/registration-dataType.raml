@@ -1,0 +1,220 @@
+#%RAML 1.0 DataType
+
+type: object
+description: 
+properties:
+  Request: 
+    type: object
+    properties:
+      storer_key:
+        description: LF unique Customer Code 
+        type: string
+        example: '14410'
+        required: true
+      order_from: 
+        description: Order type
+        type: string
+        example: "B"
+        required: true
+      OrderShip:
+        type: object
+        properties: 
+          sub_tid: 
+            description: Sub order id
+            type: string
+            example: "9813498"
+            required: false
+          tid: 
+            description: Platform order id
+            type: string
+            example: "0004773906"
+            required: true
+          sid: 
+            description: Tracking No  
+            type: string
+            example: "123"
+            required: false
+          extern_docid:
+            description: Packing List or Delivery No. Corresponds with po_id from
+            type: string
+            example: "234234"
+            required: false
+          company_code:
+            description: company code
+            type: string
+            example: "LFL"
+            required: false
+          carrier_code:
+            description: Carrier name or code
+            type: string
+            example: "YAMATO"
+            required: false
+          location_id: 
+            description: Merchant warehouse code
+            type: string
+            example: "3123"
+            required: false
+          seller_nick:
+            description: Seller nick
+            type: string
+            example: "Desigual Web Store"
+            required: false
+          pickslip_no: 
+            description: Picking list no
+            type: string
+            example: "200628000000000"
+            required: false
+          ship_time: 
+            description: Shipment time 
+            type: string
+            example: "20190322000000"
+            required: false
+          total_cartons:
+            description: Number of cartons 
+            type: integer
+            example: 2
+            required: true
+          ShipDetailInfos:
+            type: array
+            items: 
+              type: object
+              properties: 
+                ShipDetailInfo:
+                  type: array 
+                  items: 
+                    type: object 
+                    properties: 
+                      ItemInfo: 
+                        type: object
+                        properties:
+                          container_no:
+                            description: Container Number
+                            type: string
+                            example: "0"
+                            required: false
+                          carton_no:
+                            description: Carton Number
+                            type: integer
+                            example: 0
+                            required: false
+                          item_line: 
+                            description: Item Line No
+                            type: string
+                            example: "ZHWZ0011"
+                            required: false
+                          item_id: 
+                            description: Shipped commodity code
+                            type: string
+                            example: "ZHWZ0011"
+                            required: false
+                          order_qty: 
+                            description:
+                            type: integer
+                            example: 1
+                            required: false
+                          ship_qty:
+                            description:
+                            type: integer
+                            example: 1
+                            required: false
+                          tracking_no: 
+                            description:
+                            type: string
+                            example: "A234123"
+                            required: false
+                          courier_name: 
+                            description: 
+                            type: string
+                            example: "SF"
+                            required: false
+                          attribute_track: 
+                            type: array
+                            items: 
+                              type: object
+                              properties:
+                                attribute_type:
+                                  description: Ettribute Type
+                                  type: string
+                                  example: "batchcode"
+                                  required: false
+                                attribute_value: 
+                                  description: Attribute Value
+                                  type: string
+                                  example: "00001"
+                                  required: false
+          ContainerInfo: 
+            type: object
+            properties:
+              Container: 
+                type: array
+                items: 
+                  type: object
+                  properties: 
+                    container_no:
+                      description: Container Number
+                      type: string
+                      example: "0"
+                      required: false
+                    voyage_no:
+                      description: Voyage Number
+                      type: string
+                      example: "LANTAU BRIDE"
+                      required: false
+                    vessel_no:
+                      description: Vessel Number
+                      type: string
+                      example: "1004E"
+                      required: false
+                    vessel_date:
+                      description: Vessel Date
+                      type: string
+                      example: "20190322000000"
+                      required: false
+                    seal_no:
+                      description: Seal Number
+                      type: string
+                      example: "1"
+                      required: false
+                    weight:
+                      description: Weight of the container
+                      type: number
+                      example: 1.0
+                      required: false
+                    cube:
+                      description: Cube of the container
+                      type: number
+                      example: 1.0
+                      required: false
+                    container_type:
+                      description: Container tpe
+                      type: string
+                      example: "40 DRY HC"
+                      required: false
+          CartonInfo: 
+            type: object
+            properties:
+              Carton: 
+                type: array
+                items: 
+                  type: object
+                  properties: 
+                    carton_no:
+                      description: Carton Number
+                      type: integer
+                      example: 0
+                      required: false
+                    weight:
+                      description: Weight of the carton
+                      type: number
+                      example: 1.0
+                      required: false
+                    cube:
+                      description: Cube of the carton
+                      type: number
+                      example: 1.0
+                      required: false
+                    carton_type:
+                      description: Carton Type
+                      type: string
+                      example: "0083643826"
+                      required: false

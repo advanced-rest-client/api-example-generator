@@ -769,6 +769,55 @@ describe('ExampleGenerator', () => {
         });
       });
     });
+
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true],
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
+        let element;
+        let amf;
+
+        before(async () => {
+          amf = await AmfLoader.load(
+            /** @type Boolean */ (compact),
+            '10732397'
+          );
+        });
+
+        beforeEach(async () => {
+          element = new ExampleGenerator(amf);
+        });
+
+        it('Computes example for a wrapped object type', () => {
+          const payloads = AmfLoader.lookupPayloadSchema(
+            amf,
+            '/pickinglist-registrations',
+            'post'
+          );
+          const result = element.computeExamples(
+            payloads[0],
+            'application/xml'
+          );
+          assert.typeOf(result, 'array');
+          assert.lengthOf(result, 1);
+          assert.isFalse(result[0].hasRaw, 'hasRaw');
+          assert.isFalse(result[0].hasTitle, 'hasTitle');
+          assert.isFalse(result[0].hasUnion, 'hasUnion');
+          assert.equal(result[0].value.indexOf('<type>'), -1);
+        });
+
+        it('Computes example for a wrapped object type', () => {
+          const payloads = AmfLoader.lookupPayloadSchema(
+            amf,
+            '/pickinglist-registrations',
+            'post'
+          );
+          const result = element.computeTypeName(payloads[0]);
+          assert.equal(result, 'Request');
+        });
+      });
+    });
   });
 
   describe('Inline defined examples', () => {
