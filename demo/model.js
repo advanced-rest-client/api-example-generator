@@ -21,6 +21,7 @@ files.set('APIC-655/APIC-655.raml', { type: 'RAML 1.0' });
 files.set('SE-22063/SE-22063.raml', { type: 'RAML 1.0' });
 files.set('APIC-332/APIC-332.raml', { type: 'RAML 1.0' });
 files.set('APIC-690/APIC-690.raml', { type: 'RAML 1.0' });
+files.set('10732397/10732397.raml', { type: 'RAML 1.0' });
 files.set('oas-3-api/oas-3-api.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });
 files.set('allof-types/allof-types.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });
 files.set('APIC-679/APIC-679.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });

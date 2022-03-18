@@ -1,0 +1,166 @@
+#%RAML 1.0 DataType
+
+type: object
+description: 
+properties:
+  Request: 
+    type: object
+    properties:
+      storer_key:
+        description: LF unique Customer Code 
+        type: string
+        example: "18422"
+        required: true
+      ReceiveInfo: 
+        type: object
+        properties: 
+          plant_id: 
+            description: Warehouse Code
+            type: string
+            example: "s1001"
+            required: true
+          receipt_type: 
+            description: Receipt Type
+            type: string
+            example: "TRAS"
+            required: true
+          extern_docid: 
+            description: An Unique IntegrationReceiving OrderNumber
+            type: string
+            example: "r200909100033445"
+            required: true
+          ecom_receive_id: 
+            description: E-Commerce PlatformReceivingCode
+            type: string
+            example: "11111111"
+            required: false
+          ecom_order_id: 
+            description: This receiving request is for which E-Commerce Platform Order Number
+            type: string
+            example: "lp200909100033445"
+            required: false
+          client_id: 
+            description: Client ID 
+            type: string
+            example: "12431"
+            required: true
+          total_pallet: 
+            description: Total Pallet Received
+            type: string
+            example: "54"
+            required: false
+          total_carton: 
+            description: Total Carton Received
+            type: string
+            example: "65"
+            required: false
+          total_qty: 
+            description: Total PCS received
+            type: string
+            example: "1"
+            required: false
+          carrier_name: 
+            description: Name or Code of Courier Company
+            type: string
+            example: "Name"
+            required: false
+          tracking_no: 
+            description: Courier Tracking Number
+            type: string
+            example: "S4646841"
+            required: false
+          completed_date: 
+            description: Task Completion Date
+            type: string
+            example: "201304231659"
+            required: true
+          doc_type: 
+            description: Document Type
+            type: string
+            example: "A"
+            required: true
+          Comments: 
+            type: object
+            properties: 
+              comment1: 
+                description: Remarks (Shipping notice or instruction)
+                type: string
+                example: "string"
+                required: false
+              comment2: 
+                description: Other Remarks
+                type: string
+                example: "string"
+                required: false
+          ReceiveDetailInfo:
+            type: object
+            required: true
+            properties: 
+              ItemInfo:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    item_line_no:
+                      description: Unique Line No
+                      type: string
+                      example: "00001"
+                      required: true
+                    extern_line_no:
+                      description: Customer System Line No
+                      type: string
+                      example: "00001"
+                      required: true
+                    label_no:
+                      description: Carton LabelNo
+                      type: string
+                      example: "1"
+                      required: false
+                    item_id:
+                      description: Requested commodity code
+                      type: string
+                      example: "a97"
+                      required: true
+                    item_qty:
+                      description: Requested commodity quantity
+                      type: string
+                      example: "11"
+                      required: true
+                    received_qty:
+                      description: Received commodity quantity
+                      type: string
+                      example: "11"
+                      required: true
+                    item_status:
+                      description: Requested commodity condition
+                      type: string
+                      example: "normal"
+                      required: true
+                    track_id:
+                      description: SSCC
+                      type: string
+                      example: "SO14231423"
+                      required: true
+                    doc_no:
+                      description: Document Number
+                      type: string
+                      example: "32"
+                      required: false
+                    doc_position:
+                      description: Document Position
+                      type: string
+                      example: ""
+                      required: false
+                    Comments: 
+                      type: object
+                      properties: 
+                        comment1: 
+                          description: Remark1
+                          type: string
+                          example: "comment string"
+                          required: false
+                        comment2: 
+                          description: Remark2
+                          type: string
+                          example: "comment string"
+                          required: false

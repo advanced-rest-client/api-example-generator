@@ -1,0 +1,30 @@
+#%RAML 1.0
+title: Temp Support API
+version: v1
+baseUri: /api/{version}
+description: A experience level API for receiving messages
+
+/pickinglist-registrations:
+  post:
+    description: Resource to receive picking confirmations
+    body:
+      application/xml:  
+        type: !include datatypes/registration-dataType.raml   
+        xml:
+          name: Request
+          wrapped: true
+    responses:
+      202:
+
+/reception-confirmations:
+  post:
+    description: Resource to receive shipping reception confirmations
+    body:
+      application/xml: 
+        type: !include datatypes/reception-confirmation-dataType.raml   
+        xml:
+          name: Request
+          wrapped: true
+    responses:
+      202:
+  
