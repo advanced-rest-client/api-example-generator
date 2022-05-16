@@ -813,7 +813,7 @@ describe('ExampleGenerator', () => {
             '/pickinglist-registrations',
             'post'
           );
-          const result = element.computeTypeName(payloads[0]);
+          const result = element.computeTypeName(payloads[0], 'Request');
           assert.equal(result, 'Request');
         });
       });

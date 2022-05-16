@@ -25,5 +25,6 @@ files.set('10732397/10732397.raml', { type: 'RAML 1.0' });
 files.set('oas-3-api/oas-3-api.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });
 files.set('allof-types/allof-types.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });
 files.set('APIC-679/APIC-679.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });
+files.set('xml-api/xml-api.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });
 
 generator.generate(files);

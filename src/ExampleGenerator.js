@@ -346,24 +346,11 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     return undefined;
   }
 
-  computeTypeName(schema) {
+  computeTypeName(schema, xmlName) {
     const typeName = /** @type string */ (this._getValue(
       schema,
       this.ns.w3.shacl.name
     ));
-
-    const sKey = this._getAmfKey(
-      this.ns.aml.vocabularies.shapes.xmlSerialization
-    );
-    let xmlSerialization = schema[sKey];
-    if (Array.isArray(xmlSerialization)) {
-      xmlSerialization = xmlSerialization[0];
-    }
-
-    const xmlName = this._getValue(
-      xmlSerialization,
-      this.ns.aml.vocabularies.shapes.xmlName
-    );
 
     if (xmlName) {
       return xmlName;
@@ -395,8 +382,10 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       return undefined;
     }
     this._resolve(schema);
+    const xmlSerialization = this.xmlSerialization(schema);
+    const {xmlName, xmlNamespace, xmlPrefix} = this._computeXmlSerializationData(xmlSerialization)
     if (!options.typeName) {
-      const typeName = this.computeTypeName(schema);
+      const typeName = this.computeTypeName(schema, xmlName);
       if (typeName) {
         options.typeName = typeName;
       }
@@ -469,13 +458,22 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         properties,
         mime,
         options.typeName,
-        options.parentName
+        options.parentName,
+        xmlNamespace,
+        xmlPrefix
       );
       if (value) {
         return [value];
       }
     }
     return undefined;
+  }
+
+  xmlSerialization(schema) {
+    const sKey = this._getAmfKey(
+      this.ns.aml.vocabularies.shapes.xmlSerialization
+    );
+    return schema[sKey];
   }
 
   /**
@@ -1018,7 +1016,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     const isWrapped = /** @type boolean */ (this._getValue(serialization, shapes.xmlWrapped));
     const xmlName = /** @type string */ (this._getValue(serialization, shapes.xmlName));
     const xmlAttribute = /** @type boolean */ (this._getValue(serialization, shapes.xmlAttribute));
-    return { isWrapped, xmlName, xmlAttribute };
+    const xmlNamespace = /** @type string */ (this._getValue(serialization, shapes.xmlNamespace));
+    const xmlPrefix = /** @type string */ (this._getValue(serialization, shapes.xmlPrefix));
+    return { isWrapped, xmlName, xmlAttribute, xmlNamespace, xmlPrefix };
   }
 
   /**
@@ -1052,8 +1052,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (Array.isArray(range)) {
       range = range[0];
     }
-    const sKey = this._getAmfKey(shapes.xmlSerialization);
-    const serialization = range[sKey];
+    const serialization = this.xmlSerialization(range);
     return this._computeXmlSerializationData(serialization);
   }
 
@@ -1183,9 +1182,11 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {string} mime Media type
    * @param {string=} typeName Name of the RAML type.
    * @param {string=} parentType For XML processing, parent type name in case of Array type.
+   * @param {string=} namespace For XML processing, parent type name in case of Array type.
+   * @param {string=} prefix For XML processing, parent type name in case of Array type.
    * @return {Example|undefined}
    */
-  _exampleFromProperties(properties, mime, typeName, parentType) {
+  _exampleFromProperties(properties, mime, typeName, parentType, namespace, prefix) {
     const name = typeName || UNKNOWN_TYPE;
     let result;
     if (mime.indexOf('json') !== -1) {
@@ -1194,7 +1195,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         result = JSON.stringify(value, null, 2);
       }
     } else if (mime.indexOf('xml') !== -1) {
-      result = this._xmlExampleFromProperties(properties, name, parentType);
+      result = this._xmlExampleFromProperties(properties, name, parentType, namespace, prefix);
       if (result) {
         result = `<?xml version="1.0" encoding="UTF-8"?>${result}`;
         result = formatXml(result);
@@ -1574,16 +1575,19 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {Array<Object>} properties Properties read from the range object that represents an object
    * @param {String=} typeName Object name in API specification
    * @param {String=} parentType When the XML is an array then the type is the parent type
+   * @param {String=} xmlNamespace XML namespace
+   * @param {String=} xmlPrefix XML prefix
    * @return {String}
    */
-  _xmlExampleFromProperties(properties, typeName, parentType) {
+  _xmlExampleFromProperties(properties, typeName, parentType, xmlNamespace, xmlPrefix) {
     const type = normalizeXmlTagName(typeName);
     let parent = parentType;
     if (parent) {
       parent = normalizeXmlTagName(parent);
     }
+    const namespace = xmlNamespace ? `${xmlPrefix}:${xmlNamespace}` : '';
     const doc = document.implementation.createDocument(
-      '',
+      namespace,
       parent || type,
       null
     );
@@ -1629,13 +1633,8 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (range instanceof Array) {
       range = range[0];
     }
-    const sKey = this._getAmfKey(
-      this.ns.aml.vocabularies.shapes.xmlSerialization
-    );
-    let serialization = range[sKey];
-    if (serialization instanceof Array) {
-      serialization = serialization[0];
-    }
+    const serialization = this.xmlSerialization(range);
+
     const {
       isWrapped = false,
       xmlAttribute,
