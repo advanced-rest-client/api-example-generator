@@ -80,4 +80,31 @@ export interface XmlData {
    * Value of 'xmlAttribute' property of AMF's object
    */
   xmlAttribute?: boolean;
+  /**
+   * Value of 'xmlNamespace' property of AMF's object
+   */
+  xmlNamespace?: string;
+  /**
+   * Value of 'xmlPrefix' property of AMF's object
+   */
+  xmlPrefix?: string;
+}
+
+export interface XmlOptions {
+  /**
+   * Object name in API specification
+   */
+  typeName?: string;
+  /**
+   * When the XML is an array then the type is the parent type
+   */
+  parentType?: string;
+  /**
+   * Value of 'xmlNamespace' property of AMF's object
+   */
+  xmlNamespace?: boolean;
+  /**
+   * Value of 'xmlPrefix' property of AMF's object
+   */
+  xmlPrefix?: string;
 }

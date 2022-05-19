@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: OPTY Nexus To SFDC Rest Service
+  description: >-
+    This API serves incoming request to process data to Create or Update the
+    OPTY data.
+  version: v1.0
+paths:
+  /OPTYNexus:
+    post:
+      description: This api process data Create or Update OPTY from OPTY Nexus To LSG SFDC.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/nexusInputMessage'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/nexusInputMessage'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/nexusOutputMessage'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/nexusOutputMessage'
+
+components:
+  schemas:
+    nexusInputMessage:
+      description: Input Message Type
+      type: object
+      xml:
+        namespace: http://xmlns.oracle.com/CSAAS/OPTYNexusToSFDCBPELProcess/Schema
+        prefix: t0
+        name: nexusInputMessage
+      additionalProperties: false
+      required:
+        - nexusInputType
+      properties:
+        nexusInputType:
+          type: array
+          xml:
+            prefix: t0
+            name: nexusInputType
+          items:
+            type: object
+            required: 
+              - Primary_Contact_c
+            additionalProperties: false
+            properties:
+              Primary_Contact_c:
+                description: Primary_Contact_c
+                example: "0031U00001ykLV7QAM"
+                type: string
+                xml:
+                  prefix: t0
+                  name: Primary_Contact_c
+
+    nexusOutputMessage:
+      description: Output Response Type
+      type: object
+      required: 
+        - salesforce_id
+      additionalProperties: false
+      properties:
+        salesforce_id:
+          description: salesforce_id
+          example: "0061U00000SHSfMQAX"
+          type: string
+          xml:
+            name: salesforce_id
+
+servers:
+  - description: Oracle SOA Test Url
+    url: http://test-ofmcsaas.amer.thermo.com/soa-infra/resources/CRM/OPTYNexusToSFDC!1.0/OPTYNexusToSFDCRestService

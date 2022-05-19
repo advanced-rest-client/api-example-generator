@@ -455,4 +455,34 @@ describe('XML processing', () => {
       });
     });
   });
+
+  describe('XML namespace', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true],
+    ].forEach(([label, compact]) => {
+      // @ts-ignore
+      describe(label, () => {
+        let element;
+        let amf;
+
+        before(async () => {
+          // @ts-ignore
+          amf = await AmfLoader.load(compact, 'xml-api');
+        });
+
+        beforeEach(async () => {
+          element = await basicFixture();
+          element.amf = amf;
+        });
+
+        it('creates example with namespace and prefix', () => {
+          const shape = AmfLoader.lookupType(amf, 'nexusInputMessage');
+          const result = element.computeExamples(shape, 'application/xml');
+          assert.lengthOf(result, 1);
+          assert.include(result[0].value, 'xmlns="t0:http://xmlns.oracle.com/CSAAS/OPTYNexusToSFDCBPELProcess/Schema"');
+        });
+      });
+    });
+  });
 });

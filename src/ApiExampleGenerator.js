@@ -211,6 +211,10 @@ export class ApiExampleGenerator extends LitElement {
     return this._generator._processDataObjectProperties(doc, node, property);
   }
 
+  _computeXmlSerializationData(serialization) {
+    return this._generator._computeXmlSerializationData(serialization);
+  }
+
   _dataNameFromKey(key) {
     return dataNameFromKey(key);
   }
