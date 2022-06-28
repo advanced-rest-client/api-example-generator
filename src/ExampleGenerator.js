@@ -1292,6 +1292,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (this._hasType(range, this.ns.aml.vocabularies.shapes.NilShape)) {
       return null;
     }
+    if (this._hasProperty(range, this.ns.w3.shacl.xone)) {
+      const xKey = this._getAmfKey(this.ns.w3.shacl.xone);
+      const oneOfOptions = range[xKey]
+      if (Array.isArray(oneOfOptions) && oneOfOptions.length > 0) {
+        return this._computeJsonPropertyValue(oneOfOptions[0], typeName);
+      }
+    }
     return undefined;
   }
 

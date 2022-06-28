@@ -1,0 +1,748 @@
+openapi: 3.0.0
+
+info:
+  title: Chatbot Runtime API
+  version: "v4"
+
+servers:
+  - url: https://runtime-na-west.prod.chatbots.sfdc.sh
+    description: Production Chatbot Runtime API
+
+paths:
+  /v4.0.0/messages:
+    post:
+      tags:
+        - "messages"
+      summary: "Send messages to the bot"
+      description: "Send messages to the bot"
+      operationId: "sendMessages"
+      requestBody:
+        description: "Messages request payload"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestEnvelope"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessfulResponse"
+
+components:
+  schemas:
+    RequestSessionId:
+      description: "Chatbot Runtime Session ID"
+      type: "string"
+      example: "57904eb6-5352-4c5e-adf6-5f100572cf5d"
+      nullable: true
+
+    ResponseSessionId:
+      description: "Chatbot Runtime Session ID"
+      type: "string"
+      example: "57904eb6-5352-4c5e-adf6-5f100572cf5d"
+      nullable: false
+
+    ExternalSessionKey:
+      description: "Channel specific unique key for the conversation"
+      type: "string"
+      example: "57904eb6-5352-4c5e-adf6-5f100572cf5d"
+      nullable: false
+
+    BotId:
+      description: "Chatbot ID"
+      type: "string"
+      example: "0XxRM0000004Cyw0AE"
+      nullable: false
+
+    BotVersion:
+      description: "Chatbot config version"
+      type: "string"
+      example: "0X9RM0000004CD00AM"
+      nullable: true
+
+    OrgId:
+      description: "Salesforce Org ID"
+      type: "string"
+      example: "00DRM0000006k892AA"
+
+    RequestEnvelope:
+      type: "object"
+      properties:
+        messages:
+          description: "Input messages"
+          type: "array"
+          minimum: 0
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/InitMessage"
+              - $ref: "#/components/schemas/EndSessionMessage"
+              - $ref: "#/components/schemas/TextMessage"
+              - $ref: "#/components/schemas/ChoiceMessage"
+              - $ref: "#/components/schemas/RedirectMessage"
+              - $ref: "#/components/schemas/TransferSucceededRequestMessage"
+              - $ref: "#/components/schemas/TransferFailedRequestMessage"
+      required:
+        - "messages"
+      additionalProperties: false
+
+    ResponseEnvelope:
+      type: "object"
+      properties:
+        sessionId:
+          $ref: "#/components/schemas/ResponseSessionId"
+      required:
+        - "sessionId"
+
+    MessageId:
+      description: "UUID that references this message"
+      type: "string"
+      example: "a133c185-73a7-4adf-b6d9-b7fd62babb4e"
+
+    SequenceId:
+      description: "Client generated message number (must be ever increasing within the same session)"
+      type: "integer"
+      example: 1
+
+    InReplyToMessageId:
+      description: "Message ID from the previous response you are replying to"
+      type: "string"
+      example: "a133c185-73a7-4adf-b6d9-b7fd62babb4e"
+
+    BooleanVariable:
+      type: "object"
+      properties:
+        name:
+          description: "Variable name"
+          type: "string"
+          example: "isShipped"
+        type:
+          description: "Variable type"
+          type: "string"
+          enum: ["boolean"]
+        value:
+          description: "Variable value"
+          type: "boolean"
+          nullable: true
+          example: true
+      required:
+        - "name"
+        - "type"
+        - "value"
+      additionalProperties: false
+
+    DateVariable:
+      type: "object"
+      properties:
+        name:
+          description: "Variable name"
+          type: "string"
+          example: "orderDate"
+        type:
+          description: "Variable type"
+          type: "string"
+          enum: ["date"]
+        value:
+          description: "Variable value in format ISO_LOCAL_DATE 'YYYY-MM-DD'"
+          type: "string"
+          nullable: true
+          example: "2021-09-21"
+      required:
+        - "name"
+        - "type"
+        - "value"
+      additionalProperties: false
+
+    DateTimeVariable:
+      type: "object"
+      properties:
+        name:
+          description: "Variable name"
+          type: "string"
+          example: "orderDateTime"
+        type:
+          description: "Variable type"
+          type: "string"
+          enum: ["dateTime"]
+        value:
+          description: "Variable value in format ISO_LOCAL_DATE_TIME 'YYYY-MM-DDTHH:MM:SS'"
+          type: "string"
+          nullable: true
+          example: "2018-09-21T14:30:00"
+      required:
+        - "name"
+        - "type"
+        - "value"
+      additionalProperties: false
+
+    MoneyVariable:
+      type: "object"
+      properties:
+        name:
+          description: "Variable name"
+          type: "string"
+          example: "orderAmount"
+        type:
+          description: "Variable type"
+          type: "string"
+          enum: ["money"]
+        value:
+          description: "Variable value in format '$currencyCode $amount"
+          type: "string"
+          nullable: true
+          example: "USD 10.40"
+      required:
+        - "name"
+        - "type"
+        - "value"
+      additionalProperties: false
+
+    NumberVariable:
+      type: "object"
+      properties:
+        name:
+          description: "Variable name"
+          type: "string"
+          example: "qty"
+        type:
+          description: "Variable type"
+          type: "string"
+          enum: ["number"]
+        value:
+          description: "Variable value"
+          type: "number"
+          nullable: true
+          example: 10
+      required:
+        - "name"
+        - "type"
+        - "value"
+      additionalProperties: false
+
+    TextVariable:
+      type: "object"
+      properties:
+        name:
+          description: "Variable name"
+          type: "string"
+          example: "note"
+        type:
+          description: "Variable type"
+          type: "string"
+          enum: ["text"]
+        value:
+          description: "Variable value"
+          type: "string"
+          nullable: true
+          example: "Thanks for your order!"
+      required:
+        - "name"
+        - "type"
+        - "value"
+      additionalProperties: false
+
+    ObjectVariable:
+      type: "object"
+      properties:
+        name:
+          description: "Variable name"
+          type: "string"
+          example: "contact"
+        type:
+          description: "Variable type"
+          type: "string"
+          enum: ["object"]
+        value:
+          description: "Variable value"
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Variables"
+          example:
+            [{ "name": "fullName", "type": "text", "value": "Matt Smith" }]
+      required:
+        - "name"
+        - "type"
+        - "value"
+      additionalProperties: false
+
+    RefVariable:
+      type: "object"
+      properties:
+        name:
+          description: "Variable name"
+          type: "string"
+          example: "target"
+        type:
+          description: "Variable type"
+          type: "string"
+          enum: ["ref"]
+        value:
+          description: "Variable value"
+          type: "string"
+          nullable: true
+          example: "1M5xx000000000BCAQ"
+      required:
+        - "name"
+        - "type"
+        - "value"
+      additionalProperties: false
+
+    ListVariable:
+      type: "object"
+      properties:
+        name:
+          description: "Variable name"
+          type: "string"
+          example: "target"
+        type:
+          description: "Variable type"
+          type: "string"
+          enum: ["list"]
+        value:
+          items:
+            type: object
+          description: "Variable value"
+          type: array
+          nullable: true
+          example: [{ "type": "ref", "value": "1M5xx000000000BCAQ" }]
+      required:
+        - "name"
+        - "type"
+        - "value"
+      additionalProperties: false
+
+    Variables:
+      type: "array"
+      items:
+        anyOf:
+          - $ref: "#/components/schemas/BooleanVariable"
+          - $ref: "#/components/schemas/DateVariable"
+          - $ref: "#/components/schemas/DateTimeVariable"
+          - $ref: "#/components/schemas/MoneyVariable"
+          - $ref: "#/components/schemas/NumberVariable"
+          - $ref: "#/components/schemas/TextVariable"
+          - $ref: "#/components/schemas/ObjectVariable"
+          - $ref: "#/components/schemas/RefVariable"
+          - $ref: "#/components/schemas/ListVariable"
+      nullable: true
+
+    Referrer:
+      type: "object"
+      description: "Referrer"
+      properties:
+        type:
+          description: "Referrer type"
+          type: "string"
+          enum: ["Salesforce:Core:Bot:Id", "Salesforce:BotRuntime:Session:Id"]
+        value:
+          type: "string"
+      required:
+        - "type"
+        - "value"
+
+    TransferFailedRequestMessage:
+      type: "object"
+      description: "Message informing chatbot runtime that a transfer failed"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["transferFailed"]
+        sequenceId:
+          $ref: "#/components/schemas/SequenceId"
+        inReplyToMessageId:
+          $ref: "#/components/schemas/InReplyToMessageId"
+        reason:
+          description: "Reason the transfer failed"
+          type: "string"
+          enum: ["NoAgentAvailable", "Error"]
+        description:
+          description: "Optional human-readable description of why the transfer failed"
+          type: "string"
+          nullable: true
+      required:
+        - "type"
+        - "sequenceId"
+        - "reason"
+      additionalProperties: false
+
+    TransferSucceededRequestMessage:
+      type: "object"
+      description: "Message informing chatbot runtime that a transfer succeeded"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["transferSucceeded"]
+        sequenceId:
+          $ref: "#/components/schemas/SequenceId"
+        inReplyToMessageId:
+          $ref: "#/components/schemas/InReplyToMessageId"
+      required:
+        - "type"
+        - "sequenceId"
+      additionalProperties: false
+
+    InitMessage:
+      type: "object"
+      description: "Initial message that begins a conversation session"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["init"]
+        sequenceId:
+          $ref: "#/components/schemas/SequenceId"
+        text:
+          description: "Initial text input from user"
+          type: "string"
+        tz:
+          description: "Client timezone"
+          type: "string"
+          nullable: true
+        variables:
+          $ref: "#/components/schemas/Variables"
+        referrers:
+          description: "Referrers (mostly for bot to bot transfers)"
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Referrer"
+          nullable: true
+      required:
+        - "type"
+        - "sequenceId"
+      additionalProperties: false
+
+    EndSessionMessage:
+      type: "object"
+      description: "Client request to end the session"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["endSession"]
+        sequenceId:
+          $ref: "#/components/schemas/SequenceId"
+        inReplyToMessageId:
+          $ref: "#/components/schemas/InReplyToMessageId"
+        reason:
+          description: "Reason the client wishes to end the session"
+          type: "string"
+          enum: ["UserRequest", "Transfer", "Expiration", "Error", "Other"]
+          nullable: false
+      required:
+        - "type"
+        - "sequenceId"
+        - "reason"
+      additionalProperties: false
+
+    TextMessage:
+      type: "object"
+      description: "User text message"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["text"]
+        sequenceId:
+          $ref: "#/components/schemas/SequenceId"
+        inReplyToMessageId:
+          $ref: "#/components/schemas/InReplyToMessageId"
+        text:
+          description: "Text input from user"
+          type: "string"
+      required:
+        - "type"
+        - "sequenceId"
+        - "text"
+      additionalProperties: false
+
+    ChoiceMessage:
+      type: "object"
+      description: "Choice selection"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["choice"]
+        sequenceId:
+          $ref: "#/components/schemas/SequenceId"
+        inReplyToMessageId:
+          $ref: "#/components/schemas/InReplyToMessageId"
+        choiceIndex:
+          description: "Zero-based index of the selected choice. Either choiceIndex or choiceId is required."
+          type: "integer"
+          example: 0
+          nullable: true
+        choiceId:
+          description: "Id of the selected choice. Either choiceIndex or choiceId is required."
+          type: "string"
+          example: "8a9a745f-0c09-4b13-955c-1ab9e06c7ad7"
+          nullable: true
+      required:
+        - "type"
+        - "sequenceId"
+      additionalProperties: false
+
+    RedirectMessage:
+      type: "object"
+      description: "Client redirect message"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["redirect"]
+        sequenceId:
+          $ref: "#/components/schemas/SequenceId"
+        dialogId:
+          description: "Dialog ID to redirect to"
+          type: "string"
+          example: "68f934fb-e022-37a7-612e-b74fc87191d9"
+      required:
+        - "type"
+        - "sequenceId"
+        - "dialogId"
+      additionalProperties: false
+
+    Schedule:
+      type: "object"
+      properties:
+        responseDelayMilliseconds:
+          description: "Delay in ms to wait before displaying the test to the user"
+          type: "integer"
+          format: "int32"
+          example: 1200
+      required:
+        - "responseDelayMilliseconds"
+      additionalProperties: false
+
+    SessionEndedResponseMessage:
+      type: "object"
+      description: "Message informing client session has ended"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["sessionEnded"]
+        id:
+          $ref: "#/components/schemas/MessageId"
+        reason:
+          description: "Reason the session ended"
+          type: "string"
+          enum:
+            [
+              "ClientRequest",
+              "TransferFailedNotConfigured",
+              "Action",
+              "Error",
+              "InfiniteLoopDetected",
+            ]
+          nullable: false
+        schedule:
+          $ref: "#/components/schemas/Schedule"
+      required:
+        - "type"
+        - "id"
+        - "reason"
+      additionalProperties: false
+
+    TextResponseMessage:
+      type: "object"
+      description: "Text message"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["text"]
+        id:
+          $ref: "#/components/schemas/MessageId"
+        text:
+          description: "Text to render"
+          type: "string"
+          example: "Hello world!"
+        schedule:
+          $ref: "#/components/schemas/Schedule"
+      required:
+        - "type"
+        - "id"
+        - "text"
+      additionalProperties: false
+
+    ChoicesResponseMessage:
+      type: "object"
+      description: "Choices message response to be sent from the bot to the client"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["choices"]
+        id:
+          $ref: "#/components/schemas/MessageId"
+        choices:
+          description: "Available choices"
+          type: "array"
+          minimum: 1
+          items:
+            type: "object"
+            description: "Choice"
+            properties:
+              label:
+                description: "Choice label"
+                type: "string"
+                example: "Order Status"
+              alias:
+                description: "Choice alias"
+                type: "string"
+                example: "1"
+                nullable: true
+              id:
+                description: "Choice id"
+                type: "string"
+                example: "8a9a745f-0c09-4b13-955c-1ab9e06c7ad7"
+            required:
+              - "label"
+              - "id"
+        widget:
+          description: "Preferred widget type"
+          type: "string"
+          enum: ["buttons", "menu"]
+        schedule:
+          $ref: "#/components/schemas/Schedule"
+      required:
+        - "type"
+        - "id"
+        - "choices"
+        - "widget"
+      additionalProperties: false
+
+    EscalateResponseMessage:
+      type: "object"
+      description: "Escalation message"
+      properties:
+        type:
+          description: "Message type"
+          type: "string"
+          enum: ["escalate"]
+        id:
+          $ref: "#/components/schemas/MessageId"
+        schedule:
+          $ref: "#/components/schemas/Schedule"
+        targets:
+          type: "array"
+          minimum: 0
+          items:
+            type: "object"
+            description: "escalation targets"
+            properties:
+              value:
+                type: "string"
+              type:
+                type: "string"
+                enum:
+                  [
+                    "Salesforce:Core:Bot:Id",
+                    "Salesforce:Core:Queue:Id",
+                    "Salesforce:Core:Skill:Id",
+                    "Salesforce:Core:Flow:Id",
+                  ]
+            required:
+              - "value"
+              - "type"
+            nullable: false
+            additionalProperties: false
+          nullable: false
+      required:
+        - "type"
+        - "id"
+        - "targets"
+      additionalProperties: false
+
+    ForceConfig:
+      type: "object"
+      description: "Force API config"
+      properties:
+        endpoint:
+          description: "Client Org endpoint"
+          type: "string"
+          example: "https://d5e000009s7bceah-dev-ed.my.salesforce.com/"
+      required:
+        - "endpoint"
+      additionalProperties: true
+
+    ResponseOptions:
+      type: "object"
+      description: "Configuration values for response payload"
+      properties:
+        variables:
+          $ref: "#/components/schemas/ResponseOptionsVariables"
+        metrics:
+          type: "boolean"
+          description: "Whether or not to include metrics in the response"
+      additionalProperties: false
+
+    ResponseOptionsVariables:
+      type: "object"
+      description: "Configure what variables are returned in the response"
+      properties:
+        include:
+          type: "boolean"
+          example: true
+          description: "Whether or not to include variables in the response"
+        filter:
+          type: "array"
+          example: ["OrderQty", "OrderType"]
+          description: "Limit returned variables to those specified here. If missing, null, or empty no filtering will be applied."
+          items:
+            type: "string"
+          nullable: true
+        onlyChanged:
+          type: "boolean"
+          example: true
+          description: "Whether or not to limit the returned variables to only those that have changed as part of the request."
+      required:
+        - "include"
+        - "onlyChanged"
+      additionalProperties: false
+
+    Error:
+      type: "object"
+      properties:
+        status:
+          type: "integer"
+          format: "int32"
+          example: 500
+          description: "HTTP status"
+        path:
+          description: "Request path"
+          type: "string"
+          example: "/v1/00DRM00000067To/chatbots/HelloWorldBot/messages"
+        requestId:
+          description: "Request ID used for searching exception logs"
+          type: "string"
+          example: "19c056ab-d909-49df-b976-65e56b6ab214"
+        error:
+          description: "Error class name"
+          type: "string"
+          example: "NullPointerException"
+        message:
+          description: "Exception message"
+          type: "string"
+          example: "Something went wrong"
+        timestamp:
+          type: "integer"
+          format: "int64"
+          example: 1531245973799
+      required:
+        - "status"
+        - "path"
+        - "requestId"
+        - "error"
+        - "message"
+        - "timestamp"
+      additionalProperties: true
+
+  responses:
+    SuccessfulResponse:
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseEnvelope"
