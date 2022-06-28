@@ -2290,6 +2290,43 @@ describe('ExampleGenerator', () => {
     });
   });
 
+  describe('W-11117349', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true],
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
+      describe(String(label), () => {
+        /** @type ExampleGenerator */
+        let element;
+        let amf;
+        let prefix;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'v4_0_0_api_specs');
+        });
+
+        beforeEach(async () => {
+          element = new ExampleGenerator(amf);
+          prefix = element._getAmfKey(element.ns.w3.xmlSchema.key);
+          if (prefix !== element.ns.w3.xmlSchema.key) {
+            prefix += ':';
+          }
+        });
+
+        it('returns value for array type with oneOf items', () => {
+          let schema = AmfLoader.lookupPayloadSchema(amf, '/v4.0.0/messages', 'post')[0];
+          schema = element._resolve(schema);
+          const result = element._computeJsonPropertyValue(schema);
+          assert.typeOf(result, 'object');
+          assert.deepEqual(result, { messages: [{ "referrers": "", "sequenceId": 1, "text": "", "type": "", "tz": "", "variables": "" }]})
+        });
+      });
+    });
+  });
+
   describe('APIC-679', () => {
     describe('_computeJsonPropertyValue()', () => {
       [
