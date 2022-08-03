@@ -480,7 +480,13 @@ describe('XML processing', () => {
           const shape = AmfLoader.lookupType(amf, 'nexusInputMessage');
           const result = element.computeExamples(shape, 'application/xml');
           assert.lengthOf(result, 1);
-          assert.include(result[0].value, 'xmlns="t0:http://xmlns.oracle.com/CSAAS/OPTYNexusToSFDCBPELProcess/Schema"');
+          const example = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+          '<t0:nexusInputMessage xmlns:t0="http://xmlns.oracle.com/CSAAS/OPTYNexusToSFDCBPELProcess/Schema">\n' +
+          '  <t0:nexusInputType>\n' +
+          '    <t0:Primary_Contact_c>0031U00001ykLV7QAM</t0:Primary_Contact_c>\n' +
+          '  </t0:nexusInputType>\n' +
+          '</t0:nexusInputMessage>\n';
+          assert.equal(result[0].value, example);
         });
       });
     });

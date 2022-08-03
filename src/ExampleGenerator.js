@@ -1086,7 +1086,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         name,
         opts.properties
       );
-      this._xmlProcessDataProperty(doc, main, item, xmlName || name, isWrapped);
+      this._xmlProcessDataProperty(doc, main, item, xmlName || name, { isWrapped });
     }
     const s = new XMLSerializer();
     let value = s.serializeToString(doc);
@@ -1576,6 +1576,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     return undefined;
   }
 
+  _nameTagWithPrefix(name, prefix) {
+    let type = normalizeXmlTagName(name);
+    if (prefix) {
+      type = `${prefix}:${type}`
+    }
+    return type
+  }
+
   /**
    * Computes example from a range's properties for XML media type.
    *
@@ -1587,14 +1595,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {String}
    */
   _xmlExampleFromProperties(properties, typeName, parentType, xmlNamespace, xmlPrefix) {
-    const type = normalizeXmlTagName(typeName);
+    const type = this._nameTagWithPrefix(typeName, xmlPrefix)
     let parent = parentType;
     if (parent) {
       parent = normalizeXmlTagName(parent);
     }
-    const namespace = xmlNamespace ? `${xmlPrefix}:${xmlNamespace}` : '';
     const doc = document.implementation.createDocument(
-      namespace,
+      xmlNamespace,
       parent || type,
       null
     );
@@ -1646,6 +1653,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       isWrapped = false,
       xmlAttribute,
       xmlName,
+      xmlPrefix
     } = this._computeXmlSerializationData(serialization);
     const eKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
     const examples = this._ensureArray(range[eKey]);
@@ -1657,7 +1665,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
           this.ns.w3.shacl.name
         ));
       }
-      this._xmlFromExamples(doc, node, examples[0], name);
+      this._xmlFromExamples(doc, node, examples[0], name, { xmlPrefix });
       return;
     }
     if (this._hasType(range, this.ns.aml.vocabularies.shapes.UnionShape)) {
@@ -1685,7 +1693,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       return;
     }
     if (this._hasType(range, this.ns.aml.vocabularies.shapes.ArrayShape)) {
-      this._appendXmlArray(doc, node, range, { isWrapped, xmlName });
+      this._appendXmlArray(doc, node, range, { isWrapped, xmlName, xmlPrefix });
       return;
     }
     this._appendXmlElement(doc, node, range);
@@ -1700,8 +1708,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {Element} node A node to which append values
    * @param {Object} example AMF's example definition.
    * @param {String} propertyName Name of the property being processed
+   * @param {XmlData=} xmlData XMLData
    */
-  _xmlFromExamples(doc, node, example, propertyName) {
+  _xmlFromExamples(doc, node, example, propertyName, xmlData) {
     const sKey = this._getAmfKey(
       this.ns.aml.vocabularies.document.structuredValue
     );
@@ -1712,7 +1721,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (!structure) {
       return;
     }
-    this._xmlProcessDataProperty(doc, node, structure, propertyName);
+    this._xmlProcessDataProperty(doc, node, structure, propertyName, xmlData);
   }
 
   /**
@@ -1769,9 +1778,12 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {Element|null} Newly created element
    */
   _appendXmlElement(doc, node, range, xmlData = {}) {
-    const name = xmlData.xmlName || this._getXmlNormalizedName(range);
+    let name = xmlData.xmlName || this._getXmlNormalizedName(range);
     if (!name) {
       return null;
+    }
+    if (xmlData.xmlPrefix) {
+      name = xmlData.xmlPrefix + ':' + name
     }
     let nodeValue = this._getValue(range, this.ns.w3.shacl.defaultValueStr);
     if (!nodeValue) {
@@ -1885,13 +1897,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {Element} node Current node
    * @param {Object} property AMF property
    * @param {string} name Current property name
-   * @param {Boolean} isWrapped Whether the `wrapped` property is set.
+   * @param {XmlData=} xmlData XMLData
    */
-  _xmlProcessDataProperty(doc, node, property, name, isWrapped = false) {
+  _xmlProcessDataProperty(doc, node, property, name, xmlData = {}) {
+    const isWrapped = xmlData.isWrapped || false;
     if (!property || !name) {
       return;
     }
-    const tagName = normalizeXmlTagName(name);
+    const tagName = this._nameTagWithPrefix(name, xmlData.xmlPrefix);
     const arrayProperty = this._hasType(
       property,
       this.ns.aml.vocabularies.data.Array
