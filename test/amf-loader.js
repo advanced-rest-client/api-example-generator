@@ -67,6 +67,24 @@ AmfLoader.lookupPayload = function(model, endpoint, operation) {
 };
 
 /**
+ * Looks for headers in an operation
+ * @param {any} model
+ * @param {string} endpoint Endpoint's path
+ * @param {string} operation Operation name (lowercase)
+ * @return {Array<Object>}
+ */
+AmfLoader.lookupExpectsHeaderSchema = function(model, endpoint, operation) {
+  const op = AmfLoader.lookupOperation(model, endpoint, operation);
+  const expects = helper._computeExpects(op);
+  if (!expects) {
+    throw new Error(`The ${operation.toUpperCase()} ${endpoint} operation has no request definition.`);
+  }
+  const headers = helper._computeHeaders(expects);
+  const sKey = helper._getAmfKey(helper.ns.aml.vocabularies.shapes.schema);
+  return headers[0][sKey];
+};
+
+/**
  * Looks for a payload in the responses list of an operation
  * @param {any} model
  * @param {string} endpoint Endpoint's path
