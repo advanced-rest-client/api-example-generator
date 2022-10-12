@@ -2162,7 +2162,7 @@ describe('ExampleGenerator', () => {
       ];
       // @ts-ignore
       processJsonArrayExamples(examples);
-      assert.equal(examples[0].value, '[test]');
+      assert.equal(examples[0].value, '["test"]');
     });
 
     it('Adds default string value', () => {
