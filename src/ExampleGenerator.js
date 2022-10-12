@@ -1327,6 +1327,31 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   }
 
   /**
+   * Computes default enum value for given range.
+   *
+   * @param {Object} range AMF's range definition for a shape.
+   * @return {string|number|boolean|null} Value cast to the corresponding type
+   */
+  _computeDefaultEnumRangeValue(range) {
+    let enumOptions = range[this._getAmfKey(this.ns.w3.shacl.in)]
+    if (Array.isArray(enumOptions)) {
+      [enumOptions] = enumOptions;
+    }
+    const rdfKey = this._getAmfKey(this.ns.w3.rdfSchema.key);
+    const firstOptionKey = Object.keys(enumOptions).find((key) => key.indexOf(rdfKey) !== -1);
+    let firstOption = enumOptions[firstOptionKey];
+    if (Array.isArray(firstOption)) {
+      [firstOption] = firstOption;
+    }
+    const vKey = this._getAmfKey(this.ns.raml.vocabularies.data.value);
+    const value = this._getValue(firstOption, vKey);
+    if (value) {
+      return value;
+    }
+    return null;
+  }
+
+  /**
    * Computes default value for given range.
    *
    * This is to work with mocking services when the user just want to send an
@@ -1338,6 +1363,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {string|number|boolean|null} Value casted to the corresponding type
    */
   _computeDefaultRangeValue(range) {
+    const isEnum = this._hasProperty(range, this.ns.w3.shacl.in)
+    if (isEnum) {
+      const value = this._computeDefaultEnumRangeValue(range);
+      if (value) {
+        return value;
+      }
+    }
+
     const type = this._computeScalarType(range);
     switch (type) {
       case 'Number':

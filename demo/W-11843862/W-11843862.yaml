@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  title: eMPF API Specification - Contribution Module
+  description: eMPF API Specification - Contribution Module
+  version: 0.1.0
+paths:
+  /cas/ad/contribution/external/v1/bill/list:
+    get:
+      tags:
+        - ER-Portal-API
+      summary: CON-PERIOD-BILLABLE CON - Retrieve period bill
+      description: |
+        **API ID:** CON-PERIOD-BILLABLE \
+        **CM:** CM-Web-Employer-Contribution A1, A2, A3, A4, B1, B2, B3, B4 \
+        **FS:** FS-UF-CON-REE-009,FS-UF-CON-CEE-001 \
+        CON - Retrieve period bill
+      parameters:
+        - $ref: '#/components/parameters/x-empf-apiclient-id'
+      responses:
+        '200':
+          description: successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/periodBillableResponse'
+      security:
+        - bearerAuth: []
+
+components:
+  parameters:
+    x-empf-apiclient-id:
+      in: header
+      name: x-empf-apiclient-id
+      description: value should be an integer starting from 1 representing the identity of the API client, 1 for ER Portal, 2 for ER Mobile App, 3 for EE Portal, 4  for EE Mobile App, 5 for admin, 6 for trustee, 7 for mpfa, 8 for kiosk
+      schema:
+        type: integer
+        enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+      required: true
+
+  schemas:
+    GlobalSuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: The flag indicates there is no bussiness error occurred in the request
+        code:
+          type: integer
+          example: '200'
+    periodBillableResponse:
+      allOf:
+        - $ref: '#/components/schemas/GlobalSuccessResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

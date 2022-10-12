@@ -334,6 +334,14 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
   _computeDefaultRangeValue(range: object): string | number | boolean | null;
 
   /**
+   * Computes default enum value for given range.
+   *
+   * @param {Object} range AMF's range definition for a shape.
+   * @return {string|number|boolean|null} Value cast to the corresponding type
+   */
+  _computeDefaultEnumRangeValue(range: object): string | number | boolean | null;
+
+  /**
    * Casts the value to given data type represented in AMF notation.
    *
    * @param value Value encoded in AMF

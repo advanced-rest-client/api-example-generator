@@ -123,6 +123,8 @@ class ComponentDemo extends ApiDemoPage {
       ['APIC-391', 'APIC-391'],
       ['APIC-655', 'APIC-655'],
       ['xml-api', 'xml-api'],
+      ['W-11843862', 'W-11843862'],
+      ['v4_0_0_api_specs', 'v4_0_0_api_specs']
     ].map(
       ([file, label]) => html`
         <anypoint-item data-src="${file}-compact.json"
