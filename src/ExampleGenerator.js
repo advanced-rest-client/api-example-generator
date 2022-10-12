@@ -144,6 +144,18 @@ export const processJsonArrayExamples = examples => {
     } else if (item.value !== undefined && item.value[0] !== '[') {
       if (item.value === '') {
         item.value = '""';
+      } else {
+        let isJson
+        try {
+          // @ts-ignore
+          JSON.parse(item.value)
+          isJson = true
+        } catch (e) {
+          isJson = false
+        }
+        if (!isJson) {
+          item.value = '"' + item.value + '"'
+        }
       }
       item.value = '[' + item.value + ']';
     }
