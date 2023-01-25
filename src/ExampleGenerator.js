@@ -1525,6 +1525,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         }
       }
     }
+    const properties = this._ensureArray(range[pKey])
+    if (properties) {
+      const propertiesExamples = this._jsonExampleFromProperties(properties)
+      if (propertiesExamples && typeof propertiesExamples === 'object') {
+        examples.push(propertiesExamples);
+      }
+    }
     return examples.reduce((acc, value) => ({...acc, ...value}), {});
   }
 
