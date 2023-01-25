@@ -28,5 +28,6 @@ files.set('APIC-679/APIC-679.yaml', { type: 'OAS 3.0', mime: 'application/yaml' 
 files.set('xml-api/xml-api.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });
 files.set('v4_0_0_api_spec/v4_0_0_api_specs.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });
 files.set('W-11843862/W-11843862.yaml', { type: 'OAS 3.0', mime: 'application/yaml' });
+files.set('W-12428170/W-12428170.yaml', { type: 'OAS 2.0', mime: 'application/yaml' });
 
 generator.generate(files);

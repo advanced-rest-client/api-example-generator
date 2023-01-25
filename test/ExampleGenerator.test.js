@@ -2327,6 +2327,42 @@ describe('ExampleGenerator', () => {
     });
   });
 
+  describe('W-12428170', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true],
+    ].forEach((args) => {
+      const label = args[0];
+      const compact = /** @type boolean */ (args[1]);
+
+      describe(String(label), () => {
+        /** @type ExampleGenerator */
+        let element;
+        let amf;
+        let prefix;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'W-12428170');
+        });
+
+        beforeEach(async () => {
+          element = new ExampleGenerator(amf);
+          prefix = element._getAmfKey(element.ns.w3.xmlSchema.key);
+          if (prefix !== element.ns.w3.xmlSchema.key) {
+            prefix += ':';
+          }
+        });
+
+        it('returns value for array type with allOf items', () => {
+          let properties = AmfLoader.lookupTypeProperties(amf, "PreferenceSearchAccount");
+          const result = element._exampleFromProperties(properties, 'application/json', 'preferencesSearchDTO');
+          assert.typeOf(result, 'object');
+          assert.deepEqual(result.value,   "{\n  \"Collateral\": [\n    {\n      \"collateralId\": \"123\"\n    }\n  ],\n  \"Contact\": [\n    {\n      \"upid\": \"053fa2ac-4afd-4dac-9ba4-d1201ed919b1\"\n    }\n  ]\n}")
+        });
+      });
+    });
+  });
+
   describe('APIC-679', () => {
     describe('_computeJsonPropertyValue()', () => {
       [

@@ -1,0 +1,69 @@
+swagger: "2.0"
+info:
+  description: "UPM Party Services"
+  version: 1.0.0
+  title: UPM Party Services
+  contact:
+    email: CustomerMDM@internal.toyota.com
+schemes:
+  - https
+
+paths:
+  /customers/preferences/search:
+    post:
+      summary: "Search customer preferences"
+      description: "Search customer preferences"
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      tags:
+        - Search Services
+      responses:
+        "200":
+          description: "Get Address search response"
+          schema:
+            $ref: "#/definitions/preferencesSearchDTO"
+
+definitions:
+  preferencesSearchDTO:
+    type: object
+    properties:
+      Account:
+        type: "array"
+        items:
+          $ref: "#/definitions/PreferenceSearchAccount"
+  PreferenceSearchAccount:
+    type: object
+    allOf:
+      - $ref: "#/definitions/AccountBaseDTO"
+    properties:
+      Collateral:
+        type: "array"
+        items:
+          $ref: "#/definitions/CollateralDemographicsSearch"
+      Contact:
+        type: "array"
+        items:
+          $ref: "#/definitions/SearchPreferenceContactDTO"
+  CollateralDemographicsSearch:
+    type: object
+    properties:
+      collateralId:
+        type: string
+        description: collateral id vin or hin or etc
+        example: "123"
+  SearchPreferenceContactDTO:
+    type: object
+    properties:
+      upid:
+        type: string
+        example: "053fa2ac-4afd-4dac-9ba4-d1201ed919b1"
+        description: "Customer UPID"
+  AccountBaseDTO:
+    type: object
+    properties:
+      applicationId:
+        type: string
+        example: ""
+        description: "Application ID"
