@@ -259,7 +259,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         result[result.length] = mime;
       }
     }
-    
+
     return result;
   }
 
@@ -637,7 +637,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {Example|undefined}
    */
   _generateFromExample(example, mime, opts) {
-    let raw = /** @type {string} */ (this._getValue(
+    let raw = /** @type {string|number|Boolean} */ (this._getValue(
       example,
       this.ns.aml.vocabularies.document.raw
     ));
@@ -646,6 +646,11 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         example,
         this.ns.w3.shacl.raw
       ));
+      const referenceIdKey = this._getAmfKey(this.ns.aml.vocabularies.document.referenceId);
+      const referenceIdData = this._ensureArray(example[referenceIdKey]);
+      if (Array.isArray(referenceIdData) && referenceIdData.length > 0) {
+        raw = (this._getValue(referenceIdData[0], this.ns.aml.vocabularies.document.raw));
+      }
     }
     let title = /** @type {string} */ (this._getValue(
       example,
@@ -743,7 +748,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         let data;
         if (isJson) {
           data = this._jsonFromStructure(member);
-          
+
         } else if (isXml) {
           data = this._xmlFromStructure(member, { ...opts, ignoreXmlHeader: true });
         }
@@ -754,7 +759,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       if (isJson) {
         result.value = JSON.stringify(parts, null, 2);
         return result;
-      } 
+      }
       if (isXml) {
         result.value = parts.join('\n');
         return result;
@@ -1110,7 +1115,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
 
   /**
    * Adds XML schema header.
-   * @param {string} value 
+   * @param {string} value
    * @returns {string}
    */
   _appendXmlHeader(value) {
