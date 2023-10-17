@@ -824,38 +824,6 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   }
 
   /**
-   * Computes list of examples for an array shape.
-   * @param {Object} schema The AMF's array shape
-   * @param {String} mime Current mime type
-   * @param {ExampleOptions} [opts={}]
-   * @return {Array<Example>|undefined}
-   */
-  _computeExampleSchemaShape(schema, mime, opts = {}) {
-    const options = { ...opts };
-    const iKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.items);
-    debugger
-    const items = this._ensureArray(schema[iKey]);
-    if (!items) {
-      return undefined;
-    }
-    const isJson = mime.indexOf('json') !== -1;
-    options.parentName = options.typeName;
-    delete options.typeName;
-    // We need only first type here as arras can have different types
-    for (let i = 0, len = items.length; i < len; i++) {
-      const item = items[i];
-      const result = this.computeExamples(item, mime, options);
-      if (result) {
-        if (isJson) {
-          processJsonArrayExamples(result);
-        }
-        return result;
-      }
-    }
-    return undefined;
-  }
-
-  /**
    * Computes example for an `and` shape.
    * @param {Object} schema The AMF's array shape
    * @param {String} mime Current mime type
