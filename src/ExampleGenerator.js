@@ -1274,7 +1274,20 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
           }
         });
       } else {
-        let value = this._computeJsonPropertyValue(range);
+        const aKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.anyOf);
+        let value 
+        const anyOf = this._ensureArray(range[aKey]);
+        if(anyOf){
+          for(let anyOfIndex=0; i<anyOf.length; anyOfIndex++) {
+            const exampleValue = this._computeJsonPropertyValue(anyOf[anyOfIndex]);
+            if(exampleValue!==null){
+              value = exampleValue;
+              break;
+            }
+          }
+        }else{
+          value = this._computeJsonPropertyValue(range);
+        }
         if (value === undefined) {
           value = '';
         }
