@@ -2321,7 +2321,7 @@ describe('ExampleGenerator', () => {
           schema = element._resolve(schema);
           const result = element._computeJsonPropertyValue(schema);
           assert.typeOf(result, 'object');
-          assert.deepEqual(result, { messages: [{ "referrers": "", "sequenceId": 1, "text": "", "type": "init", "tz": "", "variables": "" }]})
+          assert.deepEqual(result, { messages: [{ "referrers": [{"type": "Salesforce:Core:Bot:Id", "value": ""}], "sequenceId": 1, "text": "", "type": "init", "tz": "", "variables": [] }]})
         });
       });
     });
