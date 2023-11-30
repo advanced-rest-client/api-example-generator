@@ -1278,7 +1278,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         let value 
         const anyOf = this._ensureArray(range[aKey]);
         if(anyOf){
-          for(let anyOfIndex=0; i<anyOf.length; anyOfIndex++) {
+          for(let anyOfIndex=0; anyOfIndex<anyOf.length; anyOfIndex++) {
             const exampleValue = this._computeJsonPropertyValue(anyOf[anyOfIndex]);
             if(exampleValue!==null){
               value = exampleValue;
