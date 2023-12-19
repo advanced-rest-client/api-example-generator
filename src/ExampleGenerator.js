@@ -1735,6 +1735,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
           this.ns.w3.shacl.name
         ));
       }
+      if (serialization) {
+        if (xmlAttribute) {
+        
+          this._appendXmlAttribute(node, range, xmlName, examples[0]);
+          return;
+        }
+      }
       this._xmlFromExamples(doc, node, examples[0], name, { xmlPrefix });
       return;
     }
@@ -1818,7 +1825,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {Object} range AMF range
    * @param {String} xmlName Value of 'xmlName' property of AMF's object
    */
-  _appendXmlAttribute(node, range, xmlName) {
+  _appendXmlAttribute(node, range, xmlName, example) {
     let name = /** @type {string} */ xmlName;
     if (!name) {
       name = /** @type {string} */ (this._getValue(
@@ -1832,11 +1839,23 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (name.indexOf('?') !== -1) {
       name = name.replace('?', '');
     }
-    let value = this._readDataType(range);
-    if (!value) {
-      value = '';
+    let exampleValue;
+    if (example) {
+      const sKey = this._getAmfKey(
+        this.ns.aml.vocabularies.document.structuredValue
+      );
+      const structure = example[sKey];
+      exampleValue = this._computeStructuredExampleValue(structure[0]);
     }
-    node.setAttribute(name, value);
+    if (exampleValue) {
+      node.setAttribute(name, String(exampleValue));
+    } else {
+      let value = this._readDataType(range);
+      if (!value) {
+        value = '';
+      }
+      node.setAttribute(name, value);
+    }
   }
 
   /**
