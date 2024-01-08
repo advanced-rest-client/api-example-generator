@@ -3163,4 +3163,27 @@ describe('ExampleGenerator', () => {
       });
     });
   });
+
+  describe('computeRaw', () => {
+    [
+      ['json+ld data model', false],
+      ['Compact data model', true],
+    ].forEach((args) => {
+      const compact = /** @type boolean */ (args[1]);
+      /** @type ExampleGenerator */
+      let element;
+      let amf;
+
+      beforeEach(async () => {
+        amf = await AmfLoader.load(/** @type Boolean */(compact));
+        element = new ExampleGenerator(amf);
+      });
+
+      it('should correctly transform raw string to JSON', () => {
+        const raw = "-\n  balance: 200\n  approval-status: P\n  account-id: de7228b9-f6bb-4261-9d17-a3ddd5802e03\n  account-name: Plaid Saving\n  account-number: '1111222233331111'\n  account-routing-number: '123123123'\n  institution-name: Sample Bank\n  institution-id: b3dedb19-157c-4239-880f-a125ef4384e2\n  created-by: WREX\n  modified-by: WREX\n  created-at: February 19, 2023, 3:16:01 AM\n  modified-at: February 19, 2023, 3:16:01 AM\n-\n  balance: 100\n  approval-status: P\n  account-id: e7bb8f6d-fdc0-4873-9609-d2f2713900ed\n  account-name: Plaid Checking\n  account-number: '1111222233330000 '\n  account-routing-number: '123123123'\n  institution-name: Sample Bank\n  institution-id: b3dedb19-157c-4239-880f-a125ef4384e2\n  created-by: WREX\n  modified-by: WREX\n  created-at: February 19, 2023, 3:16:01 AM\n  modified-at: February 19, 2023, 3:16:01 AM";
+        const expectedJson = '[\n  {\n    "balance": 200,\n    "approval-status": "P",\n    "account-id": "de7228b9-f6bb-4261-9d17-a3ddd5802e03",\n    "account-name": "Plaid Saving",\n    "account-number": "\'1111222233331111\'",\n    "account-routing-number": "\'123123123\'",\n    "institution-name": "Sample Bank",\n    "institution-id": "b3dedb19-157c-4239-880f-a125ef4384e2",\n    "created-by": "WREX",\n    "modified-by": "WREX",\n    "created-at": "February 19, 2023, 3:16:01 AM",\n    "modified-at": "February 19, 2023, 3:16:01 AM"\n  },\n  {\n    "balance": 100,\n    "approval-status": "P",\n    "account-id": "e7bb8f6d-fdc0-4873-9609-d2f2713900ed",\n    "account-name": "Plaid Checking",\n    "account-number": "\'1111222233330000 \'",\n    "account-routing-number": "\'123123123\'",\n    "institution-name": "Sample Bank",\n    "institution-id": "b3dedb19-157c-4239-880f-a125ef4384e2",\n    "created-by": "WREX",\n    "modified-by": "WREX",\n    "created-at": "February 19, 2023, 3:16:01 AM",\n    "modified-at": "February 19, 2023, 3:16:01 AM"\n  }\n]';
+        assert.equal(element.computeRaw(raw), expectedJson);
+      });
+    });
+  });
 });

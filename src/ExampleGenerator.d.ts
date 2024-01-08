@@ -533,4 +533,11 @@ declare class ExampleGenerator extends AmfHelperMixin(Object) {
    * @return {XmlData}
    */
   _computeXmlSerializationData(serialization): object;
+
+  /**
+   * Generate JSON example string value from raw value definition.
+   * @param {string} raw 
+   * @return {string}
+   */
+  computeRaw(raw: string): string
 }
