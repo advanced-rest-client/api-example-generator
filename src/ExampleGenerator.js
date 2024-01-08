@@ -807,7 +807,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    */
   computeRaw (raw) {
     const accountEntries = raw.split('-\n');
-    const accounts = [] 
+    const accounts = [];
     for (const entry of accountEntries) {
       if (entry !== '') {
         const lines = entry.split('\n');
@@ -821,8 +821,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         accounts.push(account);
       }
     }
-    const jsonString = JSON.stringify(accounts, null, 2);
-    return jsonString;
+    return JSON.stringify(accounts, null, 2);
   }
   
 
