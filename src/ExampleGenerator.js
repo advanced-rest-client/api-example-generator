@@ -757,6 +757,17 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         }
       });
       if (isJson) {
+        // if raw (original example) exists try to parse it to JSON  
+        // if the parse process fails then use parts to build example value
+        if (result.raw) {
+          try {
+            result.value = this.computeRaw(raw)
+            return result 
+          } catch (_) {
+            // ...
+          }
+        } 
+
         result.value = JSON.stringify(parts, null, 2);
         return result;
       }
@@ -791,6 +802,30 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return undefined;
   }
+
+  /**
+   * @param {String} raw 
+   * @returns string JSON formatted
+   */
+  computeRaw (raw) {
+    const accountEntries = raw.split('-\n');
+    const accounts = [];
+    for (const entry of accountEntries) {
+      if (entry !== '') {
+        const lines = entry.split('\n');
+        const account = {};
+        for (const line of lines) {
+          if (line !== '') {
+            const [key, value] = line.split(': ');
+            account[key.trim()] =  Number(value) ?  Number(value) : value.trim()
+          }
+        }
+        accounts.push(account);
+      }
+    }
+    return JSON.stringify(accounts, null, 2);
+  }
+  
 
   /**
    * Computes list of examples for an array shape.
