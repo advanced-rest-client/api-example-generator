@@ -757,6 +757,8 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         }
       });
       if (isJson) {
+        // if raw (original example) exists try to parse it to JSON  
+        // if the parse process fails then use parts to build example value
         if (result.raw) {
           try {
             result.value = this.computeRaw(raw)
