@@ -94,10 +94,10 @@ export const formatXml = xml => {
     const type = single
       ? 'single'
       : closing
-      ? 'closing'
-      : opening
-      ? 'opening'
-      : 'other';
+        ? 'closing'
+        : opening
+          ? 'opening'
+          : 'other';
     const fromTo = lastType + '->' + type;
     lastType = type;
     let padding = '';
@@ -395,7 +395,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     this._resolve(schema);
     const xmlSerialization = this.xmlSerialization(schema);
-    const {xmlName, xmlNamespace, xmlPrefix} = this._computeXmlSerializationData(xmlSerialization)
+    const { xmlName, xmlNamespace, xmlPrefix } = this._computeXmlSerializationData(xmlSerialization)
     if (!options.typeName) {
       const typeName = this.computeTypeName(schema, xmlName);
       if (typeName) {
@@ -650,6 +650,44 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       const referenceIdData = this._ensureArray(example[referenceIdKey]);
       if (Array.isArray(referenceIdData) && referenceIdData.length > 0) {
         raw = (this._getValue(referenceIdData[0], this.ns.aml.vocabularies.document.raw));
+
+        // Map raw to external fragment
+        if (!raw) {
+          // It first retrieves the @id property from the first element 
+          // of referenceIdData array and assigns it to referenceId.
+          const referenceId = referenceIdData[0]['@id']
+
+          // It calls the _computeReferences method with this.amf as an 
+          // argument to get the root references and assigns 
+          // the result to rootReferences.
+          const rootReferences = this._computeReferences(this.amf)
+
+          // It maps over each item in rootReferences,
+          // and for each item, it computes references twice in a nested manner. 
+          // It then gets the second element from externalFragments and computes its encodes.
+          // The result of this map operation is an array of 
+          // encoded external fragments, which is assigned to encodesOfExternalFragments.
+          const encodesOfExternalFragments = rootReferences.map((item) => {
+            const shapeFragment = this._computeReferences(item)
+            const externalFragments = this._computeReferences(shapeFragment)
+            // Get second element from externalFragments
+            const externalFragmentExample = externalFragments[1]
+            return this._computeEncodes(externalFragmentExample)
+          })
+
+          // It finds an element in encodesOfExternalFragments where 
+          // the @id property matches referenceId and assigns 
+          // it to exmapleExternalFragmentByReferenceId.
+          const exmapleExternalFragmentByReferenceId = encodesOfExternalFragments.find(externalFrament => (
+            externalFrament['@id'] === referenceId
+          ))
+
+          const rawKey = this._getAmfKey(this.ns.aml.vocabularies.document.raw)
+          // Finally, it calls the _getValue method with
+          // exmapleExternalFragmentByReferenceId and rawKey 
+          // as arguments and assigns the result to raw.
+          raw = this._getValue(exmapleExternalFragmentByReferenceId, rawKey)
+        }
       }
     }
     let title = /** @type {string} */ (this._getValue(
@@ -762,11 +800,11 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         if (result.raw) {
           try {
             result.value = this.computeRaw(raw)
-            return result 
+            return result
           } catch (_) {
             // ...
           }
-        } 
+        }
 
         result.value = JSON.stringify(parts, null, 2);
         return result;
@@ -807,7 +845,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {String} raw 
    * @returns string JSON formatted
    */
-  computeRaw (raw) {
+  computeRaw(raw) {
     const accountEntries = raw.split('-\n');
     const accounts = [];
     for (const entry of accountEntries) {
@@ -817,7 +855,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         for (const line of lines) {
           if (line !== '') {
             const [key, value] = line.split(': ');
-            account[key.trim()] =  Number(value) ?  Number(value) : value.trim()
+            account[key.trim()] = Number(value) ? Number(value) : value.trim()
           }
         }
         accounts.push(account);
@@ -825,7 +863,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return JSON.stringify(accounts, null, 2);
   }
-  
+
 
   /**
    * Computes list of examples for an array shape.
@@ -1114,7 +1152,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {ExampleOptions=} opts Examples processing options
    * @return {String}
    */
-  _xmlFromStructure(structure, opts={}) {
+  _xmlFromStructure(structure, opts = {}) {
     let typeName = (opts && opts.typeName) || UNKNOWN_TYPE;
     typeName = normalizeXmlTagName(typeName);
     const doc = document.implementation.createDocument('', typeName, null);
@@ -1310,17 +1348,17 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         });
       } else {
         const aKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.anyOf);
-        let value 
+        let value
         const anyOf = this._ensureArray(range[aKey]);
-        if(anyOf){
-          for(let anyOfIndex=0; anyOfIndex<anyOf.length; anyOfIndex++) {
+        if (anyOf) {
+          for (let anyOfIndex = 0; anyOfIndex < anyOf.length; anyOfIndex++) {
             const exampleValue = this._computeJsonPropertyValue(anyOf[anyOfIndex]);
-            if(exampleValue!==null){
+            if (exampleValue !== null) {
               value = exampleValue;
               break;
             }
           }
-        }else{
+        } else {
           value = this._computeJsonPropertyValue(range);
         }
         if (value === undefined) {
@@ -1585,7 +1623,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         examples.push(propertiesExamples);
       }
     }
-    return examples.reduce((acc, value) => ({...acc, ...value}), {});
+    return examples.reduce((acc, value) => ({ ...acc, ...value }), {});
   }
 
   /**
@@ -1772,7 +1810,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       }
       if (serialization) {
         if (xmlAttribute) {
-        
+
           this._appendXmlAttribute(node, range, xmlName, examples[0]);
           return;
         }
