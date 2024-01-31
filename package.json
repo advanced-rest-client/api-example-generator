@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-example-generator",
   "description": "Examples generator from AMF model",
-  "version": "4.4.27",
+  "version": "4.4.28",
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "index.js",
@@ -26,7 +26,7 @@
     "email": "arc@mulesoft.com"
   },
   "dependencies": {
-    "@api-components/amf-helper-mixin": "^4.1.8",
+    "@api-components/amf-helper-mixin": "^4.5.24",
     "lit-element": "^2.4.0"
   },
   "devDependencies": {
