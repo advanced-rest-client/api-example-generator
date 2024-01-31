@@ -1635,9 +1635,17 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   _computeJsonObjectValue(range) {
     const pKey = this._getAmfKey(this.ns.w3.shacl.property);
     const properties = this._ensureArray(range[pKey]);
+
+    const additionalPropertiesKey = this._getAmfKey(this.ns.w3.shacl.additionalPropertiesSchema);
+    const additionalProperties = this._ensureArray(range[additionalPropertiesKey]);
+
     if (properties && properties.length) {
       return this._jsonExampleFromProperties(properties);
     }
+    if (additionalProperties && additionalProperties.length) {
+      return this._jsonExampleFromProperties(this._ensureArray(additionalProperties[0][pKey]));
+    }
+
     return {};
   }
 
