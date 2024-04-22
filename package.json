@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-example-generator",
   "description": "Examples generator from AMF model",
-  "version": "4.4.28",
+  "version": "4.4.29",
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "index.js",
