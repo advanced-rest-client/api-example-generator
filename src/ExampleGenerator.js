@@ -692,8 +692,14 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     let title = /** @type {string} */ (this._getValue(
       example,
-      this.ns.aml.vocabularies.core.name
-    ));
+      this.ns.aml.vocabularies.core.displayName
+    ))
+    if (!title) {
+      title = /** @type {string} */ (this._getValue(
+        example,
+        this.ns.aml.vocabularies.core.name
+      ));
+    }
     if (title && title.indexOf('example_') === 0) {
       title = undefined;
     }
