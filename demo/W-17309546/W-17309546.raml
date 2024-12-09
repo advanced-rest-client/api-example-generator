@@ -1,0 +1,24 @@
+#%RAML 1.0
+title: test_for_support
+mediaType: application/json
+
+
+
+types:
+  User:
+    type: object
+    properties:
+      id: integer
+      name: string
+      email: string
+      postal_code: string
+      companyDateEntry: date-only
+
+/test:
+  get:
+    description: Obtenir la liste des utilisateurs
+    responses:
+      200:
+        body:
+          type: User[]
+          example: !include /examples/employees/user-examples.raml

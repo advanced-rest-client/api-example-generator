@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-example-generator",
   "description": "Examples generator from AMF model",
-  "version": "4.4.29",
+  "version": "4.4.30",
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "index.js",
@@ -37,7 +37,7 @@
     "@open-wc/testing": "^2.5.32",
     "@web/dev-server": "^0.1.8",
     "@web/test-runner": "^0.13.15",
-    "@web/test-runner-playwright": "^0.8.4",
+    "@web/test-runner-playwright": "^0.11.0",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.1.0",
     "husky": "^7.0.1",

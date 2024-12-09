@@ -653,19 +653,19 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
 
         // Map raw to external fragment
         if (!raw) {
-          // It first retrieves the @id property from the first element 
+          // It first retrieves the @id property from the first element
           // of referenceIdData array and assigns it to referenceId.
           const referenceId = referenceIdData[0]['@id']
 
-          // It calls the _computeReferences method with this.amf as an 
-          // argument to get the root references and assigns 
+          // It calls the _computeReferences method with this.amf as an
+          // argument to get the root references and assigns
           // the result to rootReferences.
           const rootReferences = this._computeReferences(this.amf)
 
           // It maps over each item in rootReferences,
-          // and for each item, it computes references twice in a nested manner. 
+          // and for each item, it computes references twice in a nested manner.
           // It then gets the second element from externalFragments and computes its encodes.
-          // The result of this map operation is an array of 
+          // The result of this map operation is an array of
           // encoded external fragments, which is assigned to encodesOfExternalFragments.
           const encodesOfExternalFragments = rootReferences.map((item) => {
             const shapeFragment = this._computeReferences(item)
@@ -675,8 +675,8 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
             return this._computeEncodes(externalFragmentExample)
           })
 
-          // It finds an element in encodesOfExternalFragments where 
-          // the @id property matches referenceId and assigns 
+          // It finds an element in encodesOfExternalFragments where
+          // the @id property matches referenceId and assigns
           // it to exmapleExternalFragmentByReferenceId.
           const exmapleExternalFragmentByReferenceId = encodesOfExternalFragments.find(externalFrament => (
             externalFrament['@id'] === referenceId
@@ -684,7 +684,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
 
           const rawKey = this._getAmfKey(this.ns.aml.vocabularies.document.raw)
           // Finally, it calls the _getValue method with
-          // exmapleExternalFragmentByReferenceId and rawKey 
+          // exmapleExternalFragmentByReferenceId and rawKey
           // as arguments and assigns the result to raw.
           raw = this._getValue(exmapleExternalFragmentByReferenceId, rawKey)
         }
@@ -801,7 +801,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         }
       });
       if (isJson) {
-        // if raw (original example) exists try to parse it to JSON  
+        // if raw (original example) exists try to parse it to JSON
         // if the parse process fails then use parts to build example value
         if (result.raw) {
           try {
@@ -847,27 +847,44 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     return undefined;
   }
 
+  parseToJSON (arr) {
+    return arr
+      .filter(item => item.trim() !== "") // Remove empty strings
+      .map(item => {
+        if (item.startsWith("- ")) {
+          // Handle case where item is a list of numbers
+          return item.split("- ")
+            .filter(subItem => subItem.trim() !== "")
+            .map(subItem => Number(subItem.trim()));
+        }
+        // Handle case where item is a key-value pair
+        const entries = item.trim().split("\n").map(line => {
+          const index = line.indexOf(":");
+          const key = line.slice(0, index).trim();
+          const value = line.slice(index + 1).trim();
+          if (value.startsWith("\"") && value.endsWith("\"")) {
+            return [key, value.slice(1, -1)]; // Preserve leading zeros
+          }
+          if (!Number.isNaN(Number(value))) {
+            return [key, Number(value)];
+          }
+          return [key, value];
+        });
+        return Object.fromEntries(entries);
+
+      });
+};
+
   /**
-   * @param {String} raw 
+   * @param {String} raw
    * @returns string JSON formatted
    */
   computeRaw(raw) {
     const accountEntries = raw.split('-\n');
-    const accounts = [];
-    for (const entry of accountEntries) {
-      if (entry !== '') {
-        const lines = entry.split('\n');
-        const account = {};
-        for (const line of lines) {
-          if (line !== '') {
-            const [key, value] = line.split(': ');
-            account[key.trim()] = Number(value) ? Number(value) : value.trim()
-          }
-        }
-        accounts.push(account);
-      }
-    }
-    return JSON.stringify(accounts, null, 2);
+    const parsed = this.parseToJSON(accountEntries)
+     // Ensure the parsed result is always an array
+     const result = Array.isArray(parsed[0]) ? parsed.flat() : parsed;
+    return JSON.stringify(result, null, 2);
   }
 
 
