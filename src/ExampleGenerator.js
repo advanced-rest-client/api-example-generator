@@ -1425,6 +1425,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         return this._computeJsonPropertyValue(oneOfOptions[0], typeName);
       }
     }
+    if (this._hasType(range, this.ns.w3.shacl.Shape)) {
+      return this._computeJsonOrValue(range);
+    }
     return undefined;
   }
 
@@ -1648,6 +1651,43 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     }
     return examples.reduce((acc, value) => ({ ...acc, ...value }), {});
   }
+
+  /**
+   * Computes a JSON object or value from a given range.
+   *
+   * @param {Object} range AMF's range definition for a shape.
+   * @return {any|undefined} A JavaScript object or value computed from the range.
+   */
+  _computeJsonOrValue(range) {
+    const key = this._getAmfKey(this.ns.w3.shacl.or);
+    const list = this._ensureArray(range[key]);
+    if (!list) {
+        return undefined;
+    }
+
+    const examples = [];
+    const anyOfKey = this._getAmfKey(this.ns.aml.vocabularies.shapes.anyOf);
+
+    // Iterate over all items in the list
+    for (const item of list) {
+        const properties = this._ensureArray(item[anyOfKey]);
+        if (properties) {
+            // Iterate over all properties to get all propertiesSchemas
+            for (const property of properties) {
+                const propertiesSchemas = this._listProperties(property);
+                if (propertiesSchemas) {
+                    const propertiesExamples = this._jsonExampleFromProperties(propertiesSchemas);
+                    if (propertiesExamples && typeof propertiesExamples === 'object') {
+                        examples.push(propertiesExamples);
+                    }
+                }
+            }
+        }
+    }
+
+    // Merge all examples into a single object
+    return examples.reduce((acc, value) => ({ ...acc, ...value }), {});
+}
 
   /**
    * Computes JSON object as an example from a range that is an object.
