@@ -1,0 +1,754 @@
+{
+  "openapi":"3.0.3",
+  "info":{
+    "title":"Barco CTRL Configure API",
+    "description":"This API allows you to read and change the configuration of a Barco CTRL setup.",
+    "version":"1.0.0",
+    "contact": {
+     "url":"https://www.barco.com/ctrl-api"
+    }
+  },
+  "servers":[
+    {
+      "url":"/api/configure/v1"
+    }
+  ],
+  "tags":[
+   {
+     "name":"Version"
+   },
+   {
+     "name":"Sources"
+   }
+  ],
+  "paths":{
+    "/sources":{
+      "get":{
+        "tags":[
+          "Sources"
+        ],
+        "summary":"Get the list of sources configured in the System",
+        "description":"Retrieve the list of all available sources.\n\n<b>Notes:</b>\n<ul>\n<li>This collection contains currently only camera sources, even though you might have configured other source types via the UI.</li>\n<li>Furthermore, cameras that have been configured using a template are not listed in this collection. Templates are currently not supported in the Configure API.</li>\n</ul>",
+        "operationId":"GetSources",
+        "responses":{
+          "200":{
+            "description":"Successful Response",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/SourcesGetResponse"
+                }
+              }
+            }
+          }
+        },
+        "security":[
+          {
+            "HTTPBearer":[]
+          }
+        ]
+      }
+    }
+  },
+  "components":{
+    "schemas":{
+      "ApiVersion":{
+        "properties":{
+          "version":{
+            "type":"string",
+            "title":"Version",
+            "description":"The version of the API",
+            "default":"",
+            "example":"0.1.0"
+          }
+        },
+        "type":"object",
+        "title":"ApiVersion",
+        "description":"Model representing the version of the API.\n\nAttributes:\n    version (str): The version of the API."
+      },
+      "Audio":{
+        "properties":{
+          "isEnabled":{
+            "type":"boolean",
+            "title":"Isenabled",
+            "description":"Indicates whether the source should be able to play audio.<p> <b>Note:</b> CTRL does not detect if audio is available in one of the streams. Therefore it can happen, that this property is set to true, but still no audio is playing, because the stream doesn't contain audio. Conversely, this parameter can be used to turn off the audio playback permanently, even though the stream contains audio.",
+            "example":true
+          }
+        },
+        "type":"object",
+        "nullable":true,
+        "required":[
+          "isEnabled"
+        ],
+        "title":"Audio",
+        "description":"Model representing audio settings.\n\nThis model represents the audio settings for a source, indicating whether audio playback should be enabled or disabled.\n\nAttributes:\n    isEnabled (bool): Indicates whether the source should play audio.",
+        "default":{
+          "isEnabled":false
+        }
+      },
+      "AuthenticationBasic":{
+        "properties":{
+          "method":{
+            "type":"string",
+            "enum":[
+              "basic"
+            ],
+            "default":"basic",
+            "title":"Method",
+            "description":"Indicates what kind of authentication mechanism the camera requires.<p>Setting the method to 'basic' enables Basic Auth. Basic Auth requires username and password. Those credentials are usually configured in the camera's settings or in the Video Management System."
+          },
+          "credentials":{
+            "allOf":[
+              {
+                "$ref":"#/components/schemas/BasicAuthCredentials"
+              }
+            ],
+            "title":"Credentials",
+            "description":"Credentials for the configured user. Password is hashed from the backend and will not be returned in clear text."
+          }
+        },
+        "type":"object",
+        "required":[
+          "method",
+          "credentials"
+        ],
+        "title":"AuthenticationBasic",
+        "description":"Model representing basic authentication information of a camera source.\n\nAttributes:\n    method (str): The authentication method.\n    credentials (BasicAuthCredentials): The basic authentication credentials."
+      },
+      "AuthenticationNone":{
+        "properties":{
+          "method":{
+            "type":"string",
+            "enum":[
+              "none"
+            ],
+            "default":"none",
+            "title":"Method",
+            "description":"Indicates what kind of authentication mechanism the camera requires.<p>Setting the method to 'none' will effectively turn authentication off. This is equivalent to omitting the 'authentication' object in the first place.<p><b>Note:</b> Setting the method to 'none' will delete the credentials that have been stored before."
+          }
+        },
+        "type":"object",
+        "required":[
+          "method"
+        ],
+        "title":"AuthenticationNone",
+        "description":"Model representing disabled authentication settings for a camera source.\n\nAttributes:\n    method (Method, optional): Indicates what kind of authentication mechanism the camera requires."
+      },
+      "BadRequestError":{
+        "properties":{
+          "statusCode":{
+            "type":"integer",
+            "enum":[
+              400
+            ],
+            "title":"Statuscode",
+            "default":400
+          },
+          "error":{
+            "type":"string",
+            "enum":[
+              "Bad Request"
+            ],
+            "title":"Error",
+            "default":"Bad Request"
+          },
+          "message":{
+            "type":"string",
+            "title":"Message",
+            "default":""
+          }
+        },
+        "type":"object",
+        "default":{
+          "statusCode":400,
+          "error":"Bad Request",
+          "message":""
+        },
+        "title":"BadRequestError",
+        "description":"Model representing a Bad Request error.\n\nThis model represents an error indicating that the server cannot or will not process the request\ndue to something that is perceived to be a client error.\n\nAttributes:\n    statusCode (StatusCode): The status code for the error, set to HTTP status code 400 - Bad Request.\n    error (ErrorEnum): The error type, set to \"Bad Request\".\n    message (str): Additional message providing more details about the error."
+      },
+      "BadRequestErrorResponse":{
+        "properties":{
+          "error":{
+            "allOf":[
+              {
+                "$ref":"#/components/schemas/BadRequestError"
+              }
+            ],
+            "title":"Error"
+          }
+        },
+        "type":"object",
+        "title":"BadRequestErrorResponse",
+        "description":"Model representing a response for a Bad Request error.\n\nAttributes:\n    error (BadRequestError): The BadRequestError object containing details about the error."
+      },
+      "BasicAuthCredentials":{
+        "properties":{
+          "username":{
+            "type":"string",
+            "title":"Username",
+            "description":"he username for authentication."
+          },
+          "password":{
+            "type":"string",
+            "title":"Password",
+            "description":"The password for authentication."
+          }
+        },
+        "type":"object",
+        "required":[
+          "username",
+          "password"
+        ],
+        "title":"BasicAuthCredentials",
+        "description":"Model representing basic authentication credentials.\n\nNote:\n\n    This model is used for write endpoints only. Read endpoints will always return encrypted passwords.\n\nAttributes:\n    username (str): The username for authentication.\n    password (str): The password for authentication."
+      },
+      "CameraSource":{
+        "properties":{
+          "id":{
+            "type":"string",
+            "title":"Id",
+            "example":"64f1f0d46ad16b6acdaa3e0e"
+          },
+          "name":{
+            "type":"string",
+            "minLength":1,
+            "title":"Name",
+            "description":"Human readable identifier for the source. The name is shown, e.g. in the Operator's source list.<p><b>Note:</b> The name must be unique to make the source for the Operator distinguishable from others.",
+            "example":"Main Station Track 5a"
+          },
+          "type":{
+            "type":"string",
+            "enum":[
+              "Camera"
+            ],
+            "default":"Camera",
+            "title":"Type",
+            "description":"The type of the source. Note: 'Camera' is the only supported type, at the moment.",
+            "example":"Camera"
+          },
+          "class":{
+            "type":"string",
+            "enum":[
+              "Common"
+            ],
+            "title":"Class",
+            "description":"The class for camera source. Note: 'Common' is the only supported class, at the moment.",
+            "example":"Common"
+          },
+          "audio":{
+            "anyOf":[
+              {
+                "$ref":"#/components/schemas/Audio"
+              }
+            ],
+            "title":"Audio",
+            "description":"Audio settings for the source."
+          },
+          "externalReference":{
+            "anyOf":[
+              {
+                "type":"string",
+                "nullable":true
+              }
+            ],
+            "title":"Externalreference",
+            "description":"Correlates the source with its representation in an external system. This can be useful to keep sources in sync e.g. with a Video Management System.<p><b>Note:</b> This property isn't processed anywhere in CTRL.",
+            "default":"",
+            "example":"b8755c8d-ef9d-4a7e-a8a2-7b5abace1af7"
+          },
+          "streams":{
+            "items":{
+              "$ref":"#/components/schemas/CameraStream"
+            },
+            "type":"array",
+            "maxItems":1,
+            "minItems":1,
+            "title":"Streams",
+            "description":"A camera source has exactly one stream. (a video stream including audio is considered as one stream)."
+          },
+          "authentication":{
+            "oneOf":[
+              {
+                "$ref":"#/components/schemas/AuthenticationNone"
+              },
+              {
+                "$ref":"#/components/schemas/AuthenticationBasic"
+              }
+            ],
+            "discriminator": {
+              "propertyName" : "method"
+            },
+            "title":"Authentication",
+            "description":"Defines the authentication mechanism and credentials that a camera requires in order to access the stream."
+          }
+        },
+        "type":"object",
+        "required":[
+          "id",
+          "name",
+          "type",
+          "class",
+          "streams"
+        ],
+        "title":"CameraSource",
+        "description":"Model representing a media source.\n\nAttributes:\n    id (str): The unique identifier for the source.\n    name (str): Human-readable identifier for the source.\n    type (str): The type of the source.\n    srcClass (str): The class of the source.\n    audio (Audio, optional): Audio settings for the source.\n    externalReference (str, optional): Correlates the source with its representation in an external system.\n    streams (List[CameraStream]): A list of streams related to the camera source.\n    authentication (Union[AuthenticationNone, AuthenticationBasic], optional): Defines the authentication mechanism and credentials required to access the camera stream."
+      },
+      "CameraStream":{
+        "properties":{
+          "id":{
+            "type":"string",
+            "title":"Id",
+            "description":"Unique identifier for the stream.",
+            "example":"64f1eff26ad16b6acdaa3e08"
+          },
+          "url":{
+            "type":"string",
+            "title":"Url",
+            "description":"URL of the RTSP stream.<p>The scheme (protocol prefix \"rtsp://\") is mandatory. Both, hostnames and IP addresses can be used to specify the host. The port is optional and defaults to 554.",
+            "example":"rtsp://ipcam573.example.com:554/live/ch0"
+          },
+          "decoderOptions":{
+            "type":"object",
+            "title":"Decoderoptions",
+            "description":"Parameters as key-value pairs, that will be passed to the decoder to control its behaviour. A list of supported decoder options can be found in our [Knowledge Base](https://www.barco.com/support/knowledge-base/11920).",
+            "default":{},
+            "example":{
+              "protocols":2,
+              "tcp-timeout":10000000
+            }
+          }
+        },
+        "type":"object",
+        "required":[
+          "id",
+          "url"
+        ],
+        "title":"CameraStream",
+        "description":"Model representing a camera stream.\n\nAttributes:\n    id (str): Unique identifier for the stream.\n    url (str): URL of the RTSP stream.\n    decoderOptions (Dict[str, Any], optional): Parameters as key-value pairs that will be passed to the decoder to control its behavior."
+      },
+      "ConflictError":{
+        "properties":{
+          "statusCode":{
+            "type":"integer",
+            "enum":[
+              409
+            ],
+            "title":"Statuscode",
+            "default":409
+          },
+          "error":{
+            "type":"string",
+            "enum":[
+              "Conflict"
+            ],
+            "title":"Error",
+            "default":"Conflict"
+          },
+          "message":{
+            "type":"string",
+            "title":"Message",
+            "default":""
+          }
+        },
+        "type":"object",
+        "default":{
+          "statusCode":409,
+          "error":"Conflict",
+          "message":""
+        },
+        "title":"ConflictError",
+        "description":"Model representing a Conflict error.\n\nThis model represents an error indicating that the request could not be completed due to a conflict\nwith the current state of the resource.\n\nAttributes:\n    statusCode (StatusCode): The status code for the error, set to HTTP status code 409 - Conflict.\n    error (ErrorEnum): The error type, set to \"Conflict\".\n    message (str): Additional message providing more details about the error."
+      },
+      "ConflictErrorResponse":{
+        "properties":{
+          "error":{
+            "allOf":[
+              {
+                "$ref":"#/components/schemas/ConflictError"
+              }
+            ],
+            "title":"Error"
+          }
+        },
+        "type":"object",
+        "title":"ConflictErrorResponse",
+        "description":"Model representing a response for a Conflict error.\n\nAttributes:\n    error (ConflictError): The ConflictError object containing details about the error."
+      },
+      "InternalServerError":{
+        "properties":{
+          "statusCode":{
+            "type":"integer",
+            "enum":[
+              500
+            ],
+            "title":"Statuscode",
+            "default":500
+          },
+          "error":{
+            "type":"string",
+            "enum":[
+              "Internal Server Error"
+            ],
+            "title":"Error",
+            "default":"Internal Server Error"
+          },
+          "message":{
+            "type":"string",
+            "title":"Message",
+            "default":""
+          }
+        },
+        "type":"object",
+        "default":{
+          "statusCode":500,
+          "error":"Internal Server Error",
+          "message":""
+        },
+        "title":"InternalServerError",
+        "description":"Model representing an Internal Server Error.\n\nThis model represents an error indicating that the server encountered an unexpected condition\nthat prevented it from fulfilling the request.\n\nAttributes:\n    statusCode (StatusCode): The status code for the error, set to HTTP status code 500 - Internal Server Error.\n    error (ErrorEnum): The error type, set to \"Internal Server Error\".\n    message (str): Additional message providing more details about the error."
+      },
+      "InternalServerErrorResponse":{
+        "properties":{
+          "error":{
+            "allOf":[
+              {
+                "$ref":"#/components/schemas/InternalServerError"
+              }
+            ],
+            "title":"Error"
+          }
+        },
+        "type":"object",
+        "title":"InternalServerErrorResponse",
+        "description":"Model representing a response for an Internal Server Error.\n\nAttributes:\n    error (InternalServerError): The InternalServerError object containing details about the error."
+      },
+      "Meta":{
+        "properties":{
+          "nextPageToken":{
+            "type":"string",
+            "title":"Nextpagetoken",
+            "description":"A cursor that points to the next page of results.<p><b>Note:</b> The page tokens expire after 600 seconds (10 Minutes)."
+          }
+        },
+        "type":"object",
+        "nullable":true,
+        "title":"Meta",
+        "description":"Additional metadata related to the response."
+      },
+      "MethodNotAllowedError":{
+        "properties":{
+          "statusCode":{
+            "type":"integer",
+            "enum":[
+              405
+            ],
+            "title":"Statuscode",
+            "default":405
+          },
+          "error":{
+            "type":"string",
+            "enum":[
+              "Method Not Allowed"
+            ],
+            "title":"Error",
+            "default":"Method Not Allowed"
+          },
+          "message":{
+            "type":"string",
+            "title":"Message",
+            "default":""
+          },
+          "headers":{
+            "type":"object",
+            "title":"Headers",
+            "default":{}
+          }
+        },
+        "type":"object",
+        "default":{
+          "statusCode":405,
+          "error":"Method Not Allowed",
+          "message":"",
+          "headers":{}
+        },
+        "title":"MethodNotAllowedError",
+        "description":"Model representing a Method Not Allowed Error.\n\nAttributes:\n    statusCode (StatusCode): The status code for the error, set to HTTP status code 405 - Method Not Allowed.\n    error (ErrorEnum): The error type, set to \"Method Not Allowed\".\n    message (str): Additional message providing more details about the error."
+      },
+      "MethodNotAllowedResponse":{
+        "properties":{
+          "error":{
+            "allOf":[
+              {
+                "$ref":"#/components/schemas/MethodNotAllowedError"
+              }
+            ],
+            "title":"Error"
+          }
+        },
+        "type":"object",
+        "title":"MethodNotAllowedResponse",
+        "description":"Model representing a response for a Method Not Allowed error.\n\nAttributes:\n    error (MethodNotAllowedError): The MethodNotAllowedError object containing details about the error."
+      },
+      "NotFoundError":{
+        "properties":{
+          "statusCode":{
+            "type":"integer",
+            "enum":[
+              404
+            ],
+            "title":"Statuscode",
+            "default":404
+          },
+          "error":{
+            "type":"string",
+            "enum":[
+              "Not Found"
+            ],
+            "title":"Error",
+            "default":"Not Found"
+          },
+          "message":{
+            "type":"string",
+            "title":"Message",
+            "default":""
+          }
+        },
+        "type":"object",
+        "default":{
+          "statusCode":404,
+          "error":"Not Found",
+          "message":""
+        },
+        "title":"NotFoundError",
+        "description":"Model representing a Not Found error.\n\nAttributes:\n    statusCode (StatusCode): The status code for the error, set to HTTP status code 404 - Not Found.\n    error (ErrorEnum): The error type, set to \"Not Found\".\n    message (str): Additional message providing more details about the error."
+      },
+      "NotFoundErrorResponse":{
+        "properties":{
+          "error":{
+            "allOf":[
+              {
+                "$ref":"#/components/schemas/NotFoundError"
+              }
+            ],
+            "title":"Error"
+          }
+        },
+        "type":"object",
+        "title":"NotFoundErrorResponse",
+        "description":"Model representing a response for a Not Found error.\n\nAttributes:\n    error (NotFoundError): The NotFoundError object containing details about the error."
+      },
+      "PartialCameraSource":{
+        "properties":{
+          "name":{
+            "type":"string",
+            "minLength":1,
+            "title":"Name",
+            "description":"Human readable identifier for the source. The name is shown, e.g. in the Operator's source list.<p><b>Note:</b> The name must be unique to make the source for the Operator distinguishable from others.",
+            "example":"Main Station Track 5a"
+          },
+          "type":{
+            "type":"string",
+            "enum":[
+              "Camera"
+            ],
+            "default":"Camera",
+            "title":"Type",
+            "description":"The type of the source. Note: 'Camera' is the only supported type, at the moment.",
+            "example":"Camera"
+          },
+          "class":{
+            "type":"string",
+            "enum":[
+              "Common"
+            ],
+            "title":"Class",
+            "description":"The class for camera source. Note: 'Common' is the only supported class, at the moment.",
+            "example":"Common"
+          },
+          "audio":{
+            "anyOf":[
+              {
+                "$ref":"#/components/schemas/Audio"
+              }
+            ],
+            "title":"Audio",
+            "description":"Audio settings for the source."
+          },
+          "externalReference":{
+            "anyOf":[
+              {
+                "type":"string",
+                "nullable":true
+              }
+            ],
+            "title":"Externalreference",
+            "description":"Correlates the source with its representation in an external system. This can be useful to keep sources in sync e.g. with a Video Management System.<p><b>Note:</b> This property isn't processed anywhere in CTRL.",
+            "default":"",
+            "example":"b8755c8d-ef9d-4a7e-a8a2-7b5abace1af7"
+          },
+          "streams":{
+            "items":{
+              "$ref":"#/components/schemas/PartialCameraStream"
+            },
+            "type":"array",
+            "maxItems":1,
+            "minItems":1,
+            "title":"Streams",
+            "description":"A camera source has exactly one stream. (a video stream including audio is considered as one stream)."
+          },
+          "authentication":{
+            "anyOf":[
+              {
+                "$ref":"#/components/schemas/AuthenticationNone"
+              },
+              {
+                "$ref":"#/components/schemas/AuthenticationBasic"
+              }
+            ],
+            "title":"Authentication",
+            "description":"Defines the authentication mechanism and credentials that a camera requires in order to access the stream."
+          }
+        },
+        "type":"object",
+        "required":[
+          "name",
+          "type",
+          "class",
+          "streams"
+        ],
+        "title":"PartialCameraSource",
+        "description":"Model representation to create new camera source to be created.\n\nAttributes:\n    name (str): Human-readable identifier for the source.\n    type (str): The type of the source.\n    srcClass (str): The class of the source.\n    audio (Audio, optional): Audio settings for the source.\n    externalReference (str, optional): Correlates the source with its representation in an external system.\n    streams (List[PartialCameraStream]): A list of streams related to the camera source.\n    authentication (Union[AuthenticationNone, AuthenticationBasic], optional): Defines the authentication mechanism and credentials required to access the camera stream."
+      },
+      "PartialCameraStream":{
+        "properties":{
+          "url":{
+            "type":"string",
+            "title":"Url",
+            "description":"URL of the RTSP stream.<p>The scheme (protocol prefix \"rtsp://\") is mandatory. Both, hostnames and IP addresses can be used to specify the host. The port is optional and defaults to 554.",
+            "example":"rtsp://ipcam573.example.com:554/live/ch0"
+          },
+          "decoderOptions":{
+            "type":"object",
+            "title":"Decoderoptions",
+            "description":"Parameters as key-value pairs, that will be passed to the decoder to control its behaviour. A list of supported decoder options can be found in our [Knowledge Base](https://www.barco.com/support/knowledge-base/11920).",
+            "default":{},
+            "example":{
+              "protocols":2,
+              "tcp-timeout":10000000
+            }
+          }
+        },
+        "type":"object",
+        "required":[
+          "url"
+        ],
+        "title":"PartialCameraStream",
+        "description":"Model representing camera stream.\n\nAttributes:\n    url (str): URL of the RTSP stream.\n    decoderOptions (Dict[str, Any], optional): Parameters as key-value pairs that will be passed to the decoder to control its behavior."
+      },
+      "SourceGetResponse":{
+        "properties":{
+          "data":{
+            "allOf":[
+              {
+                "$ref":"#/components/schemas/CameraSource"
+              }
+            ],
+            "title":"Data",
+            "description":"The camera source."
+          }
+        },
+        "type":"object",
+        "required":[
+          "data"
+        ],
+        "title":"SourceGetResponse",
+        "description":"Model representing a response for retrieving a specific source.\n\nAttributes:\n    data (CameraSource): The camera source."
+      },
+      "SourceType":{
+        "type":"string",
+        "enum":[
+          "Camera"
+        ],
+        "title":"SourceType",
+        "description":"Enumeration representing the type of media source.\n\nAttributes:\n    CAMERA: Represents a camera as the type of media source."
+      },
+      "SourcesGetResponse":{
+        "properties":{
+          "data":{
+            "items":{
+              "$ref":"#/components/schemas/CameraSource"
+            },
+            "type":"array",
+            "title":"Data",
+            "description":"A list of sources."
+          },
+          "meta":{
+            "allOf":[
+              {
+                "$ref":"#/components/schemas/Meta"
+              }
+            ],
+            "title":"Meta",
+            "description":"Additional metadata related to the response."
+          }
+        },
+        "type":"object",
+        "required":[
+          "data"
+        ],
+        "title":"SourcesGetResponse",
+        "description":"Model representing a response for retrieving sources.\n\nAttributes:\n    data (List[CameraSource]): A list of sources.\n    meta (Meta, optional): Additional metadata related to the response."
+      },
+      "UnprocessableEntity":{
+        "properties":{
+          "statusCode":{
+            "type":"integer",
+            "enum":[
+              422
+            ],
+            "title":"Statuscode",
+            "default":422
+          },
+          "error":{
+            "type":"string",
+            "enum":[
+              "Unprocessable Entity"
+            ],
+            "title":"Error",
+            "default":"Unprocessable Entity"
+          },
+          "message":{
+            "type":"string",
+            "title":"Message",
+            "default":"Unprocessable Content, please refer the details"
+          }
+        },
+        "type":"object",
+        "title":"UnprocessableEntity",
+        "description":"Model representing an Unprocessable Entity.\n\nThis model represents an error indicating that the server understands the content type of the request entity,\nand the syntax of the request entity is correct, but it was unable to process the contained instructions.\n\nAttributes:\n    statusCode (StatusCode): The status code for the error, set to HTTP status code 422 - Unprocessable Entity.\n    error (ErrorEnum): The error type, set to \"Unprocessable_Entity\".\n    message (str): Additional message providing more details about the error."
+      },
+      "VersionGetResponse":{
+        "properties":{
+          "data":{
+            "allOf":[
+              {
+                "$ref":"#/components/schemas/ApiVersion"
+              }
+            ],
+            "title":"Data"
+          }
+        },
+        "type":"object",
+        "title":"VersionGetResponse",
+        "description":"Model representing a response for the version endpoint.\n\nAttributes:\n    data (ApiVersion): The version data of the API, if available."
+      }
+    },
+    "securitySchemes":{
+      "HTTPBearer":{
+        "type":"http",
+        "scheme":"bearer"
+      }
+    }
+  }
+}

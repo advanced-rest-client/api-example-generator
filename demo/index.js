@@ -125,6 +125,7 @@ class ComponentDemo extends ApiDemoPage {
       ['xml-api', 'xml-api'],
       ['W-11843862', 'W-11843862'],
       ['W-17309546', 'W-17309546'],
+      ['W-17413312', 'W-17413312'],
       ['v4_0_0_api_specs', 'v4_0_0_api_specs']
     ].map(
       ([file, label]) => html`
