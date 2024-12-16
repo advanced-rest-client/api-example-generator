@@ -688,11 +688,11 @@ describe('ExampleGenerator', () => {
           assert.equal(root.querySelector('etag').textContent.trim(), 'W\\\\244m4n5kj3gbn2nj4k4n4', 'the etag value');
 
           const image = root.querySelector('image');
-          
+
           assert.ok(image, 'has the image node');
           assert.equal(image.querySelector('url').textContent.trim(), 'https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image', 'the image.url value');
           assert.equal(image.querySelector('thumb').textContent.trim(), 'https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb', 'the image.thumb value');
-          
+
           assert.typeOf(ex2.raw, 'string', 'example 2 has the raw value');
         });
 
@@ -2321,7 +2321,7 @@ describe('ExampleGenerator', () => {
           schema = element._resolve(schema);
           const result = element._computeJsonPropertyValue(schema);
           assert.typeOf(result, 'object');
-          assert.deepEqual(result, { messages: [{ "referrers": [{"type": "Salesforce:Core:Bot:Id", "value": ""}], "sequenceId": 1, "text": "", "type": "init", "tz": "", "variables": [] }]})
+          assert.deepEqual(result, { messages: [{ "referrers": [{"type": "Salesforce:Core:Bot:Id", "value": ""}], "sequenceId": 1, "text": "", "type": "init", "tz": "", "variables": [{}] }]})
         });
       });
     });
@@ -2525,7 +2525,7 @@ describe('ExampleGenerator', () => {
           assert.typeOf(parsed, 'array', 'represents an array');
           assert.lengthOf(parsed, 2, 'has 2 items');
           const [e1, e2] = parsed;
-          
+
           assert.equal(e1.id, 1, 'has the example1.id');
           assert.equal(e1.name, 'John', 'has the example1.name');
           assert.equal(e2.id, 2, 'has the example2.id');
