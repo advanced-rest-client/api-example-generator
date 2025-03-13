@@ -717,7 +717,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (result.hasTitle) {
       result.title = title;
     }
-    if (opts.rawOnly && (raw !== null || raw !== undefined)) {
+    if (opts.rawOnly && (raw === null || raw === undefined)) {
       return undefined;
     }
     if (opts.rawOnly) {
