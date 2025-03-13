@@ -641,7 +641,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       example,
       this.ns.aml.vocabularies.document.raw
     ));
-    if (!raw) {
+    if (raw === null || raw === undefined) {
       raw = /** @type {string} */ (this._getValue(
         example,
         this.ns.w3.shacl.raw
@@ -707,7 +707,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
       example,
       this.ns.aml.vocabularies.core.description
     ));
-    const hasRaw = !!raw;
+    const hasRaw = raw !== null && raw !== undefined;
     const result = {};
     result.hasTitle = !!title;
     result.hasUnion = false;
@@ -717,7 +717,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (result.hasTitle) {
       result.title = title;
     }
-    if (opts.rawOnly && !raw) {
+    if (opts.rawOnly && (raw !== null || raw !== undefined)) {
       return undefined;
     }
     if (opts.rawOnly) {
