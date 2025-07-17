@@ -1,0 +1,33 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "test-otr-eapi-response-schema"
+  },
+  "components": {
+    "schemas" : {
+      "createAsset" : {
+        "type" : "object",
+        "properties": {
+          "id" : {
+            "type" : "string"
+          },
+          "msg" : {
+            "type": "string"
+          }
+      }
+    },
+    "createPreferences" : {
+        "type" : "object",
+        "properties": {
+          "id" : {
+            "type" : "string"
+          },
+          "msg" : {
+            "type": "string"
+          }
+      }
+    }
+  }
+}
+}

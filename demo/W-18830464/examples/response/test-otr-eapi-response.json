@@ -1,0 +1,24 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "test-otr-eapi-response"
+  },
+  "components": {
+    "examples" : {
+      "createAsset" : {
+        "value": {
+          "id": "",
+          "msg" : ""
+        }
+      },
+      "createPreferences" : {
+        "value": {
+          "id": "",
+          "msg" : ""
+        }
+      }
+    }
+  }
+  
+}
