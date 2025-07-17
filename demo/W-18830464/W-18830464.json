@@ -1,0 +1,118 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "test-otr-eapi"
+  },
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "paths": {
+    "/asset": {
+      "post": {
+        "description": "Create a span",
+        "parameters": [
+          {
+            "$ref": "common/common-header.json#components/parameters/SourceHeader"
+          },
+          {
+            "$ref": "common/common-header.json#components/parameters/TargetHeader"
+          },
+          {
+            "$ref": "common/common-header.json#components/parameters/correlationId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "schema/request/test-otr-eapi-request-schema.json#/components/schemas/createAsset"
+              },
+              "examples": {
+                "createAsset": {
+                  "$ref": "examples/request/test-otr-eapi-request.json#/components/examples/createAsset"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Span created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "schema/response/test-otr-eapi-response-schema.json#/components/schemas/createAsset"
+                },
+                "examples": {
+                  "createAsset": {
+                    "$ref": "examples/response/test-otr-eapi-response.json#/components/examples/createAsset"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferences": {
+      "post": {
+        "description": "Create a preferences",
+        "parameters": [
+          {
+            "$ref": "common/common-header.json#components/parameters/SourceHeader"
+          },
+          {
+            "$ref": "common/common-header.json#components/parameters/TargetHeader"
+          },
+          {
+            "$ref": "common/common-header.json#components/parameters/correlationId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "schema/request/test-otr-eapi-request-schema.json#/components/schemas/createPreferences"
+              },
+              "examples": {
+                "createPreferences": {
+                  "$ref": "examples/request/test-otr-eapi-request.json#/components/examples/createPreferences"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Preferences created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "schema/response/test-otr-eapi-response-schema.json#/components/schemas/createPreferences"
+                },
+                "examples": {
+                  "CreateSpanRes": {
+                    "$ref": "examples/response/test-otr-eapi-response.json#/components/examples/createPreferences"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+      }
+    }

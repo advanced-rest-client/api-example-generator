@@ -1,0 +1,45 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "test-otr-eapi-request"
+  },
+  "components": {
+    "examples": {
+      "createAsset" : {
+        "value" : [
+          {
+						"spanID": "ENGYALERT",
+						"name": "EMAIL1",
+						"description": "CCB_IDL_Provider"
+           
+          }
+        ]
+      },
+      "createPreferences" : {
+        "value" : [
+          {
+						"programID": "ENERGYALERT",
+						"channelID": "EMAIL",
+						"userID": "CCB_IDL_Provider",
+            "customProperties": [
+              {
+                "link": 0
+              }
+            ]
+          },
+           {
+						"programID": "ENERGYALERT",
+						"channelID": "EMAIL",
+						"userID": "CCB_IDL_Provider",
+            "customProperties": [
+              {
+                "link": 0
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

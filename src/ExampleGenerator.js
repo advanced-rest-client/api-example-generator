@@ -669,13 +669,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
           // It then gets the second element from externalFragments and computes its encodes.
           // The result of this map operation is an array of
           // encoded external fragments, which is assigned to encodesOfExternalFragments.
-          const encodesOfExternalFragments = rootReferences.map((item) => {
-            const shapeFragment = this._computeReferences(item)
-            const externalFragments = this._computeReferences(shapeFragment)
+          const encodesOfExternalFragments = rootReferences.flat().map((item) => {
+            const shapeFragment = this._computeReferences(item);
+            const externalFragments = this._computeReferences(shapeFragment[0]);
             // Get second element from externalFragments
-            const externalFragmentExample = externalFragments[1]
-            return this._computeEncodes(externalFragmentExample)
-          })
+            const externalFragmentExample = externalFragments[1];
+            return this._computeEncodes(externalFragmentExample);
+          });
 
           // It finds an element in encodesOfExternalFragments where
           // the @id property matches referenceId and assigns
@@ -733,13 +733,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (hasRaw) {
       if (isJson) {
         try {
-          const res = JSON.parse(raw);
+          const res = JSON.parse(String(raw));
           const type = typeof res;
           if (type === 'string' || type === 'number' || type === 'boolean') {
             throw new Error('');
           }
           result.hasRaw = false;
-          result.value = raw;
+          result.value = JSON.stringify(res, null, 2);
           result.isScalar = false;
           return result;
         } catch (_) {
@@ -747,15 +747,16 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         }
       }
       if (isXml) {
-        if (raw.trim()[0] === '<') {
+        const rawValue = String(raw);
+        if (rawValue.trim()[0] === '<') {
           result.hasRaw = false;
-          result.value = raw;
+          result.value = rawValue;
           result.isScalar = false;
           return result;
         }
       }
       result.hasRaw = true;
-      result.raw = raw;
+      result.raw = String(raw);
     }
     const sKey = this._getAmfKey(
       this.ns.aml.vocabularies.document.structuredValue
@@ -794,11 +795,13 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         let data;
         if (isJson) {
           data = this._jsonFromStructure(member);
-
         } else if (isXml) {
-          data = this._xmlFromStructure(member, { ...opts, ignoreXmlHeader: true });
+          data = this._xmlFromStructure(member, {
+            ...opts,
+            ignoreXmlHeader: true,
+          });
         }
-        if (data) {
+        if (data !== undefined) {
           parts.push(data);
         }
       });
@@ -807,7 +810,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
         // if the parse process fails then use parts to build example value
         if (result.raw) {
           try {
-            result.value = this.computeRaw(raw)
+            result.value = this.computeRaw(raw);
             return result
           } catch (_) {
             // ...
@@ -881,7 +884,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    * @param {String} raw
    * @returns string JSON formatted
    */
-  computeRaw(raw) {
+  computeRawOld(raw) {
     const accountEntries = raw.split('-\n');
     const parsed = this.parseToJSON(accountEntries)
      // Ensure the parsed result is always an array
@@ -890,6 +893,49 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   }
 
 
+  computeRaw(raw) {
+    if (typeof raw !== 'string') {
+      return JSON.stringify(raw);
+    }
+    // A very basic check for a simple YAML list.
+    const trimmed = raw.trim();
+    if (trimmed.startsWith('-') && trimmed.indexOf(':') === -1) {
+      const items = trimmed
+        .split('\n')
+        .map((v) => v.trim().replace(/^-/, '').trim());
+      const values = items.map((v) => {
+        const n = Number(v);
+        return isNaN(n) ? v : n;
+      });
+      return JSON.stringify(values, null, 2);
+    }
+
+    // Split the string into blocks separated by hyphens
+    const blocks = raw.split('-\n').filter((block) => block.trim() !== '');
+
+    // Process each block to convert it into an object
+    const sanitized = blocks.map((block) => {
+      const lines = block.split('\n').filter((line) => line.trim() !== '');
+      const obj = {};
+
+      lines.forEach((line) => {
+        const i = line.indexOf(':');
+        const key = line.slice(0, i).trim().replace(/^"|"$/g, '');
+        const value = line.slice(i + 1).trim();
+        if (value.startsWith('"') && value.endsWith('"')) {
+          obj[key] = value.slice(1, -1);
+        } else {
+          const numericValue = Number(value);
+          obj[key] = isNaN(numericValue) ? value : numericValue;
+        }
+      });
+
+      return obj;
+    });
+
+    // Convert to clean JSON string
+    return JSON.stringify(sanitized, null, 2);
+  }
   /**
    * Computes list of examples for an array shape.
    * @param {Object} schema The AMF's array shape

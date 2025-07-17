@@ -1,0 +1,40 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "common-header"
+  },
+  "components": {
+		"parameters": {
+			"SourceHeader": {
+				"description": "Source-System",
+				"in": "header",
+				"name": "Source-System",
+				"schema": {
+					"type": "string"
+				},
+				"required": true,
+        "example": "SAP"
+			},
+			"TargetHeader": {
+				"description": "Target-System",
+				"in": "header",
+				"name": "Target-System",
+				"schema": {
+					"type": "string"
+				},
+				"required": true,
+        "example": "Salesforce"
+			},
+      "correlationId": {
+				"in": "header",
+				"name": "X-Correlation-Id",
+				"schema": {
+					"type": "string"
+				},
+				"required": true,
+				"example": "1065fe6c-9121-4b05-b6e3-df5c0cb42461"
+			}
+		}
+	}
+}

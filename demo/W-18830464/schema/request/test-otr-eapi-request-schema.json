@@ -1,0 +1,62 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "test-otr-eapi-request-schema"
+  },
+  "components": {
+    "schemas": {
+      "createAsset": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "spanId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "createPreferences": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "programId": {
+              "type": "string"
+            },
+            "channelId": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string"
+            },
+						"customProperties" : {
+							"type" : "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"link": {
+										"type": "integer"
+									},
+									"key": {
+										"type": "string"
+									},
+									"value": {
+										"type": "string"
+									}
+								}
+							}
+						}
+          }
+        }
+      }
+    }
+  }
+}
