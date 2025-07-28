@@ -36,21 +36,21 @@ describe('W-17309546', () => {
     "id": 1,
     "name": "Alice Dupont",
     "email": "alice.dupont@example.com",
-    "companyDateEntry": "2003-05-14",
+    "companyDateEntry": "2003-05-14T00:00:00.000Z",
     "postal_code": "075001"
   },
   {
     "id": 2,
     "name": "Bob Martin",
     "email": "bob.martin@example.com",
-    "companyDateEntry": "2004-05-04",
+    "companyDateEntry": "2004-05-04T00:00:00.000Z",
     "postal_code": "169002"
   },
   {
     "id": 3,
     "name": "Charlie Durand",
     "email": "charlie.durand@example.com",
-    "companyDateEntry": "2003-08-11",
+    "companyDateEntry": "2003-08-11T00:00:00.000Z",
     "postal_code": "013003"
   }
 ]`);

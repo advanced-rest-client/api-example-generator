@@ -42,19 +42,21 @@ describe('W-18830464', () => {
     "programID": "ENERGYALERT",
     "channelID": "EMAIL",
     "userID": "CCB_IDL_Provider",
-    "customProperties": 0
-  },
-  {
-    "link": 0
+    "customProperties": [
+      {
+        "link": 0
+      }
+    ]
   },
   {
     "programID": "ENERGYALERT",
     "channelID": "EMAIL",
     "userID": "CCB_IDL_Provider",
-    "customProperties": 0
-  },
-  {
-    "link": 0
+    "customProperties": [
+      {
+        "link": 0
+      }
+    ]
   }
 ]`);
       });
