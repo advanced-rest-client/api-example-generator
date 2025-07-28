@@ -127,7 +127,8 @@ class ComponentDemo extends ApiDemoPage {
       ['W-17309546', 'W-17309546'],
       ['W-17413312', 'W-17413312'],
       ['v4_0_0_api_specs', 'v4_0_0_api_specs'],
-      ['W-18830464', 'W-18830464']
+      ['W-18830464', 'W-18830464'],
+      ['W-19097505', 'W-19097505']
     ].map(
       ([file, label]) => html`
         <anypoint-item data-src="${file}-compact.json"

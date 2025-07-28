@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import yaml from 'js-yaml';
 
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-plusplus */
@@ -893,7 +894,7 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
   }
 
 
-  computeRaw(raw) {
+  computeRawOld2(raw) {
     if (typeof raw !== 'string') {
       return JSON.stringify(raw);
     }
@@ -936,6 +937,20 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     // Convert to clean JSON string
     return JSON.stringify(sanitized, null, 2);
   }
+
+  computeRaw(raw) {
+    if (typeof raw !== 'string') {
+      return JSON.stringify(raw, null, 2);
+    }
+    try {
+      const parsed = yaml.load(raw);
+      return JSON.stringify(parsed, null, 2);
+    } catch (e) {
+      // this is a fallback for when the RAML is not valid.
+      return raw;
+    }
+  }
+
   /**
    * Computes list of examples for an array shape.
    * @param {Object} schema The AMF's array shape

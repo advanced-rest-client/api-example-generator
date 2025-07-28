@@ -1,0 +1,59 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Connected API",
+    "description": "Resources, information and management for digitially connected products\nAll resources of this service requires a valid security token.\nSee Security Token Service API \n",
+    "version": "v1"
+  },
+  "paths": {
+    "/1.0": {},
+    "/1.0/vehicle": {},
+    "/1.0/vehicle/manual": {
+      "get": {
+        "description": "Returns a list of digital manuals",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "example": [
+                {
+                  "locale": "en-NZ",
+                  "make": "TOYOTA",
+                  "model": "AXAL64R_7",
+                  "modelYear": "2026",
+                  "vehicleRegion": "NZ",
+                  "createdAt": "2025-06-25T03:31:08.000Z",
+                  "documents": {
+                    "om": [
+                      {
+                        "documentType": "om",
+                        "documentUrl": "https://toyotanz.bynder.com/m/1a9818c1db004a8/original/AXAHA_NM1_OM_GeneralOceania_OM00C00E_1_2507-pdf.pdf",
+                        "pubNumber": "OM00C00E",
+                        "summary": "AXAHA_NM1_OM_GeneralOceania_OM00C00E_1_2507.pdf",
+                        "title": "AXAHA_NM1_OM_GeneralOceania_OM00C00E_1_2507-pdf.pdf"
+                      }
+                    ],
+                    "omms": [],
+                    "omnav": [
+                      {
+                        "documentType": "omnav",
+                        "documentUrl": "https://toyotanz.bynder.com/m/81e86f1e4959e02/original/AXAHA_NM1_MM_GeneralOceania_OM00C00E_1_2507.pdf",
+                        "pubNumber": "OM00C00E",
+                        "summary": "AXAHA_NM1_MM_GeneralOceania_OM00C00E_1_2507",
+                        "title": "AXAHA_NM1_MM_GeneralOceania_OM00C00E_1_2507.pdf"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
