@@ -1396,6 +1396,9 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
    */
   _jsonExampleFromProperties(properties) {
     const result = {};
+    if (!properties) {
+      return result;
+    }
     for (let i = 0, len = properties.length; i < len; i++) {
       const property = properties[i];
       const name = this._getValue(property, this.ns.w3.shacl.name);
