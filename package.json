@@ -48,14 +48,14 @@
     "typescript-lit-html-plugin": "^0.9.0"
   },
   "scripts": {
-    "start": "web-dev-server --app-index demo/index.html --node-resolve --open --watch --root-dir .",
+    "start": "npx web-dev-server --app-index demo/index.html --node-resolve --open --watch --root-dir .",
     "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
     "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
     "lint:types": "tsc",
     "lint": "npm run lint:eslint",
     "format": "npm run format:eslint",
-    "test": "web-test-runner test/**/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit",
-    "test:watch": "web-test-runner test/**/*.test.js --node-resolve --watch --playwright --browsers chromium",
+    "test": "npx web-test-runner test/**/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit",
+    "test:watch": "npx web-test-runner test/**/*.test.js --node-resolve --watch --playwright --browsers chromium",
     "gen:wc": "wca analyze \"*.js\" --outFile custom-elements.json",
     "prepare": "node demo/model.js"
   },
