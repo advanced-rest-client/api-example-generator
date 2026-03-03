@@ -995,32 +995,98 @@ export class ExampleGenerator extends AmfHelperMixin(Object) {
     if (!and) {
       return undefined;
     }
-    const mergedSchema = this._mergeSchemaWithProperties(schema, and);
+    // Allow external configuration of max allOf depth (default 10)
+    const maxDepth = opts?.maxAllOfDepth ?? 10;
+    const mergedSchema = this._mergeSchemaWithProperties(schema, and, maxDepth);
     // Remove the shacl:and property to avoid infinite recursion
     delete mergedSchema[andKey];
     return this.computeExamples(mergedSchema, mime, opts);
   }
 
   /**
-   * Merges a schema's properties with all the properties in a list of shapes
-   * Returns a new object to avoid changing the original schema object
-   * @param {Object} schema AMF schema object
-   * @param {Array<Object>} shapes List of shapes whose properties we want to merge
+   * Recursively collects properties from a shape and its nested allOf chains.
+   * Handles deeply nested allOf structures (4+ levels) that the single-pass iteration misses.
+   * @param {Object} shape AMF shape object
+   * @param {Number} depth Current recursion depth
+   * @param {Set} visited Set of visited shape IDs to prevent circular references
+   * @param {Number} maxDepth Maximum recursion depth (default 10)
+   * @return {Array} Flat array of all properties from the shape and its nested allOf chains
    * @private
    */
-  _mergeSchemaWithProperties(schema, shapes) {
+  _collectPropertiesRecursive(shape, depth = 0, visited = new Set(), maxDepth = 10) {
+    // Safety check: prevent infinite recursion
+    if (depth >= maxDepth) {
+      console.warn(`[ExampleGenerator] Maximum allOf depth (${maxDepth}) reached. Stopping recursion.`);
+      return [];
+    }
+
+    // Circular reference detection
+    const shapeId = shape['@id'];
+    if (shapeId && visited.has(shapeId)) {
+      return [];
+    }
+    if (shapeId) {
+      visited.add(shapeId);
+    }
+
+    // Resolve link-target references
+    this._resolve(shape);
+
+    const propertyKey = this._getAmfKey(this.ns.w3.shacl.property);
+    const andKey = this._getAmfKey(this.ns.w3.shacl.and);
+
+    // Collect direct properties from this shape
+    const directProperties = this._ensureArray(shape[propertyKey]) || [];
+    let allProperties = [...directProperties];
+
+    // Recursively collect properties from nested allOf chains
+    const andArray = this._ensureArray(shape[andKey]);
+    if (andArray && andArray.length > 0) {
+      for (let i = 0; i < andArray.length; i++) {
+        const nestedShape = andArray[i];
+        if (nestedShape) {
+          const nestedProperties = this._collectPropertiesRecursive(
+            nestedShape,
+            depth + 1,
+            visited,
+            maxDepth
+          );
+          allProperties = [...allProperties, ...nestedProperties];
+        }
+      }
+    }
+
+    return allProperties;
+  }
+
+  /**
+   * Merges a schema's properties with all the properties in a list of shapes
+   * Returns a new object to avoid changing the original schema object
+   * Now supports deeply nested allOf chains via recursive property collection.
+   * @param {Object} schema AMF schema object
+   * @param {Array<Object>} shapes List of shapes whose properties we want to merge
+   * @param {Number} maxDepth Maximum recursion depth for nested allOf (default 10)
+   * @private
+   */
+  _mergeSchemaWithProperties(schema, shapes, maxDepth = 10) {
     const newSchema = { ...schema };
     const propertyKey = this._getAmfKey(this.ns.w3.shacl.property);
+
+    // Create a single visited Set shared across all shapes in this merge operation
+    const visited = new Set();
+
     for (let i = 0; i < shapes.length; i++) {
       const shape = shapes[i];
-      this._resolve(shape);
-      if (!shape[propertyKey] && !newSchema[propertyKey]) {
-        continue;
+
+      // Recursively collect all properties (handles 4+ level allOf chains)
+      const properties = this._collectPropertiesRecursive(shape, 0, visited, maxDepth);
+
+      if (properties.length > 0) {
+        const currentProps = newSchema[propertyKey] || [];
+        newSchema[propertyKey] = [...currentProps, ...properties];
       }
-      const properties = shape[propertyKey] || [];
-      const currentProps = newSchema[propertyKey] || [];
-      newSchema[propertyKey] = [...currentProps, ...properties];
     }
+
     return newSchema;
   }
 

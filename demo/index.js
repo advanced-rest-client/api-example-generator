@@ -109,6 +109,7 @@ class ComponentDemo extends ApiDemoPage {
 
   _apiListTemplate() {
     return [
+      ['product-order-minimal', 'W-21368901 - Deep allOf'],
       ['SE-22063', 'SE-22063'],
       ['demo-api', 'Demo API'],
       ['tracked-to-linked', 'Tracked elements'],
