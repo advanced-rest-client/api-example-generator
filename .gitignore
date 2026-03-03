@@ -60,5 +60,6 @@ coverage
 # AMF models
 /demo/*.json
 !demo/apis.json
+!demo/product-order-minimal.json
 
 .idea
