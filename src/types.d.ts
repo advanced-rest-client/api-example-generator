@@ -65,6 +65,10 @@ export interface ExampleOptions {
    * When set it ignores adding XML schema header.
    */
   ignoreXmlHeader?: boolean;
+  /**
+   * Maximum depth when merging shacl:and / allOf schemas (default 10).
+   */
+  maxAllOfDepth?: number;
 }
 
 export interface XmlData {
